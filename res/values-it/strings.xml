@@ -180,7 +180,6 @@
     <string name="pref_title_drawer_background_alpha">Sfondo alfa</string>
     <string name="pref_summary_drawer_background_alpha">Imposta il livello di trasparenza dello sfondo del Drawer</string>
     <string name="pref_dialog_drawer_background_alpha">Imposta il livello di trasparenza dello sfondo del Drawer</string>
-    <string name="drop_to_uninstall">Lascia per Disinstallare</string>
 
     <string name="pref_title_icon_highlights">Colore di evidenziazione</string>
     <string name="pref_summary_icon_highlights">Imposta il colore di sfondo durante la selezione delle icone</string>
@@ -188,8 +187,57 @@
     <string name="pref_summary_icon_highlights_focus">Imposta il colore per l\'icona selezionata</string>
     <string name="pref_title_new_selectors">Usa i nuovi selettori per le icone</string>
     <string name="pref_summary_new_selectors">Disabilitare per usare i vecchi selettori.</string>
+    <string name="pref_title_drawer_color">Colore di sfondo</string>
+    <string name="pref_summary_drawer_color">Imposta il colore di sfondo del drawer</string>
+
 
     <string name="pref_dialog_title_color_picker">Scegli un colore</string>
     <string name="pref_dialog_message_color_picker">Premi sul colore al centro per confermare.\nPremi indietro per annullare.</string>
     <string name="pref_dialog_color_picker_alpha">alfa</string>
+    <string name="pref_message_restart_normal">Changing this setting will make the Launcher restart itself</string>
+    <string name="pref_message_restart_froyo">Changing this setting will make the Launcher restart itself</string>
+    <string name="drop_to_uninstall">Lascia per Disinstallare</string>
+    
+    <string name="pref_title_import_export">Backup and restore</string>
+    <string name="pref_title_xml">ADW settings</string>
+    <string name="pref_title_xml_import">Restore ADW settings</string>
+    <string name="pref_summary_xml_import">Restore from /sdcard/adw_settings.xml</string>
+    <string name="pref_title_xml_export">Backup ADW settings</string>
+    <string name="pref_summary_xml_export">Backup to /sdcard/adw_settings.xml</string>
+    
+    <string name="pref_title_db">Desktop configuration</string>
+    <string name="pref_title_db_import">Restore desktop configuration</string>
+    <string name="pref_summary_db_import">Restore from /sdcard/adw_launcher.db</string>
+    <string name="pref_title_db_export">Backup desktop configuration</string>
+    <string name="pref_summary_db_export">Backup to /sdcard/adw_launcher.db</string>
+    
+    <string name="title_dialog_xml">ADW Launcher Settings</string>
+    <string name="import_export_sdcard_unmounted">SD card not mounted!</string>
+    
+    <!-- XML Import/Export strings -->
+    <string name="message_dialog_export">Fare il backup delle impostazioni ADW? Ogni file esistente sarà sovrascritto.</string>
+    <string name="xml_export_dialog">Backup impostazioni ADW...</string>
+    <string name="xml_export_success">Backup impostazioni ADW complatato con successo!</string>
+    <string name="xml_export_error">Errore durante il backup delle impostazioni ADW!</string>    
+    
+    <string name="message_dialog_import">Rispristinare impostazioni ADW? ADW launcher sarà riavviato.</string>
+    <string name="xml_import_dialog">Rispristino impostazioni ADW...</string>  
+    <string name="xml_file_not_found">File di backup delle impostazioni non trovato!</string>
+    <string name="xml_not_readable">Impossibile leggere il file di backup delle impostazioni!</string>
+    <string name="xml_import_success">Impostazioni ADW ripristinate con successo!</string>
+    <string name="xml_import_error">Errore nel ripristino delle impostazioni ADW!</string>
+    
+    <!-- Config Import/Export strings -->
+    <string name="message_dialog_export_config">Fare il backup della configurazione del desktop? Ogni file esistente sarà sovrascritto.</string>
+    <string name="dbfile_export_dialog">Backup configurazione del desktop...</string>
+    <string name="dbfile_export_success">Backup della configurazione complatato con successo!</string>
+    <string name="dbfile_export_error">Errore durante il backup della configurazione!</string>
+    
+    <string name="message_dialog_import_config">Ripristinare la configurazione del desktop? ADW launcher sarà riavviato.</string>
+    <string name="dbfile_import_dialog">Ripristino configurazione del desktop...</string>
+    <string name="dbfile_not_found">File di configurazione non trovato!</string>
+    <string name="dbfile_not_readable">Impossibile leggere il file di backup della configurazione!</string>
+    <string name="dbfile_import_success">Configurazione ripristinata con successo!</string>
+    <string name="dbfile_import_error">Errore nel ripristino della configurazione!</string>
+
 </resources>
