@@ -1649,7 +1649,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 	@Override
 	public void getPositionAndScale(Object obj,
 			PositionAndScale objPosAndScaleOut) {
-		objPosAndScaleOut.set(0.0f, 0.0f, 1.0f);
+		objPosAndScaleOut.set(0.0f, 0.0f, true, 1.0f, false, 0.0f, 0.0f, false, 0.0f);
 	}
 
 	@Override
