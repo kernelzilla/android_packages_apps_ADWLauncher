@@ -657,8 +657,14 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			}
 			public void onGrabbedStateChange(View v, boolean grabbedState) {
 			}
+			public void onClick(View v) {
+	            if (allAppsOpen) {
+	                closeAllApps(true);
+	            } else {
+	                showAllApps(true);
+	            }
+			}
 		});
-        mHandleView.setOnClickListener(this);
         if(newDrawer){
         	((AllAppsSlidingView)grid).setDragger(dragLayer);
         	((AllAppsSlidingView)grid).setLauncher(this);
@@ -1930,12 +1936,6 @@ public final class Launcher extends Activity implements View.OnClickListener, On
             }
         } else if (tag instanceof FolderInfo) {
             handleFolderClick((FolderInfo) tag);
-        }else if (v == mHandleView) {
-            if (allAppsOpen) {
-                closeAllApps(true);
-            } else {
-                showAllApps(true);
-            }
         }
     }
 

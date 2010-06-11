@@ -151,7 +151,7 @@ public class SliderView extends ImageView {
             	final long upTime=System.currentTimeMillis();
         		final boolean shortTap=((upTime-mTouchTime)<350);
         		if((!mSliding && mSlidingEnabled) ||(shortTap&&!mTriggered)){
-            		performClick();
+        			dispatchClickedEvent();
             	}
             case MotionEvent.ACTION_CANCEL:
                 mTracking = false;
@@ -278,6 +278,14 @@ public class SliderView extends ImageView {
             mOnTriggerListener.onTrigger(this, whichHandle);
         }
     }
+    /**
+     * Dispatches a trigger event to listener. Ignored if a listener is not set.
+     */
+    private void dispatchClickedEvent() {
+        if (mOnTriggerListener != null) {
+            mOnTriggerListener.onClick(this);
+        }
+    }
     
     /**
      * Interface definition for a callback to be invoked when a tab is triggered
@@ -306,6 +314,11 @@ public class SliderView extends ImageView {
          * @param grabbedState the new state: true/false
          */
         void onGrabbedStateChange(View v, boolean grabbedState);
+        /**
+         * Called when the view is clicked instead slided
+         * @param v the clicked view
+         */
+        void onClick(View v);
     }
     /**
      * Listener used to reset the view when the current animation completes.
