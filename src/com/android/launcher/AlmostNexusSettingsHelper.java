@@ -1,10 +1,19 @@
 package com.android.launcher;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
 public final class AlmostNexusSettingsHelper {
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
-	
+	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
+		"highlights_color_focus","uiNewSelectors","restored_backup"};
+	public static boolean needsRestart(String key){
+		for(int i=0;i<restart_keys.length;i++){
+			if(restart_keys[i].equals(key))
+				return true;
+		}
+		return false;
+	}
 	public static int getDesktopScreens(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		int screens = sp.getInt("desktopScreens", context.getResources().getInteger(R.integer.config_desktopScreens))+2;

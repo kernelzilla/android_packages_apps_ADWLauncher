@@ -54,9 +54,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         DialogSeekBarPreference defaultScreen= (DialogSeekBarPreference) findPreference("defaultScreen");
         defaultScreen.setMin(1);
         defaultScreen.setMax(AlmostNexusSettingsHelper.getDesktopScreens(this)-1);
-        defaultScreen.setOnPreferenceChangeListener(this);
-        Preference drawerNew = (Preference) findPreference("drawerNew");
-        drawerNew.setOnPreferenceChangeListener(this);
         DialogSeekBarPreference columnsPortrait= (DialogSeekBarPreference) findPreference("drawerColumnsPortrait");
         columnsPortrait.setMin(1);
         DialogSeekBarPreference rowsPortrait= (DialogSeekBarPreference) findPreference("drawerRowsPortrait");
@@ -81,10 +78,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 				return true;
 			}
 		});
-        Preference uiHideLabels = (Preference) findPreference("uiHideLabels");
-        uiHideLabels.setOnPreferenceChangeListener(this);
-        Preference uiNewSelectors = (Preference) findPreference("uiNewSelectors");
-        uiNewSelectors.setOnPreferenceChangeListener(this);
         mContext=this;
         
         Preference exportToXML = findPreference("xml_export");
@@ -206,60 +199,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 		if (preference.getKey().equals("desktopScreens")) {
 			DialogSeekBarPreference pref = (DialogSeekBarPreference) findPreference("defaultScreen");
 			pref.setMax((Integer) newValue+1);
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();
-		}else if (preference.getKey().equals("defaultScreen")){
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();		
-		}else if(preference.getKey().equals("drawerNew")){
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();
-		}else if(preference.getKey().equals("uiHideLabels")){
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();
-		}else if(preference.getKey().equals("uiNewSelectors")){
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();
 		}
         return true;  
 	}
@@ -284,16 +223,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
     ColorPickerDialog.OnColorChangedListener mHighlightsColorListener =
     	new ColorPickerDialog.OnColorChangedListener() {
     	public void colorChanged(int color) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();
     		getPreferenceManager().getSharedPreferences().edit().putInt("highlights_color", color).commit();
     	}
     };
@@ -304,16 +233,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
     ColorPickerDialog.OnColorChangedListener mHighlightsColorFocusListener =
     	new ColorPickerDialog.OnColorChangedListener() {
     	public void colorChanged(int color) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-			builder.setMessage(mMsg)
-			       .setCancelable(false)
-			       .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-							shouldRestart=true;
-			           }
-			       });
-			AlertDialog alert = builder.create();
-			alert.show();
     		getPreferenceManager().getSharedPreferences().edit().putInt("highlights_color_focus", color).commit();
     	}
     };
