@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public final class AlmostNexusSettingsHelper {
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
 	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
-		"highlights_color_focus","uiNewSelectors"};
+		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns"};
 	public static boolean needsRestart(String key){
 		for(int i=0;i<restart_keys.length;i++){
 			if(restart_keys[i].equals(key))
@@ -175,4 +175,15 @@ public final class AlmostNexusSettingsHelper {
 		int newD = sp.getInt("drawer_color", context.getResources().getInteger(R.integer.config_drawer_color));
 		return newD;
 	}
+	public static int getDesktopColumns(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int screens = sp.getInt("desktopColumns", context.getResources().getInteger(R.integer.config_desktopColumns))+3;
+		return screens;
+	}
+	public static int getDesktopRows(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int screens = sp.getInt("desktopRows", context.getResources().getInteger(R.integer.config_desktopRows))+3;
+		return screens;
+	}
+
 }

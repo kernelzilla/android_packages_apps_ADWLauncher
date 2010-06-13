@@ -306,4 +306,13 @@
     <string name="dbfile_not_readable">Configuration file exists, but is not readable!</string>
     <string name="dbfile_import_success">Configuration restored successfully!</string>
     <string name="dbfile_import_error">Error restoring configuration!</string>
+    <!--  Desktop columns/Rows -->
+    <string name="pref_title_desktop_columns">Desktop Columns</string>
+    <string name="pref_summary_desktop_columns">Select the number of columns to use on desktop</string>
+    <string name="pref_dialog_desktop_columns">Select the number of columns to use on desktop</string>
+
+    <string name="pref_title_desktop_rows">Desktop Rows</string>
+    <string name="pref_summary_desktop_rows">Select the number of rows to use on desktop</string>
+    <string name="pref_dialog_desktop_rows">Select the number of rows to use on desktop</string>
+
 </resources>

@@ -48,6 +48,10 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesName(ALMOSTNEXUS_PREFERENCES);
         addPreferencesFromResource(R.xml.launcher_settings);
+        DialogSeekBarPreference columnsDesktop= (DialogSeekBarPreference) findPreference("desktopColumns");
+        columnsDesktop.setMin(3);
+        DialogSeekBarPreference rowsDesktop= (DialogSeekBarPreference) findPreference("desktopRows");
+        rowsDesktop.setMin(3);
         DialogSeekBarPreference desktopScreens= (DialogSeekBarPreference) findPreference("desktopScreens");
         desktopScreens.setMin(2);
         desktopScreens.setOnPreferenceChangeListener(this);

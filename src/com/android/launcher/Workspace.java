@@ -155,6 +155,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 	private static final double ZOOM_LOG_BASE_INV = 1.0 / Math.log(2.0 / ZOOM_SENSITIVITY);
 	//ADW: we don't need bouncing while using the previews
 	private boolean mRevertInterpolatorOnScrollFinish=false;
+	//ADW: custom desktop rows/columns
+	private int mDesktopRows;
+	private int mDesktopColumns;
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -198,7 +201,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         mTouchSlop = configuration.getScaledTouchSlop();
         mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
         //Wysie: Use MultiTouchController only for multitouch events
-        multiTouchController = new MultiTouchController<Object>(this, false); 
+        multiTouchController = new MultiTouchController<Object>(this, false);
+        mDesktopRows=AlmostNexusSettingsHelper.getDesktopRows(getContext());
+        mDesktopColumns=AlmostNexusSettingsHelper.getDesktopColumns(getContext());
     }
 
     @Override
@@ -370,7 +375,12 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             return;
             //throw new IllegalStateException("The screen must be >= 0 and < " + getChildCount());
         }
-
+        //ADW: we cannot accept an item from a position greater that current desktop columns/rows
+        Log.d("WORKSPACE","Trying to add an item to x="+x+" and y="+y);
+        if(x>=mDesktopColumns || y>=mDesktopRows){
+        	return;
+        }
+        Log.d("WORKSPACE","Allowed");
         clearVacantCache();
 
         final CellLayout group = (CellLayout) getChildAt(screen);
