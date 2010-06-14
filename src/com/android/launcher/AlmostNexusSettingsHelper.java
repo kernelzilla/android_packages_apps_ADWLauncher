@@ -185,5 +185,10 @@ public final class AlmostNexusSettingsHelper {
 		int screens = sp.getInt("desktopRows", context.getResources().getInteger(R.integer.config_desktopRows))+3;
 		return screens;
 	}
+	public static boolean getUIAB2(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		boolean newD = sp.getBoolean("uiAB2", context.getResources().getBoolean(R.bool.config_uiAB2));
+		return newD;
+	}
 
 }

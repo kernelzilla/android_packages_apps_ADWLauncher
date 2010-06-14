@@ -225,6 +225,9 @@
 
     <string name="pref_title_rab">RAB</string>
     <string name="pref_summary_rab">Enable/disable the customizable Right Action Button</string>
+    
+    <string name="pref_title_ab2">Secondary ActionButtons</string>
+    <string name="pref_summary_ab2">Enable/disable the secondary Action Buttons (disable Desktop dots)</string>
 
     <string name="pref_title_tint_ab">Tint AB</string>
     <string name="pref_summary_tint_ab">Enable/disable icon tint effect on Action Buttons</string>

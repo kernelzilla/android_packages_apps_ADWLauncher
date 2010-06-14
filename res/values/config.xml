@@ -54,4 +54,5 @@
     <!-- config_desktopColumns/Rows min value is 3, so it will add 3 to whatever value you set here -->
     <integer name="config_desktopColumns">1</integer>
     <integer name="config_desktopRows">1</integer>
+    <bool name="config_uiAB2">false</bool>
 </resources>

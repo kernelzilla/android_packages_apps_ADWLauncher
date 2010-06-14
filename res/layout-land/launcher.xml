@@ -62,6 +62,15 @@
 	        launcher:ident="RAB"
 	        android:layout_height="60dip" 
 	        />
+	    <org.adw.launcher.ActionButton
+	        android:src="@drawable/rab_empty"
+	        launcher:background="@drawable/rab2_bg"
+	        android:scaleType="center"
+	        android:layout_width="wrap_content"
+	        android:id="@+id/btn_rab2"
+	        launcher:ident="RAB2"
+	        android:layout_height="60dip" 
+	        />
 		<ImageView
 			android:id="@+id/appsBg"
 			android:layout_width="50dip"
@@ -69,6 +78,15 @@
 			android:background="@drawable/handle"
 			/>
 	    <com.android.launcher.ActionButton
+	        android:src="@drawable/lab_empty"
+	        launcher:background="@drawable/lab2_bg"
+	        android:scaleType="center"
+	        android:layout_width="wrap_content"
+	        android:id="@+id/btn_lab2"
+	        launcher:ident="LAB2"
+	        android:layout_height="60dip" 
+	        />
+	    <org.adw.launcher.ActionButton
 	        android:src="@drawable/lab_empty"
 	        launcher:background="@drawable/lab_bg"
 	        android:scaleType="center"
