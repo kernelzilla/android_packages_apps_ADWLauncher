@@ -32,7 +32,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class CellLayout extends ViewGroup {
+import mobi.intuitit.android.widget.WidgetCellLayout;
+
+public class CellLayout extends WidgetCellLayout {
     private boolean mPortrait;
 
     private int mCellWidth;
