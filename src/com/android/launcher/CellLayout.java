@@ -294,7 +294,7 @@ public class CellLayout extends ViewGroup {
         findVacantCell(cellInfo.current, xCount, yCount, occupied, cellInfo);
     }
 
-    private static void findVacantCell(Rect current, int xCount, int yCount, boolean[][] occupied,
+    /*private static void findVacantCell(Rect current, int xCount, int yCount, boolean[][] occupied,
             CellInfo cellInfo) {
 
         addVacantCell(current, cellInfo);
@@ -329,8 +329,54 @@ public class CellLayout extends ViewGroup {
                 current.bottom--;
             }
         }
-    }
+    }*/
+    //TODO: ADW.
+    /**
+     * I don't understand at all why the "findVacantCell" recursive method
+     * do what it does, but seems there's something wrong with it
+     * actually works cause default launchers use a 4x4 grid, but as soon as we rise
+     * it to 6x6 or 7x7 (please, think on tablets!!!!) it starts to ANR and act weird
+     * 
+     * Tried a lot of things, and @unekual sent me the following non-recursive piece of code
+     * This does not find ALL the possible vacant cell combinations, but it works right fine
+     * and does not stuck on a stupid ANR.
+     */
 
+    private static void findVacantCell(Rect current, int xCount, int yCount, boolean[][] occupied,
+    		 CellInfo cellInfo) {
+    		   int l = 0, r, t, b;
+    		   do {
+    		      r = 0;
+    		      do {
+    		      t = 0;
+    		         do {
+    		            b = 0;
+    		            do {
+    		               current.left += l;
+    		               current.right += r;
+    		               current.top += t;
+    		               current.bottom += b;
+
+    		               addVacantCell(current, cellInfo);
+
+    		               current.left -= l;
+    		               current.right -= r;
+    		               current.top -= t;
+    		               current.bottom -= b;
+
+    		            } while (current.bottom + b++ < yCount - 1 && isEmpty(current.left + l, current.right + r, current.bottom + b, current.bottom + b, occupied));
+    		         } while (current.top + t-- > 0 && isEmpty(current.left + l, current.right + r, current.top + t, current.top + t, occupied));
+    		      } while (current.right + r++ < xCount - 1 && isEmpty(current.right + r, current.right + r, current.bottom + b, current.top + t, occupied));
+    		   } while (current.left + l-- > 0 && isEmpty(current.left + l, current.left + l, current.bottom + b, current.top + t, occupied));
+    		}
+
+	 public static boolean isEmpty(int x0, int x1, int y0, int y1, boolean[][] occupied) {
+	    for ( int x = x0; x <= x1; x++ )
+	       for ( int y = y0; y <= y1; y++ )
+	          if ( occupied[x][y] )
+	             return false;
+	    return true;
+	 }
     private static void addVacantCell(Rect current, CellInfo cellInfo) {
         CellInfo.VacantCell cell = CellInfo.VacantCell.acquire();
         cell.cellX = current.left;
@@ -928,17 +974,7 @@ out:            for (int i = x; i < x + spanX - 1 && x < xCount; i++) {
             // like a reasonable compromise given the size of a VacantCell and
             // the fact that the user is not likely to touch an empty 4x4 grid
             // very often 
-            //TODO: ADW.
-            /**
-             * I don't understand at all why the "findVacantCell" recursive method
-             * do what it does, but seems there's something wrong with it
-             * actually works cause default launchers use a 4x4 grid, but as soon as we rise
-             * it to 6x6 or 7x7 (please, think on tablets!!!!) it starts to ANR and act weird
-             * 
-             * Tried a lot of things, but leaving POOL_LIMIT=1 instead of initial 100 seems
-             * to mitigate the ANR.... but I DON'T KNOW WHAT SIDE EFECTS WILL ADD!!!
-             */
-            private static final int POOL_LIMIT = 1;
+            private static final int POOL_LIMIT = 100;
             private static final Object sLock = new Object();
 
             private static int sAcquiredCount = 0;
