@@ -1867,7 +1867,10 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         }
 
         if (mSavedInstanceState != null) {
-            super.onRestoreInstanceState(mSavedInstanceState);
+        	//ADW: sometimes on rotating the phone, some widgets fail to restore its states.... so... damn.
+        	try{
+        		super.onRestoreInstanceState(mSavedInstanceState);
+        	}catch(IllegalArgumentException e){}
             mSavedInstanceState = null;
         }
 
@@ -3062,6 +3065,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     private boolean shouldRestart(){
         try {
         	if(mShouldRestart){
+        		android.os.Process.killProcess(android.os.Process.myPid());
         		finish();
 				startActivity(getIntent());
             return true;
