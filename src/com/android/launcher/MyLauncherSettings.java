@@ -60,7 +60,7 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         DialogSeekBarPreference rowsDesktop= (DialogSeekBarPreference) findPreference("desktopRows");
         rowsDesktop.setMin(3);
         DialogSeekBarPreference desktopScreens= (DialogSeekBarPreference) findPreference("desktopScreens");
-        desktopScreens.setMin(2);
+        desktopScreens.setMin(1);
         desktopScreens.setOnPreferenceChangeListener(this);
         DialogSeekBarPreference defaultScreen= (DialogSeekBarPreference) findPreference("defaultScreen");
         defaultScreen.setMin(1);

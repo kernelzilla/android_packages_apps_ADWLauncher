@@ -500,6 +500,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         	if(mScrollX>getChildAt(getChildCount() - 1).getRight() - (mRight - mLeft)){
         		x=(mScrollX-mWallpaperWidth+(mRight-mLeft));
         	}
+        	if(getChildCount()==1)x=getScrollX();
     		canvas.drawBitmap(mWallpaperDrawable.getBitmap(), x, (getBottom() - mWallpaperHeight) / 2, mPaint);
         }
         if(!mSensemode){

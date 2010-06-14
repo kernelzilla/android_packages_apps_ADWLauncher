@@ -16,7 +16,7 @@ public final class AlmostNexusSettingsHelper {
 	}
 	public static int getDesktopScreens(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
-		int screens = sp.getInt("desktopScreens", context.getResources().getInteger(R.integer.config_desktopScreens))+2;
+		int screens = sp.getInt("desktopScreens", context.getResources().getInteger(R.integer.config_desktopScreens))+1;
 		return screens;
 	}
 	public static int getDefaultScreen(Context context) {

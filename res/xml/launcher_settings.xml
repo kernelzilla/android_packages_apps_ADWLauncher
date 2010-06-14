@@ -19,10 +19,9 @@
 			android:defaultValue="false"
 			android:summary="@string/pref_summary_hide_statusbar"
 			android:key="hideStatusbar" />
-
 		<com.android.launcher.DialogSeekBarPreference
 			android:title="@string/pref_title_desktop_screens" android:summary="@string/pref_summary_desktop_screens"
-			android:key="desktopScreens" android:defaultValue="3" android:max="5" />
+			android:key="desktopScreens" android:defaultValue="4" android:max="6" />
 		<com.android.launcher.DialogSeekBarPreference
 			android:title="@string/pref_title_default_screen" android:summary="@string/pref_summary_default_screen"
 			android:key="defaultScreen" android:defaultValue="2" android:max="4" />
