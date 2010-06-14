@@ -52,7 +52,7 @@ public class FolderIcon extends BubbleTextView implements DropTarget {
         icon.mCloseIcon = d;
         icon.mOpenIcon = resources.getDrawable(R.drawable.ic_launcher_folder_open);
         icon.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        icon.setText(folderInfo.title);
+        if(!AlmostNexusSettingsHelper.getUIHideLabels(launcher))icon.setText(folderInfo.title);
         icon.setTag(folderInfo);
         icon.setOnClickListener(launcher);
         icon.mInfo = folderInfo;
