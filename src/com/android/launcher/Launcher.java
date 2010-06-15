@@ -271,6 +271,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private static final int BIND_PREVIEWS=3;
 	private static final int BIND_APPS=4;
 	private static final int BIND_STATUSBAR=5;
+	private static final int BIND_NOTIFICATIONS=6;
+	private static final int BIND_HOME_NOTIFICATIONS=7;
+	private static final int BIND_DOCKBAR=8;
 	private int mHomeBinding=BIND_PREVIEWS;
 	/**
 	 * ADW:Wallpaper intent receiver
@@ -1006,60 +1009,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
             if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) !=
                     Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
-                if(mHomeBinding!=BIND_APPS){
+                if(!isAllAppsVisible() || mHomeBinding==BIND_APPS)
+                	fireHomeBinding();
+            	if(mHomeBinding!=BIND_APPS){
                 	closeDrawer();
                 }
-            	//ADW: switch home button binding user selection
-                switch (mHomeBinding) {
-				case BIND_DEFAULT:
-					dismissPreviews();
-					if (!mWorkspace.isDefaultScreenShowing()) {
-						mWorkspace.moveToDefaultScreen();
-					}
-					break;
-				case BIND_HOME_PREVIEWS:
-	            	if (!mWorkspace.isDefaultScreenShowing()) {
-	            		dismissPreviews();
-	                    mWorkspace.moveToDefaultScreen();
-	                }else{
-	                	if(!showingPreviews){
-	                		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
-	                	}else{
-	                		dismissPreviews();
-	                	}
-	                }
-					break;
-				case BIND_PREVIEWS:
-                	if(!showingPreviews){
-                		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
-                	}else{
-                		dismissPreviews();
-                	}
-					break;
-				case BIND_APPS:
-					dismissPreviews();
-					if(isAllAppsVisible()){
-						closeDrawer();
-					}else{
-						showAllApps(true);
-					}
-					break;
-				case BIND_STATUSBAR:
-					WindowManager.LayoutParams attrs = getWindow().getAttributes();
-			    	if((attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN){
-				    	// go non-full screen
-				    	attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-				    	getWindow().setAttributes(attrs);
-			    	}else{
-				    	// go full screen
-				    	attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-				    	getWindow().setAttributes(attrs);
-			    	}
-					break;
-				default:
-					break;
-				}
-
                 final View v = getWindow().peekDecorView();
                 if (v != null && v.getWindowToken() != null) {
                     InputMethodManager imm = (InputMethodManager)getSystemService(
@@ -2030,7 +1984,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         openFolder.bind(folderInfo);
         folderInfo.opened = true;
 
-        if(folderInfo.container==LauncherSettings.Favorites.CONTAINER_DOCKBAR || folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB || folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB){
+        if(folderInfo.container==LauncherSettings.Favorites.CONTAINER_DOCKBAR ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB2 ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB2){
         	mWorkspace.addInScreen(openFolder, mWorkspace.getCurrentScreen(), 0, 0, 4, 4);
         }else{
         	mWorkspace.addInScreen(openFolder, folderInfo.screen, 0, 0, 4, 4);
@@ -3096,5 +3054,81 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		Intent ready = new Intent(LauncherIntent.Action.ACTION_READY).putExtra(
 				AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId).setComponent(cname);
 		sendBroadcast(ready);
+	}
+	/**
+	 * ADW: Home binding actions
+	 */
+	private void fireHomeBinding(){
+    	//ADW: switch home button binding user selection
+        switch (mHomeBinding) {
+		case BIND_DEFAULT:
+			dismissPreviews();
+			if (!mWorkspace.isDefaultScreenShowing()) {
+				mWorkspace.moveToDefaultScreen();
+			}
+			break;
+		case BIND_HOME_PREVIEWS:
+        	if (!mWorkspace.isDefaultScreenShowing()) {
+        		dismissPreviews();
+                mWorkspace.moveToDefaultScreen();
+            }else{
+            	if(!showingPreviews){
+            		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
+            	}else{
+            		dismissPreviews();
+            	}
+            }
+			break;
+		case BIND_PREVIEWS:
+        	if(!showingPreviews){
+        		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
+        	}else{
+        		dismissPreviews();
+        	}
+			break;
+		case BIND_APPS:
+			dismissPreviews();
+			if(isAllAppsVisible()){
+				closeDrawer();
+			}else{
+				showAllApps(true);
+			}
+			break;
+		case BIND_STATUSBAR:
+			WindowManager.LayoutParams attrs = getWindow().getAttributes();
+	    	if((attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN){
+		    	// go non-full screen
+		    	attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		    	getWindow().setAttributes(attrs);
+	    	}else{
+		    	// go full screen
+		    	attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+		    	getWindow().setAttributes(attrs);
+	    	}
+			break;
+		case BIND_NOTIFICATIONS:
+			dismissPreviews();
+			showNotifications();
+			break;
+		case BIND_HOME_NOTIFICATIONS:
+        	if (!mWorkspace.isDefaultScreenShowing()) {
+        		dismissPreviews();
+                mWorkspace.moveToDefaultScreen();
+            }else{
+    			dismissPreviews();
+    			showNotifications();
+            }
+			break;
+		case BIND_DOCKBAR:
+			dismissPreviews();
+			if(mDockBar.isOpen()){
+				mDockBar.close();
+			}else{
+				mDockBar.open();
+			}
+			break;
+		default:
+			break;
+		}
 	}
 }

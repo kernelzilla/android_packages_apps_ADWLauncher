@@ -1658,11 +1658,15 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 		for(int i=0;i<getChildCount();i++){
 			RectF tmp=getScaledChild(getChildAt(i));
 			if (tmp.contains(x+getScrollX(), y+getScrollY())){
-		        mLauncher.dismissPreviews();
-		        mScroller.setInterpolator(new ElasticInterpolator(0));
-		        mRevertInterpolatorOnScrollFinish=true;
-		        snapToScreen(i);
-		        postInvalidate();
+				if(mCurrentScreen!=i){
+			        mLauncher.dismissPreviews();
+			        mScroller.setInterpolator(new ElasticInterpolator(0));
+			        mRevertInterpolatorOnScrollFinish=true;
+			        snapToScreen(i);
+			        postInvalidate();
+				}else{
+					mLauncher.dismissPreviews();
+				}
 			}
 		}
 	}

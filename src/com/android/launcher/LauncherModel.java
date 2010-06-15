@@ -1174,7 +1174,8 @@ public class LauncherModel {
             final int count = desktopItems.size();
             for (int i = 0; i < count; i++) {
                 //ADW: Don't load items outer current columns/rows limits
-                if(desktopItems.get(i).cellX<mDesktopColumns && desktopItems.get(i).cellY<mDesktopRows)
+                if((desktopItems.get(i).cellX+(desktopItems.get(i).spanX-1))<mDesktopColumns && 
+                		(desktopItems.get(i).cellY+(desktopItems.get(i).spanY-1))<mDesktopRows)
                 addOccupiedCells(occupied, screen, desktopItems.get(i));
             }
         }

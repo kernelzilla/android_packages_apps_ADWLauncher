@@ -346,31 +346,21 @@ public class CellLayout extends WidgetCellLayout {
 
     private static void findVacantCell(Rect current, int xCount, int yCount, boolean[][] occupied,
     		 CellInfo cellInfo) {
-    		   int l = 0, r, t, b;
-    		   do {
-    		      r = 0;
-    		      do {
-    		      t = 0;
-    		         do {
-    		            b = 0;
-    		            do {
-    		               current.left += l;
-    		               current.right += r;
-    		               current.top += t;
-    		               current.bottom += b;
+    		   for (int l = 0; l < xCount; l++)
+    		      for (int r = l; r < xCount; r++)
+    		         for (int t = 0; t < yCount; t++)
+    		            for (int b = t; b < yCount && isRowEmpty(b, l, r, occupied); b++) {
+    		               current.left = l;
+    		               current.right = r;
+    		               current.top = t;
+    		               current.bottom = b;
 
     		               addVacantCell(current, cellInfo);
-
-    		               current.left -= l;
-    		               current.right -= r;
-    		               current.top -= t;
-    		               current.bottom -= b;
-
-    		            } while (current.bottom + b++ < yCount - 1 && isEmpty(current.left + l, current.right + r, current.bottom + b, current.bottom + b, occupied));
-    		         } while (current.top + t-- > 0 && isEmpty(current.left + l, current.right + r, current.top + t, current.top + t, occupied));
-    		      } while (current.right + r++ < xCount - 1 && isEmpty(current.right + r, current.right + r, current.bottom + b, current.top + t, occupied));
-    		   } while (current.left + l-- > 0 && isEmpty(current.left + l, current.left + l, current.bottom + b, current.top + t, occupied));
+    		            }
     		}
+
+    		// Note the row test in the last for loop. No need to test the whole area, only the
+    		// newly added row since everything before it would have already been tested.
 
 	 public static boolean isEmpty(int x0, int x1, int y0, int y1, boolean[][] occupied) {
 	    for ( int x = x0; x <= x1; x++ )
