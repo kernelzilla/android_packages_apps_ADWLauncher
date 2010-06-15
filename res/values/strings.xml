@@ -317,5 +317,8 @@
     <string name="pref_title_desktop_rows">Desktop Rows</string>
     <string name="pref_summary_desktop_rows">Select the number of rows to use on desktop</string>
     <string name="pref_dialog_desktop_rows">Select the number of rows to use on desktop</string>
+    
+    <string name="pref_title_autosize_icons">Auto Stretch</string>
+    <string name="pref_summary_autosize_icons">Try to stretch icons/widgets so they don\'t overlap</string>
 
 </resources>

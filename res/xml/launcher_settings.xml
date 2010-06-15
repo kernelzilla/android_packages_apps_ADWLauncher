@@ -35,6 +35,10 @@
 			android:summary="@string/pref_summary_desktop_overshoot"
 			android:key="desktopBounce" android:defaultValue="@integer/config_desktopBounce"
 			android:max="100" />
+		<CheckBoxPreference android:title="@string/pref_title_autosize_icons"
+			android:defaultValue="false"
+			android:summary="@string/pref_summary_autosize_icons"
+			android:key="autosizeIcons" />
 		<com.android.launcher.DialogSeekBarPreference
 			android:title="@string/pref_title_desktop_columns"
 			android:summary="@string/pref_summary_desktop_columns"

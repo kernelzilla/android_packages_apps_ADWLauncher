@@ -529,16 +529,22 @@ public class CellLayout extends WidgetCellLayout {
             throw new RuntimeException("CellLayout cannot have UNSPECIFIED dimensions");
         }
         mPortrait = heightSpecSize > widthSpecSize;
+        int tmpCellW=mCellWidth;
+        int tmpCellH=mCellHeight;
         if(mPortrait){
         	mLongAxisCells=mRows;
         	mShortAxisCells=mColumns;
-        	mCellWidth=(widthSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mColumns;
-        	mCellHeight=(heightSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mRows;
+        	tmpCellW=(widthSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mColumns;
+        	tmpCellH=(heightSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mRows;
         }else{
         	mLongAxisCells=mColumns;
         	mShortAxisCells=mRows;
-        	mCellWidth=(widthSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mColumns;
-        	mCellHeight=(heightSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mRows;
+        	tmpCellW=(widthSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mColumns;
+        	tmpCellH=(heightSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mRows;
+        }
+        if(AlmostNexusSettingsHelper.getAutosizeIcons(getContext())){
+        	mCellWidth=tmpCellW;
+        	mCellHeight=tmpCellH;
         }
         if (mOccupied == null) {
             if (mPortrait) {
@@ -595,10 +601,10 @@ public class CellLayout extends WidgetCellLayout {
 
             if (mPortrait) {
                 lp.setup(cellWidth, cellHeight, mWidthGap, mHeightGap, shortAxisStartPadding,
-                        longAxisStartPadding);
+                        longAxisStartPadding,AlmostNexusSettingsHelper.getAutosizeIcons(getContext()));
             } else {
                 lp.setup(cellWidth, cellHeight, mWidthGap, mHeightGap, longAxisStartPadding,
-                        shortAxisStartPadding);
+                        shortAxisStartPadding,AlmostNexusSettingsHelper.getAutosizeIcons(getContext()));
             }
             
             if (lp.regenerateId) {
@@ -940,19 +946,21 @@ out:            for (int i = x; i < x + spanX - 1 && x < xCount; i++) {
         }
 
         public void setup(int cellWidth, int cellHeight, int widthGap, int heightGap,
-                int hStartPadding, int vStartPadding) {
+                int hStartPadding, int vStartPadding,boolean autoStretch) {
             
             final int myCellHSpan = cellHSpan;
             final int myCellVSpan = cellVSpan;
             final int myCellX = cellX;
             final int myCellY = cellY;
             
-            /*width = myCellHSpan * cellWidth + ((myCellHSpan - 1) * widthGap) -
+            width = myCellHSpan * cellWidth + ((myCellHSpan - 1) * widthGap) -
                     leftMargin - rightMargin;
             height = myCellVSpan * cellHeight + ((myCellVSpan - 1) * heightGap) -
-                    topMargin - bottomMargin;*/
-            width=cellWidth*myCellHSpan;
-            height=cellHeight*myCellVSpan;
+                    topMargin - bottomMargin;
+            if(autoStretch){
+            	width=(cellWidth*myCellHSpan)- rightMargin-leftMargin;
+            	height=(cellHeight*myCellVSpan);
+            }
             
             x = hStartPadding + myCellX * (cellWidth + widthGap) + leftMargin;
             y = vStartPadding + myCellY * (cellHeight + heightGap) + topMargin;

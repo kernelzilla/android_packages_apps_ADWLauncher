@@ -55,4 +55,5 @@
     <integer name="config_desktopColumns">1</integer>
     <integer name="config_desktopRows">1</integer>
     <bool name="config_uiAB2">false</bool>
+    <bool name="config_autosizeIcons">false</bool>
 </resources>
