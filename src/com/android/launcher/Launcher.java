@@ -2931,7 +2931,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	public void onWindowFocusChanged(boolean hasFocus) {
 		// TODO Auto-generated method stub
     	super.onWindowFocusChanged(hasFocus);
-		if(mShouldHideStatusbaronFocus && hideStatusBar){
+		if(mShouldHideStatusbaronFocus && hideStatusBar && hasFocus){
 			fullScreen(true);
 			mShouldHideStatusbaronFocus=false;
 		}
