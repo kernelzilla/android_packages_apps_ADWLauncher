@@ -62,7 +62,7 @@
 	        launcher:ident="RAB"
 	        android:layout_height="60dip" 
 	        />
-	    <org.adw.launcher.ActionButton
+	    <com.android.launcher.ActionButton
 	        android:src="@drawable/rab_empty"
 	        launcher:background="@drawable/rab2_bg"
 	        android:scaleType="center"
@@ -86,7 +86,7 @@
 	        launcher:ident="LAB2"
 	        android:layout_height="60dip" 
 	        />
-	    <org.adw.launcher.ActionButton
+	    <com.android.launcher.ActionButton
 	        android:src="@drawable/lab_empty"
 	        launcher:background="@drawable/lab_bg"
 	        android:scaleType="center"
