@@ -158,6 +158,9 @@
     <string name="pref_title_rab">RAB</string>
     <string name="pref_summary_rab">Abilita/Disabilita il Bottone Destro (RAB) personalizzabile</string>
 
+    <string name="pref_title_ab2">ActionButtons Secondari</string>
+    <string name="pref_summary_ab2">Abilita/Disabilita gli Action Buttons secondari (disabilita i punti del Desktop)</string>
+
     <string name="pref_title_tint_ab">Sfumatura AB</string>
     <string name="pref_summary_tint_ab">Abilita/Disabilita l\'effetto sfumatura sugli Action Buttons</string>
 
@@ -239,5 +242,17 @@
     <string name="dbfile_not_readable">Impossibile leggere il file di backup della configurazione!</string>
     <string name="dbfile_import_success">Configurazione ripristinata con successo!</string>
     <string name="dbfile_import_error">Errore nel ripristino della configurazione!</string>
+        <!--  Desktop columns/Rows -->
+    <string name="pref_title_desktop_columns">Colonne Desktop</string>
+    <string name="pref_summary_desktop_columns">Seleziona il numero di colonne da usare sul desktop</string>
+    <string name="pref_dialog_desktop_columns">Seleziona il numero di colonne da usare sul desktop</string>
+
+    <string name="pref_title_desktop_rows">Righe Desktop</string>
+    <string name="pref_summary_desktop_rows">Seleziona il numero di righe da usare sul desktop</string>
+    <string name="pref_dialog_desktop_rows">Seleziona il numero di righe da usare sul desktop</string>
+
+    <string name="pref_title_autosize_icons">Auto Stretch</string>
+    <string name="pref_summary_autosize_icons">Prova a espandere automaticamente icone/widgets per non farli sovrapporre</string>
+
 
 </resources>
