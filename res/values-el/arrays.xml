@@ -6,12 +6,20 @@
                 <item>εμφανιση προεπισκοπησης</item>
                 <item>ανοιγμα κλυσιμο συρταριου εφαρμογων</item>
                 <item>εμφανιση/κρυψιμο status bar</item>
-        </string-array>
-        <string-array name="menu_binding_values">
+                <item>Open/close notifications</item>
+                <item>Move to default desktop/Open notifications</item>
+                <item>Open/close DockBar</item>
+       </string-array>
+
+       <!-- Do not translate. -->
+       <string-array name="menu_binding_values">
                 <item>1</item>
                 <item>2</item>
                 <item>3</item>
                 <item>4</item>
                 <item>5</item>
-        </string-array>
+                <item>6</item>
+                <item>7</item>
+                <item>8</item>
+       </string-array>
 </resources>

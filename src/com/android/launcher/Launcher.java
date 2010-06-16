@@ -22,6 +22,7 @@ import static android.util.Log.w;
 
 import com.android.launcher.DockBar.DockBarListener;
 import com.android.launcher.SliderView.OnTriggerListener;
+import mobi.intuitit.android.content.LauncherIntent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -233,6 +234,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private DockBar mDockBar;
 	private ActionButton mLAB;
 	private ActionButton mRAB;
+	private ActionButton mLAB2;
+	private ActionButton mRAB2;
 	/**
 	 * ADW: variables to store actual status of elements
 	 */
@@ -259,6 +262,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private float uiScaleAB=0.5f;
 	private boolean uiHideLabels=false;
 	private boolean wallpaperHack=true;
+	private boolean showAB2=false;
 	/**
 	 * ADW: Home binding constants
 	 */
@@ -267,6 +271,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private static final int BIND_PREVIEWS=3;
 	private static final int BIND_APPS=4;
 	private static final int BIND_STATUSBAR=5;
+	private static final int BIND_NOTIFICATIONS=6;
+	private static final int BIND_HOME_NOTIFICATIONS=7;
+	private static final int BIND_DOCKBAR=8;
 	private int mHomeBinding=BIND_PREVIEWS;
 	/**
 	 * ADW:Wallpaper intent receiver
@@ -700,6 +707,15 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         dragLayer.addDragListener(mRAB);
         mLAB.setOnClickListener(this);
         mRAB.setOnClickListener(this);
+        //ADW: secondary aActionButtons
+        mLAB2 = (ActionButton) dragLayer.findViewById(R.id.btn_lab2);
+        mLAB2.setLauncher(this);
+        dragLayer.addDragListener(mLAB2);
+        mRAB2 = (ActionButton) dragLayer.findViewById(R.id.btn_rab2);
+        mRAB2.setLauncher(this);
+        dragLayer.addDragListener(mRAB2);
+        mLAB2.setOnClickListener(this);
+        mRAB2.setOnClickListener(this);
 		//ADW: Dots ImageViews
         mPreviousView = (ImageView)findViewById(R.id.btn_scroll_left);
 		mNextView = (ImageView)findViewById(R.id.btn_scroll_right);
@@ -894,6 +910,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         } else if (sModel.isDesktopLoaded()) {
             sModel.addDesktopAppWidget(launcherInfo);
         }
+        // finish load a widget, send it an intent
+        if(appWidgetInfo!=null)
+        	appwidgetReadyBroadcast(appWidgetId, appWidgetInfo.provider);
     }
 
     public LauncherAppWidgetHost getAppWidgetHost() {
@@ -990,60 +1009,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
             if ((intent.getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) !=
                     Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) {
-                if(mHomeBinding!=BIND_APPS){
+                if(!isAllAppsVisible() || mHomeBinding==BIND_APPS)
+                	fireHomeBinding();
+            	if(mHomeBinding!=BIND_APPS){
                 	closeDrawer();
                 }
-            	//ADW: switch home button binding user selection
-                switch (mHomeBinding) {
-				case BIND_DEFAULT:
-					dismissPreviews();
-					if (!mWorkspace.isDefaultScreenShowing()) {
-						mWorkspace.moveToDefaultScreen();
-					}
-					break;
-				case BIND_HOME_PREVIEWS:
-	            	if (!mWorkspace.isDefaultScreenShowing()) {
-	            		dismissPreviews();
-	                    mWorkspace.moveToDefaultScreen();
-	                }else{
-	                	if(!showingPreviews){
-	                		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
-	                	}else{
-	                		dismissPreviews();
-	                	}
-	                }
-					break;
-				case BIND_PREVIEWS:
-                	if(!showingPreviews){
-                		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
-                	}else{
-                		dismissPreviews();
-                	}
-					break;
-				case BIND_APPS:
-					dismissPreviews();
-					if(isAllAppsVisible()){
-						closeDrawer();
-					}else{
-						showAllApps(true);
-					}
-					break;
-				case BIND_STATUSBAR:
-					WindowManager.LayoutParams attrs = getWindow().getAttributes();
-			    	if((attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN){
-				    	// go non-full screen
-				    	attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-				    	getWindow().setAttributes(attrs);
-			    	}else{
-				    	// go full screen
-				    	attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-				    	getWindow().setAttributes(attrs);
-			    	}
-					break;
-				default:
-					break;
-				}
-
                 final View v = getWindow().peekDecorView();
                 if (v != null && v.getWindowToken() != null) {
                     InputMethodManager imm = (InputMethodManager)getSystemService(
@@ -1189,6 +1159,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         getContentResolver().unregisterContentObserver(mWidgetObserver);
         unregisterReceiver(mApplicationsReceiver);
         unregisterReceiver(mCloseSystemDialogsReceiver);
+        mWorkspace.unregisterProvider();
     }
 
     @Override
@@ -1764,6 +1735,12 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	            case LauncherSettings.Favorites.CONTAINER_RAB:
 	            	mRAB.UpdateLaunchInfo(item);
 	            	break;
+	            case LauncherSettings.Favorites.CONTAINER_LAB2:
+	            	mLAB2.UpdateLaunchInfo(item);
+	            	break;
+	            case LauncherSettings.Favorites.CONTAINER_RAB2:
+	            	mRAB2.UpdateLaunchInfo(item);
+	            	break;
 				case LauncherSettings.Favorites.CONTAINER_DOCKBAR:
 					miniLauncher.addItemInDockBar(item);
 					break;
@@ -1849,7 +1826,10 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         }
 
         if (mSavedInstanceState != null) {
-            super.onRestoreInstanceState(mSavedInstanceState);
+        	//ADW: sometimes on rotating the phone, some widgets fail to restore its states.... so... damn.
+        	try{
+        		super.onRestoreInstanceState(mSavedInstanceState);
+        	}catch(IllegalArgumentException e){}
             mSavedInstanceState = null;
         }
 
@@ -1895,6 +1875,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                     item.cellY, item.spanX, item.spanY, !desktopLocked);
 
             workspace.requestLayout();
+            // finish load a widget, send it an intent
+            if(appWidgetInfo!=null)
+            	appwidgetReadyBroadcast(appWidgetId, appWidgetInfo.provider);
         }
 
         if (appWidgets.isEmpty()) {
@@ -2001,7 +1984,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         openFolder.bind(folderInfo);
         folderInfo.opened = true;
 
-        if(folderInfo.container==LauncherSettings.Favorites.CONTAINER_DOCKBAR || folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB || folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB){
+        if(folderInfo.container==LauncherSettings.Favorites.CONTAINER_DOCKBAR ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB2 ||
+        		folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB2){
         	mWorkspace.addInScreen(openFolder, mWorkspace.getCurrentScreen(), 0, 0, 4, 4);
         }else{
         	mWorkspace.addInScreen(openFolder, folderInfo.screen, 0, 0, 4, 4);
@@ -2560,6 +2547,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		autoCloseDockbar=AlmostNexusSettingsHelper.getUICloseDockbar(this);
 		showLAB=AlmostNexusSettingsHelper.getUILAB(this);
 		showRAB=AlmostNexusSettingsHelper.getUIRAB(this);    	
+		showAB2=AlmostNexusSettingsHelper.getUIAB2(this);
 		hideAppsBg=AlmostNexusSettingsHelper.getUIAppsBg(this);
 		hideABBg=AlmostNexusSettingsHelper.getUIABBg(this);
 		uiHideLabels=AlmostNexusSettingsHelper.getUIHideLabels(this);
@@ -2589,6 +2577,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			uiScaleAB=scale;
 			mRAB.updateIcon();
 			mLAB.updateIcon();
+			mRAB2.updateIcon();
+			mLAB2.updateIcon();
 		}
 		
     	fullScreen(hideStatusBar);
@@ -2597,11 +2587,15 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	    	mPreviousView.setVisibility(showDots?View.VISIBLE:View.GONE);
 	    	mRAB.setVisibility(showRAB?View.VISIBLE:View.INVISIBLE);
 	    	mLAB.setVisibility(showLAB?View.VISIBLE:View.INVISIBLE);
+	    	mRAB2.setVisibility((showAB2 && !showDots)?View.VISIBLE:View.GONE);
+	    	mLAB2.setVisibility((showAB2 && !showDots)?View.VISIBLE:View.GONE);
 	    	mHandleView.setSlidingEnabled(showDockBar);
 	    	View appsBg=findViewById(R.id.appsBg);
 	    	appsBg.setVisibility(hideAppsBg?View.INVISIBLE:View.VISIBLE);
 	    	mRAB.hideBg(hideABBg);
 	    	mLAB.hideBg(hideABBg);
+	    	mRAB2.hideBg(hideABBg);
+	    	mLAB2.hideBg(hideABBg);
     	}
     	if(mWorkspace!=null){
     		mWorkspace.setWallpaperHack(wallpaperHack);
@@ -2937,7 +2931,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	public void onWindowFocusChanged(boolean hasFocus) {
 		// TODO Auto-generated method stub
     	super.onWindowFocusChanged(hasFocus);
-		if(mShouldHideStatusbaronFocus && hideStatusBar){
+		if(mShouldHideStatusbaronFocus && hideStatusBar && hasFocus){
 			fullScreen(true);
 			mShouldHideStatusbaronFocus=false;
 		}
@@ -3037,6 +3031,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     private boolean shouldRestart(){
         try {
         	if(mShouldRestart){
+        		android.os.Process.killProcess(android.os.Process.myPid());
         		finish();
 				startActivity(getIntent());
             return true;
@@ -3055,5 +3050,85 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			updateAlmostNexusUI();
 		}
 	}
-
+	private void appwidgetReadyBroadcast(int appWidgetId, ComponentName cname) {
+		Intent ready = new Intent(LauncherIntent.Action.ACTION_READY).putExtra(
+				AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId).setComponent(cname);
+		sendBroadcast(ready);
+	}
+	/**
+	 * ADW: Home binding actions
+	 */
+	private void fireHomeBinding(){
+    	//ADW: switch home button binding user selection
+        switch (mHomeBinding) {
+		case BIND_DEFAULT:
+			dismissPreviews();
+			if (!mWorkspace.isDefaultScreenShowing()) {
+				mWorkspace.moveToDefaultScreen();
+			}
+			break;
+		case BIND_HOME_PREVIEWS:
+        	if (!mWorkspace.isDefaultScreenShowing()) {
+        		dismissPreviews();
+                mWorkspace.moveToDefaultScreen();
+            }else{
+            	if(!showingPreviews){
+            		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
+            	}else{
+            		dismissPreviews();
+            	}
+            }
+			break;
+		case BIND_PREVIEWS:
+        	if(!showingPreviews){
+        		showPreviews(mHandleView, 0, mWorkspace.mHomeScreens);
+        	}else{
+        		dismissPreviews();
+        	}
+			break;
+		case BIND_APPS:
+			dismissPreviews();
+			if(isAllAppsVisible()){
+				closeDrawer();
+			}else{
+				showAllApps(true);
+			}
+			break;
+		case BIND_STATUSBAR:
+			WindowManager.LayoutParams attrs = getWindow().getAttributes();
+	    	if((attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN){
+		    	// go non-full screen
+		    	attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		    	getWindow().setAttributes(attrs);
+	    	}else{
+		    	// go full screen
+		    	attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+		    	getWindow().setAttributes(attrs);
+	    	}
+			break;
+		case BIND_NOTIFICATIONS:
+			dismissPreviews();
+			showNotifications();
+			break;
+		case BIND_HOME_NOTIFICATIONS:
+        	if (!mWorkspace.isDefaultScreenShowing()) {
+        		dismissPreviews();
+                mWorkspace.moveToDefaultScreen();
+            }else{
+    			dismissPreviews();
+    			showNotifications();
+            }
+			break;
+		case BIND_DOCKBAR:
+			dismissPreviews();
+			if(mDockBar.isOpen()){
+				mDockBar.close();
+			}else{
+				mDockBar.open();
+			}
+			break;
+		default:
+			break;
+		}
+	}
 }

@@ -127,6 +127,8 @@
         <attr name="ident">
             <enum name="LAB" value="-300" />
             <enum name="RAB" value="-400" />
+            <enum name="LAB2" value="-500" />
+            <enum name="RAB2" value="-600" />
         </attr>
         <attr name="background" format="reference"  />
     </declare-styleable>

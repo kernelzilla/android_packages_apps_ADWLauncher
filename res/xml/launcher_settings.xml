@@ -19,10 +19,9 @@
 			android:defaultValue="false"
 			android:summary="@string/pref_summary_hide_statusbar"
 			android:key="hideStatusbar" />
-
 		<com.android.launcher.DialogSeekBarPreference
 			android:title="@string/pref_title_desktop_screens" android:summary="@string/pref_summary_desktop_screens"
-			android:key="desktopScreens" android:defaultValue="3" android:max="5" />
+			android:key="desktopScreens" android:defaultValue="4" android:max="6" />
 		<com.android.launcher.DialogSeekBarPreference
 			android:title="@string/pref_title_default_screen" android:summary="@string/pref_summary_default_screen"
 			android:key="defaultScreen" android:defaultValue="2" android:max="4" />
@@ -36,6 +35,21 @@
 			android:summary="@string/pref_summary_desktop_overshoot"
 			android:key="desktopBounce" android:defaultValue="@integer/config_desktopBounce"
 			android:max="100" />
+		<CheckBoxPreference android:title="@string/pref_title_autosize_icons"
+			android:defaultValue="false"
+			android:summary="@string/pref_summary_autosize_icons"
+			android:key="autosizeIcons" />
+		<com.android.launcher.DialogSeekBarPreference
+			android:title="@string/pref_title_desktop_columns"
+			android:summary="@string/pref_summary_desktop_columns"
+			android:key="desktopColumns" android:defaultValue="@integer/config_desktopColumns"
+			android:max="5" />
+		<com.android.launcher.DialogSeekBarPreference
+			android:title="@string/pref_title_desktop_rows"
+			android:summary="@string/pref_summary_desktop_rows"
+			android:key="desktopRows" android:defaultValue="@integer/config_desktopRows"
+			android:max="5" />
+
 	</PreferenceScreen>
 	<PreferenceScreen
 		android:key="drawerPrerefences"
@@ -132,6 +146,10 @@
 			android:defaultValue="true"
 			android:summary="@string/pref_summary_rab"
 			android:key="uiRAB" />
+		<CheckBoxPreference android:title="@string/pref_title_ab2"
+			android:defaultValue="false"
+			android:summary="@string/pref_summary_ab2"
+			android:key="uiAB2" />
 		<CheckBoxPreference android:title="@string/pref_title_tint_ab"
 			android:defaultValue="false"
 			android:summary="@string/pref_summary_tint_ab"

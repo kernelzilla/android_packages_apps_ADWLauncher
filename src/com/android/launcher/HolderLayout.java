@@ -198,40 +198,43 @@ public class HolderLayout extends ViewGroup {
 			Drawable[] tmp=((TextView)child).getCompoundDrawables();
 			mIconSize=tmp[1].getIntrinsicHeight()+child.getPaddingTop();
 		}
-		if(child.getDrawingCache()==null){
-			child.setDrawingCacheQuality(DRAWING_CACHE_QUALITY_HIGH);
-			child.setDrawingCacheEnabled(true);
-		}
-		Bitmap cache=child.getDrawingCache();
 		if(isAnimating){
 			postInvalidate();
-			if(cache!=null){
-				float x;
-				float y;
-				int distH=(child.getLeft()+(child.getWidth()/2))-(getWidth()/2);
-				int distV=(child.getTop()+(child.getHeight()/2))-(getHeight()/2);
-				x=child.getLeft()+(distH*(mScaleFactor-1))*(mScaleFactor);
-				y=child.getTop()+(distV*(mScaleFactor-1))*(mScaleFactor);
-				float width=child.getWidth()*mScaleFactor;
-				float height=(child.getHeight()-(child.getHeight()-mIconSize))*mScaleFactor;
-				Rect r1=new Rect(0, 0, cache.getWidth(), cache.getHeight()-(child.getHeight()-mIconSize));
-				Rect r2=new Rect((int)x, (int)y, (int)x+(int)width, (int)y+(int)height);
-				if(shouldDrawLabels){
-					//ADW: try to manually draw labels
-					Rect rl1=new Rect(0,mIconSize,cache.getWidth(),cache.getHeight());
-					Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+cache.getWidth(),child.getTop()+cache.getHeight());
-					mLabelPaint.setAlpha(mPaint.getAlpha());
-					canvas.drawBitmap(cache, rl1, rl2, mLabelPaint);
-				}
-				canvas.drawBitmap(cache, r1, r2, mPaint);
-			}else{
-				child.draw(canvas);
-			}
+			child.setDrawingCacheEnabled(false);
+			float x;
+			float y;
+			int distH=(child.getLeft()+(child.getWidth()/2))-(getWidth()/2);
+			int distV=(child.getTop()+(child.getHeight()/2))-(getHeight()/2);
+			x=child.getLeft()+(distH*(mScaleFactor-1))*(mScaleFactor);
+			y=child.getTop()+(distV*(mScaleFactor-1))*(mScaleFactor);
+			float width=child.getWidth()*mScaleFactor;
+			float height=(child.getHeight()-(child.getHeight()-mIconSize))*mScaleFactor;
+			/*if(shouldDrawLabels){
+				//ADW: try to manually draw labels
+				Rect rl1=new Rect(0,mIconSize,cache.getWidth(),cache.getHeight());
+				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+cache.getWidth(),child.getTop()+cache.getHeight());
+				mLabelPaint.setAlpha(mBgAlpha);
+				canvas.drawBitmap(cache, rl1, rl2, mLabelPaint);
+			}*/
+			float scale=((width)/child.getWidth());
+			Drawable[] tmp=((TextView)child).getCompoundDrawables();
+			Rect r3 = tmp[1].getBounds();
+			int xx=(child.getWidth()/2)-(r3.width()/2);
+			canvas.save();
+			canvas.translate(x+xx, y+child.getPaddingTop());
+			canvas.scale(scale, scale);
+			tmp[1].draw(canvas);
+			canvas.restore();
 		}else{
-			if(cache!=null){
-				canvas.drawBitmap(cache, child.getLeft(), child.getTop(), mPaint);
+			child.setDrawingCacheEnabled(true);
+			if(child.getDrawingCache()!=null){
+				mPaint.setAlpha(255);
+				canvas.drawBitmap(child.getDrawingCache(), child.getLeft(), child.getTop(), mPaint);
 			}else{
+				canvas.save();
+				canvas.translate(child.getLeft(), child.getTop());
 				child.draw(canvas);
+				canvas.restore();
 			}
 		}
 		canvas.restoreToCount(saveCount);

@@ -6,6 +6,9 @@
                 <item>Visualizza anteprima</item>
                 <item>Chiudi/Apri Applicazione Drawer</item>
                 <item>Visualizza/Nascondi barra di stato</item>
+                <item>Open/close notifications</item>
+                <item>Move to default desktop/Open notifications</item>
+                <item>Open/close DockBar</item>
        </string-array>
 
        <!-- Do not translate. -->
@@ -15,6 +18,9 @@
                 <item>3</item>
                 <item>4</item>
                 <item>5</item>
+                <item>6</item>
+                <item>7</item>
+                <item>8</item>
        </string-array>
 </resources>
 

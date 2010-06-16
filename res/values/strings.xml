@@ -130,7 +130,7 @@
     <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Problem loading widget</string>
     <!-- ADW Version Information -->
-    <string name="adw_version">Version 0.7.8 system</string>
+    <string name="adw_version">Version 0.8.2 system</string>
     <string name="adw_donate">Please, donate if you like my work :-)</string>
 
     <!-- ADW Settings -->
@@ -225,6 +225,9 @@
 
     <string name="pref_title_rab">RAB</string>
     <string name="pref_summary_rab">Enable/disable the customizable Right Action Button</string>
+    
+    <string name="pref_title_ab2">Secondary ActionButtons</string>
+    <string name="pref_summary_ab2">Enable/disable the secondary Action Buttons (disable Desktop dots)</string>
 
     <string name="pref_title_tint_ab">Tint AB</string>
     <string name="pref_summary_tint_ab">Enable/disable icon tint effect on Action Buttons</string>
@@ -306,4 +309,16 @@
     <string name="dbfile_not_readable">Configuration file exists, but is not readable!</string>
     <string name="dbfile_import_success">Configuration restored successfully!</string>
     <string name="dbfile_import_error">Error restoring configuration!</string>
+    <!--  Desktop columns/Rows -->
+    <string name="pref_title_desktop_columns">Desktop Columns</string>
+    <string name="pref_summary_desktop_columns">Select the number of columns to use on desktop</string>
+    <string name="pref_dialog_desktop_columns">Select the number of columns to use on desktop</string>
+
+    <string name="pref_title_desktop_rows">Desktop Rows</string>
+    <string name="pref_summary_desktop_rows">Select the number of rows to use on desktop</string>
+    <string name="pref_dialog_desktop_rows">Select the number of rows to use on desktop</string>
+    
+    <string name="pref_title_autosize_icons">Auto Stretch</string>
+    <string name="pref_summary_autosize_icons">Try to stretch icons/widgets so they don\'t overlap</string>
+
 </resources>

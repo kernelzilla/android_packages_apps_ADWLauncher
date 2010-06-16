@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -48,8 +49,18 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesName(ALMOSTNEXUS_PREFERENCES);
         addPreferencesFromResource(R.xml.launcher_settings);
+        CheckBoxPreference uiDots= (CheckBoxPreference) findPreference("uiDots");
+        uiDots.setOnPreferenceChangeListener(this);
+        if(uiDots.isChecked()){
+            CheckBoxPreference uiAB2= (CheckBoxPreference) findPreference("uiAB2");
+        	uiAB2.setEnabled(false);
+        }
+        DialogSeekBarPreference columnsDesktop= (DialogSeekBarPreference) findPreference("desktopColumns");
+        columnsDesktop.setMin(3);
+        DialogSeekBarPreference rowsDesktop= (DialogSeekBarPreference) findPreference("desktopRows");
+        rowsDesktop.setMin(3);
         DialogSeekBarPreference desktopScreens= (DialogSeekBarPreference) findPreference("desktopScreens");
-        desktopScreens.setMin(2);
+        desktopScreens.setMin(1);
         desktopScreens.setOnPreferenceChangeListener(this);
         DialogSeekBarPreference defaultScreen= (DialogSeekBarPreference) findPreference("defaultScreen");
         defaultScreen.setMin(1);
@@ -199,6 +210,15 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 		if (preference.getKey().equals("desktopScreens")) {
 			DialogSeekBarPreference pref = (DialogSeekBarPreference) findPreference("defaultScreen");
 			pref.setMax((Integer) newValue+1);
+		}else if(preference.getKey().equals("uiDots")) {
+			CheckBoxPreference ab2=(CheckBoxPreference) findPreference("uiAB2");
+			android.util.Log.d("PREFERENCES","new value="+newValue);
+			if(newValue.equals(true)){
+				ab2.setChecked(false);
+				ab2.setEnabled(false);
+			}else{
+				ab2.setEnabled(true);
+			}
 		}
         return true;  
 	}

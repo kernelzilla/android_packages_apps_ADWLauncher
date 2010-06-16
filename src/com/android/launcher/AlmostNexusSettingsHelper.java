@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public final class AlmostNexusSettingsHelper {
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
 	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
-		"highlights_color_focus","uiNewSelectors"};
+		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons"};
 	public static boolean needsRestart(String key){
 		for(int i=0;i<restart_keys.length;i++){
 			if(restart_keys[i].equals(key))
@@ -16,7 +16,7 @@ public final class AlmostNexusSettingsHelper {
 	}
 	public static int getDesktopScreens(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
-		int screens = sp.getInt("desktopScreens", context.getResources().getInteger(R.integer.config_desktopScreens))+2;
+		int screens = sp.getInt("desktopScreens", context.getResources().getInteger(R.integer.config_desktopScreens))+1;
 		return screens;
 	}
 	public static int getDefaultScreen(Context context) {
@@ -175,4 +175,25 @@ public final class AlmostNexusSettingsHelper {
 		int newD = sp.getInt("drawer_color", context.getResources().getInteger(R.integer.config_drawer_color));
 		return newD;
 	}
+	public static int getDesktopColumns(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int screens = sp.getInt("desktopColumns", context.getResources().getInteger(R.integer.config_desktopColumns))+3;
+		return screens;
+	}
+	public static int getDesktopRows(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int screens = sp.getInt("desktopRows", context.getResources().getInteger(R.integer.config_desktopRows))+3;
+		return screens;
+	}
+	public static boolean getUIAB2(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		boolean newD = sp.getBoolean("uiAB2", context.getResources().getBoolean(R.bool.config_uiAB2));
+		return newD;
+	}
+	public static boolean getAutosizeIcons(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		boolean newD = sp.getBoolean("autosizeIcons", context.getResources().getBoolean(R.bool.config_autosizeIcons));
+		return newD;
+	}
+
 }

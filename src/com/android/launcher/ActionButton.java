@@ -9,6 +9,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 	private int mIdent=LauncherSettings.Favorites.CONTAINER_LAB;
 	private ItemInfo mCurrentInfo;
 	private Drawable bgResource;
+	private Drawable bgEmpty;
 	public ActionButton(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
@@ -34,6 +37,7 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 		TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.ActionButton,defStyle,0);
 		mIdent=a.getInt(R.styleable.ActionButton_ident, mIdent);
 		bgResource=a.getDrawable(R.styleable.ActionButton_background);
+		bgEmpty=context.getResources().getDrawable(R.drawable.lab_rab_empty_bg);
 		a.recycle();
 	}
 
@@ -188,7 +192,8 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 	public void hideBg(boolean hide){
 		if(!hide)
 			this.setBackgroundDrawable(bgResource);
-		else
-			this.setBackgroundColor(Color.TRANSPARENT);
+		else{
+			this.setBackgroundDrawable(bgEmpty);
+		}
 	}
 }
