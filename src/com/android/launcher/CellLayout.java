@@ -287,9 +287,14 @@ public class CellLayout extends WidgetCellLayout {
         cellInfo.maxVacantSpanY = Integer.MIN_VALUE;
         cellInfo.maxVacantSpanYSpanX = Integer.MIN_VALUE;
         cellInfo.clearVacantCells();
-
-        if (occupied[x][y]) {
-            return;
+        //ADW: i can't access current desktop rows/columns, so i try to catch the
+        //possible exception dirty way :-(
+        try{
+	        if (occupied[x][y]) {
+	            return;
+	        }
+        }catch(IndexOutOfBoundsException e){
+        	return;
         }
 
         cellInfo.current.set(x, y, x, y);
