@@ -380,11 +380,9 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
             //throw new IllegalStateException("The screen must be >= 0 and < " + getChildCount());
         }
         //ADW: we cannot accept an item from a position greater that current desktop columns/rows
-        Log.d("WORKSPACE","Trying to add an item to x="+x+" and y="+y);
         if(x>=mDesktopColumns || y>=mDesktopRows){
         	return;
         }
-        Log.d("WORKSPACE","Allowed");
         clearVacantCache();
 
         final CellLayout group = (CellLayout) getChildAt(screen);
