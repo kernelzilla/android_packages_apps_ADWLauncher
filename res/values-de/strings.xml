@@ -156,6 +156,9 @@
     <string name="pref_title_rab">RAB</string>
     <string name="pref_summary_rab">Konfigurierbare rechte Aktionstaste (RAB) zeigen</string>
 
+    <string name="pref_title_ab2">Sekundäre Aktionstasten</string>
+    <string name="pref_summary_ab2">Sekundäre Aktionstasten ein-/ausschalten (keine Desktop-Punkte)</string>
+
     <string name="pref_title_tint_ab">Graue Aktionstasten</string>
     <string name="pref_summary_tint_ab">Aktionstasten-Icons mit grauen Shilouetten verschleiern</string>
 
@@ -170,7 +173,7 @@
     <string name="pref_summary_hide_ab_bg">Hintergrund der Aktionstasten ausblenden</string>
 
     <string name="pref_title_hide_icon_labels">Keine Icon-Beschriftung</string>
-    <string name="pref_summary_hide_icon_labels">Beschriftung der Desktopsymbole ausblenden</string>
+    <string name="pref_summary_hide_icon_labels">Beschriftung der Bildschirmsymbole ausblenden</string>
 
     <string name="pref_title_build_info">Informationen</string>
     <string name="pref_title_adw_version">ADW.Launcher Version</string>
@@ -186,8 +189,80 @@
     <string name="pref_summary_icon_highlights_focus">Stelle Farbe für den Icon-Hintergrund bei Fokusierung ein</string>
     <string name="pref_title_new_selectors">Neue Icon-Auswahl</string>
     <string name="pref_summary_new_selectors">Ausschalten für alte Methode</string>
+    <string name="pref_title_drawer_color">Hintergrundfarbe</string>
+    <string name="pref_summary_drawer_color">Farbe für den Drawer-Hintergrund festlegen</string>
 
     <string name="pref_dialog_title_color_picker">Farbe aufnehmen</string>
     <string name="pref_dialog_message_color_picker">Zum Bestätigen auf den farbigen Mittelpunkt tippen.\nDrücke ZURÜCK zum Abbrechen.</string>
     <string name="pref_dialog_color_picker_alpha">Tranzparenz</string>
+    <string name="pref_message_restart_normal">Nach Änderung startet sich der Launcher neu</string>
+    <string name="pref_message_restart_froyo">Nach Änderung startet sich der Launcher neu</string>
+    <string name="drop_to_uninstall">Zum deinstallieren loslassen</string>
+
+    <string name="pref_title_import_export">Sicherung und Wiederherstellung</string>
+    <string name="pref_title_xml">ADW-Einstellungen</string>
+    <string name="pref_title_xml_import">Wiederherstellen der ADW-Einstellungen</string>
+    <string name="pref_summary_xml_import">Wiederherstellen aus /sdcard/adw_settings.xml</string>
+    <string name="pref_title_xml_export">Sichern der ADW-Einstellungen</string>
+    <string name="pref_summary_xml_export">Sichern nach /sdcard/adw_settings.xml</string>
+
+    <string name="pref_title_db">Bildschirm-Konfiguration</string>
+    <string name="pref_title_db_import">Wiederherstellen der Bildschirm-Konfiguration</string>
+    <string name="pref_summary_db_import">Wiederherstellen aus /sdcard/adw_launcher.db</string>
+    <string name="pref_title_db_export">Sichern der Bildschirm-Konfiguration</string>
+    <string name="pref_summary_db_export">Sichern nach to /sdcard/adw_launcher.db</string>
+
+    <string name="title_dialog_xml">ADW-Launcher Einstellungen</string>
+    <string name="import_export_sdcard_unmounted">SD-Karte nicht eingebunden!</string>
+
+    <!-- XML Import/Export strings -->
+    <string name="message_dialog_export">ADW-Einstellungen sichern? Existierende Datei wird überschrieben!</string>
+    <string name="xml_export_dialog">Sichere ADW-Einstellungen...</string>
+    <string name="xml_export_success">ADW-Einstellungen erfolgreich gesichert!</string>
+    <string name="xml_export_error">Fehler beim Sichern der ADW-Einstellungen!</string>
+
+    <string name="message_dialog_import">ADW-Einstellungen wiederherstellen? ADW.Launcher wird neu gestartet!</string>
+    <string name="xml_import_dialog">Wiederherstellen der ADW-Einstellungen...</string>
+    <string name="xml_file_not_found">Datei für Wiederherstellung nicht gefunden!</string>
+    <string name="xml_not_readable">Datei ist vorhanden aber nicht lesbar!</string>
+    <string name="xml_import_success">ADW-Einstellungen erfolgreich wiederhergestellt!</string>
+    <string name="xml_import_error">Fehler beim Wiederherstellen der ADW-Einstellungen!</string>
+
+    <!-- Config Import/Export strings -->
+    <string name="message_dialog_export_config">Sichern der Bildschirm-Konfiguration?  Existierende Datei wird überschrieben!</string>
+    <string name="dbfile_export_dialog">Sichere Bildschirm-Konfiguration...</string>
+    <string name="dbfile_export_success">Konfiguration erfolgreich gesichert!</string>
+    <string name="dbfile_export_error">Fehler beim Sichern der Konfiguration!</string>
+
+    <string name="message_dialog_import_config">Bildschirm-Konfiguration wiederherstellen? ADW.Launcher wird neu gestartet!</string>
+    <string name="dbfile_import_dialog">Wiederherstellen der Bildschirm-Konfiguration...</string>
+    <string name="dbfile_not_found">Konfigurationsdatei nicht gefunden!</string>
+    <string name="dbfile_not_readable">Konfigurationsdatei ist vorhanden aber nicht lesbar!</string>
+    <string name="dbfile_import_success">Konfiguration erfolgreich wiederhergestellt!</string>
+    <string name="dbfile_import_error">Fehler beim Wiederherstellen der Konfiguration!</string>
+
+    <!--  Desktop columns/Rows -->
+    <string name="pref_title_desktop_columns">Zeilen: Bildschirm</string>
+    <string name="pref_summary_desktop_columns">Anzahl der Zeilen auf dem Bildschirm festlegen</string>
+    <string name="pref_dialog_desktop_columns">Anzahl der Zeilen auf dem Bildschirm festlegen</string>
+
+    <string name="pref_title_desktop_rows">Reihen: Bildschirm</string>
+    <string name="pref_summary_desktop_rows">Anzahl der Reihen auf dem Bildschirm festlegen</string>
+    <string name="pref_dialog_desktop_rows">Anzahl der Reihen auf dem Bildschirm festlegen</string>
+
+    <string name="pref_title_autosize_icons">Auto-Ausdehnung</string>
+    <string name="pref_summary_autosize_icons">Versuche Symbole/Widgets so zu dehnen, dass sie nicht überlappen</string>
+
+    <string name="pref_title_scrollable_widgets">Scrollbare Widgets</string>
+    <string name="pref_summary_scrollable_widgets">Ausschalten, wenn scrollbare Widgets nicht genutzt werden sollen</string>
+
+    <string name="pref_title_drawer_labels">App-Namen zeigen</string>
+    <string name="pref_summary_drawer_labels">Namen der Apps im Drawer zeigen</string>
+    <string name="pref_title_fade_drawer_labels">App-Namen einblenden</string>
+    <string name="pref_summary_fade_drawer_labels">Namen der Apps einblenden statt sofort sichtbar. (Nutzt mehr RAM/CPU)</string>
+
+    <string name="widget_config_dialog_title">Widget Bereich</string>
+    <string name="widget_config_dialog_summary">Wieviele Reihen/Spalten wird das Widget einnehmen?</string>
+    <string name="widget_columns">Zeilen</string>
+    <string name="widget_rows">Reihen</string>
 </resources>
