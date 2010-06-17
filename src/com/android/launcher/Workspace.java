@@ -1714,4 +1714,10 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 		// TODO Auto-generated method stub
 		return mLauncher;
 	}
+	public int currentDesktopRows(){
+		return mDesktopRows;
+	}
+	public int currentDesktopColumns(){
+		return mDesktopColumns;
+	}
 }
