@@ -86,7 +86,7 @@ public class MultiTouchController<T> {
 	public static final int MAX_TOUCH_POINTS = 10;
 
 	/** Generate tons of log entries for debugging */
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	// ----------------------------------------------------------------------------------------------------------------------
 
