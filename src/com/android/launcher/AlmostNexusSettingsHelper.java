@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public final class AlmostNexusSettingsHelper {
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
 	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
-		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons"};
+		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons","uiScrollableWidgets"};
 	public static boolean needsRestart(String key){
 		for(int i=0;i<restart_keys.length;i++){
 			if(restart_keys[i].equals(key))
@@ -195,5 +195,10 @@ public final class AlmostNexusSettingsHelper {
 		boolean newD = sp.getBoolean("autosizeIcons", context.getResources().getBoolean(R.bool.config_autosizeIcons));
 		return newD;
 	}
-
+	public static boolean getUIScrollableWidgets(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		boolean newD = sp.getBoolean("uiScrollableWidgets", context.getResources().getBoolean(R.bool.config_uiScrollableWidgets));
+		return newD;
+	}
+	
 }

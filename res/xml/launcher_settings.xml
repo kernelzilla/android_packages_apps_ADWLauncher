@@ -184,6 +184,10 @@
 			android:title="@string/pref_title_icon_highlights_focus"
 			android:summary="@string/pref_summary_icon_highlights_focus"
 	        android:defaultValue="-16777216" />
+		<CheckBoxPreference android:key="uiScrollableWidgets"
+			android:title="@string/pref_title_scrollable_widgets"
+			android:summary="@string/pref_summary_scrollable_widgets"
+			android:defaultValue="true" />
 	</PreferenceScreen>
 	<PreferenceScreen
 	    android:key="xmlPreferences"

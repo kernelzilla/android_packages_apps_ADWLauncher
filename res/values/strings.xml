@@ -321,4 +321,7 @@
     <string name="pref_title_autosize_icons">Auto Stretch</string>
     <string name="pref_summary_autosize_icons">Try to stretch icons/widgets so they don\'t overlap</string>
 
+    <string name="pref_title_scrollable_widgets">Scrollable widget support</string>
+    <string name="pref_summary_scrollable_widgets">Disable this if you don\'t use scrollable widgets</string>
+
 </resources>

@@ -479,16 +479,18 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
             if(mRevertInterpolatorOnScrollFinish)setBounceAmount(mScrollingBounce);
 			//ADW: use intuit code to allow extended widgets
 			// notify widget about screen changed
-			View changedView;
-			if (lastScreen != mCurrentScreen) {
-				changedView = getChildAt(lastScreen); // A screen get out
-			if (changedView instanceof WidgetCellLayout)
-				((WidgetCellLayout) changedView).onViewportOut();
+			if(mLauncher.isScrollableAllowed()){
+	            View changedView;
+				if (lastScreen != mCurrentScreen) {
+					changedView = getChildAt(lastScreen); // A screen get out
+				if (changedView instanceof WidgetCellLayout)
+					((WidgetCellLayout) changedView).onViewportOut();
+				}
+				changedView = getChildAt(mCurrentScreen); // A screen get in
+				if (changedView instanceof WidgetCellLayout)
+				((WidgetCellLayout) changedView).onViewportIn();
 			}
-			changedView = getChildAt(mCurrentScreen); // A screen get in
-			if (changedView instanceof WidgetCellLayout)
-			((WidgetCellLayout) changedView).onViewportIn();
-			}
+		}
     }
 
     @Override
@@ -1185,7 +1187,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
     
     void setLauncher(Launcher launcher) {
         mLauncher = launcher;
-        registerProvider();
+        if(mLauncher.isScrollableAllowed())registerProvider();
     }
 
     public void setDragger(DragController dragger) {
