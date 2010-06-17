@@ -209,7 +209,7 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		if (preference.getKey().equals("desktopScreens")) {
 			DialogSeekBarPreference pref = (DialogSeekBarPreference) findPreference("defaultScreen");
-			pref.setMax((Integer) newValue+1);
+			pref.setMax((Integer) newValue);
 		}else if(preference.getKey().equals("uiDots")) {
 			CheckBoxPreference ab2=(CheckBoxPreference) findPreference("uiAB2");
 			android.util.Log.d("PREFERENCES","new value="+newValue);
