@@ -888,7 +888,6 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 		View dialoglayout = inflater.inflate(R.layout.widget_span_setup,
 		                               (ViewGroup) findViewById(R.id.layout_root));
-		android.util.Log.d("ADDING WIDGET!","wazzzzzup!!! "+spans[0]+","+spans[1]);
 		final NumberPicker ncols=(NumberPicker)dialoglayout.findViewById(R.id.widget_columns_span);
 		ncols.setRange(1, mWorkspace.currentDesktopColumns());
 		ncols.setCurrent(spans[0]);
@@ -898,12 +897,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		builder = new AlertDialog.Builder(this);
 		builder.setView(dialoglayout);
 		alertDialog = builder.create();
-        alertDialog.setTitle("Widget span config");
-        alertDialog.setMessage("Home many rows/columns will the widget take?");
+        alertDialog.setTitle(getResources().getString(R.string.widget_config_dialog_title));
+        alertDialog.setMessage(getResources().getString(R.string.widget_config_dialog_summary));
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(android.R.string.ok), 
             new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-            	android.util.Log.d("ADDING WIDGET!","wazzzzzup!!! "+ncols.getCurrent()+","+nrows.getCurrent());
             	spans[0]=ncols.getCurrent();
             	spans[1]=nrows.getCurrent();
             	prueba(appWidgetInfo,cInfo,spans,appWidgetId,insertAtFirst);

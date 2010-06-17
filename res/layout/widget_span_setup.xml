@@ -35,14 +35,14 @@
 	        android:layout_height="fill_parent" 
 	        android:layout_weight="1.0"
 	        android:gravity="center_horizontal"
-	        android:text="Columns"/>
+	        android:text="@string/widget_columns"/>
 	    <TextView
 	        android:id="@+id/text_rows_span"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
 	        android:layout_weight="1.0"
 	        android:gravity="center_horizontal"
-	        android:text="Rows"/>
+	        android:text="@string/widget_rows"/>
 	    
 	</LinearLayout>
 	<LinearLayout 
