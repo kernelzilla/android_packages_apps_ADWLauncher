@@ -254,5 +254,11 @@
     <string name="pref_title_autosize_icons">自動伸縮</string>
     <string name="pref_summary_autosize_icons">アイコンやウィジェットが重ならないように伸縮させる</string>
 
-</resources>
+    <string name="pref_title_scrollable_widgets">スクロールウィジェット</string>
+    <string name="pref_summary_scrollable_widgets">これを無効にするとスクロールするウィジェットが使えなくなります.</string>
 
+    <string name="pref_title_drawer_labels">アプリラベル表示</string>
+    <string name="pref_summary_drawer_labels">アプリケーションドロワーでアプリラベルを表示する</string>
+    <string name="pref_title_fade_drawer_labels">フェードラベル</string>
+    <string name="pref_summary_fade_drawer_labels">ラベルをフェードして表示する. CPUやメモリを消費します.</string>
+</resources>
