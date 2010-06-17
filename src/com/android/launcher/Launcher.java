@@ -263,7 +263,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private boolean uiHideLabels=false;
 	private boolean wallpaperHack=true;
 	private boolean showAB2=false;
-	private boolean scrollableSupport=true;
+	private boolean scrollableSupport=false;
 	/**
 	 * ADW: Home binding constants
 	 */
