@@ -52,6 +52,8 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 	private boolean shouldDrawLabels=false;
 	private int mAnimationDuration=800;
 	private int mBgColor=0xFF000000;
+	private boolean mDrawLabels=true;
+	private boolean mFadeDrawLabels=false;
     public AllAppsGridView(Context context) {
         super(context);
     }
@@ -153,7 +155,7 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 				setVisibility(View.GONE);
 			}
 		}
-		shouldDrawLabels=(currentTime>mAnimationDuration/2 && mStatus==OPENING)||(currentTime<mAnimationDuration/2 && mStatus==CLOSING);
+		shouldDrawLabels=mFadeDrawLabels && mDrawLabels && ((currentTime>mAnimationDuration/2 && mStatus==OPENING)||(currentTime<mAnimationDuration/2 && mStatus==CLOSING));
 		float porcentajeScale=1.0f;
 		if(isAnimating){
 			porcentajeScale=1.0f-((mScaleFactor-1)/3.0f);
@@ -172,13 +174,12 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 	@Override
 	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
 		int saveCount = canvas.save();
+		Drawable[] tmp=((TextView)child).getCompoundDrawables();
 		if(mIconSize==0){
-			Drawable[] tmp=((TextView)child).getCompoundDrawables();
 			mIconSize=tmp[1].getIntrinsicHeight()+child.getPaddingTop();
 		}
 		if(isAnimating){
 			postInvalidate();
-			child.setDrawingCacheEnabled(false);
 			float x;
 			float y;
 			int distH=(child.getLeft()+(child.getWidth()/2))-(getWidth()/2);
@@ -187,15 +188,14 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 			y=child.getTop()+(distV*(mScaleFactor-1))*(mScaleFactor);
 			float width=child.getWidth()*mScaleFactor;
 			float height=(child.getHeight()-(child.getHeight()-mIconSize))*mScaleFactor;
-			/*if(shouldDrawLabels){
+			if(shouldDrawLabels && child.getDrawingCache()!=null){
 				//ADW: try to manually draw labels
-				Rect rl1=new Rect(0,mIconSize,cache.getWidth(),cache.getHeight());
-				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+cache.getWidth(),child.getTop()+cache.getHeight());
+				Rect rl1=new Rect(0,mIconSize,child.getDrawingCache().getWidth(),child.getDrawingCache().getHeight());
+				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+child.getDrawingCache().getWidth(),child.getTop()+child.getDrawingCache().getHeight());
 				mLabelPaint.setAlpha(mBgAlpha);
-				canvas.drawBitmap(cache, rl1, rl2, mLabelPaint);
-			}*/
+				canvas.drawBitmap(child.getDrawingCache(), rl1, rl2, mLabelPaint);
+			}
 			float scale=((width)/child.getWidth());
-			Drawable[] tmp=((TextView)child).getCompoundDrawables();
 			Rect r3 = tmp[1].getBounds();
 			int xx=(child.getWidth()/2)-(r3.width()/2);
 			canvas.save();
@@ -204,14 +204,23 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 			tmp[1].draw(canvas);
 			canvas.restore();
 		}else{
-			child.setDrawingCacheEnabled(true);
-			if(child.getDrawingCache()!=null){
-				mPaint.setAlpha(255);
-				canvas.drawBitmap(child.getDrawingCache(), child.getLeft(), child.getTop(), mPaint);
+			if(mDrawLabels){
+				child.setDrawingCacheEnabled(true);
+				if(child.getDrawingCache()!=null){
+					mPaint.setAlpha(255);
+					canvas.drawBitmap(child.getDrawingCache(), child.getLeft(), child.getTop(), mPaint);
+				}else{
+					canvas.save();
+					canvas.translate(child.getLeft(), child.getTop());
+					child.draw(canvas);
+					canvas.restore();
+				}
 			}else{
+				Rect r3 = tmp[1].getBounds();
+				int xx=(child.getWidth()/2)-(r3.width()/2);
 				canvas.save();
-				canvas.translate(child.getLeft(), child.getTop());
-				child.draw(canvas);
+				canvas.translate(child.getLeft()+xx, child.getTop()+child.getPaddingTop());
+				tmp[1].draw(canvas);
 				canvas.restore();
 			}
 		}
@@ -224,7 +233,14 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 	public void open(boolean animate){
 		mBgColor=AlmostNexusSettingsHelper.getDrawerColor(mLauncher);
 		mTargetAlpha=AlmostNexusSettingsHelper.getDrawerAlpha(mLauncher);
+		mDrawLabels=AlmostNexusSettingsHelper.getDrawerLabels(mLauncher);
+		mFadeDrawLabels=AlmostNexusSettingsHelper.getFadeDrawerLabels(mLauncher);
 		if(animate){
+			if(mFadeDrawLabels&&mDrawLabels){
+				for(int i=0;i<getChildCount();i++){
+					getChildAt(i).setDrawingCacheEnabled(true);
+				}
+			}
 			mBgAlpha=0;
 			isAnimating=true;
 			mStatus=OPENING;

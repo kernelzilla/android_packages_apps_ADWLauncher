@@ -60,6 +60,15 @@
 			android:summary="@string/pref_summary_zoom_effect_speed"
 			android:key="zoomSpeed" android:defaultValue="400"
 			android:max="1700" />
+		<CheckBoxPreference android:title="@string/pref_title_drawer_labels"
+			android:defaultValue="@bool/config_drawerLabels"
+			android:summary="@string/pref_summary_drawer_labels"
+			android:key="drawerLabels" />
+		<CheckBoxPreference android:title="@string/pref_title_fade_drawer_labels"
+			android:dependency="drawerLabels"
+			android:defaultValue="@bool/config_fadeDrawerLabels"
+			android:summary="@string/pref_summary_fade_drawer_labels"
+			android:key="fadeDrawerLabels" />
 		<CheckBoxPreference android:title="@string/pref_title_new_drawer"
 			android:defaultValue="@bool/config_drawerNew"
 			android:summary="@string/pref_summary_new_drawer"

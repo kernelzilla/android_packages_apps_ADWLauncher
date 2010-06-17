@@ -28,6 +28,8 @@ public class HolderLayout extends ViewGroup {
 	private Paint mLabelPaint;
 	private boolean shouldDrawLabels=false;
 	private int mAnimationDuration=800;
+	private boolean mDrawLabels=true;
+	private boolean mFadeDrawLabels=false;
 
 	//ADW: listener to dispatch open/close animation events
 	private OnFadingListener mOnFadingListener;
@@ -39,6 +41,7 @@ public class HolderLayout extends ViewGroup {
         mLabelPaint=new Paint();
         mLabelPaint.setDither(false);
         setWillNotDraw(false);
+        updateLabelVars(context);
 	}
 
 	public HolderLayout(Context context, AttributeSet attrs) {
@@ -49,6 +52,7 @@ public class HolderLayout extends ViewGroup {
         mLabelPaint=new Paint();
         mLabelPaint.setDither(false);
         setWillNotDraw(false);
+        updateLabelVars(context);
 	}
 
 	public HolderLayout(Context context, AttributeSet attrs, int defStyle) {
@@ -59,6 +63,7 @@ public class HolderLayout extends ViewGroup {
         mLabelPaint=new Paint();
         mLabelPaint.setDither(false);
         setWillNotDraw(false);
+        updateLabelVars(context);
 	}
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -183,7 +188,7 @@ public class HolderLayout extends ViewGroup {
 				dispatchFadingEvent(OnFadingListener.CLOSE);
 			}
 		}
-		shouldDrawLabels=(currentTime>mAnimationDuration/2 && mStatus==OPENING)||(currentTime<mAnimationDuration/2 && mStatus==CLOSING);
+		shouldDrawLabels=mFadeDrawLabels && mDrawLabels &&((currentTime>mAnimationDuration/2 && mStatus==OPENING)||(currentTime<mAnimationDuration/2 && mStatus==CLOSING));
 		mPaint.setAlpha(alpha);
 		if(mStatus!=CLOSED){
 			super.draw(canvas);
@@ -194,13 +199,12 @@ public class HolderLayout extends ViewGroup {
 	@Override
 	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
 		int saveCount = canvas.save();
+		Drawable[] tmp=((TextView)child).getCompoundDrawables();
 		if(mIconSize==0){
-			Drawable[] tmp=((TextView)child).getCompoundDrawables();
 			mIconSize=tmp[1].getIntrinsicHeight()+child.getPaddingTop();
 		}
 		if(isAnimating){
 			postInvalidate();
-			child.setDrawingCacheEnabled(false);
 			float x;
 			float y;
 			int distH=(child.getLeft()+(child.getWidth()/2))-(getWidth()/2);
@@ -209,15 +213,14 @@ public class HolderLayout extends ViewGroup {
 			y=child.getTop()+(distV*(mScaleFactor-1))*(mScaleFactor);
 			float width=child.getWidth()*mScaleFactor;
 			float height=(child.getHeight()-(child.getHeight()-mIconSize))*mScaleFactor;
-			/*if(shouldDrawLabels){
+			if(shouldDrawLabels && child.getDrawingCache()!=null){
 				//ADW: try to manually draw labels
-				Rect rl1=new Rect(0,mIconSize,cache.getWidth(),cache.getHeight());
-				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+cache.getWidth(),child.getTop()+cache.getHeight());
-				mLabelPaint.setAlpha(mBgAlpha);
-				canvas.drawBitmap(cache, rl1, rl2, mLabelPaint);
-			}*/
+				Rect rl1=new Rect(0,mIconSize,child.getDrawingCache().getWidth(),child.getDrawingCache().getHeight());
+				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+child.getDrawingCache().getWidth(),child.getTop()+child.getDrawingCache().getHeight());
+				mLabelPaint.setAlpha(mPaint.getAlpha());
+				canvas.drawBitmap(child.getDrawingCache(), rl1, rl2, mLabelPaint);
+			}
 			float scale=((width)/child.getWidth());
-			Drawable[] tmp=((TextView)child).getCompoundDrawables();
 			Rect r3 = tmp[1].getBounds();
 			int xx=(child.getWidth()/2)-(r3.width()/2);
 			canvas.save();
@@ -226,14 +229,23 @@ public class HolderLayout extends ViewGroup {
 			tmp[1].draw(canvas);
 			canvas.restore();
 		}else{
-			child.setDrawingCacheEnabled(true);
-			if(child.getDrawingCache()!=null){
-				mPaint.setAlpha(255);
-				canvas.drawBitmap(child.getDrawingCache(), child.getLeft(), child.getTop(), mPaint);
+			if(mDrawLabels){
+				child.setDrawingCacheEnabled(true);
+				if(child.getDrawingCache()!=null){
+					mPaint.setAlpha(255);
+					canvas.drawBitmap(child.getDrawingCache(), child.getLeft(), child.getTop(), mPaint);
+				}else{
+					canvas.save();
+					canvas.translate(child.getLeft(), child.getTop());
+					child.draw(canvas);
+					canvas.restore();
+				}
 			}else{
+				Rect r3 = tmp[1].getBounds();
+				int xx=(child.getWidth()/2)-(r3.width()/2);
 				canvas.save();
-				canvas.translate(child.getLeft(), child.getTop());
-				child.draw(canvas);
+				canvas.translate(child.getLeft()+xx, child.getTop()+child.getPaddingTop());
+				tmp[1].draw(canvas);
 				canvas.restore();
 			}
 		}
@@ -244,13 +256,14 @@ public class HolderLayout extends ViewGroup {
 	 * Open/close public methods
 	 */
 	public void open(boolean animate, int speed){
-        //setCacheColorHint(0);
 		if(mStatus!=OPENING){
 			mAnimationDuration=speed;
-	        //setDrawingCacheBackgroundColor(0);
-			//clearChildrenCache();
-			//setChildrenDrawingCacheEnabled(true);
 			if(animate){
+				if(mFadeDrawLabels&&mDrawLabels){
+					for(int i=0;i<getChildCount();i++){
+						getChildAt(i).setDrawingCacheEnabled(true);
+					}
+				}
 				isAnimating=true;
 				mStatus=OPENING;
 			}else{
@@ -259,24 +272,18 @@ public class HolderLayout extends ViewGroup {
 				dispatchFadingEvent(OnFadingListener.OPEN);
 			}
 			startTime=0;
-			//this.setVisibility(View.VISIBLE);
 			invalidate();
 		}
 	}
 	public void close(boolean animate, int speed){
-        //setCacheColorHint(0);
 		if(mStatus!=CLOSING){
 			mAnimationDuration=speed;
-	        //setDrawingCacheBackgroundColor(0);
-			//clearChildrenCache();
-			//setChildrenDrawingCacheEnabled(true);
 			if(animate){
 				mStatus=CLOSING;
 				isAnimating=true;
 			}else{
 				mStatus=CLOSED;
 				isAnimating=false;
-				//setVisibility(View.GONE);
 				dispatchFadingEvent(OnFadingListener.CLOSE);
 			}
 			startTime=0;
@@ -313,5 +320,9 @@ public class HolderLayout extends ViewGroup {
         if (mOnFadingListener != null) {
             mOnFadingListener.onAlphaChange(alphaPercent);
         }
+    }
+    public void updateLabelVars(Context context){
+    	mDrawLabels=AlmostNexusSettingsHelper.getDrawerLabels(context);
+    	mFadeDrawLabels=AlmostNexusSettingsHelper.getFadeDrawerLabels(context);
     }
 }

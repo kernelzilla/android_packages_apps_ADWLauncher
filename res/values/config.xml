@@ -57,4 +57,6 @@
     <bool name="config_uiAB2">false</bool>
     <bool name="config_autosizeIcons">false</bool>
     <bool name="config_uiScrollableWidgets">true</bool>
+    <bool name="config_drawerLabels">true</bool>
+    <bool name="config_fadeDrawerLabels">false</bool>
 </resources>

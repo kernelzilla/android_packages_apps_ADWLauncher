@@ -1794,6 +1794,11 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
 	public void open(boolean animate) {
 		mBgColor=AlmostNexusSettingsHelper.getDrawerColor(mLauncher);
 		mTargetAlpha=AlmostNexusSettingsHelper.getDrawerAlpha(mLauncher);
+		for(int i=0;i<getChildCount();i++){
+			if(getChildAt(i) instanceof HolderLayout){
+				((HolderLayout)getChildAt(i)).updateLabelVars(mLauncher);
+			}
+		}
 		mScroller.forceFinished(true);
 		setVisibility(View.VISIBLE);
 		findCurrentHolder();

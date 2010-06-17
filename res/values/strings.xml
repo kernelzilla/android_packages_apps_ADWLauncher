@@ -324,4 +324,9 @@
     <string name="pref_title_scrollable_widgets">Scrollable widget support</string>
     <string name="pref_summary_scrollable_widgets">Disable this if you don\'t use scrollable widgets</string>
 
+    <string name="pref_title_drawer_labels">Show app labels</string>
+    <string name="pref_summary_drawer_labels">Show the labels on app drawer</string>
+    <string name="pref_title_fade_drawer_labels">Fade app labels</string>
+    <string name="pref_summary_fade_drawer_labels">Labels fade instead of just appear. Uses more ram/cpu</string>
+
 </resources>
