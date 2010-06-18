@@ -83,13 +83,15 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
      */
       
     public void onDrop(DragSource source, int x, int y, int xOffset, int yOffset, Object dragInfo) {
+	final LauncherModel model = Launcher.getModel();
+	ItemInfo info = (ItemInfo) dragInfo;
         //TODO:ADW Limit to X items till i manage to add scroll, removing, etc
         if(getChildCount()>=mNumCells){
         	Toast t=Toast.makeText(getContext(), "sorry, "+mNumCells+" items max... atm :-)", Toast.LENGTH_SHORT);
         	t.show();
+		LauncherModel.deleteItemFromDatabase(mLauncher, info);
         	return;
         }
-    	ItemInfo info = (ItemInfo) dragInfo;
         switch (info.itemType) {
         case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
         case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
@@ -100,15 +102,17 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
         	Toast t=Toast.makeText(getContext(), "Widgets not supported... sorry :-)", Toast.LENGTH_SHORT);
         	t.show();
+		LauncherModel.deleteItemFromDatabase(mLauncher, info);
         	return;
         default:
         	Toast t2=Toast.makeText(getContext(), "Unknown item. We can't add unknown item types :-)", Toast.LENGTH_SHORT);
         	t2.show();
+		LauncherModel.deleteItemFromDatabase(mLauncher, info);
         	return;
         }
         info.cellX=getChildCount();
         //add it to launcher database
-        final LauncherModel model = Launcher.getModel();
+        
         model.addDesktopItem(info);
         LauncherModel.addOrMoveItemInDatabase(mLauncher, info,
                 LauncherSettings.Favorites.CONTAINER_DOCKBAR, -1, getChildCount(), -1);        
