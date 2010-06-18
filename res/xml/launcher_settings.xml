@@ -191,7 +191,7 @@
 		<CheckBoxPreference android:key="uiScrollableWidgets"
 			android:title="@string/pref_title_scrollable_widgets"
 			android:summary="@string/pref_summary_scrollable_widgets"
-			android:defaultValue="true" />
+			android:defaultValue="@bool/config_uiScrollableWidgets" />
 	</PreferenceScreen>
 	<PreferenceScreen
 	    android:key="xmlPreferences"
