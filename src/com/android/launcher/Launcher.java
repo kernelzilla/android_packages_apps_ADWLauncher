@@ -884,18 +884,15 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		AlertDialog.Builder builder;
 		AlertDialog alertDialog;
 
-		Context mContext = getApplicationContext();
-		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-		View dialoglayout = inflater.inflate(R.layout.widget_span_setup,
-		                               (ViewGroup) findViewById(R.id.layout_root));
-		final NumberPicker ncols=(NumberPicker)dialoglayout.findViewById(R.id.widget_columns_span);
+		final View dlg_layout = View.inflate(Launcher.this, R.layout.widget_span_setup, null);
+		final NumberPicker ncols=(NumberPicker)dlg_layout.findViewById(R.id.widget_columns_span);
 		ncols.setRange(1, mWorkspace.currentDesktopColumns());
 		ncols.setCurrent(spans[0]);
-		final NumberPicker nrows=(NumberPicker)dialoglayout.findViewById(R.id.widget_rows_span);
+		final NumberPicker nrows=(NumberPicker)dlg_layout.findViewById(R.id.widget_rows_span);
 		nrows.setRange(1, mWorkspace.currentDesktopRows());
 		nrows.setCurrent(spans[1]);
-		builder = new AlertDialog.Builder(this);
-		builder.setView(dialoglayout);
+		builder = new AlertDialog.Builder(Launcher.this);
+		builder.setView(dlg_layout);
 		alertDialog = builder.create();
         alertDialog.setTitle(getResources().getString(R.string.widget_config_dialog_title));
         alertDialog.setMessage(getResources().getString(R.string.widget_config_dialog_summary));
