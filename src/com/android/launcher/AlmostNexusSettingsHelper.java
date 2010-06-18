@@ -25,6 +25,11 @@ public final class AlmostNexusSettingsHelper {
 		int def_screen = sp.getInt("defaultScreen", context.getResources().getInteger(R.integer.config_defaultScreen));
 		return def_screen;
 	}
+	public static int getPageHorizontalMargin(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int newD = sp.getInt("pageHorizontalMargin", context.getResources().getInteger(R.integer.config_pageHorizontalMargin));
+		return newD;
+	}
 	public static int getColumnsPortrait(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		int screens = sp.getInt("drawerColumnsPortrait", context.getResources().getInteger(R.integer.config_drawerColumnsPortrait))+1;

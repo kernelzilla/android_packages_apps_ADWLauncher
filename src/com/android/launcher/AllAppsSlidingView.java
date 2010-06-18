@@ -70,6 +70,7 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
 	public int mOldItemCount;
     
     
+	private int mPageHorizontalMargin=0;
 	private int mNumColumns=2;
 	private int mNumRows=2;
 	private int paginatorSpace=16;
@@ -352,11 +353,11 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
         
         final int marginTop=getPaddingTop();
         final int marginBottom=getPaddingBottom();
-        final int marginLeft=getPaddingLeft();
+        final int marginLeft=getPaddingLeft() + mPageHorizontalMargin;
         final int marginRight=getPaddingRight();
         final int actualWidth=getMeasuredWidth()-marginLeft-marginRight;
         final int actualHeight=getMeasuredHeight()-marginTop-marginBottom;
-        final int columnWidth=actualWidth/mNumColumns;
+        final int columnWidth=(actualWidth - marginLeft)/mNumColumns;
         final int rowHeight=actualHeight/mNumRows;
     	
         AllAppsSlidingView.LayoutParams p;
@@ -1753,6 +1754,21 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
 	}
 	public int getNumColumns() {
 		return mNumColumns;
+	}
+	public void setPageHorizontalMargin(int margin) {
+			this.mPageHorizontalMargin = margin;
+			if(mAdapter!=null){
+				scrollTo(0, 0);
+				mTotalScreens=getPageCount();
+				mCurrentScreen=0;
+				mCurrentHolder=1;
+				mPager.setTotalItems(mTotalScreens);
+				mPager.setCurrentItem(0);
+				mBlockLayouts=false;
+				mScrollToScreen=0;
+				mLayoutMode=LAYOUT_NORMAL;
+				requestLayout();
+			}
 	}
 	public void setNumColumns(int numColumns) {
 		if(mNumColumns!=numColumns){

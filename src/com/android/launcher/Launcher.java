@@ -500,6 +500,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 				Log.d("LAUNCHER","SET COLUMNS");
 				((AllAppsSlidingView) mAllAppsGrid).setNumColumns(AlmostNexusSettingsHelper.getColumnsPortrait(Launcher.this));
 				((AllAppsSlidingView) mAllAppsGrid).setNumRows(AlmostNexusSettingsHelper.getRowsPortrait(Launcher.this));
+				((AllAppsSlidingView) mAllAppsGrid).setPageHorizontalMargin(AlmostNexusSettingsHelper.getPageHorizontalMargin(Launcher.this));
 			}else{
 				((AllAppsGridView) mAllAppsGrid).setNumColumns(AlmostNexusSettingsHelper.getColumnsPortrait(Launcher.this));
 			}
