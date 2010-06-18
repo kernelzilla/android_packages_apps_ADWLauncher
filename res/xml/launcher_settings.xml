@@ -49,6 +49,10 @@
 			android:summary="@string/pref_summary_desktop_rows"
 			android:key="desktopRows" android:defaultValue="@integer/config_desktopRows"
 			android:max="5" />
+		<CheckBoxPreference android:title="@string/pref_title_screen_cache"
+			android:defaultValue="@bool/config_desktopCache"
+			android:summary="@string/pref_summary_screen_cache"
+			android:key="desktopCache" />
 
 	</PreferenceScreen>
 	<PreferenceScreen

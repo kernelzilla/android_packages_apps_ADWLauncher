@@ -162,6 +162,12 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 	//ADW: custom desktop rows/columns
 	private int mDesktopRows;
 	private int mDesktopColumns;
+	//ADW: use drawing cache while scrolling, etc.
+	//Seems a lot of users with "high end" devices, like to have tons of widgets (the bigger, the better)
+	//On those devices, a drawing cache of a 4x4widget can be really big 
+	//cause of their screen sizes, so the bitmaps are... huge...
+	//And as those devices can perform pretty well without cache... let's add an option... one more...
+	private boolean mDesktopCache=true;
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -208,6 +214,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
         multiTouchController = new MultiTouchController<Object>(this, false);
         mDesktopRows=AlmostNexusSettingsHelper.getDesktopRows(getContext());
         mDesktopColumns=AlmostNexusSettingsHelper.getDesktopColumns(getContext());
+        mDesktopCache=AlmostNexusSettingsHelper.getDesktopCache(getContext());
     }
 
     @Override
@@ -477,7 +484,8 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
             if(mRevertInterpolatorOnScrollFinish)setBounceAmount(mScrollingBounce);
 			//ADW: use intuit code to allow extended widgets
 			// notify widget about screen changed
-			if(mLauncher.isScrollableAllowed()){
+			//REMOVED, seems its used for animated widgets, we don't need that yet :P
+            /*if(mLauncher.isScrollableAllowed()){
 	            View changedView;
 				if (lastScreen != mCurrentScreen) {
 					changedView = getChildAt(lastScreen); // A screen get out
@@ -487,7 +495,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 				changedView = getChildAt(mCurrentScreen); // A screen get in
 				if (changedView instanceof WidgetCellLayout)
 				((WidgetCellLayout) changedView).onViewportIn();
-			}
+			}*/
 		}
     }
 
@@ -831,22 +839,26 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
     }
 
     void enableChildrenCache() {
-        final int count = getChildCount();
-        for (int i = 0; i < count; i++) {
-        	//ADW: create cache only for current screen/previous/next.
-        	if(i>=mCurrentScreen-1 || i<=mCurrentScreen+1){
-        		final CellLayout layout = (CellLayout) getChildAt(i);
-        		layout.setChildrenDrawnWithCacheEnabled(true);
-        		layout.setChildrenDrawingCacheEnabled(true);
-        	}
+        if(mDesktopCache){
+	    	final int count = getChildCount();
+	        for (int i = 0; i < count; i++) {
+	        	//ADW: create cache only for current screen/previous/next.
+	        	if(i>=mCurrentScreen-1 || i<=mCurrentScreen+1){
+	        		final CellLayout layout = (CellLayout) getChildAt(i);
+	        		layout.setChildrenDrawnWithCacheEnabled(true);
+	        		layout.setChildrenDrawingCacheEnabled(true);
+	        	}
+	        }
         }
     }
 
     void clearChildrenCache() {
-        final int count = getChildCount();
-        for (int i = 0; i < count; i++) {
-            final CellLayout layout = (CellLayout) getChildAt(i);
-            layout.setChildrenDrawnWithCacheEnabled(false);
+        if(mDesktopCache){
+	    	final int count = getChildCount();
+	        for (int i = 0; i < count; i++) {
+	            final CellLayout layout = (CellLayout) getChildAt(i);
+	            layout.setChildrenDrawnWithCacheEnabled(false);
+	        }
         }
     }
 
