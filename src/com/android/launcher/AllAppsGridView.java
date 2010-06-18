@@ -232,7 +232,7 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 	 */
 	public void open(boolean animate){
 		mBgColor=AlmostNexusSettingsHelper.getDrawerColor(mLauncher);
-		mTargetAlpha=AlmostNexusSettingsHelper.getDrawerAlpha(mLauncher);
+		mTargetAlpha=Color.alpha(mBgColor);
 		mDrawLabels=AlmostNexusSettingsHelper.getDrawerLabels(mLauncher);
 		mFadeDrawLabels=AlmostNexusSettingsHelper.getFadeDrawerLabels(mLauncher);
 		if(animate){
