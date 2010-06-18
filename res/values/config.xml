@@ -21,6 +21,7 @@
     <integer name="config_desktopSpeed">750</integer>
     <integer name="config_desktopBounce">40</integer>
     <integer name="config_drawerAlpha">255</integer>
+    <integer name="config_pageHorizontalMargin">20</integer>
     <integer name="config_drawerColumnsPortrait">3</integer>
     <integer name="config_drawerRowsPortrait">3</integer>
     <integer name="config_drawerColumnsLandscape">4</integer>
