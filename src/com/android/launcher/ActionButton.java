@@ -86,10 +86,12 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
         	Toast t=Toast.makeText(getContext(), "Widgets not supported... sorry :-)", Toast.LENGTH_SHORT);
         	t.show();
+		LauncherModel.deleteItemFromDatabase(mLauncher, info);
         	return;
         default:
         	Toast t2=Toast.makeText(getContext(), "Unknown item. We can't add unknown item types :-)", Toast.LENGTH_SHORT);
         	t2.show();
+		LauncherModel.deleteItemFromDatabase(mLauncher, info);
         	return;
         }
         final LauncherModel model = Launcher.getModel();
