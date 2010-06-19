@@ -6,7 +6,8 @@ import android.content.SharedPreferences;
 public final class AlmostNexusSettingsHelper {
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
 	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
-		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons","uiScrollableWidgets"};
+		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons",
+		"uiScrollableWidgets","desktopCache"};
 	public static boolean needsRestart(String key){
 		for(int i=0;i<restart_keys.length;i++){
 			if(restart_keys[i].equals(key))
@@ -150,11 +151,6 @@ public final class AlmostNexusSettingsHelper {
 		boolean newD = sp.getBoolean("wallpaperHack", context.getResources().getBoolean(R.bool.config_wallpaperHack));
 		return newD;
 	}
-	public static int getDrawerAlpha(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
-		int newD = sp.getInt("drawerAlpha", context.getResources().getInteger(R.integer.config_drawerAlpha));
-		return newD;
-	}
 	public static int getHighlightsColor(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		int newD = sp.getInt("highlights_color", context.getResources().getInteger(R.integer.config_highlights_color));
@@ -208,6 +204,11 @@ public final class AlmostNexusSettingsHelper {
 	public static boolean getFadeDrawerLabels(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		boolean newD = sp.getBoolean("fadeDrawerLabels", context.getResources().getBoolean(R.bool.config_fadeDrawerLabels));
+		return newD;
+	}
+	public static boolean getDesktopCache(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		boolean newD = sp.getBoolean("desktopCache", context.getResources().getBoolean(R.bool.config_desktopCache));
 		return newD;
 	}
 	
