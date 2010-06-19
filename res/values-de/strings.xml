@@ -238,9 +238,9 @@
     <string name="dbfile_import_error">Fehler beim Wiederherstellen der Konfiguration!</string>
 
     <!--  Desktop columns/Rows -->
-    <string name="pref_title_desktop_columns">Zeilen: Bildschirm</string>
-    <string name="pref_summary_desktop_columns">Anzahl der Zeilen auf dem Bildschirm festlegen</string>
-    <string name="pref_dialog_desktop_columns">Anzahl der Zeilen auf dem Bildschirm festlegen</string>
+    <string name="pref_title_desktop_columns">Spalten: Bildschirm</string>
+    <string name="pref_summary_desktop_columns">Anzahl der Spalten auf dem Bildschirm festlegen</string>
+    <string name="pref_dialog_desktop_columns">Anzahl der Spalten auf dem Bildschirm festlegen</string>
 
     <string name="pref_title_desktop_rows">Reihen: Bildschirm</string>
     <string name="pref_summary_desktop_rows">Anzahl der Reihen auf dem Bildschirm festlegen</string>
