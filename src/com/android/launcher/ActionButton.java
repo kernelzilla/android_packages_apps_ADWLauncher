@@ -74,7 +74,7 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 
 	public void onDrop(DragSource source, int x, int y, int xOffset,
 			int yOffset, Object dragInfo) {
-		// TODO Auto-generated method stub
+		boolean accept=true;
     	ItemInfo info = (ItemInfo) dragInfo;
         switch (info.itemType) {
         case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
@@ -86,25 +86,37 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
         	Toast t=Toast.makeText(getContext(), "Widgets not supported... sorry :-)", Toast.LENGTH_SHORT);
         	t.show();
-		LauncherModel.deleteItemFromDatabase(mLauncher, info);
-        	return;
+        	accept=false;
+        	break;
         default:
         	Toast t2=Toast.makeText(getContext(), "Unknown item. We can't add unknown item types :-)", Toast.LENGTH_SHORT);
         	t2.show();
-		LauncherModel.deleteItemFromDatabase(mLauncher, info);
-        	return;
+        	accept=false;
+        	break;
         }
         final LauncherModel model = Launcher.getModel();
         //TODO:ADW check this carefully
         //We need to remove current item from database before adding the new one
-        if(mCurrentInfo!=null){
-        	model.removeDesktopItem(mCurrentInfo);
-        	LauncherModel.deleteItemFromDatabase(mLauncher, mCurrentInfo);
+        if (info instanceof LauncherAppWidgetInfo) {
+            model.removeDesktopAppWidget((LauncherAppWidgetInfo) info);
+            final LauncherAppWidgetInfo launcherAppWidgetInfo = (LauncherAppWidgetInfo) info;
+            final LauncherAppWidgetHost appWidgetHost = mLauncher.getAppWidgetHost();
+            if (appWidgetHost != null) {
+                appWidgetHost.deleteAppWidgetId(launcherAppWidgetInfo.appWidgetId);
+            } 
         }
-        model.addDesktopItem(info);
-        LauncherModel.addOrMoveItemInDatabase(mLauncher, info,
-                mIdent, -1, -1, -1);        
-        UpdateLaunchInfo(info);
+        if(accept){
+	        if(mCurrentInfo!=null){
+	        	model.removeDesktopItem(mCurrentInfo);
+	        	LauncherModel.deleteItemFromDatabase(mLauncher, mCurrentInfo);
+	        }
+	        model.addDesktopItem(info);
+	        LauncherModel.addOrMoveItemInDatabase(mLauncher, info,
+	                mIdent, -1, -1, -1);        
+	        UpdateLaunchInfo(info);
+        }else{
+        	LauncherModel.deleteItemFromDatabase(mLauncher, info);
+        }
 	}
 	protected void UpdateLaunchInfo(ItemInfo info){
     	mCurrentInfo=info;

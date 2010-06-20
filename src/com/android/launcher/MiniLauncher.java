@@ -84,7 +84,8 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
       
     public void onDrop(DragSource source, int x, int y, int xOffset, int yOffset, Object dragInfo) {
 	final LauncherModel model = Launcher.getModel();
-	ItemInfo info = (ItemInfo) dragInfo;
+		ItemInfo info = (ItemInfo) dragInfo;
+		boolean accept=true;
         //TODO:ADW Limit to X items till i manage to add scroll, removing, etc
         if(getChildCount()>=mNumCells){
         	Toast t=Toast.makeText(getContext(), "sorry, "+mNumCells+" items max... atm :-)", Toast.LENGTH_SHORT);
@@ -102,21 +103,32 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
         	Toast t=Toast.makeText(getContext(), "Widgets not supported... sorry :-)", Toast.LENGTH_SHORT);
         	t.show();
-		LauncherModel.deleteItemFromDatabase(mLauncher, info);
+        	accept=false;
         	return;
         default:
         	Toast t2=Toast.makeText(getContext(), "Unknown item. We can't add unknown item types :-)", Toast.LENGTH_SHORT);
         	t2.show();
-		LauncherModel.deleteItemFromDatabase(mLauncher, info);
+        	accept=false;
         	return;
         }
         info.cellX=getChildCount();
         //add it to launcher database
-        
-        model.addDesktopItem(info);
-        LauncherModel.addOrMoveItemInDatabase(mLauncher, info,
-                LauncherSettings.Favorites.CONTAINER_DOCKBAR, -1, getChildCount(), -1);        
-        addItemInDockBar(info);
+        if (info instanceof LauncherAppWidgetInfo) {
+            model.removeDesktopAppWidget((LauncherAppWidgetInfo) info);
+            final LauncherAppWidgetInfo launcherAppWidgetInfo = (LauncherAppWidgetInfo) info;
+            final LauncherAppWidgetHost appWidgetHost = mLauncher.getAppWidgetHost();
+            if (appWidgetHost != null) {
+                appWidgetHost.deleteAppWidgetId(launcherAppWidgetInfo.appWidgetId);
+            } 
+        }
+        if(accept){
+	        model.addDesktopItem(info);
+	        LauncherModel.addOrMoveItemInDatabase(mLauncher, info,
+	                LauncherSettings.Favorites.CONTAINER_DOCKBAR, -1, getChildCount(), -1);        
+	        addItemInDockBar(info);
+        }else{
+        	LauncherModel.deleteItemFromDatabase(mLauncher, info);
+        }
     }
 
     public void onDragEnter(DragSource source, int x, int y, int xOffset, int yOffset,
