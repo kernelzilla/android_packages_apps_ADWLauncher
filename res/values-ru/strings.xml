@@ -126,7 +126,7 @@
 		 <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Ошибка загрузки виджета</string>
     <!-- ADW Version Information -->
-	<string name="adw_donate">Если вам нравится наша работа вы можете купить нам кофе или пива :-)</string>
+    <string name="adw_donate">Если вам нравится наша работа вы можете купить нам кофе или пива :-)</string>
 
     <!-- ADW Settings -->
     <string name="pref_label_settings">Настройки AlmostNexus</string>
@@ -155,9 +155,9 @@
     <string name="pref_summary_desktop_scrolling_speed">Установка скорости прокрутки р.столов домашнего экрана</string>
     <string name="pref_dialog_desktop_scrolling_speed">Чем меньше значение, тем быстрей прокрутка</string>
 
-    <string name="pref_title_desktop_overshoot">Desktop overshoot</string>
-    <string name="pref_summary_desktop_overshoot">Allow to bounce past first/last desktop screens</string>
-    <string name="pref_dialog_desktop_overshoot">Set it to 0 to disable overshooting</string>
+    <string name="pref_title_desktop_overshoot">Эффект выход за границы экрана</string>
+    <string name="pref_summary_desktop_overshoot">Разрешить вылет за границы для первого/последнего р.стола</string>
+    <string name="pref_dialog_desktop_overshoot">Установите 0 для выключения эффекта</string>
 
     <!-- Drawer Settings -->
     <string name="pref_title_drawer_settings">Настройки меню приложений</string>
