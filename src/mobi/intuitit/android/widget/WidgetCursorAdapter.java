@@ -29,8 +29,6 @@ public class WidgetCursorAdapter extends CursorAdapter {
 
 	static final String LOG_TAG = "LauncherPP_WCA";
 
-	// Cursor mCursor;
-
 	static final int IMPOSSIBLE_INDEX = -100;
 
 	final LayoutInflater mInflater;
@@ -112,7 +110,7 @@ public class WidgetCursorAdapter extends CursorAdapter {
 		mAppWidgetProvider = provider;
 		mInflater = LayoutInflater.from(context);
 		mActivity = a;
-		
+
 		// verify is contentProvider requery is allowed
 		mAllowRequery = intent.getBooleanExtra(LauncherIntent.Extra.Scroll.EXTRA_DATA_PROVIDER_ALLOW_REQUERY, false);
 
@@ -121,11 +119,10 @@ public class WidgetCursorAdapter extends CursorAdapter {
 		if (mItemLayoutId <= 0)
 			throw (new IllegalArgumentException("The passed layout id is illegal"));
 
-        mItemChildrenClickable = intent.getBooleanExtra(
-                LauncherIntent.Extra.Scroll.EXTRA_ITEM_CHILDREN_CLICKABLE, false);
+		mItemChildrenClickable = intent.getBooleanExtra(LauncherIntent.Extra.Scroll.EXTRA_ITEM_CHILDREN_CLICKABLE,
+				false);
 
-        mItemActionUriIndex = intent.getIntExtra(
-                LauncherIntent.Extra.Scroll.EXTRA_ITEM_ACTION_VIEW_URI_INDEX, -1);
+		mItemActionUriIndex = intent.getIntExtra(LauncherIntent.Extra.Scroll.EXTRA_ITEM_ACTION_VIEW_URI_INDEX, -1);
 
 		// Generate
 		generateItemMapping(intent);
@@ -249,7 +246,10 @@ public class WidgetCursorAdapter extends CursorAdapter {
 				// Prepare tag
 				view.setTag(null);
 				if (mItemChildrenClickable && itemMapping.clickable) {
-					child.setTag(cursor.getPosition());
+					if (mItemActionUriIndex >= 0)
+						child.setTag(cursor.getString(mItemActionUriIndex));
+					else
+						child.setTag(Integer.toString(cursor.getPosition()));
 					child.setOnClickListener(new ItemViewClickListener());
 				} else {
 					if (mItemActionUriIndex >= 0) {
@@ -272,7 +272,7 @@ public class WidgetCursorAdapter extends CursorAdapter {
 
 		public void onClick(View v) {
 			try {
-				int pos = (Integer) v.getTag();
+				String pos = (String) v.getTag();
 				Intent intent = new Intent(LauncherIntent.Action.ACTION_VIEW_CLICK);
 				intent.setComponent(mAppWidgetProvider);
 				intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
