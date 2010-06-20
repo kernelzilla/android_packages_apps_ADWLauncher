@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="menu_binding_entries">
+        <item>显示默认桌面</item>
+        <item>显示默认桌面/显示预览</item>
+        <item>显示预览</item>
+        <item>打开/关闭应用程序托盘</item>
+        <item>显示/隐藏状态栏</item>
+        <item>显示/隐藏通知栏</item>
+        <item>显示默认桌面/显示提示栏</item>
+        <item>打开/关闭扩展栏</item>
+     </string-array>
+    <string-array name="menu_binding_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+</resources>
