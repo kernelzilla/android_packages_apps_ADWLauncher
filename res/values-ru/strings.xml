@@ -132,10 +132,10 @@
     <string name="pref_label_settings">Настройки AlmostNexus</string>
     <!-- Screen preferences -->
     <string name="pref_title_screen_preferences">Настройки домашнего экрана</string>
-    <string name="pref_summary_screen_preferences">Количество р.столов, р.стол по умолчанию...</string>
+    <string name="pref_summary_screen_preferences">Количество р.столов, ориентация и т.д.</string>
 
-    <string name="pref_title_wallpaper_hack">Wallpaper Hack</string>
-    <string name="pref_summary_wallpaper_hack">Выключите этот пункт если используя БОЛЬШИЕ обои у Вас возникает ошибка. Оставьте включенным чтоб сделать прокрутку красивой</string>
+    <string name="pref_title_wallpaper_hack">Плавная прокрутка</string>
+    <string name="pref_summary_wallpaper_hack">Выключите если возникает к-л ошибка</string>
 
     <string name="pref_title_orientation_sensor">Ориентация экрана</string>
     <string name="pref_summary_orientation_sensor">Автоматически разворачивать экран при повороте телефона</string>
@@ -171,22 +171,22 @@
     <string name="pref_summary_new_drawer">Стиль меню приложений как в Galaxy S</string>
 
     <string name="pref_title_animated_drawer">Анимация меню приложений</string>
-    <string name="pref_summary_animated_drawer">Установить для включения анимации менюприложений</string>
+    <string name="pref_summary_animated_drawer">Установить для включения анимации меню приложений</string>
 
     <string name="pref_title_drawer_columns_portrait">Колонки в портретной раскладке</string>
-    <string name="pref_summary_drawer_columns_portrait">Установите количество колонок меню приложений в портретной раскладке</string>
+    <string name="pref_summary_drawer_columns_portrait">Колонок меню приложений в портретной раскладке</string>
     <string name="pref_dialog_drawer_columns_portrait">Установите количество колонок меню приложений в портретной раскладке</string>
 
     <string name="pref_title_drawer_rows_portrait">Строки в портретной раскладке</string>
-    <string name="pref_summary_drawer_rows_portrait">Установите количество строк меню приложений в портретной раскладке</string>
+    <string name="pref_summary_drawer_rows_portrait">Строк меню приложений в портретной раскладке</string>
     <string name="pref_dialog_drawer_rows_portrait">Установите количество строк меню приложений в портретной раскладке</string>
 
     <string name="pref_title_drawer_columns_landscape">Колонки в альбомной раскладке</string>
-    <string name="pref_summary_drawer_columns_landscape">Установите количество колонок меню приложений в альбомной раскладке</string>
+    <string name="pref_summary_drawer_columns_landscape">Колонок меню приложений в альбомной раскладке</string>
     <string name="pref_dialog_drawer_columns_landscape">Установите количество колонок меню приложений в альбомной раскладке</string>
 
     <string name="pref_title_drawer_rows_landscape">Строки в альбомной раскладке</string>
-    <string name="pref_summary_drawer_rows_landscape">Установите количество строк меню приложений в альбомной раскладке</string>
+    <string name="pref_summary_drawer_rows_landscape">Строк меню приложений в альбомной раскладке</string>
     <string name="pref_dialog_drawer_rows_landscape">Установите количество строк меню приложений в альбомной раскладке</string>
 
     <!-- Previews preferences -->
@@ -197,7 +197,7 @@
     <string name="pref_summary_sense_previews">Просмотр р.столов как в HTC Sense (Expose)</string>
 
     <string name="pref_title_clean_screen_mode">Режим очистки экрана</string>
-    <string name="pref_summary_clean_screen_mode">Скрывать ярлыки/виджеты домашнего экрана в режиме просмотра</string>
+    <string name="pref_summary_clean_screen_mode">Скрывать ярлыки/виджеты д.экрана в режиме просмотра</string>
 
     <!-- Button preferences -->
     <string name="pref_title_ui_settings">Настройки интерфейса</string>
@@ -222,7 +222,7 @@
     <string name="pref_summary_rab">Разрешить/Запретить правую настриваемую кнопку</string>
     
     <string name="pref_title_ab2">Дополнительные настраиваемые кнопки</string>
-    <string name="pref_summary_ab2">Разрешить/Запретить дополнительные настраиваемые кнопки (При выкл. точках р.столов)</string>
+    <string name="pref_summary_ab2">Требует выключенния точек р.столов</string>
 
     <string name="pref_title_tint_ab">Обесцвечиание настраиваемых кнопок</string>
     <string name="pref_summary_tint_ab">Разрешить/Запретить обесцвечивание иконок настраиваемых кнопок</string>
@@ -241,7 +241,7 @@
     <string name="pref_summary_hide_icon_labels">Убрать подписи иконок домашнего экрана</string>
 
     <string name="pref_title_build_info">Информация о билде</string>
-    <string name="pref_title_adw_version">Версия ADW</string>
+    <string name="pref_title_adw_version">ADW Version</string>
 
     <string name="pref_title_icon_highlights">Цвет курсора нажатия</string>
     <string name="pref_summary_icon_highlights">Задайте цвет для нажатия на иконку</string>
@@ -316,7 +316,7 @@
     <string name="pref_title_drawer_labels">Показывать подписи иконок</string>
     <string name="pref_summary_drawer_labels">Показывать подписи иконок меню приложений</string>
     <string name="pref_title_fade_drawer_labels">Исчезающие подписи иконок</string>
-    <string name="pref_summary_fade_drawer_labels">Икноки постепенно исчезают вместо того чтобы просто исчезнуть. Больше нагрузка/объем: CPU/RAM</string>
+    <string name="pref_summary_fade_drawer_labels">Икноки постепенно исчезают. Больше нагрузка/объем: CPU/RAM</string>
 
 	<string name="widget_config_dialog_title">Масштабирование виджетов</string>
 	<string name="widget_config_dialog_summary">Как много сторк/колонок может занимать виджет?</string>
@@ -324,5 +324,5 @@
 	<string name="widget_rows">Строк</string>
     
     <string name="pref_title_screen_cache">Кешировать домашний экран</string>
-    <string name="pref_summary_screen_cache">Гладкая прокрутка р.столов. Отключите если у вас много виджетов</string>
+    <string name="pref_summary_screen_cache">Гладкая прокрутка р.столов. Если много виджетов выключить</string>
 </resources>
