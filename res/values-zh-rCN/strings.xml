@@ -47,7 +47,7 @@
     <string name="permdesc_write_settings">允许应用程序写入主界面设置和快捷方式。</string>
     <string name="search_hint">谷歌搜索</string>
     <string name="gadget_error_text">加载小插件时出现问题</string>
-    <string name="adw_donate">如果你喜欢我的软件，请捐献</string>
+    <string name="adw_donate">如果你喜欢我的软件，请给我买瓶啤酒吧:)</string>
     <string name="pref_label_settings">桌面设置</string>
     <string name="pref_title_screen_preferences">桌面设置</string>
     <string name="pref_summary_screen_preferences">桌面数量，默认桌面...</string>
@@ -75,7 +75,7 @@
     <string name="pref_summary_zoom_effect_speed">设置托盘打开时的缩放动画速度（毫秒）</string>
     <string name="pref_dialog_zoom_effect_speed">设置托盘打开时的缩放动画速度（毫秒）t</string>
     <string name="pref_title_new_drawer">横向托盘</string>
-    <string name="pref_summary_new_drawer">使用类似三星Galaxy 5的横向滚动托盘</string>
+    <string name="pref_summary_new_drawer">使用类似三星Galaxy S的横向滚动托盘</string>
     <string name="pref_title_animated_drawer">托盘动画</string>
     <string name="pref_summary_animated_drawer">设置开启托盘时是否显示缩放动画</string>
     <string name="pref_title_drawer_columns_portrait">竖屏托盘列数</string>
@@ -139,8 +139,8 @@
     <string name="pref_dialog_title_color_picker">选取颜色</string>
     <string name="pref_dialog_message_color_picker">点击中间的颜色来确认。\n点击返回取消选择。</string>
     <string name="pref_dialog_color_picker_alpha">透明度</string>
-    <string name="pref_message_restart_normal">更改这个设置会使得ADW主界面自动重启，退出设置后，请按房子键重新激活ADW主界面</string>
-    <string name="pref_message_restart_froyo">更改这个设置会使得ADW主界面自动重启，退出设置后，请按房子键重新激活ADW主界面</string>
+    <string name="pref_message_restart_normal">更改这个设置会使得ADW主界面自动重启，退出设置后，请按主页键重新激活ADW主界面</string>
+    <string name="pref_message_restart_froyo">更改这个设置会使得ADW主界面自动重启，退出设置后，请按主页键重新激活ADW主界面</string>
     <string name="drop_to_uninstall">卸载应用程序</string>
     <string name="pref_title_import_export">备份与恢复</string>
     <string name="pref_title_xml">ADW 设置</string>
