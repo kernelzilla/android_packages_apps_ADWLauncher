@@ -65,9 +65,6 @@
 	<!-- ADW Version Information -->
 	<string name="adw_donate">如果你喜歡我的軟體，請給我買瓶啤酒吧 :-)</string>
     
-	<!-- ADW Settings -->
-	<string name="pref_label_settings">AlmostNexus設置</string>
-	
     <!-- Screen preferences -->
     <string name="pref_label_settings">桌面設置</string>
     <string name="pref_title_screen_preferences">桌面數量，默認桌面...</string>
@@ -121,7 +118,7 @@
 
     <string name="pref_title_drawer_columns_landscape">橫屏託盤列數</string>
     <string name="pref_summary_drawer_columns_landscape">選擇橫屏時託盤顯示的圖示列數</string>
-    <string name="pref_dialog_drawer_columns_landscape">選擇橫屏時託盤顯示的圖示列數
+    <string name="pref_dialog_drawer_columns_landscape">選擇橫屏時託盤顯示的圖示列數</string>
 
     <string name="pref_title_drawer_rows_landscape">橫屏託盤行數</string>
     <string name="pref_summary_drawer_rows_landscape">選擇橫屏時託盤顯示的圖示行數</string>
