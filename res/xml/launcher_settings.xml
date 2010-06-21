@@ -86,6 +86,7 @@
 			android:summary="@string/pref_summary_drawer_color"
 	        	android:defaultValue="-16777216" />
 		<com.android.launcher.DialogSeekBarPreference
+			android:dependency="drawerNew"
 			android:title="@string/pref_title_page_horizontal_margin"
 			android:summary="@string/pref_summary_page_horizontal_margin"
 			android:key="pageHorizontalMargin"
