@@ -48,10 +48,10 @@ public class DockBar extends LinearLayout implements OnClickListener {
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DockBar);
 		RuntimeException e = null;
         mHandleId = a.getResourceId(R.styleable.DockBar_handle, 0);
-        if (mHandleId == 0) {
+        /*if (mHandleId == 0) {
                 e = new IllegalArgumentException(a.getPositionDescription() +
                                 ": The handle attribute is required and must refer to a valid child.");
-        }
+        }*/
         mContentId = a.getResourceId(R.styleable.DockBar_content, 0);
         if (mContentId == 0) {
                 e = new IllegalArgumentException(a.getPositionDescription() +
@@ -67,12 +67,15 @@ public class DockBar extends LinearLayout implements OnClickListener {
     @Override
     protected void onFinishInflate() {
     	super.onFinishInflate();
-    	mHandle = findViewById(mHandleId);
-    	if (mHandle == null) {
-    		String name = getResources().getResourceEntryName(mHandleId);
-    		throw new RuntimeException("Your DockBar must have a child View whose id attribute is 'R.id." + name + "'");
+    	if(mHandleId!=0){
+    		mHandle = findViewById(mHandleId);
+	    	/*if (mHandle == null) {
+	    		String name = getResources().getResourceEntryName(mHandleId);
+	    		throw new RuntimeException("Your DockBar must have a child View whose id attribute is 'R.id." + name + "'");
+	    	}*/
+    		if(mHandle!=null)
+    			mHandle.setOnClickListener(this);
     	}
-    	mHandle.setOnClickListener(this);
     	setVisibility(VISIBLE);
     }
 	@Override
@@ -190,19 +193,19 @@ public class DockBar extends LinearLayout implements OnClickListener {
             float velocity=0;
     		switch (mPosition) {
 		        case LEFT:
-		        	if(velocityX<0)
+		        	if(velocityX<0 && Math.abs(velocityY)<Math.abs(velocityX))
 		        		velocity=Math.abs(velocityX);
 		        	break;
 		        case RIGHT:
-		        	if(velocityX>0)
+		        	if(velocityX>0 && Math.abs(velocityY)<Math.abs(velocityX))
 		        		velocity=Math.abs(velocityX);
 		            break;
 		        case TOP:
-		        	if(velocityY<0)
+		        	if(velocityY<0 && Math.abs(velocityY)>Math.abs(velocityX))
 		        		velocity=Math.abs(velocityY);
 		        	break;
 		        case BOTTOM:
-		        	if(velocityY>0)
+		        	if(velocityY>0 && Math.abs(velocityY)>Math.abs(velocityX))
 		        		velocity=Math.abs(velocityY);
 		            break;
     		}

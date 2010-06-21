@@ -140,25 +140,18 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
 	android:layout_gravity="bottom|center_horizontal"
-	launcher:handle="@+id/close_dockbar"
 	launcher:position="bottom"
 	>
-	<ImageView
-		android:src="@drawable/dockbar_handle_icon_close"
-		android:background="@drawable/dockbar_handle_bg"
-		android:layout_height="wrap_content"
-		android:id="@id/close_dockbar"
-		android:layout_width="fill_parent"
-		android:layout_gravity="center"/>
 	<com.android.launcher.MiniLauncher
 	    android:id="@+id/mini_content"
 	    android:background="@drawable/dockbar_bg"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    launcher:cellWidth="50dip"
-	    launcher:cellHeight="52dip"
+	    launcher:cellHeight="65dip"
 	    launcher:cells="6"
 	    launcher:orientation="horizontal"
+	    android:padding="0dip"
 	    />
 </com.android.launcher.DockBar>
 </com.android.launcher.DragLayer>
