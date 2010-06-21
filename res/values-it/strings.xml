@@ -104,6 +104,10 @@
     <string name="pref_summary_zoom_effect_speed">Imposta il tempo in millisecondi per l\'effetto zoom</string>
     <string name="pref_dialog_zoom_effect_speed">Imposta il tempo in millisecondi per l\'effetto zoom</string>
 
+    <string name="pref_title_page_horizontal_margin">Margine Orizzontale Pagina</string>
+    <string name="pref_summary_page_horizontal_margin">Imposta il margine orizzontale tra ogni pagina del Drawer</string>
+    <string name="pref_dialog_page_horizontal_margin">Imposta il margine orizzontale tra ogni pagina del Drawer</string>
+
     <string name="pref_title_new_drawer">Drawer Orizzontale</string>
     <string name="pref_summary_new_drawer">Usa l\'implementazione del Samsung Galaxy S</string>
 
@@ -180,10 +184,6 @@
     <string name="pref_title_build_info">Informazioni Build</string>
     <string name="pref_title_adw_version">Versione ADW</string>
 
-    <string name="pref_title_drawer_background_alpha">Sfondo alfa</string>
-    <string name="pref_summary_drawer_background_alpha">Imposta il livello di trasparenza dello sfondo del Drawer</string>
-    <string name="pref_dialog_drawer_background_alpha">Imposta il livello di trasparenza dello sfondo del Drawer</string>
-
     <string name="pref_title_icon_highlights">Colore di evidenziazione</string>
     <string name="pref_summary_icon_highlights">Imposta il colore di sfondo durante la selezione delle icone</string>
     <string name="pref_title_icon_highlights_focus">Colore della selezione</string>
@@ -254,5 +254,19 @@
     <string name="pref_title_autosize_icons">Auto Stretch</string>
     <string name="pref_summary_autosize_icons">Prova a espandere automaticamente icone/widgets per non farli sovrapporre</string>
 
+    <string name="pref_title_scrollable_widgets">Supporto per widget sfogliabili</string>
+    <string name="pref_summary_scrollable_widgets">Disabilita se non vuoi usare i widget sfogliabili</string>
 
+    <string name="pref_title_drawer_labels">Visualizza etichette applicazioni</string>
+    <string name="pref_summary_drawer_labels">Visualizza le etichette applicazione nel drawer</string>
+    <string name="pref_title_fade_drawer_labels">Effetto scomparsa per etichette applicazioni</string>
+    <string name="pref_summary_fade_drawer_labels">Etichette a scomparsa invece di comparsa improvvisa. Usa piu\' ram/cpu</string>
+
+        <string name="widget_config_dialog_title">Configurazione larghezza Widget</string>
+        <string name="widget_config_dialog_summary">Quante righe/colonne per il Widget?</string>
+        <string name="widget_columns">Colonne</string>
+        <string name="widget_rows">Rghe</string>
+
+    <string name="pref_title_screen_cache">Usa cache dello schermo</string>
+    <string name="pref_summary_screen_cache">Scroll piu\' leggero. Disabilitare se si hanno molti widget.</string>
 </resources>
