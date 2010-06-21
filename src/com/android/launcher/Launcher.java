@@ -1076,6 +1076,12 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+    	//ADW: If we leave the menu open, on restoration it will try to auto find
+    	//the ocupied cells. But this could happed before the workspace is fully loaded,
+    	//so it can cause a NPE cause of the way we load the desktop columns/rows count.
+    	//I prefer to just close it than diggin the code to make it load later...
+    	//Accepting patches :-)
+    	closeOptionsMenu();
         super.onSaveInstanceState(outState);
 
         outState.putInt(RUNTIME_STATE_CURRENT_SCREEN, mWorkspace.getCurrentScreen());
