@@ -103,6 +103,10 @@
     <string name="pref_summary_zoom_effect_speed">ミリ秒でズームエフェクトの時間を設定</string>
     <string name="pref_dialog_zoom_effect_speed">ミリ秒でズームエフェクトの時間を設定</string>
 
+    <string name="pref_title_page_horizontal_margin">水平マージン</string>
+    <string name="pref_summary_page_horizontal_margin">ドロワーのページ間水平マージンを設定する</string>
+    <string name="pref_dialog_page_horizontal_margin">ドロワーのページ間水平マージンを設定する</string>
+
     <string name="pref_title_new_drawer">水平ドロワー</string>
     <string name="pref_summary_new_drawer">Samsung Galaxy Sで実装されているようなドロワー</string>
 
