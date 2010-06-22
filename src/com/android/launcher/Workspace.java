@@ -476,7 +476,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
         	int lastScreen = mCurrentScreen;
             mCurrentScreen = Math.max(0, Math.min(mNextScreen, getChildCount() - 1));
             //ADW: dots
-            indicatorLevels(mCurrentScreen);
+            //indicatorLevels(mCurrentScreen);
             Launcher.setScreen(mCurrentScreen);
             mNextScreen = INVALID_SCREEN;
             clearChildrenCache();
@@ -952,8 +952,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
     }
 
     void snapToScreen(int whichScreen) {
-        if (!mScroller.isFinished()) return;
-
+        //if (!mScroller.isFinished()) return;
         clearVacantCache();
         enableChildrenCache();
 
@@ -1227,15 +1226,22 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 
     public void scrollLeft() {
         clearVacantCache();
-        if (mNextScreen == INVALID_SCREEN && mCurrentScreen > 0 && mScroller.isFinished()) {
+        if(mNextScreen!=INVALID_SCREEN){
+        	mCurrentScreen=mNextScreen;
+        	mNextScreen=INVALID_SCREEN;
+        }
+        if (mNextScreen == INVALID_SCREEN && mCurrentScreen > 0) {
             snapToScreen(mCurrentScreen - 1);
         }
     }
 
     public void scrollRight() {
         clearVacantCache();
-        if (mNextScreen == INVALID_SCREEN && mCurrentScreen < getChildCount() -1 &&
-                mScroller.isFinished()) {
+        if(mNextScreen!=INVALID_SCREEN){
+        	mCurrentScreen=mNextScreen;
+        	mNextScreen=INVALID_SCREEN;
+        }
+        if (mNextScreen == INVALID_SCREEN && mCurrentScreen < getChildCount() -1) {
             snapToScreen(mCurrentScreen + 1);
         }
     }
@@ -1495,8 +1501,8 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
     }
     void indicatorLevels(int mCurrent){
     	int numScreens=getChildCount();
-    	mPreviousIndicator.setLevel(mCurrentScreen);
-    	mNextIndicator.setLevel(numScreens-mCurrentScreen-1);    	
+    	mPreviousIndicator.setLevel(mCurrent);
+    	mNextIndicator.setLevel(numScreens-mCurrent-1);    	
     }
     /**
      * ADW: Make a local copy of wallpaper bitmap to use instead wallpapermanager
