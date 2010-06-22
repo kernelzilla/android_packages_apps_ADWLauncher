@@ -449,7 +449,7 @@ public class CellLayout extends WidgetCellLayout {
 
         Rect current = cellInfo.current;
 
-        for (int x = 0; x < xCount; x++) {
+        /*for (int x = 0; x < xCount; x++) {
             for (int y = 0; y < yCount; y++) {
                 if (!occupied[x][y]) {
                     current.set(x, y, x, y);
@@ -457,8 +457,13 @@ public class CellLayout extends WidgetCellLayout {
                     occupied[x][y] = true;
                 }
             }
-        }
-
+        }*/
+        //ADW: Warning, commented code.
+        //Why s it calling a recursive/loop method from within another loop!!!!????
+        //Every time you longpress an item it does the findVacantCell zillions of times
+        //eating a lot of cpu/ram!!!!!
+        //Just calling this, seems to work, but i'd need further testing.... volunteers?
+        findVacantCell(current, xCount, yCount, occupied, cellInfo);
         cellInfo.valid = cellInfo.vacantCells.size() > 0;
 
         // Assume the caller will perform their own cell searching, otherwise we
