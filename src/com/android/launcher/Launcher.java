@@ -1706,7 +1706,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         for (int i = 0; i < count; i++) {
             ((ViewGroup) workspace.getChildAt(i)).removeAllViewsInLayout();
         }
-
+        final MiniLauncher miniLauncher=(MiniLauncher) mDragLayer.findViewById(R.id.mini_content);
+        miniLauncher.removeAllViewsInLayout();
         if (DEBUG_USER_INTERFACE) {
             android.widget.Button finishButton = new android.widget.Button(this);
             finishButton.setText("Finish");
@@ -3198,6 +3199,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
         mWorkspace.addInCurrentScreen(view, xy[0], xy[1], spanX, spanY);
 		
+	}
+	public static int getScreenCount(Context context){
+		return AlmostNexusSettingsHelper.getDesktopScreens(context);
 	}
 
 }

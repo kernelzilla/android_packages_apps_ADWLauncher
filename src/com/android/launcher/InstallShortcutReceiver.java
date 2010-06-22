@@ -38,7 +38,8 @@ public class InstallShortcutReceiver extends BroadcastReceiver {
 
         if (!installShortcut(context, data, screen)) {
             // The target screen is full, let's try the other screens
-            for (int i = 0; i < Launcher.SCREEN_COUNT; i++) {
+        	final int count=Launcher.getScreenCount(context);
+            for (int i = 0; i < count; i++) {
                 if (i != screen && installShortcut(context, data, i)) break;
             }
         }
