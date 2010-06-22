@@ -902,7 +902,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
             public void onClick(DialogInterface dialog, int which) {
             	spans[0]=ncols.getCurrent();
             	spans[1]=nrows.getCurrent();
-            	prueba(appWidgetInfo,cInfo,spans,appWidgetId,insertAtFirst);
+            	realAddWidget(appWidgetInfo,cInfo,spans,appWidgetId,insertAtFirst);
             }
         });
 		alertDialog.show();
@@ -1367,19 +1367,31 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         final int[] xy = mCellCoordinates;
         final int spanX = info.spanX;
         final int spanY = info.spanY;
+		
+        AlertDialog.Builder builder;
+		AlertDialog alertDialog;
 
-        if (!findSlot(cellInfo, xy, spanX, spanY)) return;
-
-        sModel.addDesktopItem(info);
-        LauncherModel.addItemToDatabase(this, info, LauncherSettings.Favorites.CONTAINER_DESKTOP,
-        mWorkspace.getCurrentScreen(), xy[0], xy[1], false);
-
-        final View view = mInflater.inflate(info.layoutResource, null);
-        view.setTag(info);
-        Search search = (Search) view.findViewById(R.id.widget_search);
-        search.setLauncher(this);
-
-        mWorkspace.addInCurrentScreen(view, xy[0], xy[1], info.spanX, spanY);
+		final View dlg_layout = View.inflate(Launcher.this, R.layout.widget_span_setup, null);
+		final NumberPicker ncols=(NumberPicker)dlg_layout.findViewById(R.id.widget_columns_span);
+		ncols.setRange(1, mWorkspace.currentDesktopColumns());
+		ncols.setCurrent(spanX);
+		final NumberPicker nrows=(NumberPicker)dlg_layout.findViewById(R.id.widget_rows_span);
+		nrows.setRange(1, mWorkspace.currentDesktopRows());
+		nrows.setCurrent(spanY);
+		builder = new AlertDialog.Builder(Launcher.this);
+		builder.setView(dlg_layout);
+		alertDialog = builder.create();
+        alertDialog.setTitle(getResources().getString(R.string.widget_config_dialog_title));
+        alertDialog.setMessage(getResources().getString(R.string.widget_config_dialog_summary));
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(android.R.string.ok), 
+            new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	int spanX=ncols.getCurrent();
+            	int spanY=nrows.getCurrent();
+            	realAddSearch(info,cellInfo,xy,spanX,spanY);
+            }
+        });
+		alertDialog.show();
     }
 
     void processShortcut(Intent intent, int requestCodeApplication, int requestCodeShortcut) {
@@ -3136,7 +3148,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	public boolean isScrollableAllowed(){
 		return scrollableSupport;
 	}
-	private void prueba(AppWidgetProviderInfo appWidgetInfo,CellLayout.CellInfo cellInfo, int[]spans,int appWidgetId,boolean insertAtFirst){
+	private void realAddWidget(AppWidgetProviderInfo appWidgetInfo,CellLayout.CellInfo cellInfo, int[]spans,int appWidgetId,boolean insertAtFirst){
         // Try finding open space on Launcher screen
         final int[] xy = mCellCoordinates;
         if (!findSlot(cellInfo, xy, spans[0], spans[1])) {
@@ -3170,6 +3182,22 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         // finish load a widget, send it an intent
         if(appWidgetInfo!=null)
         	appwidgetReadyBroadcast(appWidgetId, appWidgetInfo.provider);
+	}
+	private void realAddSearch(Widget info,final CellLayout.CellInfo cellInfo,final int[] xy,int spanX,int spanY){
+        if (!findSlot(cellInfo, xy, spanX, spanY)) return;
+        info.spanX=spanX;
+        info.spanY=spanY;
+        sModel.addDesktopItem(info);
+        LauncherModel.addItemToDatabase(this, info, LauncherSettings.Favorites.CONTAINER_DESKTOP,
+        mWorkspace.getCurrentScreen(), xy[0], xy[1], false);
+
+        final View view = mInflater.inflate(info.layoutResource, null);
+        view.setTag(info);
+        Search search = (Search) view.findViewById(R.id.widget_search);
+        search.setLauncher(this);
+
+        mWorkspace.addInCurrentScreen(view, xy[0], xy[1], spanX, spanY);
+		
 	}
 
 }

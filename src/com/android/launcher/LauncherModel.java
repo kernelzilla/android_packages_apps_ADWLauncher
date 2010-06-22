@@ -886,6 +886,8 @@ public class LauncherModel {
                             widgetInfo.container = container;
                             widgetInfo.cellX = c.getInt(cellXIndex);
                             widgetInfo.cellY = c.getInt(cellYIndex);
+                            widgetInfo.spanX = c.getInt(spanXIndex);
+                            widgetInfo.spanY = c.getInt(spanYIndex);
 
                             desktopItems.add(widgetInfo);
                             break;
