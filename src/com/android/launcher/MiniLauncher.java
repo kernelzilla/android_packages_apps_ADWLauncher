@@ -301,8 +301,10 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
 				mCellHeight=(getMeasuredHeight()/mNumCells);
 			}
 			mScrollAllowed=true;
+			snapScroll();
 		}else{
 			mScrollAllowed=false;
+			scrollTo(0, 0);
 		}
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
