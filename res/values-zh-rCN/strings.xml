@@ -65,9 +65,11 @@
 	<!-- ADW Version Information -->
 	<string name="adw_donate">如果你喜欢我的软件，请给我买瓶啤酒吧 :-)</string>
     
+	<!-- ADW Settings -->
+	<string name="pref_label_settings">桌面设置</string>
     <!-- Screen preferences -->
-    <string name="pref_label_settings">桌面设置</string>
-    <string name="pref_title_screen_preferences">桌面数量，默认桌面...</string>
+	<string name="pref_title_screen_preferences">桌面设置</string>
+    <string name="pref_summary_screen_preferences">桌面数量，默认桌面...</string>
 
     <string name="pref_title_wallpaper_hack">壁纸优化</string>
     <string name="pref_summary_wallpaper_hack">在使用较大壁纸时出现FC时，请禁用此选项，开启此选项后可提升屏幕滚动的表现</string>
@@ -78,7 +80,7 @@
     <string name="pref_title_hide_statusbar">隐藏状态栏</string>
     <string name="pref_summary_hide_statusbar">隐藏屏幕上方的状态栏</string>
 
-    <string name="pref_title_desktop_screens">桌面数量</string>
+	<string name="pref_title_desktop_screens">桌面数量</string>
     <string name="pref_summary_desktop_screens">选择所需的桌面数量</string>
     <string name="pref_dialog_desktop_screen">选择所需的桌面数量</string>
 
@@ -101,6 +103,10 @@
     <string name="pref_title_zoom_effect_speed">缩放特效速度</string>
     <string name="pref_summary_zoom_effect_speed">设置托盘打开时的缩放动画速度（毫秒）</string>
     <string name="pref_dialog_zoom_effect_speed">设置托盘打开时的缩放动画速度（毫秒）</string>
+
+	<string name="pref_title_page_horizontal_margin">横向边距</string>
+    <string name="pref_summary_page_horizontal_margin">设置托盘每页之间的横向边距</string>
+    <string name="pref_dialog_page_horizontal_margin">设置托盘每页之间的横向边距</string>
 
     <string name="pref_title_new_drawer">横向托盘</string>
     <string name="pref_summary_new_drawer">使用类似三星Galaxy 5的横向滚动托盘</string>
@@ -263,4 +269,22 @@
 
     <string name="pref_title_screen_cache">使用桌面缓存</string>
     <string name="pref_summary_screen_cache">平滑的滚动.禁止该选项如果你设置了很多小工具.</string>
+	
+    <string name="pref_title_desktop_indicator">显示页面指示器</string>
+    <string name="pref_summary_desktop_indicator">滑动桌面时显示视觉提示</string>
+    <string name="pref_title_desktop_indicator_autohide">自动隐藏页面指示器</string>
+    <string name="pref_summary_desktop_indicator_autohide">经过一小段时间后隐藏页面指示器</string>
+    <string name="pref_title_desktop_indicator_type">指示器类型</string>
+    <string name="pref_summary_desktop_indicator_type">选择不同的指示器风格</string>
+
+	<string name="pref_title_system_preferences">系统设置</string>
+	<string name="pref_summary_system_preferences">ADW系统设置</string>
+	<string name="pref_title_screens_preferencecategory">桌面屏幕</string>
+	<string name="pref_title_screens_layout_preferencecategory">桌面布局</string>
+	<string name="pref_title_screens_behaviour_preferencecategory">桌面特性</string>
+	<string name="pref_title_drawer_preferencecategory">程序托盘</string>
+	<string name="pref_title_drawer_visuals_preferencecategory">托盘视觉效果</string>
+	<string name="pref_title_highlights_preferencecategory">图标高亮</string>
+	<string name="pref_title_indicators_preferencecategory">页面指示器</string>
+
 </resources>
