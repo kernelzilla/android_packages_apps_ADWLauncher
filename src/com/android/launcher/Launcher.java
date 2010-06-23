@@ -1011,7 +1011,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                 if(!isAllAppsVisible() || mHomeBinding==BIND_APPS)
                 	fireHomeBinding();
             	if(mHomeBinding!=BIND_APPS){
-                	closeDrawer();
+                	closeDrawer(false);
                 }
                 final View v = getWindow().peekDecorView();
                 if (v != null && v.getWindowToken() != null) {
@@ -2008,9 +2008,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         		folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB ||
         		folderInfo.container==LauncherSettings.Favorites.CONTAINER_LAB2 ||
         		folderInfo.container==LauncherSettings.Favorites.CONTAINER_RAB2){
-        	mWorkspace.addInScreen(openFolder, mWorkspace.getCurrentScreen(), 0, 0, 4, 4);
+        	mWorkspace.addInScreen(openFolder, mWorkspace.getCurrentScreen(), 0, 0, mWorkspace.currentDesktopColumns(), mWorkspace.currentDesktopRows());
         }else{
-        	mWorkspace.addInScreen(openFolder, folderInfo.screen, 0, 0, 4, 4);
+        	mWorkspace.addInScreen(openFolder, folderInfo.screen, 0, 0, mWorkspace.currentDesktopColumns(), mWorkspace.currentDesktopRows());
         }
         openFolder.onOpen();
         //ADW: closing drawer, removed from onpause
