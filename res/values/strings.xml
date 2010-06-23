@@ -344,6 +344,7 @@
     <string name="pref_title_desktop_indicator_type">Indicator type</string>
     <string name="pref_summary_desktop_indicator_type">Select between different indicator styles</string>
 
+	<!-- Category titles -->
 	<string name="pref_title_system_preferences">System Preferences</string>
 	<string name="pref_summary_system_preferences">General system preferences for ADW.Launcher</string>
 	<string name="pref_title_screens_preferencecategory">Dekstop screens</string>
@@ -354,4 +355,6 @@
 	<string name="pref_title_highlights_preferencecategory">Icon highlights</string>
 	<string name="pref_title_indicators_preferencecategory">Screen indicator</string>
 
+    <string name="pref_title_system_persistent">System persistent</string>
+    <string name="pref_summary_system_persistent">Enable this to avoid system killing the launcher</string>
 </resources>

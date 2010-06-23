@@ -285,6 +285,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	boolean persist=AlmostNexusSettingsHelper.getSystemPersistent(this);
+    	setPersistent(persist);
         mInflater = getLayoutInflater();
 
         mAppWidgetManager = AppWidgetManager.getInstance(this);
@@ -1135,6 +1137,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     @Override
     public void onDestroy() {
         mDestroyed = true;
+    	setPersistent(false);
         //ADW: unregister the sharedpref listener
         getSharedPreferences("launcher.preferences.almostnexus", Context.MODE_PRIVATE)
         .unregisterOnSharedPreferenceChangeListener(this);
