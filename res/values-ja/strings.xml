@@ -270,4 +270,24 @@
     <string name="pref_title_screen_cache">スクリーンキャッシュ</string>
     <string name="pref_summary_screen_cache">スクロールを滑らかにする. たくさんのウィジェットを使用している場合はオフに.</string>
 
+    <string name="pref_title_desktop_indicator">デスクトップインジケータ</string>
+    <string name="pref_summary_desktop_indicator">デスクトップスクロールのヒントのためにインジケータを表示する</string>
+    <string name="pref_title_desktop_indicator_autohide">インジケータを自動消去</string>
+    <string name="pref_summary_desktop_indicator_autohide">少し時間がたったらインジケータを自動的に消去する</string>
+    <string name="pref_title_desktop_indicator_type">インジケータタイプ</string>
+    <string name="pref_summary_desktop_indicator_type">インジケータタイプを選択する.</string>
+
+	<!-- Category titles -->
+	<string name="pref_title_system_preferences">システム設定</string>
+	<string name="pref_summary_system_preferences">ADW.Launcherの一般的なシステム設定</string>
+	<string name="pref_title_screens_preferencecategory">デスクトップスクリーン</string>
+	<string name="pref_title_screens_layout_preferencecategory">デスクトップレイアウト</string>
+	<string name="pref_title_screens_behaviour_preferencecategory">デスクトップの挙動</string>
+	<string name="pref_title_drawer_preferencecategory">アプリケーションドロワー</string>
+	<string name="pref_title_drawer_visuals_preferencecategory">アプリケーションドロワーの見た目</string>
+	<string name="pref_title_highlights_preferencecategory">アイコンハイライト</string>
+	<string name="pref_title_indicators_preferencecategory">スクリーンインジケータ</string>
+
+    <string name="pref_title_system_persistent">システムに常駐</string>
+    <string name="pref_summary_system_persistent">システムからランチャーが終了されるのを防ぐ</string>
 </resources>

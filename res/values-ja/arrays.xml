@@ -10,16 +10,9 @@
                 <item>デフォルトデスクトップに移動/通知を開く</item>
                 <item>ドックバーを開く/閉じる</item>
        </string-array>
-
-       <!-- Do not translate. -->
-       <string-array name="menu_binding_values">
-                <item>1</item>
-                <item>2</item>
-                <item>3</item>
-                <item>4</item>
-                <item>5</item>
-                <item>6</item>
-                <item>7</item>
-                <item>8</item>
+       <string-array name="desktop_indicator_entries">
+                <item>上部にドットページ</item>
+                <item>上部にスライディングページ</item>
+                <item>下部にスライディングページ</item>
        </string-array>
 </resources>
