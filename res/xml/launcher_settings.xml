@@ -203,6 +203,25 @@
 			android:title="@string/pref_title_scrollable_widgets"
 			android:summary="@string/pref_summary_scrollable_widgets"
 			android:defaultValue="@bool/config_uiScrollableWidgets" />
+		<CheckBoxPreference android:key="uiDesktopIndicator"
+			android:title="@string/pref_title_desktop_indicator"
+			android:summary="@string/pref_summary_desktop_indicator"
+			android:defaultValue="@bool/config_desktop_indicator" />
+		<CheckBoxPreference android:key="uiDesktopIndicatorAutohide"
+			android:dependency="uiDesktopIndicator"
+			android:title="@string/pref_title_desktop_indicator_autohide"
+			android:summary="@string/pref_summary_desktop_indicator_autohide"
+			android:defaultValue="@bool/config_desktop_indicator_autohide" />
+		<ListPreference
+		  android:key="uiDesktopIndicatorType"
+		  android:dependency="uiDesktopIndicator"
+		  android:title="@string/pref_title_desktop_indicator_type"
+		  android:summary="@string/pref_summary_desktop_indicator_type"
+		  android:defaultValue="@string/config_desktop_indicator_type"
+		  android:entryValues="@array/desktop_indicator_values"
+		  android:entries="@array/desktop_indicator_entries"
+		  />
+		
 	</PreferenceScreen>
 	<PreferenceScreen
 	    android:key="xmlPreferences"

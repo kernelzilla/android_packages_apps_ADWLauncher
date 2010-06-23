@@ -336,4 +336,12 @@
     
     <string name="pref_title_screen_cache">Use screen cache</string>
     <string name="pref_summary_screen_cache">Smoother scrolling. Disable if you use TONS of widgets.</string>
+
+    <string name="pref_title_desktop_indicator">Show desktop indicator</string>
+    <string name="pref_summary_desktop_indicator">Show a visual hint on scrolling desktop</string>
+    <string name="pref_title_desktop_indicator_autohide">Autohide desktop indicator</string>
+    <string name="pref_summary_desktop_indicator_autohide">Hide the indicator after a small period</string>
+    <string name="pref_title_desktop_indicator_type">Indicator type</string>
+    <string name="pref_summary_desktop_indicator_type">Select between different indicator styles</string>
+
 </resources>

@@ -154,4 +154,11 @@
 	    android:padding="0dip"
 	    />
 </com.android.launcher.DockBar>
+<com.android.launcher.DesktopIndicator
+    android:id="@+id/desktop_indicator"
+    android:visibility="gone"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+/>
+
 </com.android.launcher.DragLayer>
