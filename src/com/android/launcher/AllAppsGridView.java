@@ -54,6 +54,7 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 	private int mBgColor=0xFF000000;
 	private boolean mDrawLabels=true;
 	private boolean mFadeDrawLabels=false;
+	private float mLabelFactor;
     public AllAppsGridView(Context context) {
         super(context);
     }
@@ -142,9 +143,12 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 		}
 		if(mStatus==OPENING){
 			mScaleFactor=easeOut(currentTime, 3.0f, 1.0f, mAnimationDuration);
+			mLabelFactor=easeOut(currentTime, -1.0f, 1.0f, mAnimationDuration);
 		}else if (mStatus==CLOSING){
 			mScaleFactor=easeIn(currentTime, 1.0f, 3.0f, mAnimationDuration);
+			mLabelFactor=easeIn(currentTime, 1.0f, -1.0f, mAnimationDuration);
 		}
+		if(mLabelFactor<0)mLabelFactor=0;
 		if(currentTime>=mAnimationDuration){
 			isAnimating=false;
 			if(mStatus==OPENING){
@@ -155,7 +159,7 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 				setVisibility(View.GONE);
 			}
 		}
-		shouldDrawLabels=mFadeDrawLabels && mDrawLabels && ((currentTime>mAnimationDuration/2 && mStatus==OPENING)||(currentTime<mAnimationDuration/2 && mStatus==CLOSING));
+		shouldDrawLabels=mFadeDrawLabels && mDrawLabels && (mStatus==OPENING||mStatus==CLOSING);
 		float porcentajeScale=1.0f;
 		if(isAnimating){
 			porcentajeScale=1.0f-((mScaleFactor-1)/3.0f);
@@ -188,11 +192,12 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 			y=child.getTop()+(distV*(mScaleFactor-1))*(mScaleFactor);
 			float width=child.getWidth()*mScaleFactor;
 			float height=(child.getHeight()-(child.getHeight()-mIconSize))*mScaleFactor;
+			if(shouldDrawLabels)child.setDrawingCacheEnabled(true);
 			if(shouldDrawLabels && child.getDrawingCache()!=null){
 				//ADW: try to manually draw labels
 				Rect rl1=new Rect(0,mIconSize,child.getDrawingCache().getWidth(),child.getDrawingCache().getHeight());
 				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+child.getDrawingCache().getWidth(),child.getTop()+child.getDrawingCache().getHeight());
-				mLabelPaint.setAlpha(mBgAlpha);
+				mLabelPaint.setAlpha((int) (mLabelFactor*255));
 				canvas.drawBitmap(child.getDrawingCache(), rl1, rl2, mLabelPaint);
 			}
 			float scale=((width)/child.getWidth());

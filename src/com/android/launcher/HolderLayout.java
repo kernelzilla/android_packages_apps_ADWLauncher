@@ -30,7 +30,7 @@ public class HolderLayout extends ViewGroup {
 	private int mAnimationDuration=800;
 	private boolean mDrawLabels=true;
 	private boolean mFadeDrawLabels=false;
-
+	private float mLabelFactor;
 	//ADW: listener to dispatch open/close animation events
 	private OnFadingListener mOnFadingListener;
 	public HolderLayout(Context context) {
@@ -166,9 +166,12 @@ public class HolderLayout extends ViewGroup {
 		}
 		if(mStatus==OPENING){
 			mScaleFactor=easeOut(currentTime, 3.0f, 1.0f, mAnimationDuration);
+			mLabelFactor=easeOut(currentTime, -1.0f, 1.0f, mAnimationDuration);
 		}else if (mStatus==CLOSING){
 			mScaleFactor=easeIn(currentTime, 1.0f, 3.0f, mAnimationDuration);
+			mLabelFactor=easeIn(currentTime, 1.0f, -1.0f, mAnimationDuration);
 		}
+		if(mLabelFactor<0)mLabelFactor=0;
 		int alpha=255;
 		if(isAnimating){
 			float porcentajeScale=1.0f-((mScaleFactor-1)/3.0f);
@@ -188,7 +191,7 @@ public class HolderLayout extends ViewGroup {
 				dispatchFadingEvent(OnFadingListener.CLOSE);
 			}
 		}
-		shouldDrawLabels=mFadeDrawLabels && mDrawLabels &&((currentTime>mAnimationDuration/2 && mStatus==OPENING)||(currentTime<mAnimationDuration/2 && mStatus==CLOSING));
+		shouldDrawLabels=mFadeDrawLabels && mDrawLabels &&(mStatus==OPENING || mStatus==CLOSING);
 		mPaint.setAlpha(alpha);
 		if(mStatus!=CLOSED){
 			super.draw(canvas);
@@ -213,11 +216,12 @@ public class HolderLayout extends ViewGroup {
 			y=child.getTop()+(distV*(mScaleFactor-1))*(mScaleFactor);
 			float width=child.getWidth()*mScaleFactor;
 			float height=(child.getHeight()-(child.getHeight()-mIconSize))*mScaleFactor;
+			if(shouldDrawLabels)child.setDrawingCacheEnabled(true);
 			if(shouldDrawLabels && child.getDrawingCache()!=null){
 				//ADW: try to manually draw labels
 				Rect rl1=new Rect(0,mIconSize,child.getDrawingCache().getWidth(),child.getDrawingCache().getHeight());
 				Rect rl2=new Rect(child.getLeft(),child.getTop()+mIconSize,child.getLeft()+child.getDrawingCache().getWidth(),child.getTop()+child.getDrawingCache().getHeight());
-				mLabelPaint.setAlpha(mPaint.getAlpha());
+				mLabelPaint.setAlpha((int) (mLabelFactor*255));
 				canvas.drawBitmap(child.getDrawingCache(), rl1, rl2, mLabelPaint);
 			}
 			float scale=((width)/child.getWidth());
