@@ -6,11 +6,13 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 public class DesktopIndicator extends ViewGroup implements AnimationListener {
@@ -49,8 +51,6 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 		case INDICATOR_TYPE_SLIDER_TOP:
 		case INDICATOR_TYPE_SLIDER_BOTTOM:
 			mIndicator=new SliderIndicator(context);
-			//int offset=((int) (getWidth()*(mCurrent/mItems)))-mIndicator.getLeft();
-			//mIndicator.offsetLeftAndRight(offset);
 			break;
 		}
 		addView(mIndicator);
@@ -69,25 +69,38 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 	}
 
 	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		// TODO Auto-generated method stub
+		int realHeight=SliderIndicator.INDICATOR_HEIGHT;
+		switch(mIndicatorType){
+		case INDICATOR_TYPE_PAGER:
+			realHeight=20;
+	        mIndicator.measure(getWidth(), realHeight);
+			break;
+		case INDICATOR_TYPE_SLIDER_BOTTOM:
+		case INDICATOR_TYPE_SLIDER_TOP:
+	        mIndicator.measure(getWidth(), realHeight);
+			break;
+		}
+		int realHeightMeasurespec=MeasureSpec.makeMeasureSpec(realHeight, MeasureSpec.EXACTLY);
+		super.onMeasure(widthMeasureSpec, realHeightMeasurespec);
+	}
+
+	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		// TODO Auto-generated method stub
 		LinearLayout.LayoutParams params;
 		switch(mIndicatorType){
 		case INDICATOR_TYPE_PAGER:
 	        params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	        mIndicator.measure(getWidth(), getHeight());
+	        mIndicator.measure(getWidth(), 20);
 	        mIndicator.setLayoutParams(params);
 	        mIndicator.layout(0, 0, getWidth(), 20);
 			break;
 		case INDICATOR_TYPE_SLIDER_BOTTOM:
-	        params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	        mIndicator.measure(getWidth(), getHeight());
-	        mIndicator.setLayoutParams(params);
-	        mIndicator.layout(0, getHeight()-SliderIndicator.INDICATOR_HEIGHT, getWidth(), getHeight());
-	        break;
 		case INDICATOR_TYPE_SLIDER_TOP:
 	        params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-	        mIndicator.measure(getWidth(), getHeight());
+	        mIndicator.measure(getWidth(), SliderIndicator.INDICATOR_HEIGHT);
 	        mIndicator.setLayoutParams(params);
 	        mIndicator.layout(0, 0, getWidth(), SliderIndicator.INDICATOR_HEIGHT);
 	        break;
@@ -103,7 +116,6 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 		case INDICATOR_TYPE_SLIDER_BOTTOM:
 		case INDICATOR_TYPE_SLIDER_TOP:
 			int offset=((int) (getWidth()*percent))-mIndicator.getLeft();
-			//mIndicator.offsetLeftAndRight(offset);
 			((SliderIndicator)mIndicator).setOffset(offset);
 			mIndicator.invalidate();
 		}
@@ -128,6 +140,13 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 	}
 	public void setType(int type){
 		if(type!=mIndicatorType){
+			FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(this.getLayoutParams());
+			if(type==INDICATOR_TYPE_SLIDER_BOTTOM){
+				lp.gravity=Gravity.BOTTOM;
+			}else{
+				lp.gravity=Gravity.TOP;
+			}
+			setLayoutParams(lp);
 			mIndicatorType=type;
 			removeView(mIndicator);
 			initIndicator(getContext());
