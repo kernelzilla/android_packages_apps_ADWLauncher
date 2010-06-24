@@ -2983,7 +2983,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			mHandleIcon.startTransition(150);
     	    mPreviousView.setVisibility(View.GONE);
     	    mNextView.setVisibility(View.GONE);	
-    	    if(mDesktopIndicator!=null)mDesktopIndicator.setVisibility(View.GONE);
+    	    if(mDesktopIndicator!=null)mDesktopIndicator.hide();
 		}
 
     }
@@ -3001,7 +3001,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 				mPreviousView.setVisibility(View.GONE);
 	    	    mNextView.setVisibility(View.GONE);
 			}
-			if(mDesktopIndicator!=null)mDesktopIndicator.setVisibility(View.VISIBLE);
+			if(mDesktopIndicator!=null)mDesktopIndicator.show();
             if(newDrawer){
     	        ((AllAppsSlidingView) mAllAppsGrid).close(animated && allowDrawerAnimations);
             }else{
