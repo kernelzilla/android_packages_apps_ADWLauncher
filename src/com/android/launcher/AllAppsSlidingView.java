@@ -1756,6 +1756,7 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
 		return mNumColumns;
 	}
 	public void setPageHorizontalMargin(int margin) {
+		if(margin!=mPageHorizontalMargin){
 			this.mPageHorizontalMargin = margin;
 			if(mAdapter!=null){
 				scrollTo(0, 0);
@@ -1769,6 +1770,7 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
 				mLayoutMode=LAYOUT_NORMAL;
 				requestLayout();
 			}
+		}
 	}
 	public void setNumColumns(int numColumns) {
 		if(mNumColumns!=numColumns){
