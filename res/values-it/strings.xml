@@ -269,4 +269,25 @@
 
     <string name="pref_title_screen_cache">Usa cache dello schermo</string>
     <string name="pref_summary_screen_cache">Scroll piu\' leggero. Disabilitare se si hanno molti widget.</string>
+
+    <string name="pref_title_desktop_indicator">Visualizza indicatori desktop</string>
+    <string name="pref_summary_desktop_indicator">Visualizza suggerimento visuale mentre si passa tra i desktop</string>
+    <string name="pref_title_desktop_indicator_autohide">Nascondi automaticamente gli indicatori del desktop</string>
+    <string name="pref_summary_desktop_indicator_autohide">Nascondi gli indicatori dopo poco tempo</string>
+    <string name="pref_title_desktop_indicator_type">Tipo di indicatore</string>
+    <string name="pref_summary_desktop_indicator_type">Scegli tra differenti stili di indicatore</string>
+
+        <!-- Category titles -->
+        <string name="pref_title_system_preferences">Preferenze di Sistema</string>
+        <string name="pref_summary_system_preferences">Preferenze generali di sistema per ADW Launcher</string>
+        <string name="pref_title_screens_preferencecategory">Schermi Desktop</string>
+        <string name="pref_title_screens_layout_preferencecategory">Layout del Desktop</string>
+        <string name="pref_title_screens_behaviour_preferencecategory">Comportamento del Dekstop</string>
+        <string name="pref_title_drawer_preferencecategory">Drawer delle Applicazioni</string>
+        <string name="pref_title_drawer_visuals_preferencecategory">Elementi visivi App Drawer</string>
+        <string name="pref_title_highlights_preferencecategory">Evidenziazione Icone</string>
+        <string name="pref_title_indicators_preferencecategory">Indicatore Schermo</string>
+
+    <string name="pref_title_system_persistent">Persistente nel sistema</string>
+    <string name="pref_summary_system_persistent">Abilitare per evitare che il sistema termini il launcher</string>
 </resources>
