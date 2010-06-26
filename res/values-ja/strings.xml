@@ -144,7 +144,13 @@
     <string name="pref_summary_ui_settings">ユーザインタフェースの設定</string>
 
     <string name="pref_title_home_button_binding">ホームボタン</string>
-    <string name="pref_summary_home_button_binding">ホームボタンを押したときの挙動を設定する</string>
+    <string name="pref_summary_home_button_binding">ホームボタンを押したときのアクションを設定する</string>
+
+    <string name="pref_title_swipedown_actions">スワイプダウンアクション</string>
+    <string name="pref_summary_swipedown_actions">スワイプダウンしたときのアクションを設定する</string>
+    
+    <string name="pref_title_swipeup_actions">スワイプアップアクション</string>
+    <string name="pref_summary_swipeup_actions">スワイプアップしたときのアクションを設定する</string>
 
     <string name="pref_title_desktop_dots">デスクトップドット</string>
     <string name="pref_summary_desktop_dots">Nexusのようなページめくりのドットを表示する</string>
