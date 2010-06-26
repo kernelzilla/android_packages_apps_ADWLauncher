@@ -5,15 +5,20 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -38,6 +43,10 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
     private static final String PREF_BACKUP_FILENAME = "adw_settings.xml";
     private static final String CONFIG_BACKUP_FILENAME = "adw_launcher.db";
     private static final String NAMESPACE = "com.android.launcher";
+    // Request codes for onResultActivity. That way we know the request donw when startActivityForResult was fired
+    private static final int REQUEST_SWIPE_DOWN_APP_CHOOSER = 0;
+    private static final int REQUEST_HOME_BINDING_APP_CHOOSER = 1;
+    private static final int REQUEST_SWIPE_UP_APP_CHOOSER = 2;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +86,14 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         zoomSpeed.setMin(300);
         DialogSeekBarPreference uiScaleAB= (DialogSeekBarPreference) findPreference("uiScaleAB");
         uiScaleAB.setMin(1);
+        // wjax. Listen for changes in those ListPreference as if their values are BINDING_APP, then an app shall be selected via startActivityForResult
+        ListPreference swipedown_action = (ListPreference) findPreference("swipedownActions");
+        swipedown_action.setOnPreferenceChangeListener(this);
+        ListPreference swipeup_action = (ListPreference) findPreference("swipeupActions");
+        swipeup_action.setOnPreferenceChangeListener(this);
+        ListPreference homebutton_binding = (ListPreference) findPreference("homeBinding");
+        homebutton_binding.setOnPreferenceChangeListener(this);
+        
         Preference donateLink = (Preference) findPreference("donatePref");
         donateLink.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
@@ -219,9 +236,91 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 			}else{
 				ab2.setEnabled(true);
 			}
+		}else if(preference.getKey().equals("swipedownActions"))
+		{
+			// lets launch app picker if the user selected to launch an app on gesture
+			if (newValue.equals(String.valueOf(Launcher.BIND_APP_LAUNCHER)))
+			{
+				Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+	            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+	
+	            Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
+	            pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent);
+	            startActivityForResult(pickIntent,REQUEST_SWIPE_DOWN_APP_CHOOSER);
+			}
+		}
+		else if(preference.getKey().equals("homeBinding"))
+		{
+			// lets launch app picker if the user selected to launch an app on gesture
+			if (newValue.equals(String.valueOf(Launcher.BIND_APP_LAUNCHER)))
+			{
+				Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+	            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+	
+	            Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
+	            pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent);
+	            startActivityForResult(pickIntent,REQUEST_HOME_BINDING_APP_CHOOSER);
+			}
+		}
+		else if(preference.getKey().equals("swipeupActions"))
+		{
+			// lets launch app picker if the user selected to launch an app on gesture
+			if (newValue.equals(String.valueOf(Launcher.BIND_APP_LAUNCHER)))
+			{
+				Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+	            mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+	
+	            Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
+	            pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent);
+	            startActivityForResult(pickIntent,REQUEST_SWIPE_UP_APP_CHOOSER);
+			}
 		}
         return true;  
 	}
+	// wjax: Get the App chosen as to be launched upon gesture completion. And store it in SharedPreferences via AlmostNexusSettingsHelper!!!
+	protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+				case REQUEST_SWIPE_DOWN_APP_CHOOSER:
+					AlmostNexusSettingsHelper.setSwipeDownAppToLaunch(this, infoFromApplicationIntent(this, data));
+				break;
+				case REQUEST_HOME_BINDING_APP_CHOOSER:
+					AlmostNexusSettingsHelper.setHomeBindingAppToLaunch(this, infoFromApplicationIntent(this, data));
+				break;
+				case REQUEST_SWIPE_UP_APP_CHOOSER:
+					AlmostNexusSettingsHelper.setSwipeUpAppToLaunch(this, infoFromApplicationIntent(this, data));
+				break;
+			}
+		}
+		
+	}
+	
+	// Extracts useful information from Intent containing app information
+	private static ApplicationInfo infoFromApplicationIntent(Context context, Intent data) {
+        ComponentName component = data.getComponent();
+        PackageManager packageManager = context.getPackageManager();
+        ActivityInfo activityInfo = null;
+        try {
+            activityInfo = packageManager.getActivityInfo(component, 0 /* no flags */);
+        } catch (NameNotFoundException e) {
+        }
+
+        if (activityInfo != null) {
+            ApplicationInfo itemInfo = new ApplicationInfo();
+            itemInfo.title = activityInfo.loadLabel(packageManager);
+            if (itemInfo.title == null) {
+                itemInfo.title = activityInfo.name;
+            }
+
+            itemInfo.setActivity(component, Intent.FLAG_ACTIVITY_NEW_TASK |
+                    Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+            itemInfo.icon = activityInfo.loadIcon(packageManager);
+            itemInfo.container = ItemInfo.NO_ID;
+
+            return itemInfo;
+        }
+        return null;
+    }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference.getKey().equals("highlights_color")) {

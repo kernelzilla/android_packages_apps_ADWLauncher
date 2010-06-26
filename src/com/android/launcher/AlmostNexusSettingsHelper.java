@@ -236,5 +236,69 @@ public final class AlmostNexusSettingsHelper {
 		boolean newD = sp.getBoolean("systemPersistent", context.getResources().getBoolean(R.bool.config_system_persistent));
 		return newD;
 	}
+	public static String getSwipeDownAppToLaunchPackageName(Context context)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("swipeDownAppToLaunchPackageName", "");
+	}
+	public static String getSwipeUpAppToLaunchPackageName(Context context)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("swipeUpAppToLaunchPackageName", "");
+	}
+	public static String getHomeBindingAppToLaunchPackageName(Context context)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("homeBindingAppToLaunchPackageName", "");
+	}
+	public static String getSwipeDownAppToLaunchName(Context context)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("swipeDownAppToLaunchName", "");
+	}
+	public static String getSwipeUpAppToLaunchName(Context context)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("swipeUpAppToLaunchName", "");
+	}
+	public static String getHomeBindingAppToLaunchName(Context context)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("homeBindingAppToLaunchName", "");
+	}
+	public static void setSwipeDownAppToLaunch(Context context, ApplicationInfo info)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+	    SharedPreferences.Editor editor = sp.edit();
+	    editor.putString("swipeDownAppToLaunchPackageName", info.intent.getComponent().getPackageName());
+	    editor.putString("swipeDownAppToLaunchName", info.intent.getComponent().getClassName());
+	    editor.commit();
+	}
+	public static void setSwipeUpAppToLaunch(Context context, ApplicationInfo info)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+	    SharedPreferences.Editor editor = sp.edit();
+	    editor.putString("swipeUpAppToLaunchPackageName", info.intent.getComponent().getPackageName());
+	    editor.putString("swipeUpAppToLaunchName", info.intent.getComponent().getClassName());
+	    editor.commit();
+	}
+	public static void setHomeBindingAppToLaunch(Context context, ApplicationInfo info)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+	    SharedPreferences.Editor editor = sp.edit();
+	    editor.putString("homeBindingAppToLaunchPackageName", info.intent.getComponent().getPackageName());
+	    editor.putString("homeBindingAppToLaunchName", info.intent.getComponent().getClassName());
+	    editor.commit();
+	}
+	public static int getSwipeDownActions(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int newD = Integer.valueOf(sp.getString("swipedownActions", context.getResources().getString(R.string.config_swipedown_actions)));
+		return newD;
+	}
+	public static int getSwipeUpActions(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int newD = Integer.valueOf(sp.getString("swipeupActions", context.getResources().getString(R.string.config_swipeup_actions)));
+		return newD;
+	}
 	
 }

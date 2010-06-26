@@ -9,17 +9,11 @@
                 <item>Ouvrir/Fermer les notifications</item>
                 <item>Aller au bureau par défaut/Ouvrir les notifications</item>
                 <item>Ouvrir/Fermer la barre de raccourcis</item>
+                <item>Open App...</item>
        </string-array>
-
-       <!-- Do not translate. -->
-       <string-array name="menu_binding_values">
-                <item>1</item>
-                <item>2</item>
-                <item>3</item>
-                <item>4</item>
-                <item>5</item>
-                <item>6</item>
-                <item>7</item>
-                <item>8</item>
+       <string-array name="desktop_indicator_entries">
+                <item>Dot paginator top</item>
+                <item>Sliding paginator top</item>
+                <item>Sliding paginator bottom</item>
        </string-array>
 </resources>

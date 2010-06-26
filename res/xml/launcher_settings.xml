@@ -143,6 +143,22 @@
 		  android:entryValues="@array/menu_binding_values"
 		  android:entries="@array/menu_binding_entries"
 		  />
+		<ListPreference
+		  android:key="swipedownActions"
+		  android:title="@string/pref_title_swipedown_actions"
+		  android:summary="@string/pref_summary_swipedown_actions"
+		  android:defaultValue="@string/config_swipedown_actions"
+		  android:entryValues="@array/menu_binding_values"
+		  android:entries="@array/menu_binding_entries"
+		/>
+		<ListPreference
+		  android:key="swipeupActions"
+		  android:title="@string/pref_title_swipeup_actions"
+		  android:summary="@string/pref_summary_swipeup_actions"
+		  android:defaultValue="@string/config_swipeup_actions"
+		  android:entryValues="@array/menu_binding_values"
+		  android:entries="@array/menu_binding_entries"
+		/>
 		<CheckBoxPreference android:title="@string/pref_title_wallpaper_hack"
 			android:defaultValue="true"
 			android:summary="@string/pref_summary_wallpaper_hack"

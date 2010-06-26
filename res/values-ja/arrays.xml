@@ -9,6 +9,7 @@
                 <item>通知を開く/閉じる</item>
                 <item>デフォルトデスクトップに移動/通知を開く</item>
                 <item>ドックバーを開く/閉じる</item>
+                <item>Open App...</item>
        </string-array>
        <string-array name="desktop_indicator_entries">
                 <item>上部にドットページ</item>

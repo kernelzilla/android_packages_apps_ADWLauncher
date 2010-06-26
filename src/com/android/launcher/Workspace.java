@@ -18,6 +18,7 @@ package com.android.launcher;
 
 import android.app.Activity;
 import android.app.WallpaperManager;
+import android.appwidget.AppWidgetHostView;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -92,6 +93,8 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 
     private final static int TOUCH_STATE_REST = 0;
     private final static int TOUCH_STATE_SCROLLING = 1;
+    private final static int TOUCH_SWIPE_DOWN_GESTURE = 2;
+    private final static int TOUCH_SWIPE_UP_GESTURE = 3;
 
     private int mTouchState = TOUCH_STATE_REST;
 
@@ -168,6 +171,8 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 	//cause of their screen sizes, so the bitmaps are... huge...
 	//And as those devices can perform pretty well without cache... let's add an option... one more...
 	private boolean mDesktopCache=true;
+    private boolean mTouchedScrollableWidget = false;
+	
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -783,6 +788,21 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
                         // Scroll if the user moved far enough along the X axis
                         mTouchState = TOUCH_STATE_SCROLLING;
                         enableChildrenCache();
+                    } else if (yMoved)
+                    {
+                    	// As x scrolling is left untouched, every gesture should start by dragging in Y axis. In fact I only consider useful, swipe up and down.
+                    	// Guess if the first Pointer where the user click belongs to where a scrollable widget is. 
+                		mTouchedScrollableWidget = isWidgetAtLocationScrollable((int)mLastMotionX,(int)mLastMotionY);
+                    	if (!mTouchedScrollableWidget)
+                    	{
+	                    	// Only y axis movement. So may be a Swipe down or up gesture
+	                    	if ((y - mLastMotionY) > 0)
+	                    		mTouchState = TOUCH_SWIPE_DOWN_GESTURE;
+	                    	else
+	                    	{
+	                    		mTouchState = TOUCH_SWIPE_UP_GESTURE;
+	                    	}
+                    	}
                     }
                     // Either way, cancel any pending longpress
                     if (mAllowLongPress) {
@@ -813,7 +833,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
 
-                if (mTouchState != TOUCH_STATE_SCROLLING) {
+            	if (mTouchState != TOUCH_STATE_SCROLLING && mTouchState != TOUCH_SWIPE_DOWN_GESTURE && mTouchState != TOUCH_SWIPE_UP_GESTURE) {
                     final CellLayout currentScreen = (CellLayout) getChildAt(mCurrentScreen);
                     if (!currentScreen.lastDownOnOccupiedCell()) {
                         getLocationOnScreen(mTempCell);
@@ -839,6 +859,42 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
          */
         return mTouchState != TOUCH_STATE_REST;
     }
+    private boolean isWidgetAtLocationScrollable(int x, int y) {
+		// will return true if widget at this position is scrollable.
+    	// Get current screen from the whole desktop
+    	CellLayout currentScreen = (CellLayout) getChildAt(mCurrentScreen);
+    	int[] cell_xy = new int[2];
+    	// Get the cell where the user started the touch event
+    	currentScreen.pointToCellExact(x, y, cell_xy);
+        int count = currentScreen.getChildCount();
+        
+        // Iterate to find which widget is located at that cell
+        // Find widget backwards from a cell does not work with (View)currentScreen.getChildAt(cell_xy[0]*currentScreen.getCountX etc etc); As the widget is positioned at the very first cell of the widgetspace
+        for (int i = 0; i < count; i++) {
+            View child = (View)currentScreen.getChildAt(i);
+            if ( child !=null)
+            {
+            	// Get Layount graphical info about this widget
+	            CellLayout.LayoutParams lp = (CellLayout.LayoutParams) child.getLayoutParams();
+	            // Calculate Cell Margins
+	            int left_cellmargin = lp.cellX;
+	            int rigth_cellmargin = lp.cellX+lp.cellHSpan;
+	            int top_cellmargin = lp.cellY;
+	            int botton_cellmargin = lp.cellY + lp.cellVSpan;
+	            // See if the cell where we touched is inside the Layout of the widget beeing analized
+	            if (cell_xy[0] >= left_cellmargin && cell_xy[0] < rigth_cellmargin && cell_xy[1] >= top_cellmargin && cell_xy[1] < botton_cellmargin)  {
+	            	try {
+		            	// Get Widget ID
+		            	int id = ((AppWidgetHostView)child).getAppWidgetId();
+		            	// Ask to WidgetSpace if the Widget identified itself when created as 'Scrollable'
+		            	return isWidgetScrollable(id);
+	            	} catch (Exception e)
+	            	{}
+	            }
+           }
+        }
+        return false;
+	}
 
     void enableChildrenCache() {
         if(mDesktopCache){
@@ -938,6 +994,12 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
                     mVelocityTracker.recycle();
                     mVelocityTracker = null;
                 }
+            } else if (mTouchState == TOUCH_SWIPE_DOWN_GESTURE )
+            {
+            	mLauncher.fireSwipeDownAction();
+            } else if (mTouchState == TOUCH_SWIPE_UP_GESTURE )
+            {
+            	mLauncher.fireSwipeUpAction();
             }
             mTouchState = TOUCH_STATE_REST;
             break;

@@ -9,5 +9,11 @@
                 <item>Öffne/Schliesse Benachrichtigungen</item>
                 <item>Zu Standardbildschirm/ Öffne Benachrichtigungen</item>
                 <item>Öffne/Schliesse Dockzeile</item>
+				<item>Open App...</item>
+       </string-array>
+       <string-array name="desktop_indicator_entries">
+                <item>Dot paginator top</item>
+                <item>Sliding paginator top</item>
+                <item>Sliding paginator bottom</item>
        </string-array>
 </resources>

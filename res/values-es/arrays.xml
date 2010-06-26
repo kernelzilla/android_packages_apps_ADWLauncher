@@ -9,17 +9,11 @@
                 <item>Abre/cierra las notificaciones</item>
                 <item>Ir al escritorio por defecto/abrir las notificaciones</item>
                 <item>Abre/cierra el DockBar</item>
+                <item>Elige una App...</item>
        </string-array>
-
-       <!-- Do not translate. -->
-       <string-array name="menu_binding_values">
-                <item>1</item>
-                <item>2</item>
-                <item>3</item>
-                <item>4</item>
-                <item>5</item>
-                <item>6</item>
-                <item>7</item>
-                <item>8</item>
+       <string-array name="desktop_indicator_entries">
+                <item>Puntitos arriba</item>
+                <item>Línea superior</item>
+                <item>Línea inferior</item>
        </string-array>
 </resources>

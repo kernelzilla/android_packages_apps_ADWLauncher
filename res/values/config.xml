@@ -27,6 +27,8 @@
     <integer name="config_drawerColumnsLandscape">4</integer>
     <integer name="config_drawerRowsLandscape">3</integer>
     <string name="config_homeBinding">3</string>
+    <string name="config_swipedown_actions">6</string>
+    <string name="config_swipeup_actions">5</string>    
     <bool name="config_drawerAnimated">true</bool>
     <!-- config_desktopScreens min value is 1, so it will add 1 to whatever value you set here -->
     <integer name="config_desktopScreens">4</integer>

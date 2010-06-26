@@ -215,6 +215,12 @@
     <string name="pref_title_home_button_binding">Home button binding</string>
     <string name="pref_summary_home_button_binding">Select action for home button binding</string>
 
+    <string name="pref_title_swipedown_actions">Swipe down actions</string>
+    <string name="pref_summary_swipedown_actions">Select action for Swipe down gesture</string>
+    
+    <string name="pref_title_swipeup_actions">Swipe up actions</string>
+    <string name="pref_summary_swipeup_actions">Select action for Swipe up gesture</string>
+
     <string name="pref_title_desktop_dots">Desktop dots</string>
     <string name="pref_summary_desktop_dots">Show/hide the nexus style pagination dots</string>
 
