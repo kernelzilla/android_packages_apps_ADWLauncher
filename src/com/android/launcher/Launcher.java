@@ -293,10 +293,12 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	 */
 	private static WallpaperIntentReceiver sWallpaperReceiver;
 	private boolean mShouldRestart=false;
+	private boolean mMessWithPersistence=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         int orientation = getResources().getConfiguration().orientation;
 		savedOrientation=orientation;
+		mMessWithPersistence=AlmostNexusSettingsHelper.getSystemPersistent(this);
     	super.onCreate(savedInstanceState);
         mInflater = getLayoutInflater();
 
@@ -567,7 +569,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         if (mBinder != null) {
             mBinder.mTerminate = true;
         }
-        setPersistent(false);
+        if(mMessWithPersistence)setPersistent(false);
         if (PROFILE_ROTATE) {
             android.os.Debug.startMethodTracing("/sdcard/launcher-rotate");
         }
@@ -3078,12 +3080,14 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 				startActivity(getIntent());
 				return true;
             }else{
-        		int currentOrientation=getResources().getConfiguration().orientation;
-        		if(currentOrientation!=savedOrientation){
-        			mShouldRestart=true;
-        			finish();
-        			startActivity(getIntent());
-        		}            	
+            	if(mMessWithPersistence){
+	        		int currentOrientation=getResources().getConfiguration().orientation;
+	        		if(currentOrientation!=savedOrientation){
+	        			mShouldRestart=true;
+	        			finish();
+	        			startActivity(getIntent());
+	        		}
+            	}
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -3429,7 +3433,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
-    	setPersistent(false);
+		if(mMessWithPersistence)setPersistent(false);
 		super.onStart();
 		//int currentOrientation=getResources().getConfiguration().orientation;
 		//if(currentOrientation!=savedOrientation){
@@ -3441,8 +3445,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	protected void onStop() {
 		if(!mShouldRestart){
 			savedOrientation=getResources().getConfiguration().orientation;
-	    	boolean persist=AlmostNexusSettingsHelper.getSystemPersistent(this);
-	    	setPersistent(persist);
+	    	if(mMessWithPersistence)setPersistent(true);
 		}
 		// TODO Auto-generated method stub
 		super.onStop();
