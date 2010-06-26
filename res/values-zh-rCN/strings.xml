@@ -62,13 +62,13 @@
     <string name="permdesc_write_settings" msgid="1098648778383349818">"允许应用程序写入主界面设置和快捷方式。"</string>
     <string name="search_hint" msgid="6974176141372467453">"谷歌搜索"</string>
     <string name="gadget_error_text" msgid="8359351016167075858">"加载小工具时出现问题"</string>
-	<!-- ADW Version Information -->
-	<string name="adw_donate">如果你喜欢我的软件，请给我买瓶啤酒吧 :-)</string>
+    <!-- ADW Version Information -->
+    <string name="adw_donate">如果你喜欢我的软件，请给我买瓶啤酒吧 :-)</string>
     
-	<!-- ADW Settings -->
-	<string name="pref_label_settings">桌面设置</string>
+    <!-- ADW Settings -->
+    <string name="pref_label_settings">桌面设置</string>
     <!-- Screen preferences -->
-	<string name="pref_title_screen_preferences">桌面设置</string>
+    <string name="pref_title_screen_preferences">桌面设置</string>
     <string name="pref_summary_screen_preferences">桌面数量，默认桌面...</string>
 
     <string name="pref_title_wallpaper_hack">壁纸优化</string>
@@ -80,7 +80,7 @@
     <string name="pref_title_hide_statusbar">隐藏状态栏</string>
     <string name="pref_summary_hide_statusbar">隐藏屏幕上方的状态栏</string>
 
-	<string name="pref_title_desktop_screens">桌面数量</string>
+    <string name="pref_title_desktop_screens">桌面数量</string>
     <string name="pref_summary_desktop_screens">选择所需的桌面数量</string>
     <string name="pref_dialog_desktop_screen">选择所需的桌面数量</string>
 
@@ -104,7 +104,7 @@
     <string name="pref_summary_zoom_effect_speed">设置托盘打开时的缩放动画速度（毫秒）</string>
     <string name="pref_dialog_zoom_effect_speed">设置托盘打开时的缩放动画速度（毫秒）</string>
 
-	<string name="pref_title_page_horizontal_margin">横向边距</string>
+    <string name="pref_title_page_horizontal_margin">横向边距</string>
     <string name="pref_summary_page_horizontal_margin">设置托盘每页之间的横向边距</string>
     <string name="pref_dialog_page_horizontal_margin">设置托盘每页之间的横向边距</string>
 
@@ -277,14 +277,17 @@
     <string name="pref_title_desktop_indicator_type">指示器类型</string>
     <string name="pref_summary_desktop_indicator_type">选择不同的指示器风格</string>
 
-	<string name="pref_title_system_preferences">系统设置</string>
-	<string name="pref_summary_system_preferences">ADW系统设置</string>
-	<string name="pref_title_screens_preferencecategory">桌面屏幕</string>
-	<string name="pref_title_screens_layout_preferencecategory">桌面布局</string>
-	<string name="pref_title_screens_behaviour_preferencecategory">桌面特性</string>
-	<string name="pref_title_drawer_preferencecategory">程序托盘</string>
-	<string name="pref_title_drawer_visuals_preferencecategory">托盘视觉效果</string>
-	<string name="pref_title_highlights_preferencecategory">图标高亮</string>
-	<string name="pref_title_indicators_preferencecategory">页面指示器</string>
+    <!-- Category titles -->
+    <string name="pref_title_system_preferences">系统设置</string>
+    <string name="pref_summary_system_preferences">ADW系统设置</string>
+    <string name="pref_title_screens_preferencecategory">桌面屏幕</string>
+    <string name="pref_title_screens_layout_preferencecategory">桌面布局</string>
+    <string name="pref_title_screens_behaviour_preferencecategory">桌面特性</string>
+    <string name="pref_title_drawer_preferencecategory">程序托盘</string>
+    <string name="pref_title_drawer_visuals_preferencecategory">托盘视觉效果</string>
+    <string name="pref_title_highlights_preferencecategory">图标高亮</string>
+    <string name="pref_title_indicators_preferencecategory">页面指示器</string>
 
+    <string name="pref_title_system_persistent">常驻内存</string>
+    <string name="pref_summary_system_persistent">禁止系统在内存不足时终止ADW</string>
 </resources>
