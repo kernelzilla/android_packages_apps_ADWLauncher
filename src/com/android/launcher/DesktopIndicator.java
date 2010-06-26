@@ -167,7 +167,11 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 				   mAnimation=AnimationUtils.loadAnimation(getContext(), R.anim.fade_out_fast);
 				   mAnimation.setAnimationListener(DesktopIndicator.this);
 			   }else{
-				   if(!mAnimation.hasEnded())mAnimation.cancel();
+				   try{
+					   //This little thing seems to be making some androids piss off
+					   if(!mAnimation.hasEnded())mAnimation.cancel();
+				   }catch (NoSuchMethodError e) {
+				   }
 			   }
 			   startAnimation(mAnimation);				   
 		   }
