@@ -132,7 +132,13 @@ public class DragLayer extends FrameLayout implements DragController {
     private int mAnimationState = ANIMATION_STATE_DONE;
 
     private InputMethodManager mInputMethodManager;
-
+    //ADW: Vars to use on fallback when the view bitmap cannot be generated
+    private int mDrawWidth;
+    private int mDrawHeight;
+    private Paint mRectPaint;
+    private static final int COLOR_NORMAL=0x66FF0000;
+    private static final int COLOR_TRASH=0xAAFF0000;
+    private boolean mDrawModeBitmap=true;
     /**
      * Used to create a new DragLayer from XML.
      *
@@ -151,7 +157,8 @@ public class DragLayer extends FrameLayout implements DragController {
         estimatedPaint.setColor(snagColor);
         estimatedPaint.setStrokeWidth(3);
         estimatedPaint.setAntiAlias(true);
-
+        mRectPaint=new Paint();
+        mRectPaint.setColor(COLOR_NORMAL);
     }
 
     public void startDrag(View v, DragSource source, Object dragInfo, int dragAction) {
@@ -193,29 +200,46 @@ public class DragLayer extends FrameLayout implements DragController {
         }
         v.buildDrawingCache();
         Bitmap viewBitmap = v.getDrawingCache();
-        int width = viewBitmap.getWidth();
-        int height = viewBitmap.getHeight();
-
-        Matrix scale = new Matrix();
-        float scaleFactor = v.getWidth();
-        scaleFactor = (scaleFactor + DRAG_SCALE) /scaleFactor;
-        scale.setScale(scaleFactor, scaleFactor);
-
-        mAnimationTo = 1.0f;
-        mAnimationFrom = 1.0f / scaleFactor;
-        mAnimationDuration = ANIMATION_SCALE_UP_DURATION;
-        mAnimationState = ANIMATION_STATE_STARTING;
-        mAnimationType = ANIMATION_TYPE_SCALE;
-
-        mDragBitmap = Bitmap.createBitmap(viewBitmap, 0, 0, width, height, scale, true);
-        v.destroyDrawingCache();
-        v.setWillNotCacheDrawing(willNotCache);
-        v.setDrawingCacheBackgroundColor(color);
-
-        final Bitmap dragBitmap = mDragBitmap;
-        mBitmapOffsetX = (dragBitmap.getWidth() - width) / 2;
-        mBitmapOffsetY = (dragBitmap.getHeight() - height) / 2;
-
+        if(viewBitmap!=null){
+        	mDrawModeBitmap=true;
+	        int width = viewBitmap.getWidth();
+	        int height = viewBitmap.getHeight();
+	
+	        Matrix scale = new Matrix();
+	        float scaleFactor = v.getWidth();
+	        scaleFactor = (scaleFactor + DRAG_SCALE) /scaleFactor;
+	        scale.setScale(scaleFactor, scaleFactor);
+	
+	        mAnimationTo = 1.0f;
+	        mAnimationFrom = 1.0f / scaleFactor;
+	        mAnimationDuration = ANIMATION_SCALE_UP_DURATION;
+	        mAnimationState = ANIMATION_STATE_STARTING;
+	        mAnimationType = ANIMATION_TYPE_SCALE;
+	
+	        mDragBitmap = Bitmap.createBitmap(viewBitmap, 0, 0, width, height, scale, true);
+	        v.destroyDrawingCache();
+	        v.setWillNotCacheDrawing(willNotCache);
+	        v.setDrawingCacheBackgroundColor(color);
+	
+	        final Bitmap dragBitmap = mDragBitmap;
+	        mBitmapOffsetX = (dragBitmap.getWidth() - width) / 2;
+	        mBitmapOffsetY = (dragBitmap.getHeight() - height) / 2;
+        }else{
+        	mDrawModeBitmap=false;
+            int width = v.getWidth();
+            int height = v.getHeight();
+            float scaleFactor = v.getWidth();
+            scaleFactor = (scaleFactor + DRAG_SCALE) /scaleFactor;
+            mDrawWidth=(int) (v.getWidth()*scaleFactor);
+            mDrawHeight=(int) (v.getHeight()*scaleFactor);
+            mAnimationTo = 1.0f;
+            mAnimationFrom = 1.0f / scaleFactor;
+            mAnimationDuration = ANIMATION_SCALE_UP_DURATION;
+            mAnimationState = ANIMATION_STATE_STARTING;
+            mAnimationType = ANIMATION_TYPE_SCALE;
+            mBitmapOffsetX = (mDrawWidth-width) / 2;
+            mBitmapOffsetY = (mDrawHeight-height) / 2;
+        }
         if (dragAction == DRAG_ACTION_MOVE) {
             v.setVisibility(GONE);
         }
@@ -243,7 +267,7 @@ public class DragLayer extends FrameLayout implements DragController {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
 
-        if (mDragging && mDragBitmap != null) {
+        if (mDragging) {
             if (mAnimationState == ANIMATION_STATE_STARTING) {
                 mAnimationStartTime = SystemClock.uptimeMillis();
                 mAnimationState = ANIMATION_STATE_RUNNING;
@@ -260,22 +284,40 @@ public class DragLayer extends FrameLayout implements DragController {
 
                 switch (mAnimationType) {
                     case ANIMATION_TYPE_SCALE:
-                        final Bitmap dragBitmap = mDragBitmap;
-                        canvas.save();
-                        canvas.translate(mScrollX + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,
-                                mScrollY + mLastMotionY - mTouchOffsetY - mBitmapOffsetY);
-                        canvas.translate((dragBitmap.getWidth() * (1.0f - value)) / 2,
-                                (dragBitmap.getHeight() * (1.0f - value)) / 2);
-                        canvas.scale(value, value);
-                        canvas.drawBitmap(dragBitmap, 0.0f, 0.0f, mDragPaint);
-                        canvas.restore();
+                        if(mDrawModeBitmap && mDragBitmap!=null){
+	                    	final Bitmap dragBitmap = mDragBitmap;
+	                        canvas.save();
+	                        canvas.translate(getScrollX() + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,
+	                                getScrollY() + mLastMotionY - mTouchOffsetY - mBitmapOffsetY);
+	                        canvas.translate((dragBitmap.getWidth() * (1.0f - value)) / 2,
+	                                (dragBitmap.getHeight() * (1.0f - value)) / 2);
+	                        canvas.scale(value, value);
+	                        canvas.drawBitmap(dragBitmap, 0.0f, 0.0f, mDragPaint);
+	                        canvas.restore();
+                        }else{
+                            canvas.save();
+                            canvas.translate(getScrollX() + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,
+                                    getScrollY() + mLastMotionY - mTouchOffsetY - mBitmapOffsetY);
+                            canvas.translate((mDrawWidth * (1.0f - value)) / 2,
+                                    (mDrawHeight * (1.0f - value)) / 2);
+                            canvas.drawRoundRect(new RectF(0, 0,mDrawWidth , mDrawHeight), 8.0f, 8.0f, mRectPaint);
+                            canvas.restore();
+                        }
                         break;
                 }
             } else {
                 // Draw actual icon being dragged
-                canvas.drawBitmap(mDragBitmap,
-                        mScrollX + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,
-                        mScrollY + mLastMotionY - mTouchOffsetY - mBitmapOffsetY, mDragPaint);
+                if(mDrawModeBitmap && mDragBitmap!=null){
+                	canvas.drawBitmap(mDragBitmap,
+                        getScrollX() + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,
+                        getScrollY() + mLastMotionY - mTouchOffsetY - mBitmapOffsetY, mDragPaint);
+                }else{
+                    canvas.save();
+                	canvas.translate(getScrollX() + mLastMotionX - mTouchOffsetX - mBitmapOffsetX,
+                            getScrollY() + mLastMotionY - mTouchOffsetY - mBitmapOffsetY);
+                	canvas.drawRoundRect(new RectF(0, 0,mDrawWidth , mDrawHeight), 8.0f, 8.0f, mRectPaint);
+                	canvas.restore();
+                }
             }
         }
     }
@@ -364,10 +406,16 @@ public class DragLayer extends FrameLayout implements DragController {
             int left = (int) (scrollX + mLastMotionX - touchX - offsetX);
             int top = (int) (scrollY + mLastMotionY - touchY - offsetY);
 
-            final Bitmap dragBitmap = mDragBitmap;
-            final int width = dragBitmap.getWidth();
-            final int height = dragBitmap.getHeight();
-
+            int width;
+            int height;
+            if(mDrawModeBitmap && mDragBitmap!=null){
+	            final Bitmap dragBitmap = mDragBitmap;
+	            width = dragBitmap.getWidth();
+	            height = dragBitmap.getHeight();
+            }else{
+                width = mDrawWidth;
+                height = mDrawHeight;            	
+            }
             final Rect rect = mRect;
             rect.set(left - 1, top - 1, left + width + 1, top + height + 1);
 
@@ -411,10 +459,12 @@ public class DragLayer extends FrameLayout implements DragController {
                 final boolean inRegion = region.contains(ev.getRawX(), ev.getRawY());
                 if (!mEnteredRegion && inRegion) {
                     mDragPaint = mTrashPaint;
+                    mRectPaint.setColor(COLOR_TRASH);
                     mEnteredRegion = true;
                     inDragRegion = true;
                 } else if (mEnteredRegion && !inRegion) {
                     mDragPaint = null;
+                    mRectPaint.setColor(COLOR_NORMAL);
                     mEnteredRegion = false;
                 }
             }
