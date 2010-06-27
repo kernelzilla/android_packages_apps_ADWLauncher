@@ -306,7 +306,7 @@
     <string name="message_dialog_import_config">Restauration de la configuration des bureaux ? L\'application sera redémarrée.</string>
     <string name="dbfile_import_dialog">Restauration de la configuration des bureaux...</string>
     <string name="dbfile_not_found">Fichier de configuration non trouvé !</string>
-    <string name="dbfile_not_readable">Le fichier de configuration existe, mais n'est pas accessible.</string>
+    <string name="dbfile_not_readable">Le fichier de configuration existe, mais n\'est pas accessible.</string>
     <string name="dbfile_import_success">La configuration des bureaux a été restaurée !</string>
     <string name="dbfile_import_error">Erreur lors de la restauration de la configuration des bureaux !</string>
 	<!--  Desktop columns/Rows -->
