@@ -2435,18 +2435,22 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	            }
             } else {
                 if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
-                	Log.d("FROYOOOOOOOO","EXTERNAL AVAILABLE");
+                	Log.d("FROYO","EXTERNAL AVAILABLE");
                      String packages[] = intent.getStringArrayExtra(
                              Intent.EXTRA_CHANGED_PACKAGE_LIST);
-                 	Log.d("FROYOOOOOOOO","packages="+packages.toString());
+                 	Log.d("FROYO","packages="+packages.toString());
                      if (packages == null || packages.length == 0) {
                          return;
+                     }else{
+                    	 for(int i=0;i<packages.length;i++){
+                    		 Log.d("FROYO", "try to load package:"+packages[i]);
+                    		 sModel.addPackage(Launcher.this, packages[i]);
+                    	 }
                      }
                      //synchronized (this) {
                          //mAllAppsLoaded = mWorkspaceLoaded = false;
                      //}
                      //startLoader(context, false);
-                     startLoaders();
                 } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
                      String packages[] = intent.getStringArrayExtra(
                              Intent.EXTRA_CHANGED_PACKAGE_LIST);
@@ -2454,12 +2458,17 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                  	Log.d("FROYOOOOOOOO","packages="+packages.toString());
                      if (packages == null || packages.length == 0) {
                          return;
+                     }else{
+                    	 for(int i=0;i<packages.length;i++){
+                    		 Log.d("FROYO", "try to remove package:"+packages[i]);
+                    		 sModel.removePackage(Launcher.this, packages[i]);
+                    	 }
                      }
                      //synchronized (this) {
                          //mAllAppsLoaded = mWorkspaceLoaded = false;
                      //}
                      //startLoader(context, false);
-                     startLoaders();
+                     //startLoaders();
                 }
             }
         }
