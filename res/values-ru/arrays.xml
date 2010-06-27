@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
-                <item>Показать р.стол по умолчанию</item>
-                <item>Р.стол по умолчанию/просмотр р.столов</item>
-                <item>Показать просмотр р.столов</item>
-                <item>Открыть/Закрыть меню приложений</item>
-                <item>Показать/Скрыть строку статуса</item>
-                <item>Показать/Скрыть уведомления</item>
-                <item>Р.стол по умолчанию/Открыть уведомления</item>
-                <item>Открыть/Закрыть выдвижной ящик</item>
-                <item>Open App...</item>
+                <item>рабочий стол по умолчанию</item>
+                <item>рабочий стол по умолчанию/обзор</item>
+                <item>обзор</item>
+                <item>открыть/закрыть главное меню</item>
+                <item>скрыть/показать строку статуса</item>
+                <item>открыть/закрыть уведомления</item>
+                <item>рабочий стол по умолчанию/уведомления</item>
+                <item>открыть/закрыть выдвижную панель</item>
+                <item>открыть приложение...</item>
        </string-array>
        <string-array name="desktop_indicator_entries">
-                <item>Dot paginator top</item>
-                <item>Sliding paginator top</item>
-                <item>Sliding paginator bottom</item>
+                <item>точки рабочих столов вверху</item>
+                <item>полоска вверху</item>
+                <item>полоска внизу</item>
        </string-array>
 </resources>

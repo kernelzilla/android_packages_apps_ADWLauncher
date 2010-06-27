@@ -31,9 +31,9 @@
     <!-- Button label on Wallpaper Gallery screen; user selects this button to set a specific wallpaper -->
     <string name="wallpaper_instructions">Установить обои</string>
     <!-- Option in "Select wallpaper from" dialog box -->
-    <string name="pick_wallpaper">Фотоальбом Обои</string>
+    <string name="pick_wallpaper">Галеря "Обои"</string>
     <!-- Displayed when user selects a shortcut for an app that was uninstalled -->
-    <string name="activity_not_found">Приложение не установлено</string>
+    <string name="activity_not_found">Приложение не установленно</string>
     <!-- List item for configuring the current wallpaper -->
     <string name="configure_wallpaper">Настроить...</string>
 
@@ -67,15 +67,15 @@
     <!-- Options in "Add to Home" dialog box; Title of the group containing the list of apps that can set the wallpaper-->
     <string name="group_wallpapers">Обои</string>
     <!-- Options in "Add to Home" dialog box; Name of the Folder widget-->
-    <string name="add_folder">Папки</string>
+    <string name="add_folder">Папка</string>
     <!-- Options in "Add to Home" dialog box; Name of the Clock widget-->
     <string name="add_clock">Часы</string>
     <!-- Options in "Add to Home" dialog box; Name of the Picture frame widget-->
     <string name="add_photo_frame">Фоторамка</string>
     <!-- Options in "Add to Home" dialog box; Name of the global search widget-->
-    <string name="add_search">Строка поиска</string>
+    <string name="add_search">Поиск</string>
     <!-- Error message when user has filled a home screen, possibly not used -->
-    <string name="out_of_space">На этом р.столе нет свободного места</string>
+    <string name="out_of_space">Не хватает места</string>
     <!-- Message displayed when a shortcut is created by an external application -->
     <string name="shortcut_installed">Ярлык \"<xliff:g id="name" example="Browser">%s</xliff:g>\" создан</string>
     <!-- Message displayed when a shortcut is uninstalled by an external application -->
@@ -93,7 +93,7 @@
     <!-- Verb, menu item used to add an item on the desktop -->
     <string name="menu_add">Добавить</string>
     <!-- Noun, menu item used to set the desktop's wallpaper -->
-    <string name="menu_wallpaper">Обои</string>
+    <string name="menu_wallpaper">Выбрать обои</string>
     <!-- Verb, menu item used to initiate global search -->
     <string name="menu_search">Поиск</string>
     <!-- Noun, menu item used to bring down the notifications shade -->
@@ -101,18 +101,22 @@
     <!-- Noun, menu item used to show the gestures settings -->
     <string name="menu_gestures">Жесты</string>
     <!-- Noun, menu item used to show the system settings -->
-    <string name="menu_settings">Настройки</string>
+    <string name="menu_settings">Системные настройки</string>
     <string name="menu_adw_settings">Настройки ADW</string>
 
     <!-- Permissions: -->
-    <string name="permlab_install_shortcut">Установка ярлыков</string>
-    <string name="permdesc_install_shortcut">Добавление ярлыков на домашний экран без разрзрешения пользователя</string>
+    <string name="permlab_install_shortcut">Создание ярлыков</string>
+    <string name="permdesc_install_shortcut">Приложение может создавать ярлыки
+        без вмешательства пользователя</string>
     <string name="permlab_uninstall_shortcut">Удаление ярлыков</string>
-    <string name="permdesc_uninstall_shortcut">Удаление ярлыков без разрешения пользователя</string>
-    <string name="permlab_read_settings">Читать настройки домашнего экрана и ярлыков</string>
-    <string name="permdesc_read_settings">Разрешение приложению на чтение настроек и ярлыков домашнего экрана</string>
-    <string name="permlab_write_settings">Запись настроек и ярлыков домашнего экрана</string>
-    <string name="permdesc_write_settings">Разрешение на изменение настроек и ярлыков домашнего экрана</string>
+    <string name="permdesc_uninstall_shortcut">Приложение может удалять ярлыки
+        без вмешательства пользователя</string>
+    <string name="permlab_read_settings">Чтение настроек домашнего экрана</string>
+    <string name="permdesc_read_settings">Приложение может считывать настройки ярылков
+        и домашнего экрана</string>
+    <string name="permlab_write_settings">Запист настроек домашнего экрана</string>
+    <string name="permdesc_write_settings">Приложение может изменять настройки ярлыков
+        и домашнего экрана</string>
 
     <!-- Widgets: -->
     <skip />    
@@ -123,206 +127,238 @@
          GoogleSearch/res/values/strings.xml -->
     <string name="search_hint">Поиск Google</string>
 
-		 <!-- Text to show user in place of a gadget when we can't display it properly -->
+    <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Ошибка загрузки виджета</string>
     <!-- ADW Version Information -->
-    <string name="adw_donate">Если вам нравится наша работа вы можете купить нам кофе или пива :-)</string>
-
+    <string name="adw_donate">Если Вам нравится наша работа, купите нам немного кофе</string>
     <!-- ADW Settings -->
-    <string name="pref_label_settings">Настройки AlmostNexus</string>
+    <string name="pref_label_settings">Настройки ADW</string>
     <!-- Screen preferences -->
     <string name="pref_title_screen_preferences">Настройки домашнего экрана</string>
-    <string name="pref_summary_screen_preferences">Количество р.столов, ориентация и т.д.</string>
+    <string name="pref_summary_screen_preferences">Количество рабочих столов и так далее</string>
 
-    <string name="pref_title_wallpaper_hack">Плавная прокрутка</string>
-    <string name="pref_summary_wallpaper_hack">Выключите если возникает к-л ошибка</string>
+    <string name="pref_title_wallpaper_hack">Плавная прокрутка рабочих столов</string>
+    <string name="pref_summary_wallpaper_hack">Отключить если возникает ошибка</string>
 
     <string name="pref_title_orientation_sensor">Ориентация экрана</string>
-    <string name="pref_summary_orientation_sensor">Автоматически разворачивать экран при повороте телефона</string>
+    <string name="pref_summary_orientation_sensor">поворачивать при повороте телефона</string>
 
     <string name="pref_title_hide_statusbar">Скрывать строку статуса</string>
-    <string name="pref_summary_hide_statusbar">Скрывать строку статуса</string>
+    <string name="pref_summary_hide_statusbar">скрывает строку статуса</string>
 
-    <string name="pref_title_desktop_screens">Р.столы домашнего экрана</string>
-    <string name="pref_summary_desktop_screens">Установите количество р.столов на домашнем экране</string>
-    <string name="pref_dialog_desktop_screen">Установите количество р.столов на домашнем экране</string>
+    <string name="pref_title_desktop_screens">Рабочие столы</string>
+    <string name="pref_summary_desktop_screens">Количество на домашнем экране</string>
+    <string name="pref_dialog_desktop_screen">Выберите количество рабочих столов</string>
 
-    <string name="pref_title_default_screen">Р.стол по умолчанию</string>
-    <string name="pref_summary_default_screen">Установите р.стол по умолчанию</string>
-    <string name="pref_dialog_default_screen">Установите номер р.стола по умолчанию</string>
+    <string name="pref_title_default_screen">Рабочий стол по умолчанию</string>
+    <string name="pref_summary_default_screen">Номер рабочего стола по умолчанию</string>
+    <string name="pref_dialog_default_screen">Укажите номер рабочего стола по умолчанию</string>
 
-    <string name="pref_title_desktop_scrolling_speed">Скорость прокрутки домашнего экрана</string>
-    <string name="pref_summary_desktop_scrolling_speed">Установка скорости прокрутки р.столов домашнего экрана</string>
-    <string name="pref_dialog_desktop_scrolling_speed">Чем меньше значение, тем быстрей прокрутка</string>
+    <string name="pref_title_desktop_scrolling_speed">Скорость прокрутки</string>
+    <string name="pref_summary_desktop_scrolling_speed">рабочих столов</string>
+    <string name="pref_dialog_desktop_scrolling_speed">Чем меньше значение, тем выше скорость</string>
 
-    <string name="pref_title_desktop_overshoot">Эффект выход за границы экрана</string>
-    <string name="pref_summary_desktop_overshoot">Разрешить вылет за границы для первого/последнего р.стола</string>
-    <string name="pref_dialog_desktop_overshoot">Установите 0 для выключения эффекта</string>
+    <string name="pref_title_desktop_overshoot">Эффект вылета за границу</string>
+    <string name="pref_summary_desktop_overshoot">на первом или последнем рабочем столе при прокрутке</string>
+    <string name="pref_dialog_desktop_overshoot">Значение 0 выключает эффект</string>
 
     <!-- Drawer Settings -->
-    <string name="pref_title_drawer_settings">Настройки меню приложений</string>
-    <string name="pref_summary_drawer_settings">Настройка меню приложений</string>
+    <string name="pref_title_drawer_settings">Настройки главного меню</string>
+    <string name="pref_summary_drawer_settings">количество строк, колонок, эффекты</string>
 
-    <string name="pref_title_zoom_effect_speed">Скорость эффекта увеличения</string>
-    <string name="pref_summary_zoom_effect_speed">Установка скрости эффекта</string>
-    <string name="pref_dialog_zoom_effect_speed">Задайте скрость эффекта (мс)</string>
+    <string name="pref_title_zoom_effect_speed">Длительность анимации</string>
+    <string name="pref_summary_zoom_effect_speed">главного меню в милисекундах</string>
+    <string name="pref_dialog_zoom_effect_speed">Установите длительность эффекта в милисекундах</string>
 
-    <string name="pref_title_new_drawer">Горизонтальное меню приложений</string>
-    <string name="pref_summary_new_drawer">Стиль меню приложений как в Galaxy S</string>
+    <string name="pref_title_page_horizontal_margin">Поля</string>
+    <string name="pref_summary_page_horizontal_margin">между каждой страницой главного меню</string>
+    <string name="pref_dialog_page_horizontal_margin">Установите размер поля</string>
 
-    <string name="pref_title_animated_drawer">Анимация меню приложений</string>
-    <string name="pref_summary_animated_drawer">Установить для включения анимации меню приложений</string>
+    <string name="pref_title_new_drawer">Горизонтальное представление</string>
+    <string name="pref_summary_new_drawer">главного меню как в Samsung Galaxy S</string>
 
-    <string name="pref_title_drawer_columns_portrait">Колонки в портретной раскладке</string>
-    <string name="pref_summary_drawer_columns_portrait">Колонок меню приложений в портретной раскладке</string>
-    <string name="pref_dialog_drawer_columns_portrait">Установите количество колонок меню приложений в портретной раскладке</string>
+    <string name="pref_title_animated_drawer">Анимация появления</string>
+    <string name="pref_summary_animated_drawer">главного меню</string>
 
-    <string name="pref_title_drawer_rows_portrait">Строки в портретной раскладке</string>
-    <string name="pref_summary_drawer_rows_portrait">Строк меню приложений в портретной раскладке</string>
-    <string name="pref_dialog_drawer_rows_portrait">Установите количество строк меню приложений в портретной раскладке</string>
+    <string name="pref_title_drawer_columns_portrait">Количество колонок</string>
+    <string name="pref_summary_drawer_columns_portrait">для отображения в портретном режиме</string>
+    <string name="pref_dialog_drawer_columns_portrait">Установите количество колонок</string>
 
-    <string name="pref_title_drawer_columns_landscape">Колонки в альбомной раскладке</string>
-    <string name="pref_summary_drawer_columns_landscape">Колонок меню приложений в альбомной раскладке</string>
-    <string name="pref_dialog_drawer_columns_landscape">Установите количество колонок меню приложений в альбомной раскладке</string>
+    <string name="pref_title_drawer_rows_portrait">Количество строк</string>
+    <string name="pref_summary_drawer_rows_portrait">для отображения в портретном режиме</string>
+    <string name="pref_dialog_drawer_rows_portrait">Установите количество строк</string>
 
-    <string name="pref_title_drawer_rows_landscape">Строки в альбомной раскладке</string>
-    <string name="pref_summary_drawer_rows_landscape">Строк меню приложений в альбомной раскладке</string>
-    <string name="pref_dialog_drawer_rows_landscape">Установите количество строк меню приложений в альбомной раскладке</string>
+    <string name="pref_title_drawer_columns_landscape">Количество колонок</string>
+    <string name="pref_summary_drawer_columns_landscape">для отображения в альбомном режиме</string>
+    <string name="pref_dialog_drawer_columns_landscape">Установите количество колонок</string>
+
+    <string name="pref_title_drawer_rows_landscape">Количество строк</string>
+    <string name="pref_summary_drawer_rows_landscape">для отображения в альбомном режиме</string>
+    <string name="pref_dialog_drawer_rows_landscape">Установите количество строк</string>
 
     <!-- Previews preferences -->
-    <string name="pref_title_previews_preferences">Просмотр р.столов</string>
-    <string name="pref_summary_previews_preferences">Параметры просмотра р.столов</string>
+    <string name="pref_title_previews_preferences">Обзор рабочих столов</string>
+    <string name="pref_summary_previews_preferences">в стиле HTC Sense (Expose)</string>
 
-    <string name="pref_title_sense_previews">Просмотр как в HTC Sense</string>
-    <string name="pref_summary_sense_previews">Просмотр р.столов как в HTC Sense (Expose)</string>
+    <string name="pref_title_sense_previews">Использовать обзор</string>
+    <string name="pref_summary_sense_previews">рабочих столов в стиле Sense</string>
 
-    <string name="pref_title_clean_screen_mode">Режим очистки экрана</string>
-    <string name="pref_summary_clean_screen_mode">Скрывать ярлыки/виджеты д.экрана в режиме просмотра</string>
+    <string name="pref_title_clean_screen_mode">Скрыть ярлыки/виджеты</string>
+    <string name="pref_summary_clean_screen_mode">на заднем фоне в режиме просмотра</string>
 
     <!-- Button preferences -->
     <string name="pref_title_ui_settings">Настройки интерфейса</string>
-    <string name="pref_summary_ui_settings">Вкл/Выкл элементов интерфейса</string>
+    <string name="pref_summary_ui_settings">Включение выключение элементов</string>
 
-    <string name="pref_title_home_button_binding">Функция кнопки "Домой"</string>
-    <string name="pref_summary_home_button_binding">Установите действие по нажатию кнопки "Домой"</string>
+    <string name="pref_title_home_button_binding">Кнопка "Домой"</string>
+    <string name="pref_summary_home_button_binding">Выбор действия при нажатии</string>
+    
+    <string name="pref_title_swipedown_actions">Жест "Вниз"</string>
+    <string name="pref_summary_swipedown_actions">Выбор действия при жесте</string>
+    
+    <string name="pref_title_swipeup_actions">Жест "Вверх"</string>
+    <string name="pref_summary_swipeup_actions">Выбор действия при жесте</string>
 
-    <string name="pref_title_desktop_dots">Точки р.столов</string>
-    <string name="pref_summary_desktop_dots">Спрятать/показать точки р.столов на домашнем экране в стиле Nexus</string>
+    <string name="pref_title_desktop_dots">Отображение точек</string>
+    <string name="pref_summary_desktop_dots">для индикации рабочих столов</string>
 
-    <string name="pref_title_dockbar">Выдвижной ящик</string>
-    <string name="pref_summary_dockbar">Разрешить/Запретить выдвижной ящик для ярлыков</string>
+    <string name="pref_title_dockbar">Выдвижная панель</string>
+    <string name="pref_summary_dockbar">для дополнительных ярлыков на рабочем столе</string>
 
-    <string name="pref_title_closing_dockbar">Закрывать выдвижной ящик</string>
-    <string name="pref_summary_closing_dockbar">Закрывать выдвижной ящик после запуска приложения</string>
+    <string name="pref_title_closing_dockbar">Автозакрытие выдвижной панели</string>
+    <string name="pref_summary_closing_dockbar">при запуске прилолжения</string>
 
     <string name="pref_title_lab">LAB</string>
-    <string name="pref_summary_lab">Разрешить/Запретить левую настриваемую кнопку</string>
+    <string name="pref_summary_lab">левая настраеваемая кнопка</string>
 
     <string name="pref_title_rab">RAB</string>
-    <string name="pref_summary_rab">Разрешить/Запретить правую настриваемую кнопку</string>
+    <string name="pref_summary_rab">правая настраеваемая кнопка</string>
     
-    <string name="pref_title_ab2">Дополнительные настраиваемые кнопки</string>
-    <string name="pref_summary_ab2">Требует выключенния точек р.столов</string>
+    <string name="pref_title_ab2">Дополнительные настраеваемые кнопки</string>
+    <string name="pref_summary_ab2">отображаются при выключенных точках</string>
 
-    <string name="pref_title_tint_ab">Обесцвечиание настраиваемых кнопок</string>
-    <string name="pref_summary_tint_ab">Разрешить/Запретить обесцвечивание иконок настраиваемых кнопок</string>
+    <string name="pref_title_tint_ab">Обесцвечивание иконок</string>
+    <string name="pref_summary_tint_ab">настраиваемых кнопок</string>
 
-    <string name="pref_title_ab_scale_factor">Размер иконок настраиваемых кнопок</string>
-    <string name="pref_summary_ab_scale_factor">Установите размер иконок настраиваемых кнопок</string>
-    <string name="pref_dialog_ab_scale_factor">Установите размер иконок настраиваемых кнопок</string>
+    <string name="pref_title_ab_scale_factor">Размер иконок</string>
+    <string name="pref_summary_ab_scale_factor">настраевоемых кнопок</string>
+    <string name="pref_dialog_ab_scale_factor">Установите размер</string>
 
-    <string name="pref_title_hide_allapps_ab">Фон кнопки меню приложений</string>
-    <string name="pref_summary_hide_allapps_ab">Убрать фон кнопки меню приложений</string>
+    <string name="pref_title_hide_allapps_ab">Скрыть фон</string>
+    <string name="pref_summary_hide_allapps_ab">кнопки вызова главного меню</string>
 
-    <string name="pref_title_hide_ab_bg">Фон настраиваемых кнопок</string>
-    <string name="pref_summary_hide_ab_bg">Убрать фон настраиваемых кнопок</string>
+    <string name="pref_title_hide_ab_bg">Скрыть фон</string>
+    <string name="pref_summary_hide_ab_bg">настраеваемых кнопок</string>
 
-    <string name="pref_title_hide_icon_labels">Убрать подписи иконок</string>
-    <string name="pref_summary_hide_icon_labels">Убрать подписи иконок домашнего экрана</string>
+    <string name="pref_title_hide_icon_labels">Скрыть подписи иконок</string>
+    <string name="pref_summary_hide_icon_labels">на домашнем экране</string>
 
-    <string name="pref_title_build_info">Информация о билде</string>
+    <string name="pref_title_build_info">Build Information</string>
     <string name="pref_title_adw_version">ADW Version</string>
 
-    <string name="pref_title_icon_highlights">Цвет курсора нажатия</string>
-    <string name="pref_summary_icon_highlights">Задайте цвет для нажатия на иконку</string>
-    <string name="pref_title_icon_highlights_focus">Цвет курсора выделения</string>
-    <string name="pref_summary_icon_highlights_focus">Задайте цвет выделения иконки</string>
-    <string name="pref_title_new_selectors">Использовать новый курсор</string>
-    <string name="pref_summary_new_selectors">Отключите если нужен старый стиль курсора</string>
-    <string name="pref_title_drawer_color">Цвет фона меню приложений</string>
-    <string name="pref_summary_drawer_color">Задайте цвет фона меню приложений</string>
+    <string name="pref_title_icon_highlights">Цвет курсора нажатой иконки</string>
+    <string name="pref_summary_icon_highlights">Установите цвет</string>
+    <string name="pref_title_icon_highlights_focus">Цвет курсора</string>
+    <string name="pref_summary_icon_highlights_focus">Установите цвет</string>
+    <string name="pref_title_new_selectors">Курсор ADW</string>
+    <string name="pref_summary_new_selectors">Отключите для использования стандартного</string>
+    <string name="pref_title_drawer_color">Цвет фона</string>
+    <string name="pref_summary_drawer_color">главного меню</string>
 
-    <string name="pref_dialog_title_color_picker">Выбрать цвет</string>
-    <string name="pref_dialog_message_color_picker">Нажать на круг в центре для подтверждения\nНажать "Назад" для отмены</string>
-    <string name="pref_dialog_color_picker_alpha">непрозрачность</string>
-    <string name="pref_message_restart_normal">Изменение этого параметра приведет к перезапуску ADW.Launcher</string>
-    <string name="pref_message_restart_froyo">Изменение этого параметра приведет к перезапуску ADW.Launcher</string>
-    <string name="drop_to_uninstall">Отпустить для деинсталяции</string>
+    <string name="pref_dialog_title_color_picker">Выбор цвета</string>
+    <string name="pref_dialog_message_color_picker">Нажмите на круг в центре для выбора цвета</string>
+    <string name="pref_dialog_color_picker_alpha">Непрозрачность</string>
+    <string name="pref_message_restart_normal">Изменение параметра требует перезапуска ADW</string>
+    <string name="pref_message_restart_froyo">Изменение параметра требует перезапуска ADW</string>
+    <string name="drop_to_uninstall">Отпустите для деинсталяции</string>
     
-    <string name="pref_title_import_export">Резервное копирование/востановление</string>
+    <string name="pref_title_import_export">Резервное копирование настроек</string>
     <string name="pref_title_xml">Настройки ADW</string>
-    <string name="pref_title_xml_import">Восстановить настройки ADW</string>
+    <string name="pref_title_xml_import">Восстановить настройки</string>
     <string name="pref_summary_xml_import">Восстановить из /sdcard/adw_settings.xml</string>
-    <string name="pref_title_xml_export">Сохранить настройки ADW</string>
+    <string name="pref_title_xml_export">Сохранить настройки</string>
     <string name="pref_summary_xml_export">Сохранить в /sdcard/adw_settings.xml</string>
+    
     <string name="pref_title_db">Конфигурация домашнего экрана</string>
-    <string name="pref_title_db_import">Восстановить конфигурацию домашнего экрана</string>
+    <string name="pref_title_db_import">Восстановить конфигурацию</string>
     <string name="pref_summary_db_import">Восстановить из /sdcard/adw_launcher.db</string>
-    <string name="pref_title_db_export">Сохранить конфигурацию домашнего экрана</string>
+    <string name="pref_title_db_export">Сохранить конфигурацию</string>
     <string name="pref_summary_db_export">Сохранить в /sdcard/adw_launcher.db</string>
     
-    <string name="title_dialog_xml">Настройки ADW.Launcher</string>
-    <string name="import_export_sdcard_unmounted">SD карта не смонтирована!</string>
+    <string name="title_dialog_xml">Настройки ADW Launcher</string>
+    <string name="import_export_sdcard_unmounted">Карта SD не установлена</string>
     
     <!-- XML Import/Export strings -->
-    <string name="message_dialog_export">Сохранить настройки ADW? Ранее созданные файлы будут перезаписаны</string>
-    <string name="xml_export_dialog">Сохранение настроек...</string>
-    <string name="xml_export_success">Настройки ADW успешно сохранены!</string>
-    <string name="xml_export_error">Ошибка сохранения настроек ADW!</string>    
+    <string name="message_dialog_export">Сохранить настройки? Предыдущая копия будет потеряна</string>
+    <string name="xml_export_dialog">Создание резервной копии настроек...</string>
+    <string name="xml_export_success">Резервная копия создана успешно!</string>
+    <string name="xml_export_error">Ошибка создания резервной копии!</string>    
     
-    <string name="message_dialog_import">Восстановить настройки ADW? ADW.Launcher будет перезапущен</string>
-    <string name="xml_import_dialog">Восстановление настроек ADW...</string>  
-    <string name="xml_file_not_found">Резервная копия настроек не найдена!</string>
-    <string name="xml_not_readable">Резервная копия настроек существует, но не может быть прочитана!</string>
-    <string name="xml_import_success">Настройки ADW успешно восстановленны!</string>
-    <string name="xml_import_error">Ошибка восстановления настроек ADW!</string>
+    <string name="message_dialog_import">Восстановить резервную копию настроек? Потребуется перезапуск ADW</string>
+    <string name="xml_import_dialog">Восстановление из резервной копии...</string>  
+    <string name="xml_file_not_found">Резервная копия не найдена!</string>
+    <string name="xml_not_readable">Резервная копия найдена, но не может быть прочитана!</string>
+    <string name="xml_import_success">Резервная копия восстановлена успешно!</string>
+    <string name="xml_import_error">Ошибка восстановления из резервной копии!</string>
     
     <!-- Config Import/Export strings -->
-    <string name="message_dialog_export_config">Сохранить конфигурацию домашнего экрана? Ранее созданные файлы будут перезаписаны</string>
-    <string name="dbfile_export_dialog">Сохранение конфигурации...</string>
-    <string name="dbfile_export_success">Конфигурация домашнего экрана успешно сохранена!</string>
-    <string name="dbfile_export_error">Ошибка сохранения конфигурации!</string>
-    <string name="message_dialog_import_config">Восстановить конфигурацию домашнего экрана? ADW.Launcher будет перезапущен</string>
-    <string name="dbfile_import_dialog">Востановление конфигурации домашнего экрана...</string>
-    <string name="dbfile_not_found">Файл конфигурации не найден!</string>
-    <string name="dbfile_not_readable">Файл конфигурации существует, но не может быть прочитан!</string>
-    <string name="dbfile_import_success">Конфигурация успешно восстановлена!</string>
-    <string name="dbfile_import_error">Ошибка восстановления конфигурации!</string>
+    <string name="message_dialog_export_config">Сохранить конфигурацию? Предыдущая копия будет потеряна.</string>
+    <string name="dbfile_export_dialog">Создание резервной копии настроек...</string>
+    <string name="dbfile_export_success">Резервная копия создана успешно!</string>
+    <string name="dbfile_export_error">Ошибка создания резервной копии!</string>
+    
+    <string name="message_dialog_import_config">Восстановить резервную копию конфигурации? Потребуется перезапуск ADW</string>
+    <string name="dbfile_import_dialog">Восстановление из резервной копии...</string>
+    <string name="dbfile_not_found">Резервная копия не найдена!</string>
+    <string name="dbfile_not_readable">Резервная копия найдена, но не может быть прочитана!</string>
+    <string name="dbfile_import_success">Резервная копия восстановлена успешно!</string>
+    <string name="dbfile_import_error">Ошибка восстановления из резервной копии!</string>
 	<!--  Desktop columns/Rows -->
     <string name="pref_title_desktop_columns">Колонки домашнего экрана</string>
-    <string name="pref_summary_desktop_columns">Укажите количество колонок домашнего экрана</string>
-    <string name="pref_dialog_desktop_columns">Укажите количество колонок домашнего экрана</string>
+    <string name="pref_summary_desktop_columns">Установка количества колонок</string>
+    <string name="pref_dialog_desktop_columns">Установите количество</string>
 
     <string name="pref_title_desktop_rows">Строки домашнего экрана</string>
-    <string name="pref_summary_desktop_rows">Укажите количество строк домашнего экрана</string>
-    <string name="pref_dialog_desktop_rows">Укажите количество строк домашнего экрана</string>
+    <string name="pref_summary_desktop_rows">Установка колчиста строк</string>
+    <string name="pref_dialog_desktop_rows">Установите количество</string>
     
-    <string name="pref_title_autosize_icons">Автомасштабирование</string>
-    <string name="pref_summary_autosize_icons">Пытаться растянуть иконки/виджеты</string>
+    <string name="pref_title_autosize_icons">Автоматичесое массштабирование</string>
+    <string name="pref_summary_autosize_icons">иконок и виджетов на домашнем экране</string>
 
-    <string name="pref_title_scrollable_widgets">Поддержка виджетов с прокруткой</string>
-    <string name="pref_summary_scrollable_widgets">Выключите это, если виджеты с прокруткой не используются</string>
+    <string name="pref_title_scrollable_widgets">Поддержка прокручиваемых виджетов</string>
+    <string name="pref_summary_scrollable_widgets">Лучше отключить, если не используются</string>
 
     <string name="pref_title_drawer_labels">Показывать подписи иконок</string>
-    <string name="pref_summary_drawer_labels">Показывать подписи иконок меню приложений</string>
-    <string name="pref_title_fade_drawer_labels">Исчезающие подписи иконок</string>
-    <string name="pref_summary_fade_drawer_labels">Икноки постепенно исчезают. Больше нагрузка/объем: CPU/RAM</string>
+    <string name="pref_summary_drawer_labels">в главном меню</string>
+    <string name="pref_title_fade_drawer_labels">Исчезающие подписи при анимации главног меню</string>
+    <string name="pref_summary_fade_drawer_labels">Больше нагрузка на процессор/память</string>
 
-	<string name="widget_config_dialog_title">Масштабирование виджетов</string>
-	<string name="widget_config_dialog_summary">Как много сторк/колонок может занимать виджет?</string>
+	<string name="widget_config_dialog_title">Размер виджетов</string>
+	<string name="widget_config_dialog_summary">Сколько строк/колонок?</string>
 	<string name="widget_columns">Колонок</string>
 	<string name="widget_rows">Строк</string>
     
-    <string name="pref_title_screen_cache">Кешировать домашний экран</string>
-    <string name="pref_summary_screen_cache">Гладкая прокрутка р.столов. Если много виджетов выключить</string>
+    <string name="pref_title_screen_cache">Кешировать рабочие столы</string>
+    <string name="pref_summary_screen_cache">для плавной прокрутки. Отключить если много виджетов</string>
+
+    <string name="pref_title_desktop_indicator">Индикатор рабочих столов</string>
+    <string name="pref_summary_desktop_indicator">во время прокрутки</string>
+    <string name="pref_title_desktop_indicator_autohide">Автоскрытие индикатора рабочих столов</string>
+    <string name="pref_summary_desktop_indicator_autohide">после небольшой задержки</string>
+    <string name="pref_title_desktop_indicator_type">Тип индикатора</string>
+    <string name="pref_summary_desktop_indicator_type">Выбор типа индикатора</string>
+
+	<!-- Category titles -->
+	<string name="pref_title_system_preferences">Системные настройки ADW</string>
+	<string name="pref_summary_system_preferences">Системные настройки</string>
+	<string name="pref_title_screens_preferencecategory">Рабочие столы</string>
+	<string name="pref_title_screens_layout_preferencecategory">Режим домашнего экрана</string>
+	<string name="pref_title_screens_behaviour_preferencecategory">Оформление домашнего экрана</string>
+	<string name="pref_title_drawer_preferencecategory">Главное меню</string>
+	<string name="pref_title_drawer_visuals_preferencecategory">Внешний вид главного меню</string>
+	<string name="pref_title_highlights_preferencecategory">Подсветка иконок</string>
+	<string name="pref_title_indicators_preferencecategory">Индикатор рабочих столов</string>
+
+    <string name="pref_title_system_persistent">ADW постоянно в памяти</string>
+    <string name="pref_summary_system_persistent">Запретить выгружать ADW из памяти</string>
 </resources>
