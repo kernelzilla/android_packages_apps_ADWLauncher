@@ -9,11 +9,11 @@
                 <item>Ouvrir/Fermer les notifications</item>
                 <item>Aller au bureau par défaut/Ouvrir les notifications</item>
                 <item>Ouvrir/Fermer la barre de raccourcis</item>
-                <item>Open App...</item>
+                <item>Ouvrir une application</item>
        </string-array>
        <string-array name="desktop_indicator_entries">
-                <item>Dot paginator top</item>
-                <item>Sliding paginator top</item>
-                <item>Sliding paginator bottom</item>
+                <item>Indicateur haut point</item>
+                <item>Indicateur haut ligne</item>
+                <item>Indicateur bas ligne</item>
        </string-array>
 </resources>

@@ -126,7 +126,7 @@
     <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Erreur de chargement du widget</string>
     <!-- ADW Version Information -->
-	<string name="adw_donate">Merci de faire un don si vous appréciez mon travail :-)</string>
+    <string name="adw_donate">Merci de faire un don si vous appréciez mon travail :-)</string>
     <!-- ADW Settings -->
     <string name="pref_label_settings">Préférences</string>
     <!-- Screen preferences -->
@@ -134,7 +134,7 @@
     <string name="pref_summary_screen_preferences">Nombre de bureaux, bureau par défaut...</string>
 
     <string name="pref_title_wallpaper_hack">Adaptation de l\'arrière plan</string>
-    <string name="pref_summary_wallpaper_hack">Désactivez cette option en cas d\'erreur avec des grandes images. La laisser augmente la vitesse de défilement des bureaux.</string>
+    <string name="pref_summary_wallpaper_hack">Désactivez en cas d\'erreur avec des grandes images. La laisser augmente la vitesse de défilement des bureaux.</string>
 
     <string name="pref_title_orientation_sensor">Capteur d\'orientation</string>
     <string name="pref_summary_orientation_sensor">Pivoter l\'écran en fonction du capteur d\'orientation</string>
@@ -209,14 +209,20 @@
     <string name="pref_title_home_button_binding">Comportement du bouton maison</string>
     <string name="pref_summary_home_button_binding">Sélectionner l\'action liée au bouton maison</string>
 
-    <string name="pref_title_desktop_dots">Points de bureau</string>
-    <string name="pref_summary_desktop_dots">Afficher/cacher les points de bureau de style interface nexus</string>
+    <string name="pref_title_swipedown_actions">Glissé vers le bas</string>
+    <string name="pref_summary_swipedown_actions">Actions en cas de geste glissé vers le bas</string>
+    
+    <string name="pref_title_swipeup_actions">Glissé vers le haut</string>
+    <string name="pref_summary_swipeup_actions">Actions en cas de geste glissé vers le haut</string>
+
+    <string name="pref_title_desktop_dots">Indicateurs de bureau</string>
+    <string name="pref_summary_desktop_dots">Afficher/cacher les points indicateurs de bureau</string>
 
     <string name="pref_title_dockbar">Barre de raccourcis</string>
     <string name="pref_summary_dockbar">Activer/désactiver la barre de raccourcis</string>
 
     <string name="pref_title_closing_dockbar">Fermeture de la barre de raccourcis</string>
-    <string name="pref_summary_closing_dockbar">Fermeture automatique de la barre de raccourcis après lancement de l\'application</string>
+    <string name="pref_summary_closing_dockbar">Fermeture automatique de la barre après lancement de l\'application</string>
 
     <string name="pref_title_lab">BAG</string>
     <string name="pref_summary_lab">Activer/désactiver le Bouton d\'Action Gauche</string>
@@ -300,7 +306,7 @@
     <string name="message_dialog_import_config">Restauration de la configuration des bureaux ? L\'application sera redémarrée.</string>
     <string name="dbfile_import_dialog">Restauration de la configuration des bureaux...</string>
     <string name="dbfile_not_found">Fichier de configuration non trouvé !</string>
-    <string name="dbfile_not_readable">Le fichier de configuration existe, mais n\'est pas accessible.</string>
+    <string name="dbfile_not_readable">Le fichier de configuration existe, mais n'est pas accessible.</string>
     <string name="dbfile_import_success">La configuration des bureaux a été restaurée !</string>
     <string name="dbfile_import_error">Erreur lors de la restauration de la configuration des bureaux !</string>
 	<!--  Desktop columns/Rows -->
@@ -330,4 +336,25 @@
     
     <string name="pref_title_screen_cache">Utiliser le cache mémoire</string>
     <string name="pref_summary_screen_cache">Le défilement sera plus doux. A désactiver si vous utilisez beaucoup de widgets !</string>
+
+    <string name="pref_title_desktop_indicator">Voir l\'indicateur de bureau</string>
+    <string name="pref_summary_desktop_indicator">Voir un indicateur lors du défilement de bureau</string>
+    <string name="pref_title_desktop_indicator_autohide">Cacher automatiquement l\'indicateur de bureau</string>
+    <string name="pref_summary_desktop_indicator_autohide">Cacher après un court délai l\'indicateur de bureau</string>
+    <string name="pref_title_desktop_indicator_type">Type d\'indicateur</string>
+    <string name="pref_summary_desktop_indicator_type">Choisissez entre les types d\'indicateur</string>
+
+	<!-- Category titles -->
+	<string name="pref_title_system_preferences">Préférences système</string>
+	<string name="pref_summary_system_preferences">Préférence générale de ADW.Launcher</string>
+	<string name="pref_title_screens_preferencecategory">Préférences d\'écran</string>
+	<string name="pref_title_screens_layout_preferencecategory">Apparence des bureaux</string>
+	<string name="pref_title_screens_behaviour_preferencecategory">Comportement des bureaux</string>
+	<string name="pref_title_drawer_preferencecategory">Menu d\'applications</string>
+	<string name="pref_title_drawer_visuals_preferencecategory">Aspect du menu d\'applications</string>
+	<string name="pref_title_highlights_preferencecategory">Surbrillance d\'icône</string>
+	<string name="pref_title_indicators_preferencecategory">Indicateur de bureau</string>
+
+    <string name="pref_title_system_persistent">Persistence</string>
+    <string name="pref_summary_system_persistent">Cochez pour garder ADW Launcher en mémoire</string>
 </resources>
