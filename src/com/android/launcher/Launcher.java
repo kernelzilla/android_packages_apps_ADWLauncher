@@ -1603,6 +1603,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         registerReceiver(mApplicationsReceiver, filter);
         filter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         registerReceiver(mCloseSystemDialogsReceiver, filter);
+        filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
+        filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
+        registerReceiver(mApplicationsReceiver, filter);
+        
     }
 
     /**
@@ -2383,46 +2388,79 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            final String packageName = intent.getData().getSchemeSpecificPart();
-            final boolean replacing = intent.getBooleanExtra(Intent.EXTRA_REPLACING, false);
-
-            if (LauncherModel.DEBUG_LOADERS) {
-                d(LauncherModel.LOG_TAG, "application intent received: " + action +
-                        ", replacing=" + replacing);
-                d(LauncherModel.LOG_TAG, "  --> " + intent.getData());
-            }
-
-            if (!Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
-                if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
-                    if (!replacing) {
-                        removeShortcutsForPackage(packageName);
-                        if (LauncherModel.DEBUG_LOADERS) {
-                            d(LauncherModel.LOG_TAG, "  --> remove package");
-                        }
-                        sModel.removePackage(Launcher.this, packageName);
-                    }
-                    // else, we are replacing the package, so a PACKAGE_ADDED will be sent
-                    // later, we will update the package at this time
-                } else {
-                    if (!replacing) {
-                        if (LauncherModel.DEBUG_LOADERS) {
-                            d(LauncherModel.LOG_TAG, "  --> add package");
-                        }
-                        sModel.addPackage(Launcher.this, packageName);
-                    } else {
-                        if (LauncherModel.DEBUG_LOADERS) {
-                            d(LauncherModel.LOG_TAG, "  --> update package " + packageName);
-                        }
-                        sModel.updatePackage(Launcher.this, packageName);
-                        updateShortcutsForPackage(packageName);
-                    }
-                }
-                removeDialog(DIALOG_CREATE_SHORTCUT);
+            if (Intent.ACTION_PACKAGE_CHANGED.equals(action)
+                    || Intent.ACTION_PACKAGE_REMOVED.equals(action)
+                    || Intent.ACTION_PACKAGE_ADDED.equals(action)) {
+            
+	            final String packageName = intent.getData().getSchemeSpecificPart();
+	            final boolean replacing = intent.getBooleanExtra(Intent.EXTRA_REPLACING, false);
+	
+	            if (LauncherModel.DEBUG_LOADERS) {
+	                d(LauncherModel.LOG_TAG, "application intent received: " + action +
+	                        ", replacing=" + replacing);
+	                d(LauncherModel.LOG_TAG, "  --> " + intent.getData());
+	            }
+	
+	            if (!Intent.ACTION_PACKAGE_CHANGED.equals(action)) {
+	                if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
+	                    if (!replacing) {
+	                        removeShortcutsForPackage(packageName);
+	                        if (LauncherModel.DEBUG_LOADERS) {
+	                            d(LauncherModel.LOG_TAG, "  --> remove package");
+	                        }
+	                        sModel.removePackage(Launcher.this, packageName);
+	                    }
+	                    // else, we are replacing the package, so a PACKAGE_ADDED will be sent
+	                    // later, we will update the package at this time
+	                } else {
+	                    if (!replacing) {
+	                        if (LauncherModel.DEBUG_LOADERS) {
+	                            d(LauncherModel.LOG_TAG, "  --> add package");
+	                        }
+	                        sModel.addPackage(Launcher.this, packageName);
+	                    } else {
+	                        if (LauncherModel.DEBUG_LOADERS) {
+	                            d(LauncherModel.LOG_TAG, "  --> update package " + packageName);
+	                        }
+	                        sModel.updatePackage(Launcher.this, packageName);
+	                        updateShortcutsForPackage(packageName);
+	                    }
+	                }
+	                removeDialog(DIALOG_CREATE_SHORTCUT);
+	            } else {
+	                if (LauncherModel.DEBUG_LOADERS) {
+	                    d(LauncherModel.LOG_TAG, "  --> sync package " + packageName);
+	                }
+	                sModel.syncPackage(Launcher.this, packageName);
+	            }
             } else {
-                if (LauncherModel.DEBUG_LOADERS) {
-                    d(LauncherModel.LOG_TAG, "  --> sync package " + packageName);
+                if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+                	Log.d("FROYOOOOOOOO","EXTERNAL AVAILABLE");
+                     String packages[] = intent.getStringArrayExtra(
+                             Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                 	Log.d("FROYOOOOOOOO","packages="+packages.toString());
+                     if (packages == null || packages.length == 0) {
+                         return;
+                     }
+                     //synchronized (this) {
+                         //mAllAppsLoaded = mWorkspaceLoaded = false;
+                     //}
+                     //startLoader(context, false);
+                     startLoaders();
+                } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
+                     String packages[] = intent.getStringArrayExtra(
+                             Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                 	Log.d("FROYOOOOOOOO","EXTERNAL UNAVAILABLE");
+                 	Log.d("FROYOOOOOOOO","packages="+packages.toString());
+                     if (packages == null || packages.length == 0) {
+                         return;
+                     }
+                     //synchronized (this) {
+                         //mAllAppsLoaded = mWorkspaceLoaded = false;
+                     //}
+                     //startLoader(context, false);
+                     startLoaders();
                 }
-                sModel.syncPackage(Launcher.this, packageName);
             }
         }
     }
