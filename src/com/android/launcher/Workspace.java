@@ -788,7 +788,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
                         // Scroll if the user moved far enough along the X axis
                         mTouchState = TOUCH_STATE_SCROLLING;
                         enableChildrenCache();
-                    } else if (yMoved)
+                    } else if (yMoved && getOpenFolder()==null)
                     {
                     	// As x scrolling is left untouched, every gesture should start by dragging in Y axis. In fact I only consider useful, swipe up and down.
                     	// Guess if the first Pointer where the user click belongs to where a scrollable widget is. 
