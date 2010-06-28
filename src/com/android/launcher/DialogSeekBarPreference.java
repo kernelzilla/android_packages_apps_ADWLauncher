@@ -35,7 +35,7 @@ public class DialogSeekBarPreference extends DialogPreference implements
     protected void onBindDialogView(View v) {
         super.onBindDialogView(v);
         TextView dialogMessage = (TextView) v.findViewById(R.id.dialogMessage);
-        dialogMessage.setText(getSummary());
+        dialogMessage.setText(getDialogMessage());
         
         mValueText = (TextView) v.findViewById(R.id.actualValue);
         
