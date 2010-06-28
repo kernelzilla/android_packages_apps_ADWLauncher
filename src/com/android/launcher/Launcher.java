@@ -1604,10 +1604,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         registerReceiver(mApplicationsReceiver, filter);
         filter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         registerReceiver(mCloseSystemDialogsReceiver, filter);
-        filter = new IntentFilter();
+	//ADW: damn, this should be only for froyo
+        /*filter = new IntentFilter();
         filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
         filter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
-        registerReceiver(mApplicationsReceiver, filter);
+        registerReceiver(mApplicationsReceiver, filter);*/
         
     }
 
@@ -2435,7 +2436,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	                sModel.syncPackage(Launcher.this, packageName);
 	            }
             } else {
-                if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
+		//ADW: Damn, this should be only for froyo!!!
+                /*if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
                 	Log.d("FROYO","EXTERNAL AVAILABLE");
                      String packages[] = intent.getStringArrayExtra(
                              Intent.EXTRA_CHANGED_PACKAGE_LIST);
@@ -2456,7 +2458,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                     		 sModel.removePackage(Launcher.this, packages[i]);
                     	 }
                      }
-                }
+                }*/
             }
         }
     }
