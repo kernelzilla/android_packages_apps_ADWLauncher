@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-       <string-array name="menu_binding_entries">
-       			<item>NONE</item>
-                <item>Standard-Bildschirm</item>
-                <item>Standard-Bildschirm und Vorschauen zeigen</item>
-                <item>Vorschauen zeigen</item>
-                <item>Öffne/Schliesse den Drawer</item>
-                <item>Zeige/Verberge die Statuszeile</item>
-                <item>Öffne/Schliesse Benachrichtigungen</item>
-                <item>Zu Standardbildschirm/ Öffne Benachrichtigungen</item>
-                <item>Öffne/Schliesse Dockzeile</item>
-				<item>Open App...</item>
-       </string-array>
-       <string-array name="desktop_indicator_entries">
-                <item>Dot paginator top</item>
-                <item>Sliding paginator top</item>
-                <item>Sliding paginator bottom</item>
-       </string-array>
+  <string-array name="menu_binding_entries">
+    <item>Nichts</item>
+    <item>Standard-Bildschirm</item>
+    <item>Standard-Bildschirm und Vorschauen zeigen</item>
+    <item>Vorschauen zeigen</item>
+    <item>Öffne/Schliesse den Drawer</item>
+    <item>Zeige/Verberge die Statuszeile</item>
+    <item>Öffne/Schliesse Benachrichtigungen</item>
+    <item>Zu Standardbildschirm/ Öffne Benachrichtigungen</item>
+    <item>Öffne/Schliesse Dockzeile</item>
+    <item>Anwendung starten...</item>
+  </string-array>
+  <string-array name="desktop_indicator_entries">
+    <item>Desktop-Punkte oben</item>
+    <item>Wechselanzeige oben</item>
+    <item>Wechselanzeige unten</item>
+  </string-array>
 </resources>
