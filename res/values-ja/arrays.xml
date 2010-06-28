@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
+       			<item>NONE</item>
                 <item>デフォルトデスクトップに移動</item>
                 <item>デフォルトデスクトップに移動/プレビュー表示</item>
                 <item>プレビュー表示</item>
@@ -11,7 +12,6 @@
                 <item>ドックバーを開く/閉じる</item>
                 <item>アプリを起動...</item>
        </string-array>
-
        <string-array name="desktop_indicator_entries">
                 <item>上部にドットページ</item>
                 <item>上部にスライディングページ</item>

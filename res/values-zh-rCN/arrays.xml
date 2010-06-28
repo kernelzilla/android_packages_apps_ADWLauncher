@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
+       			<item>NONE</item>
                 <item>显示默认桌面</item>
                 <item>显示默认桌面/显示预览</item>
                 <item>显示预览</item>

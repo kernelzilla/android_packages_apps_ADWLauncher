@@ -269,14 +269,15 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	/**
 	 * ADW: Home binding constants
 	 */
-	private static final int BIND_DEFAULT=1;
-	private static final int BIND_HOME_PREVIEWS=2;
-	private static final int BIND_PREVIEWS=3;
-	private static final int BIND_APPS=4;
-	private static final int BIND_STATUSBAR=5;
-	private static final int BIND_NOTIFICATIONS=6;
-	private static final int BIND_HOME_NOTIFICATIONS=7;
-	private static final int BIND_DOCKBAR=8;
+	protected static final int BIND_NONE=0;
+	protected static final int BIND_DEFAULT=1;
+	protected static final int BIND_HOME_PREVIEWS=2;
+	protected static final int BIND_PREVIEWS=3;
+	protected static final int BIND_APPS=4;
+	protected static final int BIND_STATUSBAR=5;
+	protected static final int BIND_NOTIFICATIONS=6;
+	protected static final int BIND_HOME_NOTIFICATIONS=7;
+	protected static final int BIND_DOCKBAR=8;
 	protected static final int BIND_APP_LAUNCHER=9;
 	private int mHomeBinding=BIND_PREVIEWS;
 	/**

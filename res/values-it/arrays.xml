@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
+       			<item>NONE</item>
                 <item>Muovi al Desktop predefinito</item>
                 <item>Muovi al Desktop predefinito/visualizza anteprima</item>
                 <item>Visualizza anteprima</item>

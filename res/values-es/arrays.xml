@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
+       			<item>Desactivado</item>
                 <item>Ir al escritorio por defecto</item>
                 <item>Ir al escritorio por defecto/mostrar previsualización</item>
                 <item>Mostrar previsualización</item>
@@ -12,7 +13,7 @@
                 <item>Elige una App...</item>
        </string-array>
        <string-array name="desktop_indicator_entries">
-                <item>Puntitos arriba</item>
+                <item>Puntos, arriba</item>
                 <item>Línea superior</item>
                 <item>Línea inferior</item>
        </string-array>

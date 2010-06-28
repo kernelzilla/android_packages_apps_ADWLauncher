@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
+       			<item>NONE</item>
                 <item>Move to default desktop</item>
                 <item>Move to default desktop/show previews</item>
                 <item>Show previews</item>
@@ -19,6 +20,7 @@
 
        <!-- Do not translate. -->
        <string-array name="menu_binding_values">
+       			<item>0</item>
                 <item>1</item>
                 <item>2</item>
                 <item>3</item>
