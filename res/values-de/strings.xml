@@ -102,8 +102,12 @@
     <string name="pref_summary_zoom_effect_speed">Zeit in Millisekunden für den Zoom-Effekt setzen</string>
     <string name="pref_dialog_zoom_effect_speed">Millisekunden für den Zoom-Effekt</string>
 
-    <string name="pref_title_new_drawer">Neuer Drawer</string>
-    <string name="pref_summary_new_drawer">Horizontale Variante verwenden</string>
+    <string name="pref_title_page_horizontal_margin">Horizontaler Rand</string>
+    <string name="pref_summary_page_horizontal_margin">Horizontalen Rand zwischen den Seiten des Drawers einstellen</string>
+    <string name="pref_dialog_page_horizontal_margin">Horizontaler Rand zwischen den Seiten des Drawers</string>
+
+    <string name="pref_title_new_drawer">Horizontaler Drawer</string>
+    <string name="pref_summary_new_drawer">Horizontale Variante des Drawers verwenden</string>
 
     <string name="pref_title_animated_drawer">Animierter Drawer</string>
     <string name="pref_summary_animated_drawer">Auswählen, ob Animationen im Drawer angezeigt werden sollen</string>
@@ -140,6 +144,12 @@
 
     <string name="pref_title_home_button_binding">HOME-Taste</string>
     <string name="pref_summary_home_button_binding">Aktion für HOME-Taste auswählen</string>
+
+    <string name="pref_title_swipedown_actions">Swipe-Down Aktion</string>
+    <string name="pref_summary_swipedown_actions">Aktion wählen für: Nach unten wischen</string>
+
+    <string name="pref_title_swipeup_actions">Swipe-Up Aktion</string>
+    <string name="pref_summary_swipeup_actions">Aktion wählen für: Nach oben wischen</string>
 
     <string name="pref_title_desktop_dots">Desktop-Punkte</string>
     <string name="pref_summary_desktop_dots">Zeige/Verstecke Punkte für Anzeigenwechsel (wie Nexus One)</string>
@@ -264,4 +274,25 @@
 
     <string name="pref_title_screen_cache">Bildschirm-Cache</string>
     <string name="pref_summary_screen_cache">Für sanfteres Scrolling. Ausschalten bei Verwendung vieler Widgets.</string>
+
+    <string name="pref_title_desktop_indicator">Zeige Bildschirm-Indikator</string>
+    <string name="pref_summary_desktop_indicator">Visuellen Hinweis beim Scrollen des Bildschirms zeigen</string>
+    <string name="pref_title_desktop_indicator_autohide">Indikator autom. ausblenden</string>
+    <string name="pref_summary_desktop_indicator_autohide">Den Bildschirm-Indikator nach kurzer Zeit ausblenden</string>
+    <string name="pref_title_desktop_indicator_type">Indikatortyp</string>
+    <string name="pref_summary_desktop_indicator_type">Zwischen verschiedenen Stilen wählen</string>
+
+    <!-- Category titles -->
+    <string name="pref_title_system_preferences">System-Einstellunegn</string>
+    <string name="pref_summary_system_preferences">Allgemeine Einstellungen für den ADW.Launcher</string>
+    <string name="pref_title_screens_preferencecategory">Bildschirme</string>
+    <string name="pref_title_screens_layout_preferencecategory">Bildschirmanordnung</string>
+    <string name="pref_title_screens_behaviour_preferencecategory">Bildschirmverhalten</string>
+    <string name="pref_title_drawer_preferencecategory">App-Drawer</string>
+    <string name="pref_title_drawer_visuals_preferencecategory">App-Drawer Aussehen</string>
+    <string name="pref_title_highlights_preferencecategory">Icon-Hervorhebung</string>
+    <string name="pref_title_indicators_preferencecategory">Bildschirm-Indikator</string>
+
+    <string name="pref_title_system_persistent">System persistent</string>
+    <string name="pref_summary_system_persistent">Einschalten, um Beendigung des Launchers durch das System zu verhindern</string>
 </resources>
