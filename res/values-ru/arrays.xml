@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
-       			<item>NONE</item>
+		<item>Отключено</item>
                 <item>рабочий стол по умолчанию</item>
                 <item>рабочий стол по умолчанию/обзор</item>
                 <item>обзор</item>
@@ -10,7 +10,7 @@
                 <item>открыть/закрыть уведомления</item>
                 <item>рабочий стол по умолчанию/уведомления</item>
                 <item>открыть/закрыть выдвижную панель</item>
-                <item>открыть приложение...</item>
+                <item>открыть приложение:</item>
        </string-array>
        <string-array name="desktop_indicator_entries">
                 <item>точки рабочих столов вверху</item>

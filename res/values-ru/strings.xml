@@ -31,9 +31,9 @@
     <!-- Button label on Wallpaper Gallery screen; user selects this button to set a specific wallpaper -->
     <string name="wallpaper_instructions">Установить обои</string>
     <!-- Option in "Select wallpaper from" dialog box -->
-    <string name="pick_wallpaper">Галеря "Обои"</string>
+    <string name="pick_wallpaper">Галерея: Обои</string>
     <!-- Displayed when user selects a shortcut for an app that was uninstalled -->
-    <string name="activity_not_found">Приложение не установленно</string>
+    <string name="activity_not_found">Приложение не установлено</string>
     <!-- List item for configuring the current wallpaper -->
     <string name="configure_wallpaper">Настроить...</string>
 
@@ -101,7 +101,7 @@
     <!-- Noun, menu item used to show the gestures settings -->
     <string name="menu_gestures">Жесты</string>
     <!-- Noun, menu item used to show the system settings -->
-    <string name="menu_settings">Системные настройки</string>
+    <string name="menu_settings">Настройки телефона</string>
     <string name="menu_adw_settings">Настройки ADW</string>
 
     <!-- Permissions: -->
@@ -114,7 +114,7 @@
     <string name="permlab_read_settings">Чтение настроек домашнего экрана</string>
     <string name="permdesc_read_settings">Приложение может считывать настройки ярылков
         и домашнего экрана</string>
-    <string name="permlab_write_settings">Запист настроек домашнего экрана</string>
+    <string name="permlab_write_settings">Запись настроек домашнего экрана</string>
     <string name="permdesc_write_settings">Приложение может изменять настройки ярлыков
         и домашнего экрана</string>
 
@@ -130,7 +130,7 @@
     <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Ошибка загрузки виджета</string>
     <!-- ADW Version Information -->
-    <string name="adw_donate">Если Вам нравится наша работа, купите нам немного кофе</string>
+	<string name="adw_donate">Если Вам нравится наша работа, купите нам немного кофе</string>
     <!-- ADW Settings -->
     <string name="pref_label_settings">Настройки ADW</string>
     <!-- Screen preferences -->
@@ -144,7 +144,7 @@
     <string name="pref_summary_orientation_sensor">поворачивать при повороте телефона</string>
 
     <string name="pref_title_hide_statusbar">Скрывать строку статуса</string>
-    <string name="pref_summary_hide_statusbar">скрывает строку статуса</string>
+    <string name="pref_summary_hide_statusbar">Автоматически скрывать строку статуса</string>
 
     <string name="pref_title_desktop_screens">Рабочие столы</string>
     <string name="pref_summary_desktop_screens">Количество на домашнем экране</string>
@@ -167,11 +167,11 @@
     <string name="pref_summary_drawer_settings">количество строк, колонок, эффекты</string>
 
     <string name="pref_title_zoom_effect_speed">Длительность анимации</string>
-    <string name="pref_summary_zoom_effect_speed">главного меню в милисекундах</string>
-    <string name="pref_dialog_zoom_effect_speed">Установите длительность эффекта в милисекундах</string>
+    <string name="pref_summary_zoom_effect_speed">главного меню в миллисекундах</string>
+    <string name="pref_dialog_zoom_effect_speed">Установите длительность эффекта в миллисекундах</string>
 
     <string name="pref_title_page_horizontal_margin">Поля</string>
-    <string name="pref_summary_page_horizontal_margin">между каждой страницой главного меню</string>
+    <string name="pref_summary_page_horizontal_margin">для каждой страницы главного меню</string>
     <string name="pref_dialog_page_horizontal_margin">Установите размер поля</string>
 
     <string name="pref_title_new_drawer">Горизонтальное представление</string>
@@ -208,15 +208,15 @@
 
     <!-- Button preferences -->
     <string name="pref_title_ui_settings">Настройки интерфейса</string>
-    <string name="pref_summary_ui_settings">Включение выключение элементов</string>
+    <string name="pref_summary_ui_settings">Включение/выключение элементов</string>
 
-    <string name="pref_title_home_button_binding">Кнопка "Домой"</string>
+    <string name="pref_title_home_button_binding">Кнопка: Домой</string>
     <string name="pref_summary_home_button_binding">Выбор действия при нажатии</string>
     
-    <string name="pref_title_swipedown_actions">Жест "Вниз"</string>
+    <string name="pref_title_swipedown_actions">Жест: Вниз</string>
     <string name="pref_summary_swipedown_actions">Выбор действия при жесте</string>
     
-    <string name="pref_title_swipeup_actions">Жест "Вверх"</string>
+    <string name="pref_title_swipeup_actions">Жест: Вверх</string>
     <string name="pref_summary_swipeup_actions">Выбор действия при жесте</string>
 
     <string name="pref_title_desktop_dots">Отображение точек</string>
@@ -226,29 +226,29 @@
     <string name="pref_summary_dockbar">для дополнительных ярлыков на рабочем столе</string>
 
     <string name="pref_title_closing_dockbar">Автозакрытие выдвижной панели</string>
-    <string name="pref_summary_closing_dockbar">при запуске прилолжения</string>
+    <string name="pref_summary_closing_dockbar">при запуске приложения</string>
 
     <string name="pref_title_lab">LAB</string>
-    <string name="pref_summary_lab">левая настраеваемая кнопка</string>
+    <string name="pref_summary_lab">левая настраиваемая кнопка</string>
 
     <string name="pref_title_rab">RAB</string>
-    <string name="pref_summary_rab">правая настраеваемая кнопка</string>
+    <string name="pref_summary_rab">правая настраиваемая кнопка</string>
     
-    <string name="pref_title_ab2">Дополнительные настраеваемые кнопки</string>
+    <string name="pref_title_ab2">Дополнительные настраиваемые кнопки</string>
     <string name="pref_summary_ab2">отображаются при выключенных точках</string>
 
     <string name="pref_title_tint_ab">Обесцвечивание иконок</string>
     <string name="pref_summary_tint_ab">настраиваемых кнопок</string>
 
     <string name="pref_title_ab_scale_factor">Размер иконок</string>
-    <string name="pref_summary_ab_scale_factor">настраевоемых кнопок</string>
+    <string name="pref_summary_ab_scale_factor">настраиваемых кнопок</string>
     <string name="pref_dialog_ab_scale_factor">Установите размер</string>
 
     <string name="pref_title_hide_allapps_ab">Скрыть фон</string>
     <string name="pref_summary_hide_allapps_ab">кнопки вызова главного меню</string>
 
     <string name="pref_title_hide_ab_bg">Скрыть фон</string>
-    <string name="pref_summary_hide_ab_bg">настраеваемых кнопок</string>
+    <string name="pref_summary_hide_ab_bg">настраиваемых кнопок</string>
 
     <string name="pref_title_hide_icon_labels">Скрыть подписи иконок</string>
     <string name="pref_summary_hide_icon_labels">на домашнем экране</string>
@@ -270,7 +270,7 @@
     <string name="pref_dialog_color_picker_alpha">Непрозрачность</string>
     <string name="pref_message_restart_normal">Изменение параметра требует перезапуска ADW</string>
     <string name="pref_message_restart_froyo">Изменение параметра требует перезапуска ADW</string>
-    <string name="drop_to_uninstall">Отпустите для деинсталяции</string>
+    <string name="drop_to_uninstall">Отпустите для деинсталляции</string>
     
     <string name="pref_title_import_export">Резервное копирование настроек</string>
     <string name="pref_title_xml">Настройки ADW</string>
@@ -315,14 +315,14 @@
     <string name="dbfile_import_error">Ошибка восстановления из резервной копии!</string>
 	<!--  Desktop columns/Rows -->
     <string name="pref_title_desktop_columns">Колонки домашнего экрана</string>
-    <string name="pref_summary_desktop_columns">Установка количества колонок</string>
+    <string name="pref_summary_desktop_columns">Установка количество колонок</string>
     <string name="pref_dialog_desktop_columns">Установите количество</string>
 
     <string name="pref_title_desktop_rows">Строки домашнего экрана</string>
-    <string name="pref_summary_desktop_rows">Установка колчиста строк</string>
+    <string name="pref_summary_desktop_rows">Установка количества строк</string>
     <string name="pref_dialog_desktop_rows">Установите количество</string>
     
-    <string name="pref_title_autosize_icons">Автоматичесое массштабирование</string>
+    <string name="pref_title_autosize_icons">Автоматическое масштабирование</string>
     <string name="pref_summary_autosize_icons">иконок и виджетов на домашнем экране</string>
 
     <string name="pref_title_scrollable_widgets">Поддержка прокручиваемых виджетов</string>
@@ -330,7 +330,7 @@
 
     <string name="pref_title_drawer_labels">Показывать подписи иконок</string>
     <string name="pref_summary_drawer_labels">в главном меню</string>
-    <string name="pref_title_fade_drawer_labels">Исчезающие подписи при анимации главног меню</string>
+    <string name="pref_title_fade_drawer_labels">Исчезающие подписи при анимации главного меню</string>
     <string name="pref_summary_fade_drawer_labels">Больше нагрузка на процессор/память</string>
 
 	<string name="widget_config_dialog_title">Размер виджетов</string>
