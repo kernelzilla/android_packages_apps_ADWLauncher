@@ -1758,18 +1758,15 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 	/**
 	 * Wysie: Multitouch methods/events
 	 */
-	@Override
 	public Object getDraggableObjectAtPoint(PointInfo pt) {
 		return this;
 	}
 
-	@Override
 	public void getPositionAndScale(Object obj,
 			PositionAndScale objPosAndScaleOut) {
 		objPosAndScaleOut.set(0.0f, 0.0f, true, 1.0f, false, 0.0f, 0.0f, false, 0.0f);
 	}
 
-	@Override
 	public void selectObject(Object obj, PointInfo pt) {
 		if(mStatus!=SENSE_OPEN){
 			mAllowLongPress=false;
@@ -1778,7 +1775,6 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 		}
 	}
 
-	@Override
 	public boolean setPositionAndScale(Object obj,
 			PositionAndScale update, PointInfo touchPoint) {
         float newRelativeScale = update.getScale();
@@ -1792,7 +1788,6 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
         return false;
 	}
 
-	@Override
 	public Activity getLauncherActivity() {
 		// TODO Auto-generated method stub
 		return mLauncher;
