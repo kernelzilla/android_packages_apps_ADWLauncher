@@ -726,7 +726,8 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
             }
         }
     }
-
+    
+    
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
     	if(mStatus==SENSE_OPEN){
@@ -781,16 +782,20 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
                 final int touchSlop = mTouchSlop;
                 boolean xMoved = xDiff > touchSlop;
                 boolean yMoved = yDiff > touchSlop;
+   
                 
                 if (xMoved || yMoved) {
-                    
-                    if (xMoved) {
+                    // If xDiff > yDiff means the finger path pitch is smaller than 45¼ so we assume the user want to scroll X axis
+                    if (xDiff > yDiff) {
                         // Scroll if the user moved far enough along the X axis
                         mTouchState = TOUCH_STATE_SCROLLING;
                         enableChildrenCache();
-                    } else if (yMoved && getOpenFolder()==null)
+                        
+                    } 
+                    // If yDiff > xDiff means the finger path pitch is bigger than 45» so we assume the user want to either scroll Y or Y-axis gesture
+                    else if (getOpenFolder()==null)
                     {
-                    	// As x scrolling is left untouched, every gesture should start by dragging in Y axis. In fact I only consider useful, swipe up and down.
+                    	// As x scrolling is left untouched (more or less untouched;)), every gesture should start by dragging in Y axis. In fact I only consider useful, swipe up and down.
                     	// Guess if the first Pointer where the user click belongs to where a scrollable widget is. 
                 		mTouchedScrollableWidget = isWidgetAtLocationScrollable((int)mLastMotionX,(int)mLastMotionY);
                     	if (!mTouchedScrollableWidget)
