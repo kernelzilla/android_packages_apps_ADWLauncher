@@ -746,7 +746,7 @@ public class LauncherModel {
 
                 ApplicationInfo info;
                 String intentDescription;
-                Widget widgetInfo;
+                //Widget widgetInfo;
                 LauncherAppWidgetInfo appWidgetInfo;
                 int container;
                 long id;
@@ -871,7 +871,7 @@ public class LauncherModel {
                                     break;
                             }
                             break;
-                        case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
+                        /*case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
                             widgetInfo = Widget.makeSearch();
 
                             container = c.getInt(containerIndex);
@@ -890,7 +890,7 @@ public class LauncherModel {
                             widgetInfo.spanY = c.getInt(spanYIndex);
 
                             desktopItems.add(widgetInfo);
-                            break;
+                            break;*/
                         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
                             // Read all Launcher-specific widget details
                             int appWidgetId = c.getInt(appWidgetIdIndex);

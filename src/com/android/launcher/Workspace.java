@@ -413,10 +413,10 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
         }
     }
 
-    void addWidget(View view, Widget widget, boolean insert) {
+    /*void addWidget(View view, Widget widget, boolean insert) {
         addInScreen(view, widget.screen, widget.cellX, widget.cellY, widget.spanX,
                 widget.spanY, insert);
-    }
+    }*/
 
     CellLayout.CellInfo findAllVacantCells(boolean[] occupied) {
         CellLayout group = (CellLayout) getChildAt(mCurrentScreen);
@@ -1059,9 +1059,9 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
         
         // Make sure the drag was started by a long press as opposed to a long click.
         // Note that Search takes focus when clicked rather than entering touch mode
-        if (!child.isInTouchMode() && !(child instanceof Search)) {
+        /*if (!child.isInTouchMode() && !(child instanceof Search)) {
             return;
-        }
+        }*/
         
         mDragInfo = cellInfo;
         mDragInfo.screen = mCurrentScreen;
@@ -1330,7 +1330,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
     /**
      * Find a search widget on the given screen
      */
-    private Search findSearchWidget(CellLayout screen) {
+    /*private Search findSearchWidget(CellLayout screen) {
         final int count = screen.getChildCount();
         for (int i = 0; i < count; i++) {
             View v = screen.getChildAt(i);
@@ -1339,16 +1339,16 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
             }
         }
         return null;
-    }
+    }*/
 
     /**
      * Gets the first search widget on the current screen, if there is one.
      * Returns <code>null</code> otherwise.
      */
-    public Search findSearchWidgetOnCurrentScreen() {
+    /*public Search findSearchWidgetOnCurrentScreen() {
         CellLayout currentScreen = (CellLayout)getChildAt(mCurrentScreen);
         return findSearchWidget(currentScreen);
-    }
+    }*/
 
     public Folder getFolderForTag(Object tag) {
         int screenCount = getChildCount();

@@ -130,7 +130,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     static final String EXTRA_SHORTCUT_DUPLICATE = "duplicate";
 
     static final String EXTRA_CUSTOM_WIDGET = "custom_widget";
-    static final String SEARCH_WIDGET = "search_widget";
+    //static final String SEARCH_WIDGET = "search_widget";
 
     static final int WALLPAPER_SCREENS_SPAN = 2;
     static final int SCREEN_COUNT = 5;
@@ -1189,7 +1189,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         super.startActivityForResult(intent, requestCode);
     }
 
-    @Override
+    /*@Override
     public void startSearch(String initialQuery, boolean selectInitialQuery,
             Bundle appSearchData, boolean globalSearch) {
 
@@ -1205,14 +1205,14 @@ public final class Launcher extends Activity implements View.OnClickListener, On
             // show the currently typed text in the search widget while sliding
             searchWidget.setQuery(getTypedText());
         }
-    }
+    }*/
 
     /**
      * Show the search dialog immediately, without changing the search widget.
      *
      * @see Activity#startSearch(String, boolean, android.os.Bundle, boolean)
      */
-    void showSearchDialog(String initialQuery, boolean selectInitialQuery,
+    /*void showSearchDialog(String initialQuery, boolean selectInitialQuery,
             Bundle appSearchData, boolean globalSearch) {
 
         if (initialQuery == null) {
@@ -1242,12 +1242,12 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
         searchManager.startSearch(initialQuery, selectInitialQuery, getComponentName(),
             appSearchData, globalSearch);
-    }
+    }*/
 
     /**
      * Cancel search dialog if it is open.
      */
-    void stopSearch() {
+    /*void stopSearch() {
         // Close search dialog
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchManager.stopSearch();
@@ -1256,7 +1256,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         if (searchWidget != null) {
             searchWidget.stopSearch(false);
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -1358,12 +1358,12 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         int appWidgetId = data.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
 
         String customWidget = data.getStringExtra(EXTRA_CUSTOM_WIDGET);
-        if (SEARCH_WIDGET.equals(customWidget)) {
+        /*if (SEARCH_WIDGET.equals(customWidget)) {
             // We don't need this any more, since this isn't a real app widget.
             mAppWidgetHost.deleteAppWidgetId(appWidgetId);
             // add the search widget
             addSearch();
-        } else {
+        } else {*/
             AppWidgetProviderInfo appWidget = mAppWidgetManager.getAppWidgetInfo(appWidgetId);
 
             if (appWidget.configure != null) {
@@ -1377,10 +1377,10 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                 // Otherwise just add it
                 onActivityResult(REQUEST_CREATE_APPWIDGET, Activity.RESULT_OK, data);
             }
-        }
+        //}
     }
 
-    void addSearch() {
+    /*void addSearch() {
         final Widget info = Widget.makeSearch();
         final CellLayout.CellInfo cellInfo = mAddItemCellInfo;
 
@@ -1412,7 +1412,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
             }
         });
 		alertDialog.show();
-    }
+    }*/
 
     void processShortcut(Intent intent, int requestCodeApplication, int requestCodeShortcut) {
         // Handle case where user selected "Applications"
@@ -1805,7 +1805,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		                    workspace.addInScreen(newLiveFolder, item.screen, item.cellX, item.cellY, 1, 1,
 		                            !desktopLocked);
 		                    break;
-		                case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
+		                /*case LauncherSettings.Favorites.ITEM_TYPE_WIDGET_SEARCH:
 		                    final int screen = workspace.getCurrentScreen();
 		                    final View view = mInflater.inflate(R.layout.widget_search,
 		                            (ViewGroup) workspace.getChildAt(screen), false);
@@ -1817,7 +1817,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		                    view.setTag(widget);
 		
 		                    workspace.addWidget(view, widget, !desktopLocked);
-		                    break;
+		                    break;*/
 		            }
             }
         }
@@ -2335,12 +2335,12 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                     customInfo.add(info);
                     pickIntent.putParcelableArrayListExtra(
                             AppWidgetManager.EXTRA_CUSTOM_INFO, customInfo);
-                    ArrayList<Bundle> customExtras = new ArrayList<Bundle>();
+                    /*ArrayList<Bundle> customExtras = new ArrayList<Bundle>();
                     Bundle b = new Bundle();
                     b.putString(EXTRA_CUSTOM_WIDGET, SEARCH_WIDGET);
                     customExtras.add(b);
                     pickIntent.putParcelableArrayListExtra(
-                            AppWidgetManager.EXTRA_CUSTOM_EXTRAS, customExtras);
+                            AppWidgetManager.EXTRA_CUSTOM_EXTRAS, customExtras);*/
                     // start the pick activity
                     startActivityForResult(pickIntent, REQUEST_PICK_APPWIDGET);
                     break;
@@ -3312,7 +3312,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         if(appWidgetInfo!=null)
         	appwidgetReadyBroadcast(appWidgetId, appWidgetInfo.provider);
 	}
-	private void realAddSearch(Widget info,final CellLayout.CellInfo cellInfo,final int[] xy,int spanX,int spanY){
+	/*private void realAddSearch(Widget info,final CellLayout.CellInfo cellInfo,final int[] xy,int spanX,int spanY){
         if (!findSlot(cellInfo, xy, spanX, spanY)) return;
         info.spanX=spanX;
         info.spanY=spanY;
@@ -3327,7 +3327,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
         mWorkspace.addInCurrentScreen(view, xy[0], xy[1], spanX, spanY);
 		
-	}
+	}*/
 	public static int getScreenCount(Context context){
 		return AlmostNexusSettingsHelper.getDesktopScreens(context);
 	}
