@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
        <string-array name="menu_binding_entries">
-       			<item>NONE</item>
+       			<item>禁用</item>
                 <item>显示默认桌面</item>
                 <item>显示默认桌面/显示预览</item>
                 <item>显示预览</item>
                 <item>打开/关闭应用程序托盘</item>
                 <item>显示/隐藏状态栏</item>
                 <item>显示/隐藏通知栏</item>
-                <item>显示默认桌面/显示提示栏</item>
+                <item>显示默认桌面/显示通知栏</item>
                 <item>打开/关闭扩展栏</item>
                 <item>打开程序...</item>
        </string-array>
