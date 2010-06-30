@@ -147,6 +147,12 @@
     <string name="pref_title_home_button_binding">主页键功能</string>
     <string name="pref_summary_home_button_binding">选择主页键绑定的功能</string>
 
+    <string name="pref_title_swipedown_actions">下滑手势</string>
+    <string name="pref_summary_swipedown_actions">选择向下滑动手势动作</string>
+    
+    <string name="pref_title_swipeup_actions">上滑手势</string>
+    <string name="pref_summary_swipeup_actions">选择向上滑动手势动作</string>
+
     <string name="pref_title_desktop_dots">桌面分页点</string>
     <string name="pref_summary_desktop_dots">开启/关闭Nexus风格的桌面分页点</string>
 
