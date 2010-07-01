@@ -63,7 +63,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.MessageQueue;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.provider.LiveFolders;
 import android.text.Selection;
 import android.text.SpannableStringBuilder;
@@ -72,7 +71,6 @@ import android.text.method.TextKeyListener;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -1284,10 +1282,14 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                 .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
                 .setIntent(settings);
 		//ADW: add custom settings
-                menu.add(0, MENU_ALMOSTNEXUS, 0, R.string.menu_adw_settings)
-		.setIcon(com.android.internal.R.drawable.ic_menu_preferences)
-		.setAlphabeticShortcut('X');
-        
+        String mod=System.getProperty("os.version","adw").toLowerCase();
+    	if(LOGD)Log.d(LOG_TAG,"System version="+mod);
+    	if(LOGD)Log.d(LOG_TAG,"System version contains rom_mod_version?"+(mod.contains(getResources().getString(R.string.rom_mod_string).toLowerCase())));
+    	if(!mod.contains(getResources().getString(R.string.rom_mod_string).toLowerCase())){        
+            menu.add(0, MENU_ALMOSTNEXUS, 0, R.string.menu_adw_settings)
+            .setIcon(com.android.internal.R.drawable.ic_menu_preferences)
+            .setAlphabeticShortcut('X');
+    	}
         return true;
     }
 

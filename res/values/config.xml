@@ -15,6 +15,7 @@
 -->
 
 <resources>
+	<string name="rom_mod_string">CyanogenMod</string>
     <bool name="config_desktopRotation">true</bool> 
     <bool name="config_drawerNew">true</bool>
 
