@@ -110,6 +110,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     private static final boolean DEBUG_USER_INTERFACE = false;
 
     private static final int MENU_GROUP_ADD = 1;
+    private static final int MENU_GROUP_ALMOSTNEXUS = 2;
     private static final int MENU_ADD = Menu.FIRST + 1;
     private static final int MENU_WALLPAPER_SETTINGS = MENU_ADD + 1;
     private static final int MENU_SEARCH = MENU_WALLPAPER_SETTINGS + 1;
@@ -293,6 +294,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private static WallpaperIntentReceiver sWallpaperReceiver;
 	private boolean mShouldRestart=false;
 	private boolean mMessWithPersistence=false;
+	private boolean mIsDefaultLauncher=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         int orientation = getResources().getConfiguration().orientation;
@@ -1282,14 +1284,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                 .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
                 .setIntent(settings);
 		//ADW: add custom settings
-        String mod=System.getProperty("os.version","adw").toLowerCase();
-    	if(LOGD)Log.d(LOG_TAG,"System version="+mod);
-    	if(LOGD)Log.d(LOG_TAG,"System version contains rom_mod_version?"+(mod.contains(getResources().getString(R.string.rom_mod_string).toLowerCase())));
-    	if(!mod.contains(getResources().getString(R.string.rom_mod_string).toLowerCase())){        
-            menu.add(0, MENU_ALMOSTNEXUS, 0, R.string.menu_adw_settings)
-            .setIcon(com.android.internal.R.drawable.ic_menu_preferences)
-            .setAlphabeticShortcut('X');
-    	}
+        menu.add(MENU_GROUP_ALMOSTNEXUS, MENU_ALMOSTNEXUS, 0, R.string.menu_adw_settings)
+        .setIcon(com.android.internal.R.drawable.ic_menu_preferences)
+        .setAlphabeticShortcut('X');
         return true;
     }
 
@@ -1301,7 +1298,18 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         // Get the vacancy state from the model instead.
         mMenuAddInfo = mWorkspace.findAllVacantCellsFromModel();
         menu.setGroupEnabled(MENU_GROUP_ADD, mMenuAddInfo != null && mMenuAddInfo.valid);
-
+        boolean forceHidden=getResources().getBoolean(R.bool.force_hidden_settings);
+        boolean showmenu=false;
+        if(!forceHidden){
+	        //ADW: Check if this is the default launcher
+	        mIsDefaultLauncher=checkDefaultLauncher();
+	        //ADW: Check if we're running on the specified mod rom
+	        String mod=android.os.SystemProperties.get("ro.modversion", "adw").toLowerCase();
+	    	if(LOGD)Log.d(LOG_TAG,"System version="+mod);
+	    	if(LOGD)Log.d(LOG_TAG,"System version contains rom_mod_version?"+(mod.contains(getResources().getString(R.string.rom_mod_string).toLowerCase())));
+	    	showmenu=!mod.contains(getResources().getString(R.string.rom_mod_string).toLowerCase()) || !mIsDefaultLauncher;
+        }
+        menu.setGroupVisible(MENU_GROUP_ALMOSTNEXUS, showmenu);
         return true;
     }
 
@@ -3356,5 +3364,19 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		}
 		// TODO Auto-generated method stub
 		super.onStop();
+	}
+	private boolean checkDefaultLauncher(){
+		if(LOGD)Log.d(LOG_TAG,"full activity name="+(getPackageName()+"."+getLocalClassName()));
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.MAIN");
+		intent.addCategory("android.intent.category.HOME");
+		ActivityInfo a = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY).activityInfo;
+		if (a != null && a.name.equals(getPackageName()+"."+getLocalClassName()) && (a.applicationInfo.flags & android.content.pm.ApplicationInfo.FLAG_SYSTEM) != 0 ){
+			if(LOGD)Log.d(LOG_TAG,"is default");
+			return true;
+		} else {
+			if(LOGD)Log.d(LOG_TAG,"is NOT default");
+			return false;
+		}
 	}
 }

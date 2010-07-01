@@ -16,6 +16,7 @@
 
 <resources>
 	<string name="rom_mod_string">CyanogenMod</string>
+	<bool name="force_hidden_settings">false</bool>
     <bool name="config_desktopRotation">true</bool> 
     <bool name="config_drawerNew">true</bool>
 
