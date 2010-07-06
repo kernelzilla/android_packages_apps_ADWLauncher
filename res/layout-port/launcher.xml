@@ -53,7 +53,6 @@
 		android:layout_gravity="bottom|center_horizontal">
 	    <com.android.launcher.ActionButton
 			android:src="@drawable/lab_empty"
-			launcher:background="@drawable/lab_bg"
 			android:scaleType="center"
 			android:layout_height="wrap_content"
 			android:id="@+id/btn_lab"
@@ -62,7 +61,6 @@
 			/>
 	    <com.android.launcher.ActionButton
 			android:src="@drawable/lab_empty"
-			launcher:background="@drawable/lab2_bg"
 			android:scaleType="center"
 			android:layout_height="wrap_content"
 			android:id="@+id/btn_lab2"
@@ -73,11 +71,9 @@
 			android:id="@+id/appsBg"
 			android:layout_width="50dip"
 			android:layout_height="50dip"
-			android:background="@drawable/handle"
 			/>
 	    <com.android.launcher.ActionButton
 			android:src="@drawable/rab_empty"
-			launcher:background="@drawable/rab2_bg"
 			android:scaleType="center"
 			android:layout_height="wrap_content"
 			android:id="@+id/btn_rab2"
@@ -86,7 +82,6 @@
 			/>
 	    <com.android.launcher.ActionButton
 			android:src="@drawable/rab_empty"
-			launcher:background="@drawable/rab_bg"
 			android:scaleType="center"
 			android:layout_height="wrap_content"
 			android:id="@+id/btn_rab"
@@ -95,14 +90,12 @@
 			/>
 	</LinearLayout>
     <ImageView
-		android:src="@drawable/home_arrows_left"
 		android:layout_height="wrap_content"
 		android:id="@+id/btn_scroll_left"
 		android:layout_width="wrap_content"
 		android:layout_gravity="bottom|left"
 		android:onClick="previousScreen"/>
 	<ImageView
-		android:src="@drawable/home_arrows_right"
 		android:layout_height="wrap_content"
 		android:id="@+id/btn_scroll_right"
 		android:layout_width="wrap_content"
@@ -115,7 +108,6 @@
 		android:focusable="true"
 		android:clickable="true"
 		android:scaleType="center"
-		android:src="@drawable/handle_icon"
 		android:layout_gravity="bottom|center_horizontal"
 		launcher:slideDirections="up"
 		launcher:targetDistance="45dip"
@@ -126,8 +118,6 @@
         android:layout_height="wrap_content"
 
         android:scaleType="center"
-        android:src="@drawable/ic_delete"
-        android:background="@drawable/delete_zone_selector"
 
         android:layout_gravity="bottom|center_horizontal"
         android:visibility="invisible"
@@ -144,7 +134,6 @@
 	>
 	<com.android.launcher.MiniLauncher
 	    android:id="@+id/mini_content"
-	    android:background="@drawable/dockbar_bg"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    launcher:cellWidth="50dip"

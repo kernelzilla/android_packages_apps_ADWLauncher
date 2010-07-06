@@ -18,6 +18,8 @@ package com.android.launcher;
 
 import android.widget.TextView;
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -62,13 +64,34 @@ public class BubbleTextView extends TextView {
     private void init() {
         setFocusable(true);
         //mBackground = getBackground();
-        mBackground=IconHighlights.getDrawable(getContext());
+        mBackground=IconHighlights.getDrawable(getContext(),false);
         setBackgroundDrawable(null);
         mBackground.setCallback(this);
-
+        //ADW: Load textcolor and bubble color from theme
+        String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
+        int color=getContext().getResources().getColor(R.color.bubble_dark_background);
+        if(themePackage!=Launcher.THEME_DEFAULT){
+        	Resources themeResources=null;
+        	try {
+    			themeResources=getContext().getPackageManager().getResourcesForApplication(themePackage);
+    		} catch (NameNotFoundException e) {
+    			e.printStackTrace();
+    		}
+    		if(themeResources!=null){
+    			int resourceId=themeResources.getIdentifier("bubble_color", "color", themePackage);
+    			if(resourceId!=0){
+    				color=themeResources.getColor(resourceId);
+    			}
+    			int textColorId=themeResources.getIdentifier("bubble_text_color", "color", themePackage);
+    			if(textColorId!=0){
+    				setTextColor(themeResources.getColor(textColorId));
+    			}
+    		}
+        }
+        
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(getContext().getResources().getColor(R.color.bubble_dark_background));
-
+        //mPaint.setColor(getContext().getResources().getColor(R.color.bubble_dark_background));
+        mPaint.setColor(color);
         final float scale = getContext().getResources().getDisplayMetrics().density;
         mCornerRadius = CORNER_RADIUS * scale;
         mPaddingH = PADDING_H * scale;

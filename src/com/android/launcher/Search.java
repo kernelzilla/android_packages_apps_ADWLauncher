@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -284,10 +286,37 @@ public class Search extends LinearLayout
 
         mSearchText.setOnLongClickListener(this);
         mVoiceButton.setOnLongClickListener(this);
-
+    	//ADW: Load the specified theme
+    	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
+    	Log.d("SUPERLAUNCHER","SEARCH WIDGET:We should load theme from:"+themePackage);
+    	PackageManager pm=getContext().getPackageManager();
+    	Resources themeResources=null;
+    	if(themePackage!=Launcher.THEME_DEFAULT){
+	    	try {
+				themeResources=pm.getResourcesForApplication(themePackage);
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}else{
+    		themeResources=getResources();
+    	}
+		if(themeResources!=null){
+			//Action Buttons
+			Launcher.loadThemeResource(themeResources,themePackage,"btn_search_dialog_voice",mVoiceButton,Launcher.THEME_ITEM_BACKGROUND,R.drawable.btn_search_dialog_voice);
+			Launcher.loadThemeResource(themeResources,themePackage,"textfield_searchwidget",mSearchText,Launcher.THEME_ITEM_BACKGROUND,R.drawable.textfield_searchwidget);
+			View search_bg=findViewById(R.id.search_plate);
+			Launcher.loadThemeResource(themeResources,themePackage,"search_floater",search_bg,Launcher.THEME_ITEM_BACKGROUND,R.drawable.search_floater);
+		}
         // Set the placeholder text to be the Google logo within the search widget.
-        Drawable googlePlaceholder =
-                getContext().getResources().getDrawable(R.drawable.placeholder_google);
+        Drawable googlePlaceholder = null;
+                //getContext().getResources().getDrawable(R.drawable.placeholder_google);
+		int resource_id=themeResources.getIdentifier ("placeholder_google", "drawable", themePackage);
+		if(resource_id!=0){
+			googlePlaceholder=themeResources.getDrawable(resource_id);
+		}else{
+			googlePlaceholder=getContext().getResources().getDrawable(R.drawable.placeholder_google);
+		}
         mSearchText.setCompoundDrawablesWithIntrinsicBounds(googlePlaceholder, null, null, null);
 
         configureVoiceSearchButton();

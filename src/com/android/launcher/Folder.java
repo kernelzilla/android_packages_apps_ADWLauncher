@@ -17,7 +17,11 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -70,6 +74,27 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
         mCloseButton = (Button) findViewById(R.id.folder_close);
         mCloseButton.setOnClickListener(this);
         mCloseButton.setOnLongClickListener(this);
+    	//ADW: Load the specified theme
+    	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
+    	Log.d("SUPERLAUNCHER","FOLDERS :We should load theme from:"+themePackage);
+    	PackageManager pm=getContext().getPackageManager();
+    	Resources themeResources=null;
+    	if(themePackage!=Launcher.THEME_DEFAULT){
+	    	try {
+				themeResources=pm.getResourcesForApplication(themePackage);
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}else{
+    		themeResources=getResources();
+    	}
+		if(themeResources!=null){
+			//Action Buttons
+			Launcher.loadThemeResource(themeResources,themePackage,"box_launcher_top",mCloseButton,Launcher.THEME_ITEM_BACKGROUND,R.drawable.box_launcher_top);
+			Launcher.loadThemeResource(themeResources,themePackage,"box_launcher_bottom",mContent,Launcher.THEME_ITEM_BACKGROUND,R.drawable.box_launcher_bottom);
+		}
+        
     }
     
     public void onItemClick(AdapterView parent, View v, int position, long id) {

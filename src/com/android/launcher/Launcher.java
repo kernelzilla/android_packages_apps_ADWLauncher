@@ -56,6 +56,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -296,6 +297,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	private boolean mShouldRestart=false;
 	private boolean mMessWithPersistence=false;
 	private boolean mIsDefaultLauncher=false;
+	//ADW Theme constants
+	public static final int THEME_ITEM_BACKGROUND=0;
+	public static final int THEME_ITEM_FOREGROUND=1;
+	public static final String THEME_DEFAULT="adw";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         int orientation = getResources().getConfiguration().orientation;
@@ -675,8 +681,6 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         final DeleteZone deleteZone = (DeleteZone) dragLayer.findViewById(R.id.delete_zone);
 
         mHandleView = (SliderView) dragLayer.findViewById(R.id.all_apps);
-        mHandleIcon = (TransitionDrawable) mHandleView.getDrawable();
-        mHandleIcon.setCrossFadeEnabled(true);
         mHandleView.setOnTriggerListener(new OnTriggerListener() {
 			public void onTrigger(View v, int whichHandle) {
 				mDockBar.open();
@@ -741,10 +745,6 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		mPreviousView.setOnLongClickListener(this);
 		mNextView.setOnLongClickListener(this);
 		
-		Drawable previous = mPreviousView.getDrawable();
-		Drawable next = mNextView.getDrawable();
-		mWorkspace.setIndicators(previous, next);
-		
 		//ADW linearlayout with apptray, lab and rab
 		final View drwToolbar=findViewById(R.id.drawer_toolbar);
 		//ADW add a listener to the dockbar to show/hide the app-drawer-button and the dots
@@ -779,6 +779,47 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         mPreviousView.setFocusable(true);
 		mNextView.setFocusable(true);
 		
+    	//ADW: Load the specified theme
+    	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
+    	Log.d("SUPERLAUNCHER","We should load theme from:"+themePackage);
+    	PackageManager pm=getPackageManager();
+    	Resources themeResources=null;
+    	if(themePackage!=THEME_DEFAULT){
+	    	try {
+				themeResources=pm.getResourcesForApplication(themePackage);
+				Log.d("ThemeLoader", "found a resource:"+themeResources);
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}else{
+    		themeResources=getResources();
+    	}
+		if(themeResources!=null){
+			//Action Buttons
+			loadThemeResource(themeResources,themePackage,"lab_bg",mLAB,THEME_ITEM_BACKGROUND,R.drawable.lab_bg);
+			loadThemeResource(themeResources,themePackage,"rab_bg",mRAB,THEME_ITEM_BACKGROUND,R.drawable.rab_bg);
+			loadThemeResource(themeResources,themePackage,"lab2_bg",mLAB2,THEME_ITEM_BACKGROUND,R.drawable.lab2_bg);
+			loadThemeResource(themeResources,themePackage,"rab2_bg",mRAB2,THEME_ITEM_BACKGROUND,R.drawable.rab2_bg);
+			//App drawer button
+			loadThemeResource(themeResources,themePackage,"handle_icon",mHandleView,THEME_ITEM_FOREGROUND,R.drawable.handle_icon);
+			View appsBg=findViewById(R.id.appsBg);
+			loadThemeResource(themeResources,themePackage,"handle",appsBg,THEME_ITEM_BACKGROUND,R.drawable.handle);
+			//Deletezone
+			loadThemeResource(themeResources,themePackage,"ic_delete",deleteZone,THEME_ITEM_FOREGROUND,R.drawable.ic_delete);
+			loadThemeResource(themeResources,themePackage,"delete_zone_selector",deleteZone,THEME_ITEM_BACKGROUND,R.drawable.delete_zone_selector);
+			//Desktop dots
+			loadThemeResource(themeResources,themePackage,"home_arrows_left",mPreviousView,THEME_ITEM_FOREGROUND,R.drawable.home_arrows_left);
+			loadThemeResource(themeResources,themePackage,"home_arrows_right",mNextView,THEME_ITEM_FOREGROUND,R.drawable.home_arrows_right);
+			//Dockbar
+			loadThemeResource(themeResources,themePackage,"dockbar_bg",mMiniLauncher,THEME_ITEM_BACKGROUND,R.drawable.dockbar_bg);
+		}
+        mHandleIcon = (TransitionDrawable) mHandleView.getDrawable();
+        mHandleIcon.setCrossFadeEnabled(true);
+		Drawable previous = mPreviousView.getDrawable();
+		Drawable next = mNextView.getDrawable();
+		mWorkspace.setIndicators(previous, next);
+		//ADW: EOF Themes
 		updateAlmostNexusUI();
     }
 
@@ -3389,4 +3430,32 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			return false;
 		}
 	}
+	/**
+	 * ADW: Load the specified theme resource
+	 * @param themeResources Resources from the theme package
+	 * @param themePackage the theme's package name 
+	 * @param item_name the theme item name to load
+	 * @param item the View Item to apply the theme into
+	 * @param themeType Specify if the themed element will be a background or a foreground item
+	 */
+	public static void loadThemeResource(Resources themeResources,
+			String themePackage, String item_name, View item,
+			int themeType, int fallbackId) {
+		
+		int resource_id=themeResources.getIdentifier (item_name, "drawable", themePackage);
+		Drawable d=null;
+		if(resource_id!=0){
+			d=themeResources.getDrawable(resource_id);
+		}else{
+			d=themeResources.getDrawable(fallbackId);
+		}
+		if(d!=null){
+			if(themeType==THEME_ITEM_FOREGROUND && item instanceof ImageView){
+				((ImageView)item).setImageDrawable(d);
+			}else{
+				item.setBackgroundDrawable(d);
+			}
+		}
+	}
+	
 }

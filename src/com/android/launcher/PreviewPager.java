@@ -1,6 +1,9 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
@@ -46,13 +49,35 @@ public class PreviewPager extends ViewGroup {
 	}
 	private void createLayout(){
 		detachAllViewsFromParent();
+    	//ADW: Load the specified theme
+    	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
+    	PackageManager pm=getContext().getPackageManager();
+    	Resources themeResources=null;
+    	if(themePackage!=Launcher.THEME_DEFAULT){
+	    	try {
+				themeResources=pm.getResourcesForApplication(themePackage);
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	int resource_id=0;
+		if(themeResources!=null){
+			resource_id=themeResources.getIdentifier ("pager_dots", "drawable", themePackage);
+		}
+		
 		int dotWidth=getResources().getDrawable(mDotDrawableId).getIntrinsicWidth();
 		int separation=dotWidth;
 		int marginLeft=((getWidth())/2)-(((mTotalItems*dotWidth)/2)+(((mTotalItems-1)*separation)/2));
 		int marginTop=((getHeight())/2)-(dotWidth/2);
 		for(int i=0;i<mTotalItems;i++){
 			ImageView dot=new ImageView(getContext());
-			TransitionDrawable td=(TransitionDrawable)getResources().getDrawable(mDotDrawableId);
+			TransitionDrawable td;
+			if(themeResources!=null && resource_id!=0){
+				td=(TransitionDrawable)themeResources.getDrawable(resource_id);
+			}else{
+				td=(TransitionDrawable)getResources().getDrawable(mDotDrawableId);
+			}
 			td.setCrossFadeEnabled(true);
 			dot.setImageDrawable(td);
 	        ViewGroup.LayoutParams p;

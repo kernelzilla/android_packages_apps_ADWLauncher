@@ -305,5 +305,10 @@ public final class AlmostNexusSettingsHelper {
 		int newD = Integer.valueOf(sp.getString("swipeupActions", context.getResources().getString(R.string.config_swipeup_actions)));
 		return newD;
 	}
+	public static String getThemePackageName(Context context, String default_theme)
+	{
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		return sp.getString("ThemePackageName", default_theme);
+	}
 	
 }

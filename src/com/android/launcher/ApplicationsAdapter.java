@@ -17,6 +17,8 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,23 @@ public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
         final TextView textView = (TextView) convertView;
         textView.setCompoundDrawablesWithIntrinsicBounds(null, info.icon, null, null);
         textView.setText(info.title);
+        //ADW: Load textcolor and bubble color from theme
+        String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
+        int color=getContext().getResources().getColor(R.color.bubble_dark_background);
+        if(themePackage!=Launcher.THEME_DEFAULT){
+        	Resources themeResources=null;
+        	try {
+    			themeResources=getContext().getPackageManager().getResourcesForApplication(themePackage);
+    		} catch (NameNotFoundException e) {
+    			e.printStackTrace();
+    		}
+    		if(themeResources!=null){
+    			int textColorId=themeResources.getIdentifier("drawer_text_color", "color", themePackage);
+    			if(textColorId!=0){
+    				textView.setTextColor(themeResources.getColor(textColorId));
+    			}
+    		}
+        }
 
         return convertView;
     }

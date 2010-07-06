@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -471,9 +472,21 @@ public class LauncherModel {
         if (application.title == null) {
             application.title = info.activityInfo.name;
         }
-
-        application.icon =
-                Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);
+        //TODO:ADW Load icon from theme/iconpack
+        String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
+        if(themePackage==Launcher.THEME_DEFAULT){
+        	application.icon = Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);
+        }else{
+        	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,info.activityInfo.packageName+"_"+info.activityInfo.name);
+        	if(tmpIcon==null){
+        		application.icon = Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);
+        	}else{
+        		application.icon = Utilities.createIconThumbnail(tmpIcon, context);
+        	}
+        }
+        
+        /*application.icon =
+                Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);*/
         application.filtered = false;
     }
  
@@ -1255,10 +1268,20 @@ public class LauncherModel {
         if (resolveInfo == null) {
             return null;
         }
-
+        //TODO:ADW Load icon from theme/iconpack
         final ApplicationInfo info = new ApplicationInfo();
         final ActivityInfo activityInfo = resolveInfo.activityInfo;
-        info.icon = Utilities.createIconThumbnail(activityInfo.loadIcon(manager), context);
+        String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
+        if(themePackage==Launcher.THEME_DEFAULT){
+        	info.icon = Utilities.createIconThumbnail(activityInfo.loadIcon(manager), context);
+        }else{
+        	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
+        	if(tmpIcon==null){
+        		info.icon = Utilities.createIconThumbnail(activityInfo.loadIcon(manager), context);
+        	}else{
+        		info.icon = Utilities.createIconThumbnail(tmpIcon, context);
+        	}
+        }
         if (info.title == null || info.title.length() == 0) {
             info.title = activityInfo.loadLabel(manager);
         }
@@ -1488,4 +1511,31 @@ public class LauncherModel {
         cr.delete(LauncherSettings.Favorites.CONTENT_URI,
                 LauncherSettings.Favorites.CONTAINER + "=" + info.id, null);
     }
+    /**
+     * ADW: Load a theme icon
+     * @param context
+     * @param manager
+     * @param themePackage
+     * @param string
+     * @return
+     */
+    private static Drawable loadIconFromTheme(Context context,
+			PackageManager manager, String themePackage, String resourceName) {
+		Drawable icon=null;
+    	Resources themeResources=null;
+    	resourceName=resourceName.toLowerCase().replace(".", "_");
+    	try {
+			themeResources=manager.getResourcesForApplication(themePackage);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		if(themeResources!=null){
+			int resource_id=themeResources.getIdentifier (resourceName, "drawable", themePackage);
+			if(resource_id!=0){
+				icon=themeResources.getDrawable(resource_id);
+			}
+		}
+		return icon;
+	}
+
 }
