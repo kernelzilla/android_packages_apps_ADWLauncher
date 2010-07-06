@@ -170,7 +170,7 @@
     <string name="pref_summary_ab2">Sekundäre Aktionstasten ein-/ausschalten (keine Desktop-Punkte)</string>
 
     <string name="pref_title_tint_ab">Graue Aktionstasten</string>
-    <string name="pref_summary_tint_ab">Aktionstasten-Icons mit grauen Shilouetten verschleiern</string>
+    <string name="pref_summary_tint_ab">Aktionstasten-Icons mit grauen Silhouetten verschleiern</string>
 
     <string name="pref_title_ab_scale_factor">Größe Aktionstasten</string>
     <string name="pref_summary_ab_scale_factor">Skaliere die Größe der Aktionstasten-Icons</string>
@@ -283,7 +283,7 @@
     <string name="pref_summary_desktop_indicator_type">Zwischen verschiedenen Stilen wählen</string>
 
     <!-- Category titles -->
-    <string name="pref_title_system_preferences">System-Einstellunegn</string>
+    <string name="pref_title_system_preferences">System-Einstellungen</string>
     <string name="pref_summary_system_preferences">Allgemeine Einstellungen für den ADW.Launcher</string>
     <string name="pref_title_screens_preferencecategory">Bildschirme</string>
     <string name="pref_title_screens_layout_preferencecategory">Bildschirmanordnung</string>
