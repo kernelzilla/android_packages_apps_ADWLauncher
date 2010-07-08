@@ -230,6 +230,9 @@
     <string name="pref_title_closing_dockbar">Closing dockbar</string>
     <string name="pref_summary_closing_dockbar">Auto-close dockbar after app-launch</string>
 
+    <string name="pref_title_closing_folder">Closing folder</string>
+    <string name="pref_summary_closing_folder">Auto-close folder after app-launch</string>
+
     <string name="pref_title_lab">LAB</string>
     <string name="pref_summary_lab">Enable/disable the customizable Left Action Button</string>
 

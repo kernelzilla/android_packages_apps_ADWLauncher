@@ -51,7 +51,7 @@
     <string name="menu_notifications" msgid="6424587053194766192">"通知"</string>
     <string name="menu_gestures" msgid="514678675575912237">"手势"</string>
     <string name="menu_settings" msgid="6233960148378443661">"设置"</string>
-    <string name="menu_adw_settings">ADW设置</string>
+    <string name="menu_adw_settings">桌面设置</string>
     <string name="permlab_install_shortcut" msgid="1201690825493376489">"安装快捷方式"</string>
     <string name="permdesc_install_shortcut" msgid="7429365847558984148">"允许应用程序自动安装快捷方式。"</string>
     <string name="permlab_uninstall_shortcut" msgid="7696645932555926449">"卸载快捷方式"</string>
@@ -135,7 +135,7 @@
     <string name="pref_summary_previews_preferences">桌面预览设置</string>
 
     <string name="pref_title_sense_previews">Sense风格预览</string>
-    <string name="pref_summary_sense_previews">使用Sense风格的缩略图预览风格</string>
+    <string name="pref_summary_sense_previews">使用Sense界面的缩略图预览风格</string>
 
     <string name="pref_title_clean_screen_mode">无图标预览模式</string>
     <string name="pref_summary_clean_screen_mode">在预览时隐藏桌面的图标和小插件</string>

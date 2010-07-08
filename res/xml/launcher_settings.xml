@@ -209,6 +209,10 @@
 			android:dependency="uiDockbar"
 			android:summary="@string/pref_summary_closing_dockbar"
 			android:key="uiCloseDockbar" />
+		<CheckBoxPreference android:title="@string/pref_title_closing_folder"
+			android:defaultValue="false"
+			android:summary="@string/pref_summary_closing_folder"
+			android:key="uiCloseFolder" />
 		<CheckBoxPreference android:title="@string/pref_title_lab"
 			android:defaultValue="true"
 			android:summary="@string/pref_summary_lab"

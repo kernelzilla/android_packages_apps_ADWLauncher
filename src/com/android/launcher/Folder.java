@@ -75,6 +75,9 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
     public void onItemClick(AdapterView parent, View v, int position, long id) {
         ApplicationInfo app = (ApplicationInfo) parent.getItemAtPosition(position);
         mLauncher.startActivitySafely(app.intent);
+        if (mLauncher.autoCloseFolder) {
+            mLauncher.closeFolder(this);
+        }
     }
 
     public void onClick(View v) {
