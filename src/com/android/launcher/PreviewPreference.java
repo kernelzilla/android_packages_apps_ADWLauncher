@@ -11,6 +11,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PreviewPreference extends Preference {
@@ -45,6 +46,13 @@ public class PreviewPreference extends Preference {
 			TextView vThemeDescription= (TextView) view.findViewById(R.id.ThemeDescription);
 			vThemeDescription.setMovementMethod(LinkMovementMethod.getInstance());
 			vThemeDescription.setText(Html.fromHtml(themeDescription.toString()));
+			ImageView vThemePreview= (ImageView) view.findViewById(R.id.ThemeIcon);
+			if(themePreview!=null)
+				vThemePreview.setImageDrawable(themePreview);
+			else
+				vThemePreview.setImageResource(R.drawable.ic_launcher_wallpaper);
+			vThemeTitle.setText(themeName);
+			
 			Button applyButton= (Button) view.findViewById(R.id.ThemeApply);
 			applyButton.setEnabled(true);
 		}else{
@@ -57,6 +65,8 @@ public class PreviewPreference extends Preference {
 		themePackageName=packageName;
 		themeName=null;
 		themeDescription=null;
+		if(themePreview!=null)themePreview.setCallback(null);
+		themePreview=null;
         if(!packageName.equals(Launcher.THEME_DEFAULT)){
         	Resources themeResources=null;
         	try {
@@ -72,6 +82,10 @@ public class PreviewPreference extends Preference {
     			int themeDescriptionId=themeResources.getIdentifier("theme_description", "string", packageName.toString());
     			if(themeDescriptionId!=0){
     				themeDescription=themeResources.getString(themeDescriptionId);
+    			}
+    			int themePreviewId=themeResources.getIdentifier("theme_preview", "drawable", packageName.toString());
+    			if(themePreviewId!=0){
+    				themePreview=themeResources.getDrawable(themePreviewId);
     			}
     		}
         }
