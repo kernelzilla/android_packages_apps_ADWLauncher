@@ -73,8 +73,13 @@ public class IconHighlights {
 				if(use_drawer_icons_bgs_id!=0){
 					use_drawer_icons_bgs=themeResources.getBoolean(use_drawer_icons_bgs_id);
 				}
-			}
-			if(type!=TYPE_DRAWER || use_drawer_icons_bgs){
+				if(use_drawer_icons_bgs){
+					int resource_id=themeResources.getIdentifier("normal_application_background", "drawable", themePackage);
+					if(resource_id!=0){
+						drawable=themeResources.getDrawable(resource_id);
+					}					
+				}
+			}else{
 				int resource_id=0;
 				if(type==TYPE_DOCKBAR){
 					resource_id=themeResources.getIdentifier("dockbar_selector", "drawable", themePackage);
