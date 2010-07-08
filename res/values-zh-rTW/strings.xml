@@ -62,9 +62,7 @@
     <string name="search_hint" msgid="6974176141372467453">"Google 搜尋"</string>
     <string name="gadget_error_text" msgid="8359351016167075858">"載入小工具時發生問題"</string>
 
-	<!-- ADW Version Information -->
-	<string name="adw_donate">如果你喜歡我的軟體，請給我買瓶啤酒吧 :-)</string>
-	
+
 	<!-- ADW Settings -->
 	<string name="pref_label_settings">桌面設置</string>
     <!-- Screen preferences -->

@@ -94,17 +94,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         ListPreference homebutton_binding = (ListPreference) findPreference("homeBinding");
         homebutton_binding.setOnPreferenceChangeListener(this);
         
-        Preference donateLink = (Preference) findPreference("donatePref");
-        donateLink.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			public boolean onPreferenceClick(Preference preference) {
-				// TODO Auto-generated method stub
-				String url = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9S8WKFETUYRHG";
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(url));
-				startActivity(i);				
-				return true;
-			}
-		});
         mContext=this;
         
         Preference exportToXML = findPreference("xml_export");

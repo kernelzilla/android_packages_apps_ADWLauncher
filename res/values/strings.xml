@@ -131,8 +131,6 @@
     <string name="gadget_error_text">Problem loading widget</string>
     <!-- ADW Version Information -->
     <string name="adw_version">Version 0.9.0 System</string>
-    <string name="adw_donate">Please, donate if you like my work :-)</string>
-
     <!-- ADW Settings -->
     <string name="pref_label_settings">AlmostNexus Settings</string>
     <!-- Screen preferences -->

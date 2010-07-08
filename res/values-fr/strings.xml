@@ -125,8 +125,6 @@
 
     <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Erreur de chargement du widget</string>
-    <!-- ADW Version Information -->
-    <string name="adw_donate">Merci de faire un don si vous appréciez mon travail :-)</string>
     <!-- ADW Settings -->
     <string name="pref_label_settings">Préférences</string>
     <!-- Screen preferences -->

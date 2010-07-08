@@ -129,8 +129,6 @@
 
     <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">Ошибка загрузки виджета</string>
-    <!-- ADW Version Information -->
-	<string name="adw_donate">Если Вам нравится наша работа, купите нам немного кофе</string>
     <!-- ADW Settings -->
     <string name="pref_label_settings">Настройки ADW</string>
     <!-- Screen preferences -->
