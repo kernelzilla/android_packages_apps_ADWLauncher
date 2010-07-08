@@ -1519,7 +1519,7 @@ public class LauncherModel {
      * @param string
      * @return
      */
-    private static Drawable loadIconFromTheme(Context context,
+    static Drawable loadIconFromTheme(Context context,
 			PackageManager manager, String themePackage, String resourceName) {
 		Drawable icon=null;
     	Resources themeResources=null;

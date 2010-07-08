@@ -898,8 +898,20 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
             itemInfo.setActivity(component, Intent.FLAG_ACTIVITY_NEW_TASK |
                     Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            itemInfo.icon = activityInfo.loadIcon(packageManager);
+            //itemInfo.icon = activityInfo.loadIcon(packageManager);
             itemInfo.container = ItemInfo.NO_ID;
+            //TODO:ADW Load icon from theme/iconpack
+            String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
+            if(themePackage.equals(Launcher.THEME_DEFAULT)){
+            	itemInfo.icon =activityInfo.loadIcon(packageManager);
+            }else{
+            	Drawable tmpIcon = LauncherModel.loadIconFromTheme(context, packageManager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
+            	if(tmpIcon==null){
+            		itemInfo.icon = activityInfo.loadIcon(packageManager);
+            	}else{
+            		itemInfo.icon = tmpIcon;
+            	}
+            }
 
             return itemInfo;
         }
