@@ -187,7 +187,6 @@
 
     <string name="pref_title_build_info">Informationen</string>
     <string name="pref_title_adw_version">ADW.Launcher-Version</string>
-    <string name="adw_donate">Bitte spende, wenn dir meine Arbeit gefällt :-)</string>
 
     <string name="pref_title_icon_highlights">Farbe: Auswahl gedrückt</string>
     <string name="pref_summary_icon_highlights">Stelle Farbe für den Icon-Hintergrund bei Auswahl ein</string>
