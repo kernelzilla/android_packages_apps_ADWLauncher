@@ -28,7 +28,7 @@
     android:nextFocusDown="@+id/all_apps"
     android:nextFocusRight="@id/all_apps_view"
     android:visibility="gone"
-    android:paddingBottom="50dip"
+    android:paddingBottom="60dip"
     android:verticalSpacing="10dip"
     android:numColumns="4"
     launcher:pager_height="15dip" />
