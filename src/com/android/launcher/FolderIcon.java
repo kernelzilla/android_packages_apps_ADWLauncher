@@ -17,6 +17,8 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -45,13 +47,42 @@ public class FolderIcon extends BubbleTextView implements DropTarget {
             UserFolderInfo folderInfo) {
 
         FolderIcon icon = (FolderIcon) LayoutInflater.from(launcher).inflate(resId, group, false);
-
+        //TODO:ADW Load icon from theme/iconpack
+        Drawable dclosed;
+        Drawable dopen;
         final Resources resources = launcher.getResources();
+        String themePackage=AlmostNexusSettingsHelper.getThemePackageName(launcher, Launcher.THEME_DEFAULT);
+        if(themePackage.equals(Launcher.THEME_DEFAULT)){
+        	android.util.Log.d("FOLDERS","stock icons");
+        	dclosed = resources.getDrawable(R.drawable.ic_launcher_folder);
+        	dopen = resources.getDrawable(R.drawable.ic_launcher_folder_open);
+        }else{
+        	android.util.Log.d("FOLDERS","themed icons");
+        	Drawable tmpIcon1 = loadFolderFromTheme(launcher, launcher.getPackageManager(), themePackage,"ic_launcher_folder");
+        	if(tmpIcon1==null){
+        		android.util.Log.d("FOLDERS","reverting to stock closed icon");
+        		dclosed = resources.getDrawable(R.drawable.ic_launcher_folder);
+        	}else{
+        		android.util.Log.d("FOLDERS","closed icon themed!!!");
+        		dclosed = tmpIcon1;
+        	}
+        	Drawable tmpIcon2 = loadFolderFromTheme(launcher, launcher.getPackageManager(), themePackage,"ic_launcher_folder_open");
+        	if(tmpIcon2==null){
+        		android.util.Log.d("FOLDERS","reverting to stock open icon");
+        		dopen = resources.getDrawable(R.drawable.ic_launcher_folder_open);
+        	}else{
+        		android.util.Log.d("FOLDERS","open icon themed!!!");
+        		dopen = tmpIcon2;
+        	}
+        }
+        icon.mCloseIcon=Utilities.createIconThumbnail(dclosed, launcher);
+        icon.mOpenIcon=dopen;
+        /*final Resources resources = launcher.getResources();
         Drawable d = resources.getDrawable(R.drawable.ic_launcher_folder);
         d = Utilities.createIconThumbnail(d, launcher);
         icon.mCloseIcon = d;
-        icon.mOpenIcon = resources.getDrawable(R.drawable.ic_launcher_folder_open);
-        icon.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+        icon.mOpenIcon = resources.getDrawable(R.drawable.ic_launcher_folder_open);*/
+        icon.setCompoundDrawablesWithIntrinsicBounds(null, dclosed, null, null);
         if(!AlmostNexusSettingsHelper.getUIHideLabels(launcher))icon.setText(folderInfo.title);
         icon.setTag(folderInfo);
         icon.setOnClickListener(launcher);
@@ -94,4 +125,30 @@ public class FolderIcon extends BubbleTextView implements DropTarget {
             Object dragInfo) {
         setCompoundDrawablesWithIntrinsicBounds(null, mCloseIcon, null, null);
     }
+    /**
+     * ADW: Load the floder icon drawables from the theme
+     * @param context
+     * @param manager
+     * @param themePackage
+     * @param resourceName
+     * @return
+     */
+    static Drawable loadFolderFromTheme(Context context,
+			PackageManager manager, String themePackage, String resourceName) {
+		Drawable icon=null;
+    	Resources themeResources=null;
+    	try {
+			themeResources=manager.getResourcesForApplication(themePackage);
+		} catch (NameNotFoundException e) {
+			//e.printStackTrace();
+		}
+		if(themeResources!=null){
+			int resource_id=themeResources.getIdentifier (resourceName, "drawable", themePackage);
+			if(resource_id!=0){
+				icon=themeResources.getDrawable(resource_id);
+			}
+		}
+		return icon;
+	}
+    
 }
