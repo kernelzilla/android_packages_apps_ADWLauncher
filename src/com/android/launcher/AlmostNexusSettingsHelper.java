@@ -100,6 +100,11 @@ public final class AlmostNexusSettingsHelper {
 		boolean newD = sp.getBoolean("uiCloseDockbar", context.getResources().getBoolean(R.bool.config_uiCloseDockbar));
 		return newD;
 	}
+	public static boolean getUICloseFolder(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		boolean newD = sp.getBoolean("uiCloseFolder", context.getResources().getBoolean(R.bool.config_uiCloseFolder));
+		return newD;
+	}
 	public static boolean getUILAB(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		boolean newD = sp.getBoolean("uiLAB", context.getResources().getBoolean(R.bool.config_uiLAB));

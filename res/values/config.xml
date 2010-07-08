@@ -41,6 +41,7 @@
     <bool name="config_uiDots">true</bool>
     <bool name="config_uiDockbar">true</bool>
     <bool name="config_uiCloseDockbar">false</bool>
+    <bool name="config_uiCloseFolder">false</bool>
     <bool name="config_uiLAB">true</bool>
     <bool name="config_uiRAB">true</bool>
     <bool name="config_uiTint">false</bool>
