@@ -784,13 +784,14 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     	Log.d("SUPERLAUNCHER","We should load theme from:"+themePackage);
     	PackageManager pm=getPackageManager();
     	Resources themeResources=null;
-    	if(themePackage!=THEME_DEFAULT){
+    	if(!themePackage.equals(THEME_DEFAULT)){
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
 				Log.d("ThemeLoader", "found a resource:"+themeResources);
 			} catch (NameNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//ADW The saved theme was uninstalled so we save the default one
+			    AlmostNexusSettingsHelper.setThemePackageName(this, Launcher.THEME_DEFAULT);
+				themeResources=getResources();
 			}
     	}else{
     		themeResources=getResources();

@@ -13,6 +13,9 @@ import android.graphics.drawable.StateListDrawable;
 import android.widget.ImageView;
 
 public class IconHighlights {
+	public static final int TYPE_DESKTOP=1;
+	public static final int TYPE_DOCKBAR=2;
+	public static final int TYPE_DRAWER=3;
 	public IconHighlights(Context context) {
 		// TODO Auto-generated constructor stub
 	}
@@ -44,49 +47,59 @@ public class IconHighlights {
 		drawable.addState(new int[]{-stateFocused, -stateWindowFocused}, null);
 		return drawable;
 	}
-	private static Drawable oldSelector(Context context, boolean forDockbar){
+	private static Drawable oldSelector(Context context, int type){
 		int selectedColor=AlmostNexusSettingsHelper.getHighlightsColorFocus(context);
 		int pressedColor=AlmostNexusSettingsHelper.getHighlightsColor(context);
     	//ADW: Load the specified theme
     	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
     	Resources themeResources=null;
-    	if(themePackage!=Launcher.THEME_DEFAULT){
+    	if(!themePackage.equals(Launcher.THEME_DEFAULT)){
         	PackageManager pm=context.getPackageManager();
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
 			} catch (NameNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				themeResources=context.getResources();
 			}
     	}else{
     		themeResources=context.getResources();
     	}
     	Drawable drawable=null;
+    	//use_drawer_icons_bg
 		if(themeResources!=null){
-			int resource_id=0;
-			if(forDockbar){
-				resource_id=themeResources.getIdentifier("dockbar_selector", "drawable", themePackage);
-			}else{
-				resource_id=themeResources.getIdentifier("shortcut_selector", "drawable", themePackage);
-			}
-			if(resource_id!=0){
-				drawable=themeResources.getDrawable(resource_id);
-			}else{
-				if(forDockbar){
-					drawable=themeResources.getDrawable(R.drawable.dockbar_selector);
-				}else{
-					drawable=themeResources.getDrawable(R.drawable.shortcut_selector);
+			boolean use_drawer_icons_bgs=false;
+			if(type==TYPE_DRAWER){
+				int use_drawer_icons_bgs_id=themeResources.getIdentifier("use_drawer_icons_bg", "bool", themePackage);
+				if(use_drawer_icons_bgs_id!=0){
+					use_drawer_icons_bgs=themeResources.getBoolean(use_drawer_icons_bgs_id);
 				}
 			}
+			if(type!=TYPE_DRAWER || use_drawer_icons_bgs){
+				int resource_id=0;
+				if(type==TYPE_DOCKBAR){
+					resource_id=themeResources.getIdentifier("dockbar_selector", "drawable", themePackage);
+				}else{
+					resource_id=themeResources.getIdentifier("shortcut_selector", "drawable", themePackage);
+				}
+				if(resource_id!=0){
+					drawable=themeResources.getDrawable(resource_id);
+				}else{
+					if(type==TYPE_DOCKBAR){
+						drawable=themeResources.getDrawable(R.drawable.dockbar_selector);
+					}else{
+						drawable=themeResources.getDrawable(R.drawable.shortcut_selector);
+					}
+				}
+				drawable.setColorFilter(pressedColor, Mode.SRC_ATOP);
+			}
 		}
-		drawable.setColorFilter(pressedColor, Mode.SRC_ATOP);
 		return drawable;
 	}
-	public static Drawable getDrawable(Context context, boolean forDockbar){
+	public static Drawable getDrawable(Context context, int type){
 		if(AlmostNexusSettingsHelper.getUINewSelectors(context)){
 			return newSelector(context);
 		}else{
-			return oldSelector(context, forDockbar);
+			return oldSelector(context, type);
 		}
 	}
 }

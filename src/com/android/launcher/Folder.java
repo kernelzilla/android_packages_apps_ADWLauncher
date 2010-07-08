@@ -79,12 +79,12 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
     	Log.d("SUPERLAUNCHER","FOLDERS :We should load theme from:"+themePackage);
     	PackageManager pm=getContext().getPackageManager();
     	Resources themeResources=null;
-    	if(themePackage!=Launcher.THEME_DEFAULT){
+    	if(!themePackage.equals(Launcher.THEME_DEFAULT)){
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
 			} catch (NameNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
     	}else{
     		themeResources=getResources();

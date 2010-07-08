@@ -33,7 +33,7 @@ import android.text.Layout;
  * too aggressive.
  */
 public class BubbleTextView extends TextView {
-    private static final float CORNER_RADIUS = 8.0f;
+    //private static final float CORNER_RADIUS = 8.0f;
     private static final float PADDING_H = 5.0f;
     private static final float PADDING_V = 1.0f;
 
@@ -45,7 +45,8 @@ public class BubbleTextView extends TextView {
     private float mCornerRadius;
     private float mPaddingH;
     private float mPaddingV;
-
+    //adw custom corner radius themable
+    private float mCustomCornerRadius=8.0f;
     public BubbleTextView(Context context) {
         super(context);
         init();
@@ -64,18 +65,18 @@ public class BubbleTextView extends TextView {
     private void init() {
         setFocusable(true);
         //mBackground = getBackground();
-        mBackground=IconHighlights.getDrawable(getContext(),false);
+        mBackground=IconHighlights.getDrawable(getContext(),IconHighlights.TYPE_DESKTOP);
         setBackgroundDrawable(null);
         mBackground.setCallback(this);
         //ADW: Load textcolor and bubble color from theme
         String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
         int color=getContext().getResources().getColor(R.color.bubble_dark_background);
-        if(themePackage!=Launcher.THEME_DEFAULT){
+        if(!themePackage.equals(Launcher.THEME_DEFAULT)){
         	Resources themeResources=null;
         	try {
     			themeResources=getContext().getPackageManager().getResourcesForApplication(themePackage);
     		} catch (NameNotFoundException e) {
-    			e.printStackTrace();
+    			//e.printStackTrace();
     		}
     		if(themeResources!=null){
     			int resourceId=themeResources.getIdentifier("bubble_color", "color", themePackage);
@@ -86,6 +87,11 @@ public class BubbleTextView extends TextView {
     			if(textColorId!=0){
     				setTextColor(themeResources.getColor(textColorId));
     			}
+    			int cornerId=themeResources.getIdentifier("bubble_radius", "integer", themePackage);
+    			if(cornerId!=0){
+    				mCustomCornerRadius=(float)themeResources.getInteger(cornerId);
+    				android.util.Log.d("BubbleTExtView","corner radius="+mCustomCornerRadius);
+    			}
     		}
         }
         
@@ -93,7 +99,8 @@ public class BubbleTextView extends TextView {
         //mPaint.setColor(getContext().getResources().getColor(R.color.bubble_dark_background));
         mPaint.setColor(color);
         final float scale = getContext().getResources().getDisplayMetrics().density;
-        mCornerRadius = CORNER_RADIUS * scale;
+        //mCornerRadius = CORNER_RADIUS * scale;
+        mCornerRadius = mCustomCornerRadius * scale;
         mPaddingH = PADDING_H * scale;
         //noinspection PointlessArithmeticExpression
         mPaddingV = PADDING_V * scale;

@@ -474,7 +474,7 @@ public class LauncherModel {
         }
         //TODO:ADW Load icon from theme/iconpack
         String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
-        if(themePackage==Launcher.THEME_DEFAULT){
+        if(themePackage.equals(Launcher.THEME_DEFAULT)){
         	application.icon = Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);
         }else{
         	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,info.activityInfo.packageName+"_"+info.activityInfo.name);
@@ -1272,7 +1272,7 @@ public class LauncherModel {
         final ApplicationInfo info = new ApplicationInfo();
         final ActivityInfo activityInfo = resolveInfo.activityInfo;
         String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
-        if(themePackage==Launcher.THEME_DEFAULT){
+        if(themePackage.equals(Launcher.THEME_DEFAULT)){
         	info.icon = Utilities.createIconThumbnail(activityInfo.loadIcon(manager), context);
         }else{
         	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
@@ -1527,7 +1527,7 @@ public class LauncherModel {
     	try {
 			themeResources=manager.getResourcesForApplication(themePackage);
 		} catch (NameNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if(themeResources!=null){
 			int resource_id=themeResources.getIdentifier (resourceName, "drawable", themePackage);

@@ -53,12 +53,12 @@ public class PreviewPager extends ViewGroup {
     	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
     	PackageManager pm=getContext().getPackageManager();
     	Resources themeResources=null;
-    	if(themePackage!=Launcher.THEME_DEFAULT){
+    	if(!themePackage.equals(Launcher.THEME_DEFAULT)){
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
 			} catch (NameNotFoundException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
     	}
     	int resource_id=0;
