@@ -161,6 +161,9 @@
     <string name="pref_title_closing_dockbar">ドックバーを閉じる</string>
     <string name="pref_summary_closing_dockbar">アプリケーションを起動したら自動的にドックバーを閉じる</string>
 
+    <string name="pref_title_closing_folder">フォルダを閉じる</string>
+    <string name="pref_summary_closing_folder">アプリケーションを起動したら自動的にフォルダを閉じる</string>
+
     <string name="pref_title_lab">LAB(左ボタン)</string>
     <string name="pref_summary_lab">カスタマイズ可能な左ボタンを有効にする</string>
 
