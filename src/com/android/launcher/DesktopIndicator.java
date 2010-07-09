@@ -1,6 +1,9 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -20,25 +23,29 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 	public static final int INDICATOR_TYPE_PAGER=1;
 	public static final int INDICATOR_TYPE_SLIDER_TOP=2;
 	public static final int INDICATOR_TYPE_SLIDER_BOTTOM=3;
+	private static final int INDICATOR_DEFAULT_COLOR=0x99FFFFFF;
 	private int mIndicatorType=1;
 	private int mItems=5;
 	private int mCurrent=0;
-	private int mIndicatorColor=0x99FFFFFF;
+	private int mIndicatorColor=INDICATOR_DEFAULT_COLOR;
 	private int mVisibleTime=300;
 	private Animation mAnimation;
 	private Handler mHandler=new Handler();
 	public DesktopIndicator(Context context) {
 		super(context);
+		loadThemeColors(context);
 		initIndicator(context);
 	}
 
 	public DesktopIndicator(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		loadThemeColors(context);
 		initIndicator(context);
 	}
 
 	public DesktopIndicator(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		loadThemeColors(context);
 		initIndicator(context);
 	}
 	private void initIndicator(Context context){
@@ -229,5 +236,22 @@ public class DesktopIndicator extends ViewGroup implements AnimationListener {
 		if(mVisibleTime<0){
 			setVisibility(View.VISIBLE);
 		}
+	}
+	private void loadThemeColors(Context context){
+    	//ADW: Load the specified theme
+    	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
+    	Resources themeResources=null;
+    	if(!themePackage.equals(Launcher.THEME_DEFAULT)){
+        	PackageManager pm=context.getPackageManager();
+	    	try {
+				themeResources=pm.getResourcesForApplication(themePackage);
+				int desktop_indicator_color_id=themeResources.getIdentifier("desktop_indicator_color", "color", themePackage);
+				if(desktop_indicator_color_id!=0){
+					mIndicatorColor=themeResources.getColor(desktop_indicator_color_id);
+				}
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+			}
+    	}
 	}
 }
