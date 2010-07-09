@@ -16,8 +16,10 @@
 
 package com.android.launcher;
 
+import android.app.SearchManager;
 import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.ContentProvider;
 import android.content.Context;
 import android.content.ContentValues;
@@ -46,6 +48,7 @@ import android.provider.Settings;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParser;
@@ -525,14 +528,13 @@ public class LauncherProvider extends ContentProvider {
 
                     TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.Favorite);
 
-                    values.clear();          
+                    values.clear();
                     String container = a.getString(R.styleable.Favorite_container);
                     if (container == null) {
                         values.put(LauncherSettings.Favorites.CONTAINER, LauncherSettings.Favorites.CONTAINER_DESKTOP);
                     } else {
                         values.put(LauncherSettings.Favorites.CONTAINER, container);
                     }
-
                     values.put(LauncherSettings.Favorites.SCREEN,
                             a.getString(R.styleable.Favorite_screen));
                     values.put(LauncherSettings.Favorites.CELLX,
@@ -541,13 +543,13 @@ public class LauncherProvider extends ContentProvider {
                             a.getString(R.styleable.Favorite_y));
 
                     if (TAG_FAVORITE.equals(name)) {
-                        added = addShortcut(db, values, a, packageManager, intent);
+                        added = addAppShortcut(db, values, a, packageManager, intent);
                     } else if (TAG_SEARCH.equals(name)) {
                         added = addSearchWidget(db, values);
                     } else if (TAG_CLOCK.equals(name)) {
                         added = addClockWidget(db, values);
                     } else if (TAG_APPWIDGET.equals(name)) {
-                        added = addAppWidget(db, values, a);
+                        added = addAppWidget(db, values, a, packageManager);
                     } else if (TAG_SHORTCUT.equals(name)) {
                         added = addUriShortcut(db, values, a);
                     }
@@ -565,18 +567,27 @@ public class LauncherProvider extends ContentProvider {
             return i;
         }
 
-        private boolean addShortcut(SQLiteDatabase db, ContentValues values, TypedArray a,
+        private boolean addAppShortcut(SQLiteDatabase db, ContentValues values, TypedArray a,
                 PackageManager packageManager, Intent intent) {
 
             ActivityInfo info;
             String packageName = a.getString(R.styleable.Favorite_packageName);
             String className = a.getString(R.styleable.Favorite_className);
             try {
-                ComponentName cn = new ComponentName(packageName, className);
-                info = packageManager.getActivityInfo(cn, 0);
+                ComponentName cn;
+                try {
+                    cn = new ComponentName(packageName, className);
+                    info = packageManager.getActivityInfo(cn, 0);
+                } catch (PackageManager.NameNotFoundException nnfe) {
+                    String[] packages = packageManager.currentToCanonicalPackageNames(
+                        new String[] { packageName });
+                    cn = new ComponentName(packages[0], className);
+                    info = packageManager.getActivityInfo(cn, 0);
+                }
+
                 intent.setComponent(cn);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                 values.put(Favorites.INTENT, intent.toUri(0));
                 values.put(Favorites.TITLE, info.loadLabel(packageManager).toString());
                 values.put(Favorites.ITEM_TYPE, Favorites.ITEM_TYPE_APPLICATION);
@@ -591,82 +602,101 @@ public class LauncherProvider extends ContentProvider {
             return true;
         }
 
-        private boolean addSearchWidget(SQLiteDatabase db, ContentValues values) {
-            // Add a search box
-            values.put(Favorites.ITEM_TYPE, Favorites.ITEM_TYPE_WIDGET_SEARCH);
-            values.put(Favorites.SPANX, 4);
-            values.put(Favorites.SPANY, 1);
-            db.insert(TABLE_FAVORITES, null, values);
+        private ComponentName getSearchWidgetProvider() {
+            SearchManager searchManager =
+                    (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
+            ComponentName searchComponent = searchManager.getGlobalSearchActivity();
+            if (searchComponent == null) return null;
+            return getProviderInPackage(searchComponent.getPackageName());
+        }
 
-            return true;
+        /**
+         * Gets an appwidget provider from the given package. If the package contains more than
+         * one appwidget provider, an arbitrary one is returned.
+         */
+        private ComponentName getProviderInPackage(String packageName) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
+            List<AppWidgetProviderInfo> providers = appWidgetManager.getInstalledProviders();
+            if (providers == null) return null;
+            final int providerCount = providers.size();
+            for (int i = 0; i < providerCount; i++) {
+                ComponentName provider = providers.get(i).provider;
+                if (provider != null && provider.getPackageName().equals(packageName)) {
+                    return provider;
+                }
+            }
+            return null;
+        }
+
+        private boolean addSearchWidget(SQLiteDatabase db, ContentValues values) {
+            ComponentName cn = getSearchWidgetProvider();
+            return addAppWidget(db, values, cn, 4, 1);
         }
 
         private boolean addClockWidget(SQLiteDatabase db, ContentValues values) {
-            final int[] bindSources = new int[] {
-                    Favorites.ITEM_TYPE_WIDGET_CLOCK,
-            };
-
-            final ArrayList<ComponentName> bindTargets = new ArrayList<ComponentName>();
-            bindTargets.add(new ComponentName("com.android.alarmclock",
-                    "com.android.alarmclock.AnalogAppWidgetProvider"));
-
-            boolean allocatedAppWidgets = false;
-
-            // Try binding to an analog clock widget
-            try {
-                int appWidgetId = mAppWidgetHost.allocateAppWidgetId();
-
-                values.put(Favorites.ITEM_TYPE, Favorites.ITEM_TYPE_WIDGET_CLOCK);
-                values.put(Favorites.SPANX, 2);
-                values.put(Favorites.SPANY, 2);
-                values.put(Favorites.APPWIDGET_ID, appWidgetId);
-                db.insert(TABLE_FAVORITES, null, values);
-
-                allocatedAppWidgets = true;
-            } catch (RuntimeException ex) {
-                Log.e(LOG_TAG, "Problem allocating appWidgetId", ex);
-            }
-
-            // If any appWidgetIds allocated, then launch over to binder
-            if (allocatedAppWidgets) {
-                launchAppWidgetBinder(bindSources, bindTargets);
-            }
-
-            return allocatedAppWidgets;
+            ComponentName cn = new ComponentName("com.android.alarmclock",
+                    "com.android.alarmclock.AnalogAppWidgetProvider");
+            return addAppWidget(db, values, cn, 2, 2);
         }
-        
-        private boolean addAppWidget(SQLiteDatabase db, ContentValues values, TypedArray a) {
+
+        private boolean addAppWidget(SQLiteDatabase db, ContentValues values, TypedArray a,
+                PackageManager packageManager) {
+
             String packageName = a.getString(R.styleable.Favorite_packageName);
             String className = a.getString(R.styleable.Favorite_className);
 
             if (packageName == null || className == null) {
                 return false;
             }
-            
+
+            boolean hasPackage = true;
             ComponentName cn = new ComponentName(packageName, className);
-            
+            try {
+                packageManager.getReceiverInfo(cn, 0);
+            } catch (Exception e) {
+                String[] packages = packageManager.currentToCanonicalPackageNames(
+                        new String[] { packageName });
+                cn = new ComponentName(packages[0], className);
+                try {
+                    packageManager.getReceiverInfo(cn, 0);
+                } catch (Exception e1) {
+                    hasPackage = false;
+                }
+            }
+
+            if (hasPackage) {
+                int spanX = a.getInt(R.styleable.Favorite_spanX, 0);
+                int spanY = a.getInt(R.styleable.Favorite_spanY, 0);
+                return addAppWidget(db, values, cn, spanX, spanY);
+            }
+
+            return false;
+        }
+
+        private boolean addAppWidget(SQLiteDatabase db, ContentValues values, ComponentName cn,
+                int spanX, int spanY) {
             boolean allocatedAppWidgets = false;
             final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
 
             try {
                 int appWidgetId = mAppWidgetHost.allocateAppWidgetId();
-                
+
                 values.put(Favorites.ITEM_TYPE, Favorites.ITEM_TYPE_APPWIDGET);
-                values.put(Favorites.SPANX, a.getString(R.styleable.Favorite_spanX));
-                values.put(Favorites.SPANY, a.getString(R.styleable.Favorite_spanY));
+                values.put(Favorites.SPANX, spanX);
+                values.put(Favorites.SPANY, spanY);
                 values.put(Favorites.APPWIDGET_ID, appWidgetId);
                 db.insert(TABLE_FAVORITES, null, values);
 
                 allocatedAppWidgets = true;
-                
+
                 appWidgetManager.bindAppWidgetId(appWidgetId, cn);
             } catch (RuntimeException ex) {
                 Log.e(LOG_TAG, "Problem allocating appWidgetId", ex);
             }
-            
+
             return allocatedAppWidgets;
         }
-        
+
         private boolean addUriShortcut(SQLiteDatabase db, ContentValues values,
                 TypedArray a) {
             Resources r = mContext.getResources();
