@@ -2457,6 +2457,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                      }else{
                     	 for(int i=0;i<packages.length;i++){
                     		 sModel.addPackage(Launcher.this, packages[i]);
+                    		 updateShortcutsForPackage(packages[i]);
                     	 }
                      }
                 } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
@@ -2467,6 +2468,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                      }else{
                     	 for(int i=0;i<packages.length;i++){
                     		 sModel.removePackage(Launcher.this, packages[i]);
+                    		 //ADW: We tell desktop to update packages
+                    		 //(probably will load the standard android icon)
+                    		 //to show the user the app is no more available.
+                    		 //We may add the froyo code to just load a grayscale version of the icon, but...
+                    		 updateShortcutsForPackage(packages[i]);
                     	 }
                      }
                 }
