@@ -76,7 +76,6 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
         mCloseButton.setOnLongClickListener(this);
     	//ADW: Load the specified theme
     	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
-    	Log.d("SUPERLAUNCHER","FOLDERS :We should load theme from:"+themePackage);
     	PackageManager pm=getContext().getPackageManager();
     	Resources themeResources=null;
     	if(!themePackage.equals(Launcher.THEME_DEFAULT)){

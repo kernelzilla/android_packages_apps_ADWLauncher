@@ -199,10 +199,8 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
             }
         });  
         //TODO: ADW, theme settings
-        //ArrayAdapter<ThemeData> mAdapter;
     	SharedPreferences sp=getPreferenceManager().getSharedPreferences();
     	final String themePackage=sp.getString("themePackageName", Launcher.THEME_DEFAULT);
-    	//Log.d("ThemeLoader", "The previously saved theme is:"+themePackage);
         ListPreference lp = (ListPreference)findPreference("themePackageName");
         lp.setOnPreferenceChangeListener(this);
 		Intent intent=new Intent("org.adw.launcher.THEMES");
@@ -214,7 +212,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 		entries[0]=Launcher.THEME_DEFAULT;
 		values[0]=Launcher.THEME_DEFAULT;
 		for(int i=0;i<themes.size();i++){
-			Log.d("ThemeLoader", "There's a theme:"+themes.get(i));
 			String appPackageName=((ResolveInfo)themes.get(i)).activityInfo.packageName.toString();
 			entries[i+1]=appPackageName;
 			values[i+1]=appPackageName;
@@ -227,7 +224,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 	public void applyTheme(View v){
 		PreviewPreference themePreview=(PreviewPreference) findPreference("themePreview");
 		String packageName=themePreview.getValue().toString();
-		Log.d("Preferences","APPLY THEME!!!"+packageName);
 		//this time we really save the themepackagename
 		SharedPreferences sp = getPreferenceManager().getSharedPreferences();
 	    SharedPreferences.Editor editor = sp.edit();
@@ -242,13 +238,10 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
     			//e.printStackTrace();
     		}
     		if(themeResources!=null){
-    			Log.d("THEMESETTINGS","Try to load specific theme settings for:"+packageName);
     			int config_uiTintId=themeResources.getIdentifier("config_uiTint", "bool", packageName.toString());
     			if(config_uiTintId!=0){
-    				Log.d("THEMESETTINGS","uiTint found at:"+config_uiTintId);
     				boolean config_uiTint=themeResources.getBoolean(config_uiTintId);
     				editor.putBoolean("config_uiTint", config_uiTint);
-    				Log.d("THEMESETTINGS","uiTint preference saved");
     			}
     			int config_uiAppsBgId=themeResources.getIdentifier("config_uiAppsBg", "bool", packageName.toString());
     			if(config_uiAppsBgId!=0){
@@ -363,7 +356,6 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 				ab2.setEnabled(true);
 			}
 		}else if(preference.getKey().equals("themePackageName")) {
-			android.util.Log.d("PREFERENCES","new theme="+newValue);
 			PreviewPreference themePreview=(PreviewPreference) findPreference("themePreview");
 			themePreview.setTheme(newValue.toString());
 			return false;

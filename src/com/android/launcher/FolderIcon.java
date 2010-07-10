@@ -53,25 +53,19 @@ public class FolderIcon extends BubbleTextView implements DropTarget {
         final Resources resources = launcher.getResources();
         String themePackage=AlmostNexusSettingsHelper.getThemePackageName(launcher, Launcher.THEME_DEFAULT);
         if(themePackage.equals(Launcher.THEME_DEFAULT)){
-        	android.util.Log.d("FOLDERS","stock icons");
         	dclosed = resources.getDrawable(R.drawable.ic_launcher_folder);
         	dopen = resources.getDrawable(R.drawable.ic_launcher_folder_open);
         }else{
-        	android.util.Log.d("FOLDERS","themed icons");
         	Drawable tmpIcon1 = loadFolderFromTheme(launcher, launcher.getPackageManager(), themePackage,"ic_launcher_folder");
         	if(tmpIcon1==null){
-        		android.util.Log.d("FOLDERS","reverting to stock closed icon");
         		dclosed = resources.getDrawable(R.drawable.ic_launcher_folder);
         	}else{
-        		android.util.Log.d("FOLDERS","closed icon themed!!!");
         		dclosed = tmpIcon1;
         	}
         	Drawable tmpIcon2 = loadFolderFromTheme(launcher, launcher.getPackageManager(), themePackage,"ic_launcher_folder_open");
         	if(tmpIcon2==null){
-        		android.util.Log.d("FOLDERS","reverting to stock open icon");
         		dopen = resources.getDrawable(R.drawable.ic_launcher_folder_open);
         	}else{
-        		android.util.Log.d("FOLDERS","open icon themed!!!");
         		dopen = tmpIcon2;
         	}
         }

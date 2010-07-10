@@ -351,13 +351,11 @@ public class SliderView extends ImageView {
         Starter starter=new Starter();
         //ADW: Lets try to use the themed drawables....
     	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
-    	Log.d("SUPERLAUNCHER","We should load theme from:"+themePackage);
     	PackageManager pm=getContext().getPackageManager();
     	Resources themeResources=null;
     	if(!themePackage.equals(Launcher.THEME_DEFAULT)){
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
-				Log.d("ThemeLoader", "found a resource:"+themeResources);
 			} catch (NameNotFoundException e) {
 				themeResources=getResources();
 			}

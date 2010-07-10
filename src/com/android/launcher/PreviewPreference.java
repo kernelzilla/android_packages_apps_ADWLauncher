@@ -39,7 +39,6 @@ public class PreviewPreference extends Preference {
 	protected void onBindView(View view) {
 		// TODO Auto-generated method stub
 		super.onBindView(view);
-		android.util.Log.d("PreferencePreview","onBindView:"+themePackageName);
 		if(themePackageName!=null && themePackageName.toString().length()>0){
 			TextView vThemeTitle= (TextView) view.findViewById(R.id.ThemeTitle);
 			vThemeTitle.setText(themeName);
@@ -61,7 +60,6 @@ public class PreviewPreference extends Preference {
 		}
 	}
 	public void setTheme(CharSequence packageName){
-		android.util.Log.d("PreferencePreview","setThemeName:"+packageName);
 		themePackageName=packageName;
 		themeName=null;
 		themeDescription=null;

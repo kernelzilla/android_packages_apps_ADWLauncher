@@ -437,7 +437,6 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
 	@Override
 	public void setBackgroundDrawable(Drawable d) {
 		// TODO Auto-generated method stub
-		Log.d("MINILAUNCHER","SetBackground");
 		if(mBackground!=null)mBackground.setCallback(null);
 		super.setBackgroundDrawable(d);
 		mBackground=(TransitionDrawable) d;
