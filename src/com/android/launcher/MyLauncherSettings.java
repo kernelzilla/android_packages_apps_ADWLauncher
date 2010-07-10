@@ -213,7 +213,8 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 		values[0]=Launcher.THEME_DEFAULT;
 		for(int i=0;i<themes.size();i++){
 			String appPackageName=((ResolveInfo)themes.get(i)).activityInfo.packageName.toString();
-			entries[i+1]=appPackageName;
+			String themeName=((ResolveInfo)themes.get(i)).loadLabel(pm).toString();
+			entries[i+1]=themeName;
 			values[i+1]=appPackageName;
 		}
 		lp.setEntries(entries);

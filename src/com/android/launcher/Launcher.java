@@ -300,7 +300,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	//ADW Theme constants
 	public static final int THEME_ITEM_BACKGROUND=0;
 	public static final int THEME_ITEM_FOREGROUND=1;
-	public static final String THEME_DEFAULT="adw";
+	public static final String THEME_DEFAULT="ADW.Default theme";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
