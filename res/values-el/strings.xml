@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
 * Copyright (C) 2008 The Android Open Source Project
@@ -242,7 +242,6 @@
     <string name="pref_title_build_info">πληροφοριες εκδοσης εφαρμογης</string>
     <string name="pref_title_adw_version">εκδοση ADW </string>
     
-    <string name="pref_title_drawer_background_alpha">φοντο alpha</string>
     <string name="pref_summary_drawer_background_alpha">οριστε το επιπεδο διαφανειας του φοντου του συρταριου</string>
     <string name="pref_dialog_drawer_background_alpha">οριστε το επιπεδο διαφανειας του φοντου του συρταριου</string>
 </resources>
