@@ -160,6 +160,9 @@
     <string name="pref_title_closing_dockbar">Automatisch schliessen</string>
     <string name="pref_summary_closing_dockbar">Dockzeile nach Anwendungsstart automatisch schliessen</string>
 
+    <string name="pref_title_closing_folder">Ordner schliessen</string>
+    <string name="pref_summary_closing_folder">Ordner nach Programmstart automatisch schliessen</string>
+
     <string name="pref_title_lab">LAB</string>
     <string name="pref_summary_lab">Konfigurierbare linke Aktionstaste (LAB) zeigen</string>
 
