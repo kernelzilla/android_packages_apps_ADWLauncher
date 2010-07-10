@@ -85,13 +85,15 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
 			}
-    	}else{
-    		themeResources=getResources();
     	}
 		if(themeResources!=null){
 			//Action Buttons
 			Launcher.loadThemeResource(themeResources,themePackage,"box_launcher_top",mCloseButton,Launcher.THEME_ITEM_BACKGROUND,R.drawable.box_launcher_top);
 			Launcher.loadThemeResource(themeResources,themePackage,"box_launcher_bottom",mContent,Launcher.THEME_ITEM_BACKGROUND,R.drawable.box_launcher_bottom);
+			int grid_selector_id=themeResources.getIdentifier("grid_selector", "drawable", themePackage);
+			if(grid_selector_id!=0){
+				mContent.setSelector(themeResources.getDrawable(grid_selector_id));
+			}
 		}
         
     }
