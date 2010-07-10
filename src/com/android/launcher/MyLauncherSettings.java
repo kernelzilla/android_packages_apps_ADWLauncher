@@ -683,5 +683,12 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
             outChannel.close();
         }
     }
+    public void getThemes(View v){
+    	//TODO:warn theme devs to use "ADWTheme" as keyword.
+    	Uri marketUri = Uri.parse("market://search?q=ADWTheme");
+        Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(marketUri);
+        startActivity(marketIntent);
+        finish();
+    }
 }
 

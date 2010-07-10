@@ -320,8 +320,6 @@
 			  />
     		<org.adw.launcher.PreviewPreference
     			android:layout="@layout/theme_preview"
-	    	    android:title="@string/pref_title_theme_preview"
-	    	    android:summary="@string/pref_summary_theme_preview"
 	    		android:key="themePreview" />
 		
 	</PreferenceScreen>	

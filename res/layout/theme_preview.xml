@@ -4,32 +4,6 @@
   android:orientation="vertical"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
-      <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dip"
-        android:layout_marginRight="6dip"
-        android:layout_marginTop="6dip"
-        android:layout_marginBottom="6dip"
-        android:layout_weight="1">
-    
-        <TextView android:id="@+android:id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal" />
-            
-        <TextView android:id="@+android:id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@android:id/title"
-            android:layout_alignLeft="@android:id/title"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:maxLines="2" />
-
-    </RelativeLayout>
 	<TextView
 		android:id="@+id/ThemeTitle"
 		android:layout_width="fill_parent"
@@ -54,5 +28,12 @@
 		android:layout_height="wrap_content"
 	  	android:text="Apply"
 	  	android:onClick="applyTheme"
+	/>
+	<Button
+		android:id="@+id/ThemeSearch"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+	  	android:text="Get themes!"
+	  	android:onClick="getThemes"
 	/>
 </LinearLayout>
