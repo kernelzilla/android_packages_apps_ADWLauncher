@@ -294,23 +294,23 @@ public class Search extends LinearLayout
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
 			} catch (NameNotFoundException e) {
-				// TODO Auto-generated catch block
-				themeResources=getResources();
 			}
-    	}else{
-    		themeResources=getResources();
     	}
         Drawable googlePlaceholder = null;
-		int resource_id=0;
-		//Action Buttons
-		Launcher.loadThemeResource(themeResources,themePackage,"btn_search_dialog_voice",mVoiceButton,Launcher.THEME_ITEM_BACKGROUND,R.drawable.btn_search_dialog_voice);
-		Launcher.loadThemeResource(themeResources,themePackage,"textfield_searchwidget",mSearchText,Launcher.THEME_ITEM_BACKGROUND,R.drawable.textfield_searchwidget);
-		View search_bg=findViewById(R.id.search_plate);
-		Launcher.loadThemeResource(themeResources,themePackage,"search_floater",search_bg,Launcher.THEME_ITEM_BACKGROUND,R.drawable.search_floater);
-		resource_id=themeResources.getIdentifier ("placeholder_google", "drawable", themePackage);
-        // Set the placeholder text to be the Google logo within the search widget.
-		if(resource_id!=0){
-			googlePlaceholder=themeResources.getDrawable(resource_id);
+		if(themeResources!=null){
+	        int resource_id=0;
+			//Action Buttons
+			Launcher.loadThemeResource(themeResources,themePackage,"btn_search_dialog_voice",mVoiceButton,Launcher.THEME_ITEM_BACKGROUND);
+			Launcher.loadThemeResource(themeResources,themePackage,"textfield_searchwidget",mSearchText,Launcher.THEME_ITEM_BACKGROUND);
+			View search_bg=findViewById(R.id.search_plate);
+			Launcher.loadThemeResource(themeResources,themePackage,"search_floater",search_bg,Launcher.THEME_ITEM_BACKGROUND);
+			resource_id=themeResources.getIdentifier ("placeholder_google", "drawable", themePackage);
+	        // Set the placeholder text to be the Google logo within the search widget.
+			if(resource_id!=0){
+				googlePlaceholder=themeResources.getDrawable(resource_id);
+			}else{
+				googlePlaceholder=getContext().getResources().getDrawable(R.drawable.placeholder_google);
+			}
 		}else{
 			googlePlaceholder=getContext().getResources().getDrawable(R.drawable.placeholder_google);
 		}

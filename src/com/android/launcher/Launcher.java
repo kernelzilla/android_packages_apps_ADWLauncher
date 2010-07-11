@@ -789,29 +789,26 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			} catch (NameNotFoundException e) {
 				//ADW The saved theme was uninstalled so we save the default one
 			    AlmostNexusSettingsHelper.setThemePackageName(this, Launcher.THEME_DEFAULT);
-				themeResources=getResources();
 			}
-    	}else{
-    		themeResources=getResources();
     	}
 		if(themeResources!=null){
-			//Action Buttons
-			loadThemeResource(themeResources,themePackage,"lab_bg",mLAB,THEME_ITEM_BACKGROUND,R.drawable.lab_bg);
-			loadThemeResource(themeResources,themePackage,"rab_bg",mRAB,THEME_ITEM_BACKGROUND,R.drawable.rab_bg);
-			loadThemeResource(themeResources,themePackage,"lab2_bg",mLAB2,THEME_ITEM_BACKGROUND,R.drawable.lab2_bg);
-			loadThemeResource(themeResources,themePackage,"rab2_bg",mRAB2,THEME_ITEM_BACKGROUND,R.drawable.rab2_bg);
+	    	//Action Buttons
+			loadThemeResource(themeResources,themePackage,"lab_bg",mLAB,THEME_ITEM_BACKGROUND);
+			loadThemeResource(themeResources,themePackage,"rab_bg",mRAB,THEME_ITEM_BACKGROUND);
+			loadThemeResource(themeResources,themePackage,"lab2_bg",mLAB2,THEME_ITEM_BACKGROUND);
+			loadThemeResource(themeResources,themePackage,"rab2_bg",mRAB2,THEME_ITEM_BACKGROUND);
 			//App drawer button
-			loadThemeResource(themeResources,themePackage,"handle_icon",mHandleView,THEME_ITEM_FOREGROUND,R.drawable.handle_icon);
+			loadThemeResource(themeResources,themePackage,"handle_icon",mHandleView,THEME_ITEM_FOREGROUND);
 			View appsBg=findViewById(R.id.appsBg);
-			loadThemeResource(themeResources,themePackage,"handle",appsBg,THEME_ITEM_BACKGROUND,R.drawable.handle);
+			loadThemeResource(themeResources,themePackage,"handle",appsBg,THEME_ITEM_BACKGROUND);
 			//Deletezone
-			loadThemeResource(themeResources,themePackage,"ic_delete",deleteZone,THEME_ITEM_FOREGROUND,R.drawable.ic_delete);
-			loadThemeResource(themeResources,themePackage,"delete_zone_selector",deleteZone,THEME_ITEM_BACKGROUND,R.drawable.delete_zone_selector);
+			loadThemeResource(themeResources,themePackage,"ic_delete",deleteZone,THEME_ITEM_FOREGROUND);
+			loadThemeResource(themeResources,themePackage,"delete_zone_selector",deleteZone,THEME_ITEM_BACKGROUND);
 			//Desktop dots
-			loadThemeResource(themeResources,themePackage,"home_arrows_left",mPreviousView,THEME_ITEM_FOREGROUND,R.drawable.home_arrows_left);
-			loadThemeResource(themeResources,themePackage,"home_arrows_right",mNextView,THEME_ITEM_FOREGROUND,R.drawable.home_arrows_right);
+			loadThemeResource(themeResources,themePackage,"home_arrows_left",mPreviousView,THEME_ITEM_FOREGROUND);
+			loadThemeResource(themeResources,themePackage,"home_arrows_right",mNextView,THEME_ITEM_FOREGROUND);
 			//Dockbar
-			loadThemeResource(themeResources,themePackage,"dockbar_bg",mMiniLauncher,THEME_ITEM_BACKGROUND,R.drawable.dockbar_bg);
+			loadThemeResource(themeResources,themePackage,"dockbar_bg",mMiniLauncher,THEME_ITEM_BACKGROUND);
 		}
         mHandleIcon = (TransitionDrawable) mHandleView.getDrawable();
         mHandleIcon.setCrossFadeEnabled(true);
@@ -3470,20 +3467,29 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	 */
 	public static void loadThemeResource(Resources themeResources,
 			String themePackage, String item_name, View item,
-			int themeType, int fallbackId) {
-		
-		int resource_id=themeResources.getIdentifier (item_name, "drawable", themePackage);
+			int themeType) {
 		Drawable d=null;
-		if(resource_id!=0){
-			d=themeResources.getDrawable(resource_id);
-		}else{
-			d=themeResources.getDrawable(fallbackId);
-		}
-		if(d!=null){
-			if(themeType==THEME_ITEM_FOREGROUND && item instanceof ImageView){
-				((ImageView)item).setImageDrawable(d);
-			}else{
-				item.setBackgroundDrawable(d);
+		if(themeResources!=null){
+			int resource_id=themeResources.getIdentifier (item_name, "drawable", themePackage);
+			if(resource_id!=0){
+				d=themeResources.getDrawable(resource_id);
+				if(themeType==THEME_ITEM_FOREGROUND && item instanceof ImageView){
+					//ADW remove the old drawable
+					Drawable tmp=((ImageView)item).getDrawable();
+					if(tmp!=null){
+						tmp.setCallback(null);
+						tmp=null;
+					}
+					((ImageView)item).setImageDrawable(d);
+				}else{
+					//ADW remove the old drawable
+					Drawable tmp=item.getBackground();
+					if(tmp!=null){
+						tmp.setCallback(null);
+						tmp=null;
+					}
+					item.setBackgroundDrawable(d);
+				}
 			}
 		}
 	}

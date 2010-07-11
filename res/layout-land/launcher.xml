@@ -55,6 +55,7 @@
 		android:layout_gravity="right|center_vertical">
 	    <com.android.launcher.ActionButton
 	        android:src="@drawable/rab_empty"
+	        android:background="@drawable/lab_bg"
 	        android:scaleType="center"
 	        android:layout_width="wrap_content"
 	        android:id="@+id/btn_rab"
@@ -63,6 +64,7 @@
 	        />
 	    <com.android.launcher.ActionButton
 	        android:src="@drawable/rab_empty"
+	        android:background="@drawable/lab2_bg"
 	        android:scaleType="center"
 	        android:layout_width="wrap_content"
 	        android:id="@+id/btn_rab2"
@@ -71,11 +73,13 @@
 	        />
 		<ImageView
 			android:id="@+id/appsBg"
+			android:background="@drawable/handle"
 			android:layout_width="50dip"
 			android:layout_height="50dip"
 			/>
 	    <com.android.launcher.ActionButton
 	        android:src="@drawable/lab_empty"
+	        android:background="@drawable/rab2_bg"
 	        android:scaleType="center"
 	        android:layout_width="wrap_content"
 	        android:id="@+id/btn_lab2"
@@ -84,6 +88,7 @@
 	        />
 	    <com.android.launcher.ActionButton
 	        android:src="@drawable/lab_empty"
+	        android:background="@drawable/rab_bg"
 	        android:scaleType="center"
 	        android:layout_width="wrap_content"
 	        android:id="@+id/btn_lab"
@@ -92,18 +97,21 @@
 	        />
     </LinearLayout>
     <ImageView
+    	android:src="@drawable/home_arrows_left"
         android:layout_height="wrap_content"
         android:id="@+id/btn_scroll_left"
         android:layout_width="wrap_content"
         android:layout_gravity="bottom|right"
         android:onClick="previousScreen"/>
     <ImageView
+    	android:src="@drawable/home_arrows_right"
         android:layout_height="wrap_content"
         android:id="@+id/btn_scroll_right"
         android:layout_width="wrap_content" 
         android:layout_gravity="top|right"
         android:onClick="nextScreen"/>
     <com.android.launcher.SliderView
+    	android:src="@drawable/handle_icon"
         android:id="@+id/all_apps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,6 +124,8 @@
         launcher:targetDistance="45dip" />
 
     <com.android.launcher.DeleteZone
+    	android:src="@drawable/ic_delete"
+    	android:background="@drawable/delete_zone_selector"
         android:id="@+id/delete_zone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -132,6 +142,7 @@
         launcher:position="right"
         >
         <com.android.launcher.MiniLauncher
+        	android:background="@drawable/dockbar_bg"
             android:id="@+id/mini_content"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

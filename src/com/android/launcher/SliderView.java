@@ -357,16 +357,16 @@ public class SliderView extends ImageView {
 	    	try {
 				themeResources=pm.getResourcesForApplication(themePackage);
 			} catch (NameNotFoundException e) {
-				themeResources=getResources();
 			}
-    	}else{
-    		themeResources=getResources();
     	}
 		//loadThemeResource(themeResources,themePackage,"lab_bg",mLAB,THEME_ITEM_BACKGROUND,R.drawable.lab_bg);
         if((mSlideDirections&OnTriggerListener.UP)==OnTriggerListener.UP) {
         	ImageView v1 =new ImageView(getContext());
-			//v1.setBackgroundResource(R.drawable.sliding_target_top);
-        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_top",v1,Launcher.THEME_ITEM_BACKGROUND,R.drawable.sliding_target_top);
+        	//v1.setBackgroundResource(R.drawable.sliding_target_top);
+        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_top",v1,Launcher.THEME_ITEM_BACKGROUND);
+        	if(v1.getBackground()==null){
+        		v1.setBackgroundResource(R.drawable.sliding_target_top);
+        	}
 			AnimationDrawable frameAnimation = (AnimationDrawable) v1.getBackground();
 			//frameAnimation.start();
 			starter.addAnimation(frameAnimation);
@@ -381,7 +381,10 @@ public class SliderView extends ImageView {
 		if((mSlideDirections&OnTriggerListener.DOWN)==OnTriggerListener.DOWN){
 	    	ImageView v2 =new ImageView(getContext());
 			//v2.setBackgroundResource(R.drawable.sliding_target_bottom);
-        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_bottom",v2,Launcher.THEME_ITEM_BACKGROUND,R.drawable.sliding_target_bottom);
+        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_bottom",v2,Launcher.THEME_ITEM_BACKGROUND);
+        	if(v2.getBackground()==null){
+        		v2.setBackgroundResource(R.drawable.sliding_target_bottom);
+        	}
 			AnimationDrawable frameAnimation = (AnimationDrawable) v2.getBackground();
 			starter.addAnimation(frameAnimation);
 	    	v2.setTag(OnTriggerListener.DOWN);
@@ -395,7 +398,10 @@ public class SliderView extends ImageView {
 		if((mSlideDirections&OnTriggerListener.LEFT)==OnTriggerListener.LEFT){
 	    	ImageView v3 =new ImageView(getContext());
 			//v3.setBackgroundResource(R.drawable.sliding_target_left);
-        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_left",v3,Launcher.THEME_ITEM_BACKGROUND,R.drawable.sliding_target_left);
+        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_left",v3,Launcher.THEME_ITEM_BACKGROUND);
+        	if(v3.getBackground()==null){
+        		v3.setBackgroundResource(R.drawable.sliding_target_left);
+        	}
 			AnimationDrawable frameAnimation = (AnimationDrawable) v3.getBackground();
 			starter.addAnimation(frameAnimation);
 	    	v3.setTag(OnTriggerListener.LEFT);
@@ -409,7 +415,10 @@ public class SliderView extends ImageView {
 		if((mSlideDirections&OnTriggerListener.RIGHT)==OnTriggerListener.RIGHT){
 	    	ImageView v4 =new ImageView(getContext());
 			//v4.setBackgroundResource(R.drawable.sliding_target_right);
-        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_right",v4,Launcher.THEME_ITEM_BACKGROUND,R.drawable.sliding_target_right);
+        	Launcher.loadThemeResource(themeResources,themePackage,"sliding_target_right",v4,Launcher.THEME_ITEM_BACKGROUND);
+        	if(v4.getBackground()==null){
+        		v4.setBackgroundResource(R.drawable.sliding_target_right);
+        	}
 			AnimationDrawable frameAnimation = (AnimationDrawable) v4.getBackground();
 			starter.addAnimation(frameAnimation);
 	    	v4.setTag(OnTriggerListener.RIGHT);
