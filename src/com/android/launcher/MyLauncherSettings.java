@@ -242,7 +242,7 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
     			int config_uiTintId=themeResources.getIdentifier("config_uiTint", "bool", packageName.toString());
     			if(config_uiTintId!=0){
     				boolean config_uiTint=themeResources.getBoolean(config_uiTintId);
-    				editor.putBoolean("config_uiTint", config_uiTint);
+    				editor.putBoolean("uiTint", config_uiTint);
     			}
     			int config_uiAppsBgId=themeResources.getIdentifier("config_uiAppsBg", "bool", packageName.toString());
     			if(config_uiAppsBgId!=0){
