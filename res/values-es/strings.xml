@@ -173,7 +173,6 @@
     <string name="pref_title_build_info">Información de compilación</string>
     <string name="pref_title_adw_version">ADW Version</string>
     
-    <string name="pref_title_drawer_background_alpha">Transparencia del fondo</string>
     <string name="pref_summary_drawer_background_alpha">Cambia la transparencia de la lista de apps</string>
     <string name="pref_dialog_drawer_background_alpha">Cambia la transparencia de la lista de apps</string>
 
