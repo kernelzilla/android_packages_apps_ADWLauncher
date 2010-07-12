@@ -1524,17 +1524,19 @@ public class LauncherModel {
     static Drawable loadIconFromTheme(Context context,
 			PackageManager manager, String themePackage, String resourceName) {
 		Drawable icon=null;
-    	Resources themeResources=null;
-    	resourceName=resourceName.toLowerCase().replace(".", "_");
-    	try {
-			themeResources=manager.getResourcesForApplication(themePackage);
-		} catch (NameNotFoundException e) {
-			//e.printStackTrace();
-		}
-		if(themeResources!=null){
-			int resource_id=themeResources.getIdentifier (resourceName, "drawable", themePackage);
-			if(resource_id!=0){
-				icon=themeResources.getDrawable(resource_id);
+		if(AlmostNexusSettingsHelper.getThemeIcons(context)){
+	    	Resources themeResources=null;
+	    	resourceName=resourceName.toLowerCase().replace(".", "_");
+	    	try {
+				themeResources=manager.getResourcesForApplication(themePackage);
+			} catch (NameNotFoundException e) {
+				//e.printStackTrace();
+			}
+			if(themeResources!=null){
+				int resource_id=themeResources.getIdentifier (resourceName, "drawable", themePackage);
+				if(resource_id!=0){
+					icon=themeResources.getDrawable(resource_id);
+				}
 			}
 		}
 		return icon;

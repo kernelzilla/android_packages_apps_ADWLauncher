@@ -2783,15 +2783,19 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
         final Resources resources = getResources();
         //Drawable d = resources.getDrawable(R.drawable.ic_launcher_folder);
-        String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
         Drawable d=null;
-        if(packageName.equals(THEME_DEFAULT)){
-        	d = resources.getDrawable(R.drawable.ic_launcher_folder);
+        if(AlmostNexusSettingsHelper.getThemeIcons(this)){
+	        String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
+	        if(packageName.equals(THEME_DEFAULT)){
+	        	d = resources.getDrawable(R.drawable.ic_launcher_folder);
+	        }else{
+	        	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
+	        	if(d==null){
+	        		d = resources.getDrawable(R.drawable.ic_launcher_folder);
+	        	}
+	        }
         }else{
-        	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
-        	if(d==null){
-        		d = resources.getDrawable(R.drawable.ic_launcher_folder);
-        	}
+        	d = resources.getDrawable(R.drawable.ic_launcher_folder);
         }
         d=Utilities.drawReflection(d, this);
         favorite.setImageDrawable(d);
@@ -2812,15 +2816,19 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         final Resources resources = getResources();
         Drawable d = info.icon;
         if (d == null) {
-            //Drawable d = resources.getDrawable(R.drawable.ic_launcher_folder);
-            String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
-            if(packageName.equals(THEME_DEFAULT)){
-            	d = resources.getDrawable(R.drawable.ic_launcher_folder);
+            if(AlmostNexusSettingsHelper.getThemeIcons(this)){
+	        	//Drawable d = resources.getDrawable(R.drawable.ic_launcher_folder);
+	            String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
+	            if(packageName.equals(THEME_DEFAULT)){
+	            	d = resources.getDrawable(R.drawable.ic_launcher_folder);
+	            }else{
+	            	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
+	            	if(d==null){
+	            		d = resources.getDrawable(R.drawable.ic_launcher_folder);
+	            	}
+	            }
             }else{
-            	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
-            	if(d==null){
-            		d = resources.getDrawable(R.drawable.ic_launcher_folder);
-            	}
+            	d = resources.getDrawable(R.drawable.ic_launcher_folder);
             }
         	info.filtered = true;
         }
@@ -2847,20 +2855,27 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         }else if(info instanceof LiveFolderInfo){
         	d=((LiveFolderInfo)info).icon;
             if (d == null) {
-            	//d = Utilities.createIconThumbnail(resources.getDrawable(R.drawable.ic_launcher_folder), this);
-                String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
-                if(!packageName.equals(THEME_DEFAULT)){
-                	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
-                }
-            	
+            	if(AlmostNexusSettingsHelper.getThemeIcons(this)){
+	            	//d = Utilities.createIconThumbnail(resources.getDrawable(R.drawable.ic_launcher_folder), this);
+	                String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
+	                if(!packageName.equals(THEME_DEFAULT)){
+	                	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
+	                }
+            	}else{
+            		d = Utilities.createIconThumbnail(resources.getDrawable(R.drawable.ic_launcher_folder), this);
+            	}
             	((LiveFolderInfo)info).filtered = true;
             }        	
         }else if(info instanceof UserFolderInfo){
-        	//d = resources.getDrawable(R.drawable.ic_launcher_folder);
-            String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
-            if(!packageName.equals(THEME_DEFAULT)){
-            	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
-            }
+        	if(AlmostNexusSettingsHelper.getThemeIcons(this)){
+	        	//d = resources.getDrawable(R.drawable.ic_launcher_folder);
+	            String packageName=AlmostNexusSettingsHelper.getThemePackageName(this, THEME_DEFAULT);
+	            if(!packageName.equals(THEME_DEFAULT)){
+	            	d=FolderIcon.loadFolderFromTheme(this, getPackageManager(), packageName, "ic_launcher_folder");
+	            }
+        	}else{
+        		d = resources.getDrawable(R.drawable.ic_launcher_folder);
+        	}
         }
         if (d == null) {
         	d = Utilities.createIconThumbnail(
