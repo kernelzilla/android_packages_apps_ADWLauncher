@@ -900,7 +900,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
             if(themePackage.equals(Launcher.THEME_DEFAULT)){
             	itemInfo.icon =activityInfo.loadIcon(packageManager);
             }else{
-            	Drawable tmpIcon = LauncherModel.loadIconFromTheme(context, packageManager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
+            	//Drawable tmpIcon = LauncherModel.loadIconFromTheme(context, packageManager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
+            	Drawable tmpIcon = LauncherModel.loadIconFromTheme(context, packageManager, themePackage,activityInfo.name);
             	if(tmpIcon==null){
             		itemInfo.icon = activityInfo.loadIcon(packageManager);
             	}else{

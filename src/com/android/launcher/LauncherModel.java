@@ -477,7 +477,8 @@ public class LauncherModel {
         if(themePackage.equals(Launcher.THEME_DEFAULT)){
         	application.icon = Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);
         }else{
-        	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,info.activityInfo.packageName+"_"+info.activityInfo.name);
+        	//Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,info.activityInfo.packageName+"_"+info.activityInfo.name);
+        	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,info.activityInfo.name);
         	if(tmpIcon==null){
         		application.icon = Utilities.createIconThumbnail(info.activityInfo.loadIcon(manager), context);
         	}else{
@@ -1275,7 +1276,8 @@ public class LauncherModel {
         if(themePackage.equals(Launcher.THEME_DEFAULT)){
         	info.icon = Utilities.createIconThumbnail(activityInfo.loadIcon(manager), context);
         }else{
-        	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
+        	//Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,activityInfo.packageName+"_"+activityInfo.name);
+        	Drawable tmpIcon = loadIconFromTheme(context, manager, themePackage,activityInfo.name);
         	if(tmpIcon==null){
         		info.icon = Utilities.createIconThumbnail(activityInfo.loadIcon(manager), context);
         	}else{
