@@ -160,6 +160,9 @@
     <string name="pref_title_closing_dockbar">自动关闭扩展栏</string>
     <string name="pref_summary_closing_dockbar">应用程序启动后，自动关闭打开的扩展栏</string>
 
+    <string name="pref_title_closing_folder">自动关闭文件夹</string>
+    <string name="pref_summary_closing_folder">应用程序启动后，自动关闭打开的文件夹</string>
+
     <string name="pref_title_lab">左侧动作按键</string>
     <string name="pref_summary_lab">开启/关闭左侧动作按键</string>
 
