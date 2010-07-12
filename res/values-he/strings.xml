@@ -63,7 +63,7 @@
     <!-- Options in "Add to Home" dialog box; Title of the group containing the list of all live folders -->
     <string name="group_live_folders">סיפריות</string>
     <!-- Options in "Add to Home" dialog box; Title of the group containing the list of all widgets/gadgets -->
-    <string name="group_widgets">ווידג'ט</string>
+    <string name="group_widgets">"ווידג'ט"</string>
     <!-- Options in "Add to Home" dialog box; Title of the group containing the list of apps that can set the wallpaper-->
     <string name="group_wallpapers">רקעים</string>
     <!-- Options in "Add to Home" dialog box; Name of the Folder widget-->
@@ -128,7 +128,7 @@
     <string name="search_hint">חיפוש בגוגל</string>
 
     <!-- Text to show user in place of a gadget when we can't display it properly -->
-    <string name="gadget_error_text">בעיה בטעינת הווידג'ט</string>
+    <string name="gadget_error_text">"בעיה בטעינת הווידג'ט"</string>
     <!-- ADW Settings -->
     <string name="pref_label_settings">AlmostNexus הגדרות</string>
     <!-- Screen preferences -->
@@ -324,23 +324,23 @@
     <string name="pref_dialog_desktop_rows">בחר מספר שורות לשולחן העבודה</string>
     
     <string name="pref_title_autosize_icons">מתח אוטומטית</string>
-    <string name="pref_summary_autosize_icons">נסה למתוח סמלים ווידג'טים</string>
+    <string name="pref_summary_autosize_icons">"נסה למתוח סמלים ווידג'טים"</string>
 
-    <string name="pref_title_scrollable_widgets">תמיכה בגלילת ווידג'ט</string>
-    <string name="pref_summary_scrollable_widgets">בטל אפשרות זאת אם אתה לא משתמש בווידג'ט נגלל</string>
+    <string name="pref_title_scrollable_widgets">"תמיכה בגלילת ווידג'ט"</string>
+    <string name="pref_summary_scrollable_widgets">"בטל אפשרות זאת אם אתה לא משתמש בווידג'ט נגלל"</string>
 
     <string name="pref_title_drawer_labels">הצג תוית אפליקציה</string>
     <string name="pref_summary_drawer_labels">הראה תוויות במגירת האפליקציות</string>
     <string name="pref_title_fade_drawer_labels">עמעם תויות אפליקציות</string>
     <string name="pref_summary_fade_drawer_labels">Labels fade instead of just appear. Uses more ram/cpu</string>
 	
-	<string name="widget_config_dialog_title">הגדרות מתחית ווידג'ט</string>
-	<string name="widget_config_dialog_summary">כמה שורות/עמודות ווידג'ט יתפוס</string>
+	<string name="widget_config_dialog_title">"הגדרות מתחית ווידג'ט"</string>
+	<string name="widget_config_dialog_summary">"כמה שורות/עמודות ווידג'ט יתפוס"</string>
 	<string name="widget_columns">עמודות</string>
 	<string name="widget_rows">שורות</string>
     
     <string name="pref_title_screen_cache">השתמש בזיכרון מטמון של המסך</string>
-    <string name="pref_summary_screen_cache">גלילה חלקה יותר. בטל אם יש המון ווידג'טים!</string>
+    <string name="pref_summary_screen_cache">"גלילה חלקה יותר. בטל אם יש המון ווידג'טים!"</string>
 
     <string name="pref_title_desktop_indicator">הראה מחוון שולחן עבודה</string>
     <string name="pref_summary_desktop_indicator">מציג מחוון בזמן מעבר שולחנות העבודה</string>
@@ -361,5 +361,5 @@
 	<string name="pref_title_indicators_preferencecategory">מחוון מסך</string>
 
     <string name="pref_title_system_persistent">התמדת מערכת</string>
-    <string name="pref_summary_system_persistent">אפשר אפשרות זאת כדי למנוע לקריסתו של הלאנצ'ר</string>
+    <string name="pref_summary_system_persistent">"אפשר אפשרות זאת כדי למנוע לקריסתו של הלאנצ'ר"</string>
 </resources>
