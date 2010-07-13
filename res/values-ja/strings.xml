@@ -299,4 +299,15 @@
 
     <string name="pref_title_system_persistent">システムに常駐</string>
     <string name="pref_summary_system_persistent">システムからランチャーが終了されるのを防ぐ</string>
+    <!-- Theme preferences -->
+	<string name="pref_title_theme_settings">テーマ設定</string>
+	<string name="pref_summary_theme_settings">ADW.Launcherのテーマを選択</string>
+	<string name="pref_title_theme_package">使用するテーマ</string>
+	<string name="pref_summary_theme_package">使用するADW.Launcherのテーマを選択</string>
+	<string name="pref_title_theme_preview">プレビュー</string>
+	<string name="pref_summary_theme_preview">選択したテーマのプレビュー</string>
+	<string name="pref_title_theme_icons">アイコンにテーマを使用する</string>
+	<string name="pref_summary_theme_icons">標準のアイコンを使用するにはオフにする</string>
+	<string name="pref_themes_apply_theme">テーマを適用!</string>
+	<string name="pref_themes_get_themes">テーマを入手!</string>
 </resources>
