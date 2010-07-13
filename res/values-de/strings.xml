@@ -297,4 +297,16 @@
 
     <string name="pref_title_system_persistent">System persistent</string>
     <string name="pref_summary_system_persistent">Einschalten, um Beendigung des Launchers durch das System zu verhindern</string>
+
+    <!-- Theme preferences -->
+    <string name="pref_title_theme_settings">Themes</string>
+    <string name="pref_summary_theme_settings">Themes für ADW.Launcher auswählen</string>
+    <string name="pref_title_theme_package">Wähle dein Theme</string>
+    <string name="pref_summary_theme_package">Theme für ADW.Launcher auswählen</string>
+    <string name="pref_title_theme_preview">Theme-Vorschau</string>
+    <string name="pref_summary_theme_preview">Vorschau des ausgewählten Themes</string>
+    <string name="pref_title_theme_icons">Theme-Icons nutzen</string>
+    <string name="pref_summary_theme_icons">Abwählen um die Standard-Icons zu nutzen</string>
+    <string name="pref_themes_apply_theme">Theme anwenden!</string>
+    <string name="pref_themes_get_themes">Themes beziehen!</string>
 </resources>
