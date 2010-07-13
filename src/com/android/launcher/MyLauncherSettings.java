@@ -6,12 +6,14 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,7 +26,15 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+import android.content.pm.*;
+import android.content.res.Resources;
+import android.content.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Calendar;
+import java.util.List;
 
 public class MyLauncherSettings extends PreferenceActivity implements OnPreferenceChangeListener {
     
@@ -186,8 +197,130 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
                 alertDialog.show();
                 return true;
             }
-        });    
+        });  
+        //TODO: ADW, theme settings
+    	SharedPreferences sp=getPreferenceManager().getSharedPreferences();
+    	final String themePackage=sp.getString("themePackageName", Launcher.THEME_DEFAULT);
+        ListPreference lp = (ListPreference)findPreference("themePackageName");
+        lp.setOnPreferenceChangeListener(this);
+		Intent intent=new Intent("org.adw.launcher.THEMES");
+		intent.addCategory("android.intent.category.DEFAULT");
+		PackageManager pm=getPackageManager();
+		List<ResolveInfo> themes=pm.queryIntentActivities(intent, 0);
+		String[] entries = new String[themes.size()+1];
+		String[] values = new String[themes.size()+1];
+		entries[0]=Launcher.THEME_DEFAULT;
+		values[0]=Launcher.THEME_DEFAULT;
+		for(int i=0;i<themes.size();i++){
+			String appPackageName=((ResolveInfo)themes.get(i)).activityInfo.packageName.toString();
+			String themeName=((ResolveInfo)themes.get(i)).loadLabel(pm).toString();
+			entries[i+1]=themeName;
+			values[i+1]=appPackageName;
+		}
+		lp.setEntries(entries);
+		lp.setEntryValues(values);
+		PreviewPreference themePreview=(PreviewPreference) findPreference("themePreview");
+		themePreview.setTheme(themePackage);
     }
+	public void applyTheme(View v){
+		PreviewPreference themePreview=(PreviewPreference) findPreference("themePreview");
+		String packageName=themePreview.getValue().toString();
+		//this time we really save the themepackagename
+		SharedPreferences sp = getPreferenceManager().getSharedPreferences();
+	    SharedPreferences.Editor editor = sp.edit();
+	    editor.putString("themePackageName",packageName);
+	    //and update the preferences from the theme
+	    //TODO:ADW maybe this should be optional for the user
+        if(!packageName.equals(Launcher.THEME_DEFAULT)){
+        	Resources themeResources=null;
+        	try {
+    			themeResources=getPackageManager().getResourcesForApplication(packageName.toString());
+    		} catch (NameNotFoundException e) {
+    			//e.printStackTrace();
+    		}
+    		if(themeResources!=null){
+    			int config_uiTintId=themeResources.getIdentifier("config_uiTint", "bool", packageName.toString());
+    			if(config_uiTintId!=0){
+    				boolean config_uiTint=themeResources.getBoolean(config_uiTintId);
+    				editor.putBoolean("uiTint", config_uiTint);
+    			}
+    			int config_uiAppsBgId=themeResources.getIdentifier("config_uiAppsBg", "bool", packageName.toString());
+    			if(config_uiAppsBgId!=0){
+    				boolean config_uiAppsBg=themeResources.getBoolean(config_uiAppsBgId);
+    				editor.putBoolean("uiAppsBg", config_uiAppsBg);
+    			}
+    			int config_uiABBgId=themeResources.getIdentifier("config_uiABBg", "bool", packageName.toString());
+    			if(config_uiABBgId!=0){
+    				boolean config_uiABBg=themeResources.getBoolean(config_uiABBgId);
+    				editor.putBoolean("uiABBg", config_uiABBg);
+    			}
+    			int config_new_selectorsId=themeResources.getIdentifier("config_new_selectors", "bool", packageName.toString());
+    			if(config_new_selectorsId!=0){
+    				boolean config_new_selectors=themeResources.getBoolean(config_new_selectorsId);
+    				editor.putBoolean("uiNewSelectors", config_new_selectors);
+    			}
+    			int config_drawerLabelsId=themeResources.getIdentifier("config_drawerLabels", "bool", packageName.toString());
+    			if(config_drawerLabelsId!=0){
+    				boolean config_drawerLabels=themeResources.getBoolean(config_drawerLabelsId);
+    				editor.putBoolean("drawerLabels", config_drawerLabels);
+    			}
+    			int config_fadeDrawerLabelsId=themeResources.getIdentifier("config_fadeDrawerLabels", "bool", packageName.toString());
+    			if(config_fadeDrawerLabelsId!=0){
+    				boolean config_fadeDrawerLabels=themeResources.getBoolean(config_fadeDrawerLabelsId);
+    				editor.putBoolean("fadeDrawerLabels", config_fadeDrawerLabels);
+    			}
+    			int config_desktop_indicatorId=themeResources.getIdentifier("config_desktop_indicator", "bool", packageName.toString());
+    			if(config_desktop_indicatorId!=0){
+    				boolean config_desktop_indicator=themeResources.getBoolean(config_desktop_indicatorId);
+    				editor.putBoolean("uiDesktopIndicator", config_desktop_indicator);
+    			}
+    			int config_highlights_colorId=themeResources.getIdentifier("config_highlights_color", "integer", packageName.toString());
+    			if(config_highlights_colorId!=0){
+    				int config_highlights_color=themeResources.getInteger(config_highlights_colorId);
+    				editor.putInt("highlights_color", config_highlights_color);
+    			}
+    			int config_highlights_color_focusId=themeResources.getIdentifier("config_highlights_color_focus", "integer", packageName.toString());
+    			if(config_highlights_color_focusId!=0){
+    				int config_highlights_color_focus=themeResources.getInteger(config_highlights_color_focusId);
+    				editor.putInt("highlights_color_focus", config_highlights_color_focus);
+    			}
+    			int config_drawer_colorId=themeResources.getIdentifier("config_drawer_color", "integer", packageName.toString());
+    			if(config_drawer_colorId!=0){
+    				int config_drawer_color=themeResources.getInteger(config_drawer_colorId);
+    				editor.putInt("drawer_color", config_drawer_color);
+    			}
+    			int config_desktop_indicator_typeId=themeResources.getIdentifier("config_desktop_indicator_type", "string", packageName.toString());
+    			if(config_desktop_indicator_typeId!=0){
+    				String config_desktop_indicator_type=themeResources.getString(config_desktop_indicator_typeId);
+    				editor.putString("uiDesktopIndicatorType", config_desktop_indicator_type);
+    			}
+    			//TODO:ADW We set the theme wallpaper. We should add this as optional...
+    			int wallpaperId=themeResources.getIdentifier("theme_wallpaper", "drawable", packageName.toString());
+    			if(wallpaperId!=0){
+    	            Options mOptions = new BitmapFactory.Options();
+    	            mOptions.inDither = false;
+    	            mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+    	            Bitmap wallpaper=null;
+    	            try {
+    	                wallpaper=BitmapFactory.decodeResource(themeResources,wallpaperId, mOptions);
+    	            } catch (OutOfMemoryError e) {
+    	            }            
+    	        	if(wallpaper!=null){
+            	        try {
+	        	            WallpaperManager wpm = (WallpaperManager)getSystemService(WALLPAPER_SERVICE);
+	        	            //wpm.setResource(mImages.get(position));
+	        	            wpm.setBitmap(wallpaper);
+	        	            wallpaper.recycle();
+	        	        } catch (Exception e) {
+	        	        }
+    	        	}
+    			}
+    		}
+        }
+	    
+	    editor.commit();
+	    finish();
+	}
 	@Override
 	protected void onPause(){
 		if(shouldRestart){
@@ -217,13 +350,16 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 			pref.setMax((Integer) newValue);
 		}else if(preference.getKey().equals("uiDots")) {
 			CheckBoxPreference ab2=(CheckBoxPreference) findPreference("uiAB2");
-			android.util.Log.d("PREFERENCES","new value="+newValue);
 			if(newValue.equals(true)){
 				ab2.setChecked(false);
 				ab2.setEnabled(false);
 			}else{
 				ab2.setEnabled(true);
 			}
+		}else if(preference.getKey().equals("themePackageName")) {
+			PreviewPreference themePreview=(PreviewPreference) findPreference("themePreview");
+			themePreview.setTheme(newValue.toString());
+			return false;
 		}else if(preference.getKey().equals("swipedownActions"))
 		{
 			// lets launch app picker if the user selected to launch an app on gesture
@@ -540,6 +676,12 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
             outChannel.close();
         }
     }
-
+    public void getThemes(View v){
+    	//TODO:warn theme devs to use "ADWTheme" as keyword.
+    	Uri marketUri = Uri.parse("market://search?q=ADWTheme");
+        Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(marketUri);
+        startActivity(marketIntent);
+        finish();
+    }
 }
 

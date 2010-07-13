@@ -234,7 +234,7 @@ public class AllAppsSlidingView extends AdapterView<ApplicationsAdapter> impleme
     
     void setLauncher(Launcher launcher) {
         mLauncher = launcher;
-        setSelector(IconHighlights.getDrawable(mLauncher));
+        setSelector(IconHighlights.getDrawable(mLauncher,IconHighlights.TYPE_DESKTOP));
     }
 	@Override
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {

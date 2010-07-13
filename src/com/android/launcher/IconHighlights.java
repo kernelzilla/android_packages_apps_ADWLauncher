@@ -1,6 +1,8 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff.Mode;
@@ -8,8 +10,12 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.widget.ImageView;
 
 public class IconHighlights {
+	public static final int TYPE_DESKTOP=1;
+	public static final int TYPE_DOCKBAR=2;
+	public static final int TYPE_DRAWER=3;
 	public IconHighlights(Context context) {
 		// TODO Auto-generated constructor stub
 	}
@@ -41,37 +47,64 @@ public class IconHighlights {
 		drawable.addState(new int[]{-stateFocused, -stateWindowFocused}, null);
 		return drawable;
 	}
-	private static Drawable oldSelector(Context context){
+	private static Drawable oldSelector(Context context, int type){
 		int selectedColor=AlmostNexusSettingsHelper.getHighlightsColorFocus(context);
 		int pressedColor=AlmostNexusSettingsHelper.getHighlightsColor(context);
-		int stateFocused = android.R.attr.state_focused;
-		int statePressed = android.R.attr.state_pressed;
-		int stateWindowFocused = android.R.attr.state_window_focused;
-		Drawable mDrawPressed;
-		Drawable mDrawSelected;
-		StateListDrawable drawable=new StateListDrawable();
-		
-		Resources res = context.getResources();
-		mDrawPressed=res.getDrawable(R.drawable.pressed_application_background);
-		mDrawSelected=res.getDrawable(R.drawable.focused_application_background);
-		//TODO:ADW This doesn't work and i don't know why
-		//So for now i'll use only one colour for tinting both drawables
-		//mDrawPressed.setColorFilter(pressedColor, Mode.SRC_ATOP);
-		//mDrawSelected.setColorFilter(selectedColor, Mode.SRC_ATOP);
-		
-		drawable.addState(new int[]{ statePressed}, mDrawPressed);
-		drawable.addState(new int[]{ stateFocused, stateWindowFocused}, mDrawSelected);
-		drawable.addState(new int[]{stateFocused, -stateWindowFocused}, null);
-		drawable.addState(new int[]{-stateFocused, stateWindowFocused}, null);
-		drawable.addState(new int[]{-stateFocused, -stateWindowFocused}, null);
-		drawable.setColorFilter(pressedColor, Mode.SRC_ATOP);
+    	//ADW: Load the specified theme
+    	String themePackage=AlmostNexusSettingsHelper.getThemePackageName(context, Launcher.THEME_DEFAULT);
+    	Resources themeResources=null;
+    	if(!themePackage.equals(Launcher.THEME_DEFAULT)){
+        	PackageManager pm=context.getPackageManager();
+	    	try {
+				themeResources=pm.getResourcesForApplication(themePackage);
+			} catch (NameNotFoundException e) {
+				// TODO Auto-generated catch block
+				themeResources=context.getResources();
+			}
+    	}else{
+    		themeResources=context.getResources();
+    	}
+    	Drawable drawable=null;
+    	//use_drawer_icons_bg
+		if(themeResources!=null){
+			boolean use_drawer_icons_bgs=false;
+			if(type==TYPE_DRAWER){
+				int use_drawer_icons_bgs_id=themeResources.getIdentifier("use_drawer_icons_bg", "bool", themePackage);
+				if(use_drawer_icons_bgs_id!=0){
+					use_drawer_icons_bgs=themeResources.getBoolean(use_drawer_icons_bgs_id);
+				}
+				if(use_drawer_icons_bgs){
+					int resource_id=themeResources.getIdentifier("normal_application_background", "drawable", themePackage);
+					if(resource_id!=0){
+						drawable=themeResources.getDrawable(resource_id);
+					}					
+				}
+			}else{
+				int resource_id=0;
+				if(type==TYPE_DOCKBAR){
+					resource_id=themeResources.getIdentifier("dockbar_selector", "drawable", themePackage);
+				}else{
+					resource_id=themeResources.getIdentifier("shortcut_selector", "drawable", themePackage);
+				}
+				if(resource_id!=0){
+					drawable=themeResources.getDrawable(resource_id);
+				}else{
+					if(type==TYPE_DOCKBAR){
+						drawable=themeResources.getDrawable(R.drawable.dockbar_selector);
+					}else{
+						drawable=themeResources.getDrawable(R.drawable.shortcut_selector);
+					}
+				}
+				drawable.setColorFilter(pressedColor, Mode.SRC_ATOP);
+			}
+		}
 		return drawable;
 	}
-	public static Drawable getDrawable(Context context){
+	public static Drawable getDrawable(Context context, int type){
 		if(AlmostNexusSettingsHelper.getUINewSelectors(context)){
 			return newSelector(context);
 		}else{
-			return oldSelector(context);
+			return oldSelector(context, type);
 		}
 	}
 }

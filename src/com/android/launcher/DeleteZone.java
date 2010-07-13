@@ -23,6 +23,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -84,11 +85,11 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
         a.recycle();
     }
 
-    @Override
+    /*@Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         mTransition = (TransitionDrawable) getBackground();
-    }
+    }*/
 
     public boolean acceptDrop(DragSource source, int x, int y, int xOffset, int yOffset,
             Object dragInfo) {
@@ -382,4 +383,11 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
     	       }
 		}
     };
+
+	@Override
+	public void setBackgroundDrawable(Drawable d) {
+		// TODO Auto-generated method stub
+		super.setBackgroundDrawable(d);
+        mTransition = (TransitionDrawable) d;
+	}
 }

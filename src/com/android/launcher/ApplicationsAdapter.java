@@ -17,6 +17,10 @@
 package com.android.launcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +34,28 @@ import java.util.ArrayList;
  */
 public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
     private final LayoutInflater mInflater;
-
+    private Drawable mBackground;
+    private int mTextColor=-1;
     public ApplicationsAdapter(Context context, ArrayList<ApplicationInfo> apps) {
         super(context, 0, apps);
         mInflater = LayoutInflater.from(context);
+        //ADW: Load textcolor and bubble color from theme
+        String themePackage=AlmostNexusSettingsHelper.getThemePackageName(getContext(), Launcher.THEME_DEFAULT);
+        if(!themePackage.equals(Launcher.THEME_DEFAULT)){
+        	Resources themeResources=null;
+        	try {
+    			themeResources=getContext().getPackageManager().getResourcesForApplication(themePackage);
+    		} catch (NameNotFoundException e) {
+    			//e.printStackTrace();
+    		}
+    		if(themeResources!=null){
+    			int textColorId=themeResources.getIdentifier("drawer_text_color", "color", themePackage);
+    			if(textColorId!=0){
+    				mTextColor=themeResources.getColor(textColorId);
+    			}
+    			mBackground=IconHighlights.getDrawable(getContext(), IconHighlights.TYPE_DRAWER);
+    		}
+        }
     }
 
     @Override
@@ -52,7 +74,13 @@ public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
         final TextView textView = (TextView) convertView;
         textView.setCompoundDrawablesWithIntrinsicBounds(null, info.icon, null, null);
         textView.setText(info.title);
-
+		if(mTextColor!=-1){
+			textView.setTextColor(mTextColor);
+		}
+        //TODO:ADW Loading the background drawable for the app drawer hogs the ram and cpu
+        //so i'd better not use it, sorry themers
+		if(mBackground!=null)
+			convertView.setBackgroundDrawable(mBackground);
         return convertView;
     }
 }

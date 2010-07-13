@@ -20,6 +20,7 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 	private ItemInfo mCurrentInfo;
 	private Drawable bgResource;
 	private Drawable bgEmpty;
+	private boolean hiddenBg=false;
 	public ActionButton(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
@@ -36,7 +37,7 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 		setHapticFeedbackEnabled(true);
 		TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.ActionButton,defStyle,0);
 		mIdent=a.getInt(R.styleable.ActionButton_ident, mIdent);
-		bgResource=a.getDrawable(R.styleable.ActionButton_background);
+		//bgResource=a.getDrawable(R.styleable.ActionButton_background);
 		bgEmpty=context.getResources().getDrawable(R.drawable.lab_rab_empty_bg);
 		a.recycle();
 	}
@@ -204,10 +205,23 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 	 * @param enable
 	 */
 	public void hideBg(boolean hide){
-		if(!hide)
-			this.setBackgroundDrawable(bgResource);
-		else{
-			this.setBackgroundDrawable(bgEmpty);
+		if(hide!=hiddenBg){
+			hiddenBg=hide;
+			if(!hide)
+				this.setBackgroundDrawable(bgResource);
+			else{
+				this.setBackgroundDrawable(bgEmpty);
+			}
+		}
+	}
+
+	@Override
+	public void setBackgroundDrawable(Drawable d) {
+		// TODO Auto-generated method stub
+		super.setBackgroundDrawable(d);
+		if(d!=bgEmpty){
+			if(bgResource!=null)bgResource.setCallback(null);
+			bgResource=d;
 		}
 	}
 }

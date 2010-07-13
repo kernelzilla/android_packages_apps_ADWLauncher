@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -192,7 +193,7 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
         }
         view.setLongClickable(true);
         view.setOnLongClickListener(this);
-        view.setBackgroundDrawable(IconHighlights.getDrawable(mLauncher));
+        view.setBackgroundDrawable(IconHighlights.getDrawable(mLauncher,IconHighlights.TYPE_DOCKBAR));
         addView(view);
         invalidate();
     }
@@ -260,13 +261,6 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
     void setLauncher(Launcher launcher) {
         mLauncher = launcher;
     }
-
-	@Override
-	protected void onFinishInflate() {
-		super.onFinishInflate();
-		mBackground=(TransitionDrawable) getBackground();
-		mBackground.setCrossFadeEnabled(true);
-	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -439,5 +433,15 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
             postInvalidate();
         }
     }
+
+	@Override
+	public void setBackgroundDrawable(Drawable d) {
+		// TODO Auto-generated method stub
+		if(mBackground!=null)mBackground.setCallback(null);
+		super.setBackgroundDrawable(d);
+		mBackground=(TransitionDrawable) d;
+		mBackground.setCrossFadeEnabled(true);
+		
+	}
 
 }

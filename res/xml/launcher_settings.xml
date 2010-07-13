@@ -286,6 +286,24 @@
 		</PreferenceCategory>
 	</PreferenceScreen>
 	<PreferenceScreen
+		android:key="themePrefences"
+		android:summary="@string/pref_summary_theme_settings"
+		android:title="@string/pref_title_theme_settings">
+			<CheckBoxPreference android:key="themeIcons"
+				android:title="@string/pref_title_theme_icons"
+				android:summary="@string/pref_summary_theme_icons"
+				android:defaultValue="true" />
+			<ListPreference
+			  android:key="themePackageName"
+			  android:title="@string/pref_title_theme_package"
+			  android:summary="@string/pref_summary_theme_package"
+			  />
+    		<com.android.launcher.PreviewPreference
+    			android:layout="@layout/theme_preview"
+	    		android:key="themePreview" />
+		
+	</PreferenceScreen>	
+	<PreferenceScreen
 	    android:key="xmlPreferences"
 		android:title="@string/pref_title_import_export">
 		<PreferenceCategory android:title="@string/pref_title_xml">
