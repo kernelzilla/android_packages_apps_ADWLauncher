@@ -20,4 +20,5 @@
     <dimen name="gesture_thumbnail_size">64dip</dimen>
     <dimen name="cell_width">80dip</dimen>
     <dimen name="cell_height">100dip</dimen>
+    <dimen name="desktop_paginator_padding">10dip</dimen>
 </resources>

@@ -42,9 +42,11 @@ public class CellLayout extends WidgetCellLayout {
     
     private int mLongAxisStartPadding;
     private int mLongAxisEndPadding;
-
+    private int mLongAxisStartPaddingOrg;
+    
     private int mShortAxisStartPadding;
     private int mShortAxisEndPadding;
+    private int mShortAxisStartPaddingOrg;
 
     private int mShortAxisCells;
     private int mLongAxisCells;
@@ -68,7 +70,7 @@ public class CellLayout extends WidgetCellLayout {
     //ADW: We'll have fixed rows/columns
 	private int mRows;
 	private int mColumns;
-
+	private int mPaginatorPadding;
     public CellLayout(Context context) {
         this(context, null);
     }
@@ -94,6 +96,9 @@ public class CellLayout extends WidgetCellLayout {
             a.getDimensionPixelSize(R.styleable.CellLayout_shortAxisEndPadding, 10);
         mRows=AlmostNexusSettingsHelper.getDesktopRows(context);
         mColumns=AlmostNexusSettingsHelper.getDesktopColumns(context);
+        mLongAxisStartPaddingOrg=mLongAxisStartPadding;
+        mShortAxisStartPaddingOrg=mShortAxisStartPadding;
+        mPaginatorPadding=getResources().getDimensionPixelSize(R.dimen.desktop_paginator_padding);
         //mShortAxisCells = a.getInt(R.styleable.CellLayout_shortAxisCells, 4);
         //mLongAxisCells = a.getInt(R.styleable.CellLayout_longAxisCells, 4);
 
@@ -531,14 +536,21 @@ public class CellLayout extends WidgetCellLayout {
         mPortrait = heightSpecSize > widthSpecSize;
         int tmpCellW=mCellWidth;
         int tmpCellH=mCellHeight;
+        //ADW: add paddinf if using top paginator dots
+        int topExtra=0;
+        if(AlmostNexusSettingsHelper.getDesktopIndicatorType(getContext())==DesktopIndicator.INDICATOR_TYPE_PAGER){
+        	topExtra=mPaginatorPadding;
+        }
         if(mPortrait){
         	mLongAxisCells=mRows;
         	mShortAxisCells=mColumns;
+        	mLongAxisStartPadding=mLongAxisStartPaddingOrg+topExtra;
         	tmpCellW=(widthSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mColumns;
         	tmpCellH=(heightSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mRows;
         }else{
         	mLongAxisCells=mColumns;
         	mShortAxisCells=mRows;
+        	mShortAxisStartPadding=mShortAxisStartPaddingOrg+topExtra;
         	tmpCellW=(widthSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mColumns;
         	tmpCellH=(heightSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mRows;
         }
