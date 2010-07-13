@@ -26,7 +26,7 @@
 		android:id="@+id/ThemeApply"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-	  	android:text="pref_themes_apply_theme"
+	  	android:text="@string/pref_themes_apply_theme"
 	  	android:onClick="applyTheme"
 	/>
 	<Button
