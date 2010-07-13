@@ -26,14 +26,14 @@
 		android:id="@+id/ThemeApply"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-	  	android:text="Apply"
+	  	android:text="pref_themes_apply_theme"
 	  	android:onClick="applyTheme"
 	/>
 	<Button
 		android:id="@+id/ThemeSearch"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-	  	android:text="Get themes!"
+	  	android:text="@string/pref_themes_get_themes"
 	  	android:onClick="getThemes"
 	/>
 </LinearLayout>
