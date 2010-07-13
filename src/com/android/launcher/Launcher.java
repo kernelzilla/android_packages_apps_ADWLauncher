@@ -771,6 +771,14 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		if(AlmostNexusSettingsHelper.getDesktopIndicator(this)){
 			mDesktopIndicator=(DesktopIndicator) (findViewById(R.id.desktop_indicator));
 		}
+		//ADW: Add focusability to screen items
+        mLAB.setFocusable(true);
+        mRAB.setFocusable(true);
+        mLAB2.setFocusable(true);
+        mRAB2.setFocusable(true);
+        mPreviousView.setFocusable(true);
+		mNextView.setFocusable(true);
+		
 		updateAlmostNexusUI();
     }
 
