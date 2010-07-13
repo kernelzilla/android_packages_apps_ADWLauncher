@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public final class AlmostNexusSettingsHelper {
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
 	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
-		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons",
+		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons","uiDesktopIndicatorType",
 		"uiScrollableWidgets","desktopCache","uiDesktopIndicator","systemPersistent"};
 	public static boolean needsRestart(String key){
 		for(int i=0;i<restart_keys.length;i++){
