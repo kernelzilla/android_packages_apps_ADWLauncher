@@ -8,6 +8,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -445,5 +446,17 @@ public class SliderView extends ImageView {
 			animations.add(anim);
 		}
     }
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+        case KeyEvent.KEYCODE_DPAD_CENTER:
+        case KeyEvent.KEYCODE_ENTER:
+	        if (isPressed()) {
+	        	dispatchClickedEvent();
+	            return true;
+	        }
+        }
+        return false;
+	}
     
 }
