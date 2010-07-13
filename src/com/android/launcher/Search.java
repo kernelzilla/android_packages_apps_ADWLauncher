@@ -301,6 +301,7 @@ public class Search extends LinearLayout
 	        int resource_id=0;
 			//Action Buttons
 			Launcher.loadThemeResource(themeResources,themePackage,"btn_search_dialog_voice",mVoiceButton,Launcher.THEME_ITEM_BACKGROUND);
+			Launcher.loadThemeResource(themeResources,themePackage,"search_button_voice",mVoiceButton,Launcher.THEME_ITEM_FOREGROUND);
 			Launcher.loadThemeResource(themeResources,themePackage,"textfield_searchwidget",mSearchText,Launcher.THEME_ITEM_BACKGROUND);
 			View search_bg=findViewById(R.id.search_plate);
 			Launcher.loadThemeResource(themeResources,themePackage,"search_floater",search_bg,Launcher.THEME_ITEM_BACKGROUND);
