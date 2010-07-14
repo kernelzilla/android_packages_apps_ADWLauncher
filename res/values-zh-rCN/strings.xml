@@ -275,7 +275,7 @@
     <string name="widget_rows">小工具行数</string>
 
     <string name="pref_title_screen_cache">使用桌面缓存</string>
-    <string name="pref_summary_screen_cache">平滑的滚动.禁止该选项如果你设置了很多小工具.</string>
+    <string name="pref_summary_screen_cache">更平滑的滚动，如果你设置了很多小工具则禁止该选项</string>
 	
     <string name="pref_title_desktop_indicator">显示页面指示器</string>
     <string name="pref_summary_desktop_indicator">滑动桌面时显示视觉提示</string>
@@ -297,4 +297,16 @@
 
     <string name="pref_title_system_persistent">常驻内存</string>
     <string name="pref_summary_system_persistent">禁止系统在内存不足时终止ADW</string>
+	
+	<!-- Theme preferences -->
+	<string name="pref_title_theme_settings">主题设置</string>
+	<string name="pref_summary_theme_settings">选择主题</string>
+	<string name="pref_title_theme_package">选择您的主题</string>
+	<string name="pref_summary_theme_package">选择您的主题</string>
+	<string name="pref_title_theme_preview">主题预览</string>
+	<string name="pref_summary_theme_preview">预览选择的主题</string>
+	<string name="pref_title_theme_icons">使用主题图标</string>
+	<string name="pref_summary_theme_icons">不选择此项使用系统标准图标</string>
+	<string name="pref_themes_apply_theme">应用主题</string>
+	<string name="pref_themes_get_themes">获取更多主题</string>
 </resources>
