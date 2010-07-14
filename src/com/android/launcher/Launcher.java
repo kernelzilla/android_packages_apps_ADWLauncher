@@ -2505,9 +2505,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 	                sModel.syncPackage(Launcher.this, packageName);
 	            }
             } else {
-		//ADW: Damn, this should be only for froyo!!!
-                if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
-                	Log.d("FROYO","EXTERNAL AVAILABLE");
+            	//ADW: Damn, this should be only for froyo!!!
                 if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)) {
                      String packages[] = intent.getStringArrayExtra(
                              Intent.EXTRA_CHANGED_PACKAGE_LIST);
