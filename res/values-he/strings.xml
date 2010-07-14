@@ -362,4 +362,15 @@
 
     <string name="pref_title_system_persistent">התמדת מערכת</string>
     <string name="pref_summary_system_persistent">"אפשר אפשרות זאת כדי למנוע לקריסתו של הלאנצ'ר"</string>
+		   <!-- Theme preferences -->
+	<string name="pref_title_theme_settings">הגדרות ערכת נושא</string>
+	<string name="pref_summary_theme_settings">בחר ערכת נושא מ ADW.Launcher</string>
+	<string name="pref_title_theme_package">בחר ערכת נושא</string>
+	<string name="pref_summary_theme_package">בחר ערכת נושא עבור ADW.Launcher</string>
+	<string name="pref_title_theme_preview">תצוגה מקדמת</string>
+	<string name="pref_summary_theme_preview">תצוגה מקדמת של ערכת הנושא</string>
+	<string name="pref_title_theme_icons">השתמש בסמלי ערכת הנושא</string>
+	<string name="pref_summary_theme_icons">אל תבחר זאת אם אתה רוצה להשתמש בסמלי המערכת</string>
+	<string name="pref_themes_apply_theme">החל ערכת נושא!</string>
+	<string name="pref_themes_get_themes">הורד ערכות נושא!</string>
 </resources>
