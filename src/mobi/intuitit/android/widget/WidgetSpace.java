@@ -38,7 +38,9 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public abstract class WidgetSpace extends ViewGroup {
 
-    protected boolean mAllowLongPress;
+    private static final String TAG = "WidgetSpace";
+
+	protected boolean mAllowLongPress;
 
     protected int mCurrentScreen;
 
