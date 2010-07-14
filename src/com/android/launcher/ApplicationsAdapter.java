@@ -35,7 +35,8 @@ import java.util.ArrayList;
 public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
     private final LayoutInflater mInflater;
     private Drawable mBackground;
-    private int mTextColor=-1;
+    private int mTextColor=0;
+    private boolean useThemeTextColor=false;
     public ApplicationsAdapter(Context context, ArrayList<ApplicationInfo> apps) {
         super(context, 0, apps);
         mInflater = LayoutInflater.from(context);
@@ -52,6 +53,7 @@ public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
     			int textColorId=themeResources.getIdentifier("drawer_text_color", "color", themePackage);
     			if(textColorId!=0){
     				mTextColor=themeResources.getColor(textColorId);
+    				useThemeTextColor=true;
     			}
     			mBackground=IconHighlights.getDrawable(getContext(), IconHighlights.TYPE_DRAWER);
     		}
@@ -74,7 +76,7 @@ public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
         final TextView textView = (TextView) convertView;
         textView.setCompoundDrawablesWithIntrinsicBounds(null, info.icon, null, null);
         textView.setText(info.title);
-		if(mTextColor!=-1){
+		if(useThemeTextColor){
 			textView.setTextColor(mTextColor);
 		}
         //TODO:ADW Loading the background drawable for the app drawer hogs the ram and cpu
