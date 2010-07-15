@@ -27,7 +27,7 @@ import android.view.ViewConfiguration;
  * {@inheritDoc}
  */
 public class LauncherAppWidgetHostView extends AppWidgetHostView {
-	private static final long WIDGET_LONG_CLICK_TIMEOUT = 2000;
+	private static final long WIDGET_LONG_CLICK_TIMEOUT = 700;
 	private boolean mHasPerformedLongPress;
     
     private CheckForLongPress mPendingCheckForLongPress;
