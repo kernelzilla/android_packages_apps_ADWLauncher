@@ -116,7 +116,9 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
 		if (v != null) {
 		    Rect targetRect = new Rect();
 		    v.getGlobalVisibleRect(targetRect);
-		    app.intent.setSourceBounds(targetRect);
+		    try{
+		    	app.intent.setSourceBounds(targetRect);
+		    }catch(NoSuchMethodError e){};
 		}        
         mLauncher.startActivitySafely(app.intent);
         if (mLauncher.autoCloseFolder) {

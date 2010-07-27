@@ -63,7 +63,9 @@ public class LiveFolder extends Folder {
         		if (v != null) {
         		    Rect targetRect = new Rect();
         		    v.getGlobalVisibleRect(targetRect);
-        		    intent.setSourceBounds(targetRect);
+        		    try{
+        		    	intent.setSourceBounds(targetRect);
+        		    }catch(NoSuchMethodError e){};
         		}        
                 mLauncher.startActivitySafely(intent);
             }
@@ -71,7 +73,9 @@ public class LiveFolder extends Folder {
     		if (v != null) {
     		    Rect targetRect = new Rect();
     		    v.getGlobalVisibleRect(targetRect);
-    		    holder.intent.setSourceBounds(targetRect);
+    		    try{
+    		    	holder.intent.setSourceBounds(targetRect);
+    		    }catch(NoSuchMethodError e){};
     		}        
             mLauncher.startActivitySafely(holder.intent);
         }
