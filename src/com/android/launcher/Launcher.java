@@ -330,7 +330,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         newDrawer=AlmostNexusSettingsHelper.getDrawerNew(Launcher.this);
         setContentView(R.layout.launcher);
         setupViews();
-
+        
+        mAppWidgetHost.setWorkspace(mWorkspace);
         registerIntentReceivers();
         registerContentObservers();
 
@@ -1232,7 +1233,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         }
         sModel.unbind();
         sModel.abortLoaders();
-
+        mWorkspace.unbindWidgetScrollableViews();
         getContentResolver().unregisterContentObserver(mObserver);
         getContentResolver().unregisterContentObserver(mWidgetObserver);
         unregisterReceiver(mApplicationsReceiver);

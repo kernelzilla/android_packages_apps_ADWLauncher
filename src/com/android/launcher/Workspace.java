@@ -785,14 +785,14 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
    
                 
                 if (xMoved || yMoved) {
-                    // If xDiff > yDiff means the finger path pitch is smaller than 45¼ so we assume the user want to scroll X axis
+                    // If xDiff > yDiff means the finger path pitch is smaller than 45ï¿½ so we assume the user want to scroll X axis
                     if (xDiff > yDiff) {
                         // Scroll if the user moved far enough along the X axis
                         mTouchState = TOUCH_STATE_SCROLLING;
                         enableChildrenCache();
                         
                     } 
-                    // If yDiff > xDiff means the finger path pitch is bigger than 45» so we assume the user want to either scroll Y or Y-axis gesture
+                    // If yDiff > xDiff means the finger path pitch is bigger than 45ï¿½ so we assume the user want to either scroll Y or Y-axis gesture
                     else if (getOpenFolder()==null)
                     {
                     	// As x scrolling is left untouched (more or less untouched;)), every gesture should start by dragging in Y axis. In fact I only consider useful, swipe up and down.
@@ -864,43 +864,6 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
          */
         return mTouchState != TOUCH_STATE_REST;
     }
-    private boolean isWidgetAtLocationScrollable(int x, int y) {
-		// will return true if widget at this position is scrollable.
-    	// Get current screen from the whole desktop
-    	CellLayout currentScreen = (CellLayout) getChildAt(mCurrentScreen);
-    	int[] cell_xy = new int[2];
-    	// Get the cell where the user started the touch event
-    	currentScreen.pointToCellExact(x, y, cell_xy);
-        int count = currentScreen.getChildCount();
-        
-        // Iterate to find which widget is located at that cell
-        // Find widget backwards from a cell does not work with (View)currentScreen.getChildAt(cell_xy[0]*currentScreen.getCountX etc etc); As the widget is positioned at the very first cell of the widgetspace
-        for (int i = 0; i < count; i++) {
-            View child = (View)currentScreen.getChildAt(i);
-            if ( child !=null)
-            {
-            	// Get Layount graphical info about this widget
-	            CellLayout.LayoutParams lp = (CellLayout.LayoutParams) child.getLayoutParams();
-	            // Calculate Cell Margins
-	            int left_cellmargin = lp.cellX;
-	            int rigth_cellmargin = lp.cellX+lp.cellHSpan;
-	            int top_cellmargin = lp.cellY;
-	            int botton_cellmargin = lp.cellY + lp.cellVSpan;
-	            // See if the cell where we touched is inside the Layout of the widget beeing analized
-	            if (cell_xy[0] >= left_cellmargin && cell_xy[0] < rigth_cellmargin && cell_xy[1] >= top_cellmargin && cell_xy[1] < botton_cellmargin)  {
-	            	try {
-		            	// Get Widget ID
-		            	int id = ((AppWidgetHostView)child).getAppWidgetId();
-		            	// Ask to WidgetSpace if the Widget identified itself when created as 'Scrollable'
-		            	return isWidgetScrollable(id);
-	            	} catch (Exception e)
-	            	{}
-	            }
-           }
-        }
-        return false;
-	}
-
     void enableChildrenCache() {
         if(mDesktopCache){
 	    	final int count = getChildCount();
@@ -1803,4 +1766,44 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
 	public int currentDesktopColumns(){
 		return mDesktopColumns;
 	}
+    public boolean isWidgetAtLocationScrollable(int x, int y) {
+		// will return true if widget at this position is scrollable.
+    	// Get current screen from the whole desktop
+    	CellLayout currentScreen = (CellLayout) getChildAt(mCurrentScreen);
+    	int[] cell_xy = new int[2];
+    	// Get the cell where the user started the touch event
+    	currentScreen.pointToCellExact(x, y, cell_xy);
+        int count = currentScreen.getChildCount();
+        
+        // Iterate to find which widget is located at that cell
+        // Find widget backwards from a cell does not work with (View)currentScreen.getChildAt(cell_xy[0]*currentScreen.getCountX etc etc); As the widget is positioned at the very first cell of the widgetspace
+        for (int i = 0; i < count; i++) {
+            View child = (View)currentScreen.getChildAt(i);
+            if ( child !=null)
+            {
+            	// Get Layount graphical info about this widget
+	            CellLayout.LayoutParams lp = (CellLayout.LayoutParams) child.getLayoutParams();
+	            // Calculate Cell Margins
+	            int left_cellmargin = lp.cellX;
+	            int rigth_cellmargin = lp.cellX+lp.cellHSpan;
+	            int top_cellmargin = lp.cellY;
+	            int botton_cellmargin = lp.cellY + lp.cellVSpan;
+	            // See if the cell where we touched is inside the Layout of the widget beeing analized
+	            if (cell_xy[0] >= left_cellmargin && cell_xy[0] < rigth_cellmargin && cell_xy[1] >= top_cellmargin && cell_xy[1] < botton_cellmargin)  {
+	            	try {
+		            	// Get Widget ID
+		            	int id = ((AppWidgetHostView)child).getAppWidgetId();
+		            	// Ask to WidgetSpace if the Widget identified itself when created as 'Scrollable'
+		            	return isWidgetScrollable(id);
+	            	} catch (Exception e)
+	            	{}
+	            }
+           }
+        }
+        return false;
+	}
+    public void unbindWidgetScrollableViews() {
+    	unbindWidgetScrollable();
+	}
+	
 }
