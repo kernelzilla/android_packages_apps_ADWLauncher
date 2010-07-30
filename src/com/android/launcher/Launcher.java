@@ -513,10 +513,10 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         if(shouldRestart())
         	return;
         //ADW: Use custom settings to set the rotation
-        this.setRequestedOrientation(
+        /*this.setRequestedOrientation(
         		AlmostNexusSettingsHelper.getDesktopRotation(this)?
         				ActivityInfo.SCREEN_ORIENTATION_USER:ActivityInfo.SCREEN_ORIENTATION_NOSENSOR
-        );
+        );*/
         //ADW: Use custom settings to change number of columns (and rows for SlidingGrid) depending on phone rotation
         int orientation = getResources().getConfiguration().orientation;
 		if(orientation==Configuration.ORIENTATION_PORTRAIT){
@@ -3253,7 +3253,15 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		if(AlmostNexusSettingsHelper.needsRestart(key))
 			mShouldRestart=true;
 		else{
+			//TODO: ADW Move here all the updates instead on updateAlmostNexusUI() 
 			updateAlmostNexusUI();
+			if(key.equals("desktopRotation")){
+				Log.d("LAUNCHER PREFERENCES","Desktop rotation changed");
+		        this.setRequestedOrientation(
+        		AlmostNexusSettingsHelper.getDesktopRotation(this)?
+        				ActivityInfo.SCREEN_ORIENTATION_USER:ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+			}
+				
 		}
 	}
 	private void appwidgetReadyBroadcast(int appWidgetId, ComponentName cname) {
