@@ -119,6 +119,8 @@
 		android:layout_gravity="bottom|center_horizontal"
 		launcher:slideDirections="up"
 		launcher:targetDistance="45dip"
+		android:nextFocusUp="@id/all_apps_view"
+		
         />
     <com.android.launcher.DeleteZone
     	android:src="@drawable/ic_delete"
