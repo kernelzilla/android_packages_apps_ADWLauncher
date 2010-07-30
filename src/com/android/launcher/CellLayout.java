@@ -536,21 +536,24 @@ public class CellLayout extends WidgetCellLayout {
         mPortrait = heightSpecSize > widthSpecSize;
         int tmpCellW=mCellWidth;
         int tmpCellH=mCellHeight;
-        //ADW: add paddinf if using top paginator dots
+        //ADW: add padding if using top paginator dots AND indicator is enabled
         int topExtra=0;
-        if(AlmostNexusSettingsHelper.getDesktopIndicatorType(getContext())==DesktopIndicator.INDICATOR_TYPE_PAGER){
+        if(AlmostNexusSettingsHelper.getDesktopIndicator(getContext()) && AlmostNexusSettingsHelper.getDesktopIndicatorType(getContext())==DesktopIndicator.INDICATOR_TYPE_PAGER){
         	topExtra=mPaginatorPadding;
         }
+        android.util.Log.d("CELLLAYOUT","onMeasure!!! portrait="+mPortrait);
         if(mPortrait){
         	mLongAxisCells=mRows;
         	mShortAxisCells=mColumns;
         	mLongAxisStartPadding=mLongAxisStartPaddingOrg+topExtra;
+        	mShortAxisStartPadding=mShortAxisStartPaddingOrg;
         	tmpCellW=(widthSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mColumns;
         	tmpCellH=(heightSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mRows;
         }else{
         	mLongAxisCells=mColumns;
         	mShortAxisCells=mRows;
         	mShortAxisStartPadding=mShortAxisStartPaddingOrg+topExtra;
+        	mLongAxisStartPadding=mLongAxisStartPaddingOrg;
         	tmpCellW=(widthSpecSize-mLongAxisStartPadding-mLongAxisEndPadding)/mColumns;
         	tmpCellH=(heightSpecSize-mShortAxisStartPadding-mShortAxisEndPadding)/mRows;
         }
