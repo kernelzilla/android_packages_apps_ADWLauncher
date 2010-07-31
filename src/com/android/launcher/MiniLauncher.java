@@ -32,7 +32,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Scroller;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -445,6 +447,28 @@ public class MiniLauncher extends ViewGroup implements View.OnLongClickListener,
 		mBackground=(TransitionDrawable) d;
 		mBackground.setCrossFadeEnabled(true);
 		
+	}
+	/**
+	 * ADW: Reload the proper icons
+	 * This is mainly used when the apps from SDcard are available in froyo
+	 */
+	public void reloadIcons(){
+		final int count=getChildCount();
+		for(int i=0;i<count;i++){
+			final View cell=getChildAt(i);
+			final ItemInfo itemInfo = (ItemInfo) cell.getTag();
+			if (itemInfo.itemType==LauncherSettings.Favorites.ITEM_TYPE_APPLICATION){
+	            ApplicationInfo info=(ApplicationInfo) itemInfo;
+				final Drawable icon = Launcher.getModel().getApplicationInfoIcon(
+	                    mLauncher.getPackageManager(), info);
+	            if (icon != null && icon != info.icon) {
+	                info.icon.setCallback(null);
+	                info.icon = Utilities.createIconThumbnail(icon, mLauncher);
+	                info.filtered = true;
+	                ((ImageView)cell).setImageDrawable(Utilities.drawReflection(info.icon, mLauncher));
+	            }
+			}
+        }
 	}
 
 }

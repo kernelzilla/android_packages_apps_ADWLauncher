@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActionButton extends ImageView implements DropTarget, DragListener {
@@ -241,5 +242,27 @@ public class ActionButton extends ImageView implements DropTarget, DragListener 
 			if(bgResource!=null)bgResource.setCallback(null);
 			bgResource=d;
 		}
+	}
+	/**
+	 * ADW: Reload the proper icon
+	 * This is mainly used when the apps from SDcard are available in froyo
+	 */
+	public void reloadIcon(){
+		if(mCurrentInfo==null)return;
+		if(mCurrentInfo.itemType==LauncherSettings.Favorites.ITEM_TYPE_APPLICATION){
+	        ApplicationInfo info=(ApplicationInfo) mCurrentInfo;
+			final Drawable icon = Launcher.getModel().getApplicationInfoIcon(
+	                mLauncher.getPackageManager(), info);
+	        Drawable myIcon=null;
+			if (icon != null) {
+	            info.icon.setCallback(null);
+	            info.icon = Utilities.createIconThumbnail(icon, mLauncher);
+	            info.filtered = true;
+	            myIcon = mLauncher.createSmallActionButtonIcon(info);
+				setImageDrawable(myIcon);
+		        invalidate();			
+	        }
+		}
+		
 	}
 }
