@@ -31,6 +31,7 @@ import android.provider.LiveFolders;
 import android.graphics.drawable.Drawable;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ class LiveFolderAdapter extends CursorAdapter {
     private final HashMap<Long, SoftReference<Drawable>> mCustomIcons =
             new HashMap<Long, SoftReference<Drawable>>();
     private final Launcher mLauncher;
-
+    private Typeface themeFont=null;
     LiveFolderAdapter(Launcher launcher, LiveFolderInfo info, Cursor cursor) {
         super(launcher, cursor, true);
         mIsList = info.displayMode == LiveFolders.DISPLAY_MODE_LIST;
@@ -52,6 +53,7 @@ class LiveFolderAdapter extends CursorAdapter {
         mLauncher = launcher;
 
         mLauncher.startManagingCursor(getCursor());
+        themeFont=launcher.getThemeFont();
     }
 
     static Cursor query(Context context, LiveFolderInfo info) {
@@ -68,11 +70,13 @@ class LiveFolderAdapter extends CursorAdapter {
         } else {
             view = mInflater.inflate(R.layout.application_list, parent, false);
             holder.description = (TextView) view.findViewById(R.id.description);
+            if(themeFont!=null)holder.description.setTypeface(themeFont);
             holder.icon = (ImageView) view.findViewById(R.id.icon);
         }
 
         holder.name = (TextView) view.findViewById(R.id.name);
-
+        if(themeFont!=null)holder.name.setTypeface(themeFont);
+        
         holder.idIndex = cursor.getColumnIndexOrThrow(LiveFolders._ID);
         holder.nameIndex = cursor.getColumnIndexOrThrow(LiveFolders.NAME);
         holder.descriptionIndex = cursor.getColumnIndex(LiveFolders.DESCRIPTION);
