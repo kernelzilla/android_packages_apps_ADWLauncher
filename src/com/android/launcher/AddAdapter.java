@@ -18,6 +18,7 @@ package com.android.launcher;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class AddAdapter extends BaseAdapter {
     public static final int ITEM_APPWIDGET = 1;
     public static final int ITEM_LIVE_FOLDER = 2;
     public static final int ITEM_WALLPAPER = 3;
-    
+    private Typeface themeFont=null;
     /**
      * Specific item in our list.
      */
@@ -62,7 +63,7 @@ public class AddAdapter extends BaseAdapter {
     
     public AddAdapter(Launcher launcher) {
         super();
-
+        themeFont=launcher.getThemeFont();
         mInflater = (LayoutInflater) launcher.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
         // Create default actions
@@ -93,7 +94,7 @@ public class AddAdapter extends BaseAdapter {
         textView.setTag(item);
         textView.setText(item.text);
         textView.setCompoundDrawablesWithIntrinsicBounds(item.image, null, null, null);
-        
+        if(themeFont!=null)textView.setTypeface(themeFont);
         return convertView;
     }
 
