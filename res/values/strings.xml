@@ -372,7 +372,7 @@
 	<string name="pref_title_theme_preview">Theme Preview</string>
 	<string name="pref_summary_theme_preview">Preview of the selected theme</string>
 	<string name="pref_title_theme_icons">Use Theme Icons</string>
-	<string name="pref_summary_theme_icons">Deselect this tu use standard OS icons</string>
+	<string name="pref_summary_theme_icons">Deselect this to use standard OS icons</string>
 	<string name="pref_themes_apply_theme">Apply theme!</string>
 	<string name="pref_themes_get_themes">Get themes!</string>
 </resources>
