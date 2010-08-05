@@ -106,7 +106,12 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
 				mTextColor=themeResources.getColor(textColorId);
 				mCloseButton.setTextColor(mTextColor);
 			}
-			Typeface themeFont=Typeface.createFromAsset(themeResources.getAssets(), "themefont.ttf");
+			Typeface themeFont=null;
+			try{
+				themeFont=Typeface.createFromAsset(themeResources.getAssets(), "themefont.ttf");
+			}catch (RuntimeException e) {
+				// TODO: handle exception
+			}
 			if(themeFont!=null)mCloseButton.setTypeface(themeFont);
 		}
         

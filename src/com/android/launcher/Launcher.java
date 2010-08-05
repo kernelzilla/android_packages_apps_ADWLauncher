@@ -810,7 +810,11 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			loadThemeResource(themeResources,themePackage,"home_arrows_right",mNextView,THEME_ITEM_FOREGROUND);
 			//Dockbar
 			loadThemeResource(themeResources,themePackage,"dockbar_bg",mMiniLauncher,THEME_ITEM_BACKGROUND);
-			themeFont=Typeface.createFromAsset(themeResources.getAssets(), "themefont.ttf");
+			try{
+				themeFont=Typeface.createFromAsset(themeResources.getAssets(), "themefont.ttf");
+			}catch (RuntimeException e) {
+				// TODO: handle exception
+			}
 		}
         mHandleIcon = (TransitionDrawable) mHandleView.getDrawable();
         mHandleIcon.setCrossFadeEnabled(true);

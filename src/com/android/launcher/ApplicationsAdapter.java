@@ -58,7 +58,11 @@ public class ApplicationsAdapter extends ArrayAdapter<ApplicationInfo> {
     				useThemeTextColor=true;
     			}
     			mBackground=IconHighlights.getDrawable(getContext(), IconHighlights.TYPE_DRAWER);
-    			themeFont=Typeface.createFromAsset(themeResources.getAssets(), "themefont.ttf");
+    			try{
+    				themeFont=Typeface.createFromAsset(themeResources.getAssets(), "themefont.ttf");
+    			}catch (RuntimeException e) {
+					// TODO: handle exception
+				}
     		}
         }
     }
