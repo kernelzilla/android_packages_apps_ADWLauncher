@@ -1487,6 +1487,34 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
                                     info.icon, null, null);
                         }
                     }
+                }else if (tag instanceof UserFolderInfo){
+                	//TODO: ADW: Maybe there are icons inside folders.... need to update them too
+                    final UserFolderInfo info = (UserFolderInfo) tag;
+                    final ArrayList<ApplicationInfo> contents = info.contents;
+                    final int contentsCount = contents.size();
+                    for (int k = 0; k < contentsCount; k++) {
+                        final ApplicationInfo appInfo = contents.get(k);
+                        final Intent intent = appInfo.intent;
+                        final ComponentName name = intent.getComponent();
+                        if (appInfo.itemType == LauncherSettings.Favorites.ITEM_TYPE_APPLICATION &&
+                                Intent.ACTION_MAIN.equals(intent.getAction()) && name != null &&
+                                packageName.equals(name.getPackageName())) {
+
+                            final Drawable icon = Launcher.getModel().getApplicationInfoIcon(
+                                    mLauncher.getPackageManager(), appInfo);
+                            boolean folderUpdated=false;
+                            if (icon != null && icon != appInfo.icon) {
+                            	appInfo.icon.setCallback(null);
+                            	appInfo.icon = Utilities.createIconThumbnail(icon, mLauncher);
+                            	appInfo.filtered = true;
+                            	folderUpdated=true;
+                            }
+                            if(folderUpdated){
+                                final Folder folder = getOpenFolder();
+                                if (folder != null) folder.notifyDataSetChanged();
+                            }
+                        }
+                    }
                 }
             }
         }
