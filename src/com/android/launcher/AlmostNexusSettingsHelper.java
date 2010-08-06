@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public final class AlmostNexusSettingsHelper {
+	public static final int ORIENTATION_SENSOR=1;
+	public static final int ORIENTATION_PORTRAIT=2;
+	public static final int ORIENTATION_LANDSCAPE=3;
 	private static final String ALMOSTNEXUS_PREFERENCES = "launcher.preferences.almostnexus";
 	private static final String[] restart_keys={"desktopScreens","drawerNew","uiHideLabels","highlights_color",
 		"highlights_color_focus","uiNewSelectors","desktopRows","desktopColumns","autosizeIcons","uiDesktopIndicatorType",
-		"uiScrollableWidgets","desktopCache","uiDesktopIndicator","systemPersistent","themePackageName","themeIcons"};
+		"uiScrollableWidgets","desktopCache","uiDesktopIndicator","themePackageName","themeIcons"};
 
 	public static boolean needsRestart(String key){
 		for(int i=0;i<restart_keys.length;i++){
@@ -59,11 +62,6 @@ public final class AlmostNexusSettingsHelper {
 	public static boolean getDrawerNew(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		boolean newD = sp.getBoolean("drawerNew", context.getResources().getBoolean(R.bool.config_drawerNew));
-		return newD;
-	}
-	public static boolean getDesktopRotation(Context context) {
-		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
-		boolean newD = sp.getBoolean("desktopRotation",context.getResources().getBoolean(R.bool.config_desktopRotation));
 		return newD;
 	}
 	public static boolean getHideStatusbar(Context context) {
@@ -321,6 +319,11 @@ public final class AlmostNexusSettingsHelper {
 	public static boolean getThemeIcons(Context context) {
 		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
 		boolean newD = sp.getBoolean("themeIcons", true);
+		return newD;
+	}
+	public static int getDesktopOrientation(Context context) {
+		SharedPreferences sp = context.getSharedPreferences(ALMOSTNEXUS_PREFERENCES, Context.MODE_PRIVATE);
+		int newD = Integer.valueOf(sp.getString("homeOrientation", context.getResources().getString(R.string.config_orientation_default)));
 		return newD;
 	}
 	

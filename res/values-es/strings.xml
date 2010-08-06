@@ -70,8 +70,8 @@
     <string name="pref_title_wallpaper_hack">Wallpaper Hack</string>
     <string name="pref_summary_wallpaper_hack">Mejora el desplazamiento entre escritorios. Desactívalo si tienes FCs con wallpapers grandes.</string>
 
-    <string name="pref_title_orientation_sensor">Sensor de rotación</string>
-    <string name="pref_summary_orientation_sensor">Habilita el sensor de rotación</string>
+    <string name="pref_title_orientation_sensor">Orientación</string>
+    <string name="pref_summary_orientation_sensor">Selecciona la orientación que deseas</string>
 
     <string name="pref_title_hide_statusbar">Ocultar barra de estado</string>
     <string name="pref_summary_hide_statusbar">Oculta la barra de estado</string>
@@ -287,7 +287,7 @@
 	<string name="pref_title_indicators_preferencecategory">Indicador de pantalla</string>
 
     <string name="pref_title_system_persistent">Persistencia</string>
-    <string name="pref_summary_system_persistent">Evitar el cierre. PELIGROSO. Mejor no usar</string>
+    <string name="pref_summary_system_persistent">PELIGRO. Evita que se cierre el launcher</string>
     <!-- Theme preferences -->
 	<string name="pref_title_theme_settings">Preferencias de Temas</string>
 	<string name="pref_summary_theme_settings">Elige temas para ADW.Launcher</string>

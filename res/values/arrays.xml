@@ -17,7 +17,11 @@
                 <item>Sliding paginator top</item>
                 <item>Sliding paginator bottom</item>
        </string-array>
-
+       <string-array name="home_orientation_entries">
+                <item>Auto/sensor</item>
+                <item>Portrait</item>
+                <item>Landscape</item>
+       </string-array>
        <!-- Do not translate. -->
        <string-array name="menu_binding_values">
        			<item>0</item>
@@ -32,6 +36,11 @@
                 <item>9</item>
        </string-array>
        <string-array name="desktop_indicator_values">
+                <item>1</item>
+                <item>2</item>
+                <item>3</item>
+       </string-array>
+       <string-array name="home_orientation_values">
                 <item>1</item>
                 <item>2</item>
                 <item>3</item>

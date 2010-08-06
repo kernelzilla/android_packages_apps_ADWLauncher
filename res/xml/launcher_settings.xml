@@ -175,10 +175,6 @@
 			android:defaultValue="true"
 			android:summary="@string/pref_summary_wallpaper_hack"
 			android:key="wallpaperHack" />
-		<CheckBoxPreference android:title="@string/pref_title_orientation_sensor"
-			android:defaultValue="@bool/config_desktopRotation"
-			android:summary="@string/pref_summary_orientation_sensor"
-			android:key="desktopRotation" />
 		<CheckBoxPreference android:title="@string/pref_title_screen_cache"
 			android:defaultValue="@bool/config_desktopCache"
 			android:summary="@string/pref_summary_screen_cache"
@@ -191,6 +187,14 @@
 			android:title="@string/pref_title_system_persistent"
 			android:summary="@string/pref_summary_system_persistent"
 			android:defaultValue="@bool/config_system_persistent" />
+		<ListPreference
+		  android:key="homeOrientation"
+		  android:title="@string/pref_title_orientation_sensor"
+		  android:summary="@string/pref_summary_orientation_sensor"
+		  android:defaultValue="@string/config_orientation_default"
+		  android:entryValues="@array/home_orientation_values"
+		  android:entries="@array/home_orientation_entries"
+		/>
 	</PreferenceScreen>
 	<PreferenceScreen
 		android:key="buttonPrerefences"

@@ -17,4 +17,9 @@
                 <item>Línea superior</item>
                 <item>Línea inferior</item>
        </string-array>
+       <string-array name="home_orientation_entries">
+                <item>Automático/sensor</item>
+                <item>Vertical</item>
+                <item>Horizontal</item>
+       </string-array>       
 </resources>

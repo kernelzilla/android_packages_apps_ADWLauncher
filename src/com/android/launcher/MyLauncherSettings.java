@@ -106,7 +106,14 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
         swipeup_action.setOnPreferenceChangeListener(this);
         ListPreference homebutton_binding = (ListPreference) findPreference("homeBinding");
         homebutton_binding.setOnPreferenceChangeListener(this);
-        
+        CheckBoxPreference persist=(CheckBoxPreference)findPreference("systemPersistent");
+        persist.setOnPreferenceChangeListener(this);
+        Preference orientations=findPreference("homeOrientation");
+        if(AlmostNexusSettingsHelper.getSystemPersistent(this)){
+        	orientations.setEnabled(false);
+        }else{
+        	orientations.setEnabled(true);
+        }
         mContext=this;
         
         Preference exportToXML = findPreference("xml_export");
@@ -399,6 +406,13 @@ public class MyLauncherSettings extends PreferenceActivity implements OnPreferen
 	            Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
 	            pickIntent.putExtra(Intent.EXTRA_INTENT, mainIntent);
 	            startActivityForResult(pickIntent,REQUEST_SWIPE_UP_APP_CHOOSER);
+			}
+		}else if(preference.getKey().equals("systemPersistent")) {
+			Preference orientations=findPreference("homeOrientation");
+			if(newValue.equals(true)){
+				orientations.setEnabled(false);
+			}else{
+				orientations.setEnabled(true);
 			}
 		}
         return true;  

@@ -138,10 +138,10 @@
     <string name="pref_summary_screen_preferences">Screen count, default screen...</string>
 
     <string name="pref_title_wallpaper_hack">Wallpaper Hack</string>
-    <string name="pref_summary_wallpaper_hack">Disable this if you get FCs using LARGE wallpapers.Leaving it enabled inproves the scrolling speed.</string>
+    <string name="pref_summary_wallpaper_hack">Disable this if you get FCs.Leaving it enabled inproves the scrolling speed.</string>
 
-    <string name="pref_title_orientation_sensor">Orientation sensor</string>
-    <string name="pref_summary_orientation_sensor">Rotate desktop on sensor rotation</string>
+    <string name="pref_title_orientation_sensor">Home Orientation</string>
+    <string name="pref_summary_orientation_sensor">Select your desired orientation</string>
 
     <string name="pref_title_hide_statusbar">Hide StatusBar</string>
     <string name="pref_summary_hide_statusbar">Hides your statusbar</string>
@@ -159,7 +159,7 @@
     <string name="pref_dialog_desktop_scrolling_speed">The lower the value, the faster you will fling</string>
 
     <string name="pref_title_desktop_overshoot">Desktop overshoot</string>
-    <string name="pref_summary_desktop_overshoot">Allow to bounce past first/last desktop screens</string>
+    <string name="pref_summary_desktop_overshoot">Allows bouncy scrolling desktop screens</string>
     <string name="pref_dialog_desktop_overshoot">Set it to 0 to disable overshooting</string>
 
     <!-- Drawer Settings -->
@@ -363,7 +363,7 @@
 	<string name="pref_title_indicators_preferencecategory">Screen indicator</string>
 
     <string name="pref_title_system_persistent">System persistent</string>
-    <string name="pref_summary_system_persistent">Enable this to avoid system killing the launcher</string>
+    <string name="pref_summary_system_persistent">Dangerous. Enable this to avoid system killing the launcher</string>
     <!-- Theme preferences -->
 	<string name="pref_title_theme_settings">Themes Preferences</string>
 	<string name="pref_summary_theme_settings">Select themes for ADW.Launcher</string>
