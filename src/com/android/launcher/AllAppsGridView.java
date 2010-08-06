@@ -240,7 +240,7 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 		mTargetAlpha=Color.alpha(mBgColor);
 		mDrawLabels=AlmostNexusSettingsHelper.getDrawerLabels(mLauncher);
 		mFadeDrawLabels=AlmostNexusSettingsHelper.getFadeDrawerLabels(mLauncher);
-		if(animate){
+		if(animate  && getChildCount()>0){
 			if(mFadeDrawLabels&&mDrawLabels){
 				for(int i=0;i<getChildCount();i++){
 					getChildAt(i).setDrawingCacheEnabled(true);
@@ -259,7 +259,7 @@ public class AllAppsGridView extends GridView implements AdapterView.OnItemClick
 		invalidate();
 	}
 	public void close(boolean animate){
-		if(animate){
+		if(animate  && getChildCount()>0){
 			mStatus=CLOSING;
 			isAnimating=true;
 		}else{

@@ -2752,8 +2752,10 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		mHandleView.setSlidingEnabled(showDockBar);
     	fullScreen(hideStatusBar);
     	if(!mDockBar.isOpen() && !showingPreviews){
-	    	mNextView.setVisibility(showDots?View.VISIBLE:View.GONE);
-	    	mPreviousView.setVisibility(showDots?View.VISIBLE:View.GONE);
+	    	if(!isAllAppsVisible()){
+	    		mNextView.setVisibility(showDots?View.VISIBLE:View.GONE);
+		    	mPreviousView.setVisibility(showDots?View.VISIBLE:View.GONE);
+	    	}
 	    	mRAB.setVisibility(showRAB?View.VISIBLE:View.INVISIBLE);
 	    	mLAB.setVisibility(showLAB?View.VISIBLE:View.INVISIBLE);
 	    	mRAB2.setVisibility((showAB2 && !showDots)?View.VISIBLE:View.GONE);
@@ -2773,6 +2775,9 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     		mDesktopIndicator.setAutoHide(AlmostNexusSettingsHelper.getDesktopIndicatorAutohide(this));
     		if(mWorkspace!=null){
     			mDesktopIndicator.setItems(mWorkspace.getChildCount());
+    		}
+    		if(isAllAppsVisible()){
+    			if(mDesktopIndicator!=null)mDesktopIndicator.hide();
     		}
     	}
 
@@ -3162,7 +3167,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			allAppsOpen=true;
 			mWorkspace.enableChildrenCache();
 	        mWorkspace.lock();
-	        mDesktopLocked=true;
+	        //mDesktopLocked=true;
 	        mWorkspace.invalidate();			
             if(newDrawer){
     	        ((AllAppsSlidingView) mAllAppsGrid).open(animated && allowDrawerAnimations);
@@ -3180,7 +3185,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 		if(allAppsOpen){
 			allAppsOpen=false;
 	        mWorkspace.unlock();
-	        mDesktopLocked=false;
+	        //mDesktopLocked=false;
 	        mWorkspace.invalidate();			
 			mHandleIcon.resetTransition();
 			if(!isDockBarOpen() && showDots){
