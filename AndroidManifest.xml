@@ -84,17 +84,6 @@
             </intent-filter>
         </activity>
 		<activity android:name="MyLauncherSettings" android:label="@string/pref_label_settings" />
-        <activity
-            android:name="WallpaperChooser"
-            android:label="@string/pick_wallpaper"
-            android:icon="@drawable/ic_launcher_wallpaper"
-            android:finishOnCloseSystemDialogs="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SET_WALLPAPER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <!-- Enable system-default search mode for any activity in Home -->
         <meta-data
             android:name="android.app.default_searchable"
