@@ -1415,17 +1415,13 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         settings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
-        /*menu.add(MENU_GROUP_NORMAL, MENU_SETTINGS, 0, R.string.menu_settings)
+        menu.add(MENU_GROUP_NORMAL, MENU_SETTINGS, 0, R.string.menu_settings)
                 .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
-                .setIntent(settings);*/
+                .setIntent(settings);
 		//ADW: add custom settings
         menu.add(MENU_GROUP_ALMOSTNEXUS, MENU_ALMOSTNEXUS, 0, R.string.menu_adw_settings)
         .setIcon(com.android.internal.R.drawable.ic_menu_preferences)
         .setAlphabeticShortcut('X');
-
-        menu.add(MENU_GROUP_NORMAL, MENU_ALMOSTNEXUS, 0, R.string.menu_adw_settings)
-		.setIcon(android.R.drawable.ic_menu_preferences)
-		.setAlphabeticShortcut('X');
        
 		menu.add(MENU_GROUP_CATALOGUE, MENU_APP_GRP_CONFIG, 0, R.string.AppGroupConfig)
 			.setIcon(android.R.drawable.ic_menu_agenda);
