@@ -1897,6 +1897,10 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
     public void unbindWidgetScrollableViews() {
     	unbindWidgetScrollable();
 	}
+    public void unbindWidgetScrollableViewsForWidget(int widgetId) {
+    	Log.d("WORKSPACE", "trying to completely unallocate widget ID="+widgetId);
+    	unbindWidgetScrollableId(widgetId);
+	}
 
 	public void setDefaultScreen(int defaultScreen) {
 		mDefaultScreen=defaultScreen;
