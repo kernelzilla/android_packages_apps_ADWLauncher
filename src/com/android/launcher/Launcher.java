@@ -32,10 +32,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import mobi.intuitit.android.content.LauncherIntent;
-import com.android.launcher.catalogue.AppGroupAdapter;
-import com.android.launcher.catalogue.AppGrpUtils;
-import com.android.launcher.catalogue.AppInfoMList;
 import mobi.intuitit.android.content.LauncherMetadata;
+
+import com.android.launcher.DockBar.DockBarListener;
+import com.android.launcher.SliderView.OnTriggerListener;
+import com.android.launcher.catalogue.AppCatalogueFilter;
+import com.android.launcher.catalogue.AppCatalogueFilters;
+import com.android.launcher.catalogue.AppGroupAdapter;
+import com.android.launcher.catalogue.AppInfoMList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -386,7 +390,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         //ADW: register a sharedpref listener
         getSharedPreferences("launcher.preferences.almostnexus", Context.MODE_PRIVATE).registerOnSharedPreferenceChangeListener(this);
 
-		AppGrpUtils.init(this);
+		AppCatalogueFilters.getInstance().init(this);
 
     }
 
@@ -1507,26 +1511,27 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
         return super.onOptionsItemSelected(item);
     }
+
 	private void showAppList() {
-        if (null==AppGrpUtils.getCurAppGrp()) {
+		final AppCatalogueFilter flt = AppCatalogueFilters.getInstance().getDrawerFilter();
+        if (!flt.isUserGroup()) {
 			Toast.makeText(this, getString(R.string.AppGroupConfigError), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		Intent i = new Intent(this, AppInfoMList.class);
+		i.putExtra(AppInfoMList.EXTRA_CATALOGUE_INDEX, flt.getCurrentFilterIndex());
 		startActivityForResult(i, REQUEST_SHOW_APP_LIST);
 	}
+
     void showDeleteGrpDialog() {
-        if (null==AppGrpUtils.getCurAppGrp()) {
+        if (!AppCatalogueFilters.getInstance().getDrawerFilter().isUserGroup()) {
             Toast.makeText(this, getString(R.string.AppGroupConfigError), Toast.LENGTH_SHORT).show();
 			return;
 		}
         showDialog(DIALOG_DELETE_GROUP_CONFIRM);
     }
+
     void showNewGrpDialog() {
-        if (!AppGrpUtils.hasValidGrp()) {
-            Toast.makeText(this, getString(R.string.AppGroupAddError), Toast.LENGTH_SHORT).show();
-			return;
-		}
         mWaitingForResult = true;
         showDialog(DIALOG_NEW_GROUP);
     }
@@ -2171,7 +2176,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     private void bindDrawer(Launcher.DesktopBinder binder,
             ApplicationsAdapter drawerAdapter) {
         int currCatalog=AlmostNexusSettingsHelper.getCurrentAppCatalog(this);
-        AppGrpUtils.setCurGrp(currCatalog);
+        AppCatalogueFilters.getInstance().getDrawerFilter().setCurrentGroupIndex(currCatalog);
         if(newDrawer){
         	((AllAppsSlidingView)mAllAppsGrid).setAdapter(drawerAdapter);
         	((AllAppsSlidingView)mAllAppsGrid).updateAppGrp();
@@ -2468,7 +2473,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
     }
 	public void delCurrentGrp()
 	{
-		AppGrpUtils.checkAndDisableGrp();
+		int index = AppCatalogueFilters.getInstance().getDrawerFilter().getCurrentFilterIndex();
+		AppCatalogueFilters.getInstance().dropGroup(index);
 		showSwitchGrp();
 	}
 	public void showSwitchGrp()
@@ -2623,14 +2629,17 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 
 		public void onClick(DialogInterface dialog, int which) {
 			cleanup();
+			AppGroupAdapter.ListItem itm = (AppGroupAdapter.ListItem)mAdapter.getItem(which);
+			int action = itm.actionTag;
+
 			//1st is add,
 			//2nd is All, mapping to -1, check AppGrpUtils For detail
 		   //int dbGrp = AppGrpUtils.getGrpNumber(which-2);
-		   if (0 == which ) {
+		   if (action == AppGroupAdapter.APP_GROUP_ADD) {
 			   showNewGrpDialog() ;
 		   } else {
-			   AppGrpUtils.setCurGrp(which-2);
-			   AlmostNexusSettingsHelper.setCurrentAppCatalog(Launcher.this, which-2);
+			   AppCatalogueFilters.getInstance().getDrawerFilter().setCurrentGroupIndex(action);
+			   AlmostNexusSettingsHelper.setCurrentAppCatalog(Launcher.this, action);
 			   if(newDrawer){
 				   ((AllAppsSlidingView)mAllAppsGrid).updateAppGrp();
 			   }else{
@@ -2697,7 +2706,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
 			mInput.setText("");
 			if (!TextUtils.isEmpty(name)) {
 				// Make sure we have the right folder info
-				int which=AppGrpUtils.checkAndInitGrp(name);
+				int which=AppCatalogueFilters.getInstance().createNewGroup(name);
 				AlmostNexusSettingsHelper.setCurrentAppCatalog(Launcher.this, which);
 				LauncherModel.mApplicationsAdapter.updateDataSet();
 			}
