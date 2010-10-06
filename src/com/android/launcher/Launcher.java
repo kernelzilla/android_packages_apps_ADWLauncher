@@ -895,7 +895,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
      * @return A View inflated from layoutResId.
      */
     View createShortcut(int layoutResId, ViewGroup parent, ApplicationInfo info) {
-        TextView favorite = (TextView) mInflater.inflate(layoutResId, parent, false);
+        CounterTextView favorite = (CounterTextView) mInflater.inflate(layoutResId, parent, false);
 
         if (!info.filtered) {
             info.icon = Utilities.createIconThumbnail(info.icon, this);
@@ -908,7 +908,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         favorite.setOnClickListener(this);
 		//ADW: Custom font
 		if(themeFont!=null) favorite.setTypeface(themeFont);
-
+		//ADW: Counters stuff
+		favorite.setCounter(info.counter);
         return favorite;
     }
 
@@ -3150,6 +3151,8 @@ public final class Launcher extends Activity implements View.OnClickListener, On
         favorite.setImageDrawable(Utilities.drawReflection(info.icon, this));
         favorite.setTag(info);
         favorite.setOnClickListener(this);
+        //ADW: Counters stuff
+        favorite.setCounter(info.counter);
         return favorite;
     }
     /**
@@ -4304,6 +4307,7 @@ public final class Launcher extends Activity implements View.OnClickListener, On
                     ((CounterImageView) view).setCounter(counter);
                 //else if
                 view.invalidate();
+                sModel.updateCounterDesktopItem(info, counter);
             }
         }
 	}

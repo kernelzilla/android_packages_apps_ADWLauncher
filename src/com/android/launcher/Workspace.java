@@ -2065,6 +2065,7 @@ public class Workspace extends WidgetSpace implements DropTarget, DragSource, Dr
                         packageName.equals(name.getPackageName())) {
                         ((BubbleTextView) view).setCounter(counter);
                         view.invalidate();
+                        Launcher.getModel().updateCounterDesktopItem(info, counter);
                     }
                 }
             }
