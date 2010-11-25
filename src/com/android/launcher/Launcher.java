@@ -22,7 +22,6 @@ import static android.util.Log.w;
 
 import com.android.launcher.ActionButton.SwipeListener;
 import com.android.launcher.DockBar.DockBarListener;
-import com.android.launcher.SliderView.OnTriggerListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
