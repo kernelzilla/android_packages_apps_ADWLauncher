@@ -69,13 +69,9 @@
     <!-- Options in "Add to Home" dialog box; Title of the group containing the list of apps that can set the wallpaper-->
     <string name="group_wallpapers">배경화면</string>
     <!-- Options in "Add to Home" dialog box; Name of the Folder widget-->
-    <string name="add_folder">폴더</string>
     <!-- Options in "Add to Home" dialog box; Name of the Clock widget-->
-    <string name="add_clock">시계</string>
     <!-- Options in "Add to Home" dialog box; Name of the Picture frame widget-->
-    <string name="add_photo_frame">사진 프레임</string>
     <!-- Options in "Add to Home" dialog box; Name of the global search widget-->
-    <string name="add_search">검색</string>
     <!-- Error message when user has filled a home screen, possibly not used -->
     <string name="out_of_space">홈 화면에 더 이상 공간이 없습니다.</string>
     <!-- Message displayed when a shortcut is created by an external application -->
@@ -99,9 +95,7 @@
     <!-- Verb, menu item used to initiate global search -->
     <string name="menu_search">검색</string>
     <!-- Noun, menu item used to bring down the notifications shade -->
-    <string name="menu_notifications">알림</string>
     <!-- Noun, menu item used to show the gestures settings -->
-    <string name="menu_gestures">동작</string>
     <!-- Noun, menu item used to show the system settings -->
     <string name="menu_settings">설정</string>
     <string name="menu_adw_settings">ADW 런처 설정</string>
@@ -121,9 +115,7 @@
 
     <!-- TODO: Determine if this can be removed.
          This is the hint text shown in the search widget, before text is entered.
-         This translation SHOULD MATCH the string "search_hint" which is found in
          GoogleSearch/res/values/strings.xml -->
-    <string name="search_hint">Google 검색</string>
 
     <!-- Text to show user in place of a gadget when we can't display it properly -->
     <string name="gadget_error_text">위젯을 로드하는 중 문제가 발생했습니다</string>
@@ -143,8 +135,6 @@
     <string name="pref_summary_hide_statusbar">상태 표시줄을 숨깁니다.</string>
 
     <string name="pref_title_default_screen">기본 화면 설정</string>
-    <string name="pref_summary_default_screen">처음 보이는 화면을 설정합니다.</string>
-    <string name="pref_dialog_default_screen">기본 화면을 설정합니다.</string>
 
     <string name="pref_title_desktop_scrolling_speed">넘김 속도</string>
     <string name="pref_summary_desktop_scrolling_speed">화면을 넘기는 속도를 지정합니다.</string>
@@ -166,8 +156,6 @@
     <string name="pref_summary_page_horizontal_margin">페이지 사이의 여백을 지정합니다.</string>
     <string name="pref_dialog_page_horizontal_margin">페이지 사이의 여백을 지정합니다.</string>
 
-    <string name="pref_title_new_drawer">가로 메뉴</string>
-    <string name="pref_summary_new_drawer">갤럭시 시리즈에 적용된 가로 메뉴를 적용합니다.</string>
 
     <string name="pref_title_animated_drawer">메뉴 에니메이션</string>
     <string name="pref_summary_animated_drawer">메뉴의 에니메이션 여부를 설정합니다.</string>
@@ -189,14 +177,10 @@
     <string name="pref_dialog_drawer_rows_landscape">가로모드에서 사용할 열의 개수를 설정합니다.</string>
 
     <!-- Previews preferences -->
-    <string name="pref_title_previews_preferences">미리보기 설정</string>
-    <string name="pref_summary_previews_preferences">화면 미리보기 설정</string>
 
     <string name="pref_title_sense_previews">센스 미리보기</string>
     <string name="pref_summary_sense_previews">htc 스마트폰(예. 디자이어)에 적용된 센스UI와 같은 미리보기를 설정합니다.</string>
 
-    <string name="pref_title_clean_screen_mode">화면 지우기</string>
-    <string name="pref_summary_clean_screen_mode">미리보기를 열때는 홈버튼과 위젯을 없앱니다.</string>
 
     <!-- Button preferences -->
     <string name="pref_title_ui_settings">UI 설정</string>
@@ -223,24 +207,14 @@
     <string name="pref_title_closing_folder">폴더 닫기</string>
     <string name="pref_summary_closing_folder">어플을 실행한 후에 폴더를 자동으로 닫습니다.</string>
 
-    <string name="pref_title_lab">왼쪽 실행 버튼</string>
-    <string name="pref_summary_lab">왼쪽 실행 버튼 개인화을 활성화/비활성화합니다.</string>
 
-    <string name="pref_title_rab">오른쪽 실행</string>
-    <string name="pref_summary_rab">오른쪽 실행 버튼 개인화를 활성화/비활성화합니다.</string>
 
-    <string name="pref_title_ab2">실행버튼 5개로 추가</string>
-    <string name="pref_summary_ab2">기본 실행버튼의 양쪽에 실행버튼을 추가시켜 5개로 만듭니다. (disable Desktop dots)</string>
 
-    <string name="pref_title_tint_ab">틴트 효과</string>
-    <string name="pref_summary_tint_ab">실행 버튼을 옅게 하는 효과를 줍니다.</string>
 
     <string name="pref_title_ab_scale_factor">실행버튼 크기 설정</string>
     <string name="pref_summary_ab_scale_factor">실행버튼의 크기를 설정합니다.</string>
     <string name="pref_dialog_ab_scale_factor">실행버튼의 크기를 설정합니다.</string>
 
-    <string name="pref_title_hide_allapps_ab">메뉴버튼 배경 없애기</string>
-    <string name="pref_summary_hide_allapps_ab">메뉴버튼 뒤의 흰 배경을 없앱니다.</string>
 
     <string name="pref_title_hide_ab_bg">실행버튼 배경 없애기</string>
     <string name="pref_summary_hide_ab_bg">실행버튼 뒤의 흰 배경을 없앱니다.</string>
@@ -350,7 +324,6 @@
     <!-- Category titles -->
     <string name="pref_title_system_preferences">시스템 설정</string>
     <string name="pref_summary_system_preferences">ADW런처의 시스템을 설정합니다.</string>
-    <string name="pref_title_screens_preferencecategory">화면 스크린</string>
     <string name="pref_title_screens_layout_preferencecategory">화면 레이아웃</string>
     <string name="pref_title_screens_behaviour_preferencecategory">화면 설정</string>
     <string name="pref_title_drawer_preferencecategory">메뉴</string>
@@ -383,7 +356,6 @@
 
     <string name="pref_label_shirtcuts">사용자 설정 아이콘</string>
     <string name="pref_label_activities">활동</string>
-    <string name="pref_label_activities_loading">활동 리스트 로드 중...</string>
     <string name="shirtcut_header">원하는 어플을 선택하세요.\n아이콘도 바꿀 수 있습니다.</string>
     <string name="shirtcut_pick_activity">활동을 선택하세요.</string>
     <string name="shirtcut_label">이름</string>
@@ -402,7 +374,6 @@
     <string name="AppGroupConfig">"그룹 설정"</string>
     <string name="AppGroupRename">"새 카탈로그"</string>
     <string name="AppGroupConfigError">"이 그룹을 설정할 수 없습니다."</string>
-    <string name="AppGroupAddError">"그룹을 더 이상 생성할 수 없습니다."</string>
     <string name="rename_group_title">새 카탈로그</string>
     <string name="rename_group_label">카탈로그 이름</string>
     <string name="show_catalog">카탈로기 보여주기 \"%s\"</string>

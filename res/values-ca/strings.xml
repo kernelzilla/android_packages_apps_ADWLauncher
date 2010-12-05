@@ -21,10 +21,6 @@
   <string name="group_live_folders">Directoris</string>
   <string name="group_widgets">Estris</string>
   <string name="group_wallpapers">Fons d\'escriptori</string>
-  <string name="add_folder">Directori</string>
-  <string name="add_clock">Rellotge</string>
-  <string name="add_photo_frame">Marc de fotos</string>
-  <string name="add_search">Cerca</string>
   <string name="out_of_space">No hi ha prou espai a l\'escriptori.</string>
   <string name="shortcut_installed">Drecera \"<xliff:g id="name" example="Browser">%s</xliff:g>\" creada.</string>
   <string name="shortcut_uninstalled">Drecera \"<xliff:g id="name" example="Browser">%s</xliff:g>\" eliminada.</string>
@@ -34,8 +30,6 @@
   <string name="menu_add">Afegeix</string>
   <string name="menu_wallpaper">Fons d\'escriptori</string>
   <string name="menu_search">Cerca</string>
-  <string name="menu_notifications">Notificacions</string>
-  <string name="menu_gestures">Gestos</string>
   <string name="menu_settings">Paràmetres</string>
   <string name="menu_adw_settings">Paràmetres ADW</string>
   <string name="permlab_install_shortcut">instal·la dreceres</string>
@@ -46,7 +40,6 @@
   <string name="permdesc_read_settings">Permet que una aplicació llegeixi la configuració i les dreceres de l\'inici.</string>
   <string name="permlab_write_settings">escriu la configuració de l\'inici i dreceres</string>
   <string name="permdesc_write_settings">Permet que una aplicació canviï la configuració i les dreceres de l\'inici.</string>
-  <string name="search_hint">Cerca a Google</string>
   <string name="gadget_error_text">Problema carregant l\'estri</string>
   <string name="adw_version">Versió 1.2.0 del sistema</string>
   <string name="pref_label_settings">Paràmetres ADW</string>
@@ -59,8 +52,6 @@
   <string name="pref_title_hide_statusbar">Amaga la barra d\'estat</string>
   <string name="pref_summary_hide_statusbar">Amaga la barra d\'estat</string>
   <string name="pref_title_default_screen">Pantalla per defecte</string>
-  <string name="pref_summary_default_screen">Selecciona la pantalla que s\'establirà per defecte</string>
-  <string name="pref_dialog_default_screen">Selecciona la pantalla que s\'establirà per defecte</string>
   <string name="pref_title_desktop_scrolling_speed">Velocitat de desplaçament de l\'escriptori</string>
   <string name="pref_summary_desktop_scrolling_speed">Estableix la velocitat de canvi entre els diferents escriptoris</string>
   <string name="pref_dialog_desktop_scrolling_speed">Com més baix sigui el valor, més ràpid serà el canvi</string>
@@ -75,8 +66,6 @@
   <string name="pref_title_page_horizontal_margin">Marge de la pàgina horitzontal</string>
   <string name="pref_summary_page_horizontal_margin">Estableix el marge horitzontal entre les pàgines de cada calaix</string>
   <string name="pref_dialog_page_horizontal_margin">Estableix el marge horitzontal entre les pàgines de cada calaix</string>
-  <string name="pref_title_new_drawer">Calaix horitzontal</string>
-  <string name="pref_summary_new_drawer">Utilitza l\'implementació del Samsung Galaxy S</string>
   <string name="pref_title_animated_drawer">Calaix animat</string>
   <string name="pref_summary_animated_drawer">Si el calaix d\'aplicacions ha de mostrar animacions</string>
   <string name="pref_title_drawer_columns_portrait">Columnes del calaix en vertical</string>
@@ -91,12 +80,8 @@
   <string name="pref_title_drawer_rows_landscape">Files del calaix en horitzontal</string>
   <string name="pref_summary_drawer_rows_landscape">Seleccioneu el nombre de files del calaix que s\'utilitzaran a la disposició horitzontal</string>
   <string name="pref_dialog_drawer_rows_landscape">Seleccioneu el nombre de files del calaix que s\'utilitzaran a la disposició horitzontal</string>
-  <string name="pref_title_previews_preferences">Paràmetres de previsualització</string>
-  <string name="pref_summary_previews_preferences">Preferències de les previsualitzacions de l\'escriptori</string>
   <string name="pref_title_sense_previews">Previsualitzacions «Sense»</string>
   <string name="pref_summary_sense_previews">Utilitza la nova implementació «Sense»</string>
-  <string name="pref_title_clean_screen_mode">Mode de pantalla neta</string>
-  <string name="pref_summary_clean_screen_mode">Amaga les icones i ginys quan s\'obren les previsualitzacions</string>
   <string name="pref_title_ui_settings">Configuració de la interfície d\'usuari</string>
   <string name="pref_summary_ui_settings">Activa/desactiva els elements de la interfície d\'usuari</string>
   <string name="pref_title_home_button_binding">Vinculació del botó d\'inici</string>
@@ -113,19 +98,9 @@
   <string name="pref_summary_closing_dockbar">Tanca automàticament la base després d\'executar una aplicació</string>
   <string name="pref_title_closing_folder">Tancament de la carpeta</string>
   <string name="pref_summary_closing_folder">Tanca automàticament la carpeta quan es llanci l\'aplicació</string>
-  <string name="pref_title_lab">LAB</string>
-  <string name="pref_summary_lab">Activa/desactiva l\'acció personalitzable del botó esquerre</string>
-  <string name="pref_title_rab">RAB</string>
-  <string name="pref_summary_rab">Activa/desactiva l\'acció personalitzable del botó dret</string>
-  <string name="pref_title_ab2">Botons d\'acció secundària</string>
-  <string name="pref_summary_ab2">Activa/desactiva els botons d\'acció secundària (desactiva els punts d\'escriptori)</string>
-  <string name="pref_title_tint_ab">Tint AB</string>
-  <string name="pref_summary_tint_ab">Activa/desactiva l\'efecte tint de les icones als botons d\'acció</string>
   <string name="pref_title_ab_scale_factor">Factor d\'escala AB</string>
   <string name="pref_summary_ab_scale_factor">Estableix la mida d\'escala per a les icones dels botons d\'acció</string>
   <string name="pref_dialog_ab_scale_factor">Estableix la mida d\'escala per a les icones dels botons d\'acció</string>
-  <string name="pref_title_hide_allapps_ab">Amaga el fons CA</string>
-  <string name="pref_summary_hide_allapps_ab">Amaga el fons del boto del calaix d\'aplicacions</string>
   <string name="pref_title_hide_ab_bg">Amaga el fons AB</string>
   <string name="pref_summary_hide_ab_bg">Amaga el fons dels botons d\'acció</string>
   <string name="pref_title_hide_icon_labels">Amaga les etiquetes de les icones</string>
@@ -210,7 +185,6 @@
   <string name="pref_summary_desktop_indicator_type">Seleccioneu entre els diferents estils d\'indicador</string>
   <string name="pref_title_system_preferences">Preferències del sistema</string>
   <string name="pref_summary_system_preferences">Preferències generals del sistema per a l\'ADW.Launcher</string>
-  <string name="pref_title_screens_preferencecategory">Pantalles d\'escriptori</string>
   <string name="pref_title_screens_layout_preferencecategory">Disposició de l\'escriptori</string>
   <string name="pref_title_screens_behaviour_preferencecategory">Comportament de l\'escriptori</string>
   <string name="pref_title_drawer_preferencecategory">Calaix d\'aplicacions</string>
@@ -238,7 +212,6 @@
   <string name="menu_edit">Edita</string>
   <string name="pref_label_shirtcuts">Drecera personalitzada</string>
   <string name="pref_label_activities">Activitats</string>
-  <string name="pref_label_activities_loading">S\'està carregant el llistat d\'activitats...</string>
   <string name="shirtcut_header">Seleccioneu l\'activitat que es llançarà.\nTambé podeu seleccionar una icona personalitzada.</string>
   <string name="shirtcut_pick_activity">Trieu la vostra activitat</string>
   <string name="shirtcut_label">Etiqueta</string>
@@ -256,7 +229,6 @@
   <string name="AppGroupConfig">"Configuració del grup"</string>
   <string name="AppGroupRename">"Nou catàleg"</string>
   <string name="AppGroupConfigError">"No podeu configurar aquest grup"</string>
-  <string name="AppGroupAddError">"No podeu tenir més grups"</string>
   <string name="rename_group_title">Catàleg nou</string>
   <string name="rename_group_label">Nom del catàleg</string>
   <string name="show_catalog">Mostra catàleg \"%s\"</string>
