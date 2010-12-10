@@ -149,7 +149,7 @@
 
     <string name="pref_title_icon_highlights">Color presionado</string>
     <string name="pref_summary_icon_highlights">Elige color al presionar iconos</string>
-    <string name="pref_title_icon_highlights_focus">Colro selección</string>
+    <string name="pref_title_icon_highlights_focus">Color con foco</string>
     <string name="pref_summary_icon_highlights_focus">Elige color al seleccionar iconos</string>
     <string name="pref_title_new_selectors">Nuevos selectores</string>
     <string name="pref_summary_new_selectors">Desactivar para usar las imágenes de siempre</string>
