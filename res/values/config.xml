@@ -15,7 +15,7 @@
 -->
 
 <resources>
-	<string name="rom_mod_string">CyanogenMod</string>
+	<string name="rom_mod_string">Unofficial-CM</string>
 	<bool name="force_hidden_settings">false</bool>
     <bool name="config_desktopRotation">true</bool> 
     <integer name="config_desktopSpeed">450</integer>
